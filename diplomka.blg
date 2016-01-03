@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: diplomka.aux
+The style file: plain.bst
+Database file #1: biblio.bib
+Warning--empty journal in klinec2013white
+Warning--can't use both volume and number fields in luk2005pin
+Warning--can't use both volume and number fields in nethercote2007valgrind
+You've used 6 entries,
+            2118 wiz_defined-function locations,
+            535 strings with 5157 characters,
+and the built_in function-call counts, 2407 in all, are:
+= -- 241
+> -- 121
+< -- 5
++ -- 48
+- -- 42
+* -- 162
+:= -- 392
+add.period$ -- 22
+call.type$ -- 6
+change.case$ -- 40
+chr.to.int$ -- 0
+cite$ -- 9
+duplicate$ -- 95
+empty$ -- 171
+format.name$ -- 42
+if$ -- 514
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 5
+newline$ -- 34
+num.names$ -- 12
+pop$ -- 44
+preamble$ -- 1
+purify$ -- 33
+quote$ -- 0
+skip$ -- 73
+stack$ -- 0
+substring$ -- 121
+swap$ -- 36
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 3
+while$ -- 21
+width$ -- 7
+write$ -- 72
+(There were 3 warnings)

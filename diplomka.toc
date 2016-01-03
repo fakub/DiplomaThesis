@@ -1,0 +1,26 @@
+\contentsline {chapter}{Preface}{1}{section*.3}
+\contentsline {chapter}{\numberline {1}Introduction to Whitebox Cryptography}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}History and Overview}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}WBAES}{3}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}Basic Cryptography Principles}{3}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Black-Box Model}{3}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{3}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Key Schedule}{3}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}AddRoundKey}{3}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}SubBytes}{3}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.4}ShiftRows}{3}{subsection.1.3.4}
+\contentsline {subsection}{\numberline {1.3.5}MixColumns}{3}{subsection.1.3.5}
+\contentsline {section}{\numberline {1.4}White-Box AES}{3}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Mixing Bijection}{3}{subsection.1.4.1}
+\contentsline {section}{\numberline {1.5}Known Attacks}{4}{section.1.5}
+\contentsline {chapter}{\numberline {2}Attack using Differential Computation Analysis}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Side-Channel Attack}{5}{section.2.1}
+\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}Trace Acquisition}{6}{section.3.1}
+\contentsline {section}{\numberline {3.2}Trace Processing}{6}{section.3.2}
+\contentsline {section}{\numberline {3.3}Attacking Traces}{6}{section.3.3}
+\contentsline {section}{\numberline {3.4}Trace Processing}{6}{section.3.4}
+\contentsline {chapter}{\numberline {4}Future Work}{7}{chapter.4}
+\contentsline {chapter}{Conclusion}{8}{section*.8}
+\contentsline {chapter}{References}{9}{section*.10}
+\contentsline {chapter}{\numberline {A}Contents of attached CD}{10}{appendix.A}

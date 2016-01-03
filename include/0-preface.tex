@@ -1,0 +1,91 @@
+\cleardoublepage\phantomsection   % cleardoublepage a phantomsection udělají že odkaz z obsahu vede NAD nadpis, jinak vede POD
+\addcontentsline{toc}{chapter}{Preface}
+\chapter*{Preface}
+
+% o čem ta práce vlastně bude ve smyslu uvedení do problému, jak/proč ta práce vznikla?
+
+Motivation for whitebox crypto, whitebox crypto history, milestones   % Bos et al. to hezky shrnul
+	from black-box ... gray-box ... white-box
+	malicious software on your device
+	cryptographic keys of third-parties
+	use cases: DRM
+	modeled as if adversary had full control over execution environment of the device running the implementation
+	everything allowed: perform static analysis, read/alter memory (fault injection)
+	Chow et al. \cite{chow2003white}
+	program obfuscation impossibility results
+	goal of wbc = embed the secret key to the implementation s.t. it is difficult to extract it even when the source code is available
+	note the difference from obfuscation, in practice could be utilized as well
+	conjecture by Chow: wb implementations provide no long-term defense against attacks
+	symmetric crypto only, no published results on pubkey crypto
+	all published approaches have been broken
+	software vendors then disobey Kerckhoff's principle (cite) i.e. use secret design
+	Bos et al. exploit leaked information instead, no need for exact knowledge of design nor reverse engineering
+	perfect wb implementation should resist all existing and future side-channel attacks (C. Delerablee, T. Lepoint, P. Paillier, and M. Rivain. White-box security notions for symmetric encryption schemes. In T. Lange, K. Lauter, and P. Lisonek, editors, SAC 2013, volume 8282 of LNCS, pages 247–264, Burnaby, BC, Canada, Aug. 14–16, 2014. Springer, Berlin, Germany.)
+	... Bos et al. utilize software traces for this purpose
+	The goal of this thesis is to reproduce the attack and make it easy for future researchers and analysis.
+
+\section*{Work overview}
+	
+	\begin{description}
+		\item[Chapter \ref{chap:intro}.] In this chapter we describe basic whitebox crypto techniques\ldots
+		\item[Chapter \ref{chap:results}.] This chapter presents our practical results together with\ldots
+	\end{description}
+
+% ====================================================================
+% ====================================================================
+% ====================================================================
+
+\nomenclature{$N$}{Positive integers}
+\nomenclature{$a$}{The number of angels per unit area}
+
+A table for fun follows:
+\begin{center}
+\begin{tabular}{|| c || c | c | c ||}
+	\hline\hline
+	~ & \multicolumn{2}{c|}{\bf $n\times n$ squares} & {\bf Computational} \\
+	~ & \multicolumn{1}{c}{Lower bound} & \multicolumn{1}{c|}{Upper bound} & {\bf Power}\\
+	\hline
+	2D & \multicolumn{2}{c|}{See see} & Universal \\
+	\hline
+	3D & see & see & Universal \\
+	\hline
+	2D & see & see & Unknown \\
+	\hline\hline
+\end{tabular}
+\end{center}
+
+Just for fun:
+\begin{figure}[H]
+\begin{center}
+	\includegraphics[width=0.4\textwidth]{./figures/fig.pdf} % {šířka v mm}/370 je to původně
+	\caption{Remove me, please.}
+	\label{fig:3color}
+\end{center}
+\end{figure}
+
+Or a multifigure:
+\begin{figure}[H]
+\begin{center}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{./figures/fig.pdf}
+		\caption{One.}
+		\label{fig:one}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{./figures/fig.pdf}
+		\caption{Two.}
+		\label{fig:two}
+	\end{subfigure}
+	\caption{One and Two.}
+	\label{fig:onetwo}
+\end{center}
+\end{figure}
+
+%~ \begin{proof}
+	%~ ~   % aby to uskočilo
+	%~ \begin{description}
+		%~ \item[Biostep.] All tiles.
+		%~ \item[Binding.] All Turing.
+	%~ \end{description}
+%~ \end{proof}
+

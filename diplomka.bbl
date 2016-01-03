@@ -1,0 +1,40 @@
+\begin{thebibliography}{1}
+
+\bibitem{bos2015differential}
+Joppe~W Bos, Charles Hubain, Wil Michiels, and Philippe Teuwen.
+\newblock Differential computation analysis: Hiding your white-box designs is
+  not enough.
+\newblock Technical report, Technical report, Cryptology ePrint Archive, Report
+  2015/753. http://eprint. iacr. org/2015/753, 2015.
+
+\bibitem{chow2003white}
+Stanley Chow, Philip Eisen, Harold Johnson, and Paul~C Van~Oorschot.
+\newblock White-box cryptography and an aes implementation.
+\newblock In {\em Selected Areas in Cryptography}, pages 250--270. Springer,
+  2003.
+
+\bibitem{klinec2013white}
+Du{\v{s}}an Klinec.
+\newblock White-box attack resistant cryptography.
+\newblock 2013.
+
+\bibitem{luk2005pin}
+Chi-Keung Luk, Robert Cohn, Robert Muth, Harish Patil, Artur Klauser, Geoff
+  Lowney, Steven Wallace, Vijay~Janapa Reddi, and Kim Hazelwood.
+\newblock Pin: building customized program analysis tools with dynamic
+  instrumentation.
+\newblock In {\em ACM Sigplan Notices}, volume~40, pages 190--200. ACM, 2005.
+
+\bibitem{nethercote2007valgrind}
+Nicholas Nethercote and Julian Seward.
+\newblock Valgrind: a framework for heavyweight dynamic binary instrumentation.
+\newblock In {\em ACM Sigplan notices}, volume~42, pages 89--100. ACM, 2007.
+
+\bibitem{teuwen2015movfuscator}
+Philippe Teuwen.
+\newblock Movfuscator writeup.
+\newblock {\em Philippe Teuwen's blog}, 2015.
+\newblock Permalink:
+  http://wiki.yobi.be/index.php?title=MoVfuscator_Writeup\&oldid=9714.
+
+\end{thebibliography}

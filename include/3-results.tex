@@ -1,0 +1,18 @@
+\chapter{Practical Attack \& Results}
+\label{chap:results}
+
+Two implementations will be considered for the attack -- a naive AES implementation in C++ and Dušan Klinec's implementation of wbAES. The attack will perform as follows:
+\begin{enumerate}
+	\item acquire memory traces,
+	\item process memory traces,
+	\item run DCA attack.
+\end{enumerate}
+In the following sections we describe these steps in detail, finally we present practical results of the attack.
+
+\input{./include/3-results_1-trace-acq.tex}
+
+\input{./include/3-results_2-trace-proc.tex}
+
+\input{./include/3-results_3-attack.tex}
+
+\input{./include/3-results_4-results.tex}

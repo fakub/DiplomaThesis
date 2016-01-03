@@ -1,0 +1,10 @@
+\begin{thenomenclature} 
+
+ \nomgroup{A}
+
+  \item [{$a$}]\begingroup The number of angels per unit area\nomeqref {1.0}
+		\nompageref{2}
+  \item [{$N$}]\begingroup Positive integers\nomeqref {1.0}
+		\nompageref{2}
+
+\end{thenomenclature}
