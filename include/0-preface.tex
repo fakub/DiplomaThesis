@@ -2,27 +2,29 @@
 \addcontentsline{toc}{chapter}{Preface}
 \chapter*{Preface}
 
+% PŘEDMLUVA !!! se tomu řiká u nás ...
+%~ význam WBC, kde se to vzalo, co za útok že tam chci použít, musí to bejt poutavý!
 % o čem ta práce vlastně bude ve smyslu uvedení do problému, jak/proč ta práce vznikla?
 
-Motivation for whitebox crypto, whitebox crypto history, milestones   % Bos et al. to hezky shrnul
-	from black-box ... gray-box ... white-box
-	malicious software on your device
-	cryptographic keys of third-parties
-	use cases: DRM
-	modeled as if adversary had full control over execution environment of the device running the implementation
-	everything allowed: perform static analysis, read/alter memory (fault injection)
-	Chow et al. \cite{chow2003white}
-	program obfuscation impossibility results
-	goal of wbc = embed the secret key to the implementation s.t. it is difficult to extract it even when the source code is available
-	note the difference from obfuscation, in practice could be utilized as well
-	conjecture by Chow: wb implementations provide no long-term defense against attacks
-	symmetric crypto only, no published results on pubkey crypto
-	all published approaches have been broken
-	software vendors then disobey Kerckhoff's principle (cite) i.e. use secret design
-	Bos et al. exploit leaked information instead, no need for exact knowledge of design nor reverse engineering
-	perfect wb implementation should resist all existing and future side-channel attacks (C. Delerablee, T. Lepoint, P. Paillier, and M. Rivain. White-box security notions for symmetric encryption schemes. In T. Lange, K. Lauter, and P. Lisonek, editors, SAC 2013, volume 8282 of LNCS, pages 247–264, Burnaby, BC, Canada, Aug. 14–16, 2014. Springer, Berlin, Germany.)
-	... Bos et al. utilize software traces for this purpose
-	The goal of this thesis is to reproduce the attack and make it easy for future researchers and analysis.
+%~ Motivation for whitebox crypto, whitebox crypto history, milestones   % Bos et al. to hezky shrnul
+	%~ from black-box ... gray-box ... white-box
+	%~ malicious software on your device
+	%~ cryptographic keys of third-parties
+	%~ use cases: DRM
+	%~ modeled as if adversary had full control over execution environment of the device running the implementation
+	%~ everything allowed: perform static analysis, read/alter memory (fault injection)
+	%~ Chow et al. \cite{chow2003white}
+	%~ program obfuscation impossibility results
+	%~ goal of wbc = embed the secret key to the implementation s.t. it is difficult to extract it even when the source code is available
+	%~ note the difference from obfuscation, in practice could be utilized as well
+	%~ conjecture by Chow: wb implementations provide no long-term defense against attacks
+	%~ symmetric crypto only, no published results on pubkey crypto
+	%~ all published approaches have been broken
+	%~ software vendors then disobey Kerckhoff's principle (cite) i.e. use secret design
+	%~ Bos et al. exploit leaked information instead, no need for exact knowledge of design nor reverse engineering
+	%~ perfect wb implementation should resist all existing and future side-channel attacks (C. Delerablee, T. Lepoint, P. Paillier, and M. Rivain. White-box security notions for symmetric encryption schemes. In T. Lange, K. Lauter, and P. Lisonek, editors, SAC 2013, volume 8282 of LNCS, pages 247–264, Burnaby, BC, Canada, Aug. 14–16, 2014. Springer, Berlin, Germany.)
+	%~ ... Bos et al. utilize software traces for this purpose
+	%~ The goal of this thesis is to reproduce the attack and make it easy for future researchers and analysis.
 
 \section*{Work overview}
 	
@@ -34,9 +36,6 @@ Motivation for whitebox crypto, whitebox crypto history, milestones   % Bos et a
 % ====================================================================
 % ====================================================================
 % ====================================================================
-
-\nomenclature{$N$}{Positive integers}
-\nomenclature{$a$}{The number of angels per unit area}
 
 A table for fun follows:
 \begin{center}
@@ -80,12 +79,3 @@ Or a multifigure:
 	\label{fig:onetwo}
 \end{center}
 \end{figure}
-
-%~ \begin{proof}
-	%~ ~   % aby to uskočilo
-	%~ \begin{description}
-		%~ \item[Biostep.] All tiles.
-		%~ \item[Binding.] All Turing.
-	%~ \end{description}
-%~ \end{proof}
-

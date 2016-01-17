@@ -1,40 +1,59 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{americantripple}
+American~Bankers Association et~al.
+\newblock Tripple data encryption algorithm modes of operation.
+\newblock {\em ANSI X9}, pages 52--1998.
 
 \bibitem{bos2015differential}
 Joppe~W Bos, Charles Hubain, Wil Michiels, and Philippe Teuwen.
 \newblock Differential computation analysis: Hiding your white-box designs is
   not enough.
 \newblock Technical report, Technical report, Cryptology ePrint Archive, Report
-  2015/753. http://eprint. iacr. org/2015/753, 2015.
+  2015/753. \url{http://eprint. iacr. org/2015/753}, 2015.
 
-\bibitem{chow2003white}
-Stanley Chow, Philip Eisen, Harold Johnson, and Paul~C Van~Oorschot.
-\newblock White-box cryptography and an aes implementation.
-\newblock In {\em Selected Areas in Cryptography}, pages 250--270. Springer,
-  2003.
+\bibitem{curtin1998brute}
+Matt Curtin and Justin Dolske.
+\newblock A brute force search of des keyspace.
+\newblock In {\em 8th Usenix Symposium, January}, pages 26--29. Citeseer, 1998.
+
+\bibitem{daemen1999aes}
+Joan Daemen and Vincent Rijmen.
+\newblock Aes proposal: Rijndael.
+\newblock 1999.
+
+\bibitem{daemen2013rijndael}
+Joan Daemen and Vincent Rijmen.
+\newblock {\em The design of Rijndael: AES-the advanced encryption standard}.
+\newblock Springer Science \& Business Media, 2013.
+
+\bibitem{junod2001complexity}
+Pascal Junod.
+\newblock On the complexity of matsui’s attack.
+\newblock In {\em Selected Areas in Cryptography}, pages 199--211. Springer,
+  2001.
 
 \bibitem{klinec2013white}
 Du{\v{s}}an Klinec.
 \newblock White-box attack resistant cryptography.
 \newblock 2013.
 
-\bibitem{luk2005pin}
-Chi-Keung Luk, Robert Cohn, Robert Muth, Harish Patil, Artur Klauser, Geoff
-  Lowney, Steven Wallace, Vijay~Janapa Reddi, and Kim Hazelwood.
-\newblock Pin: building customized program analysis tools with dynamic
-  instrumentation.
-\newblock In {\em ACM Sigplan Notices}, volume~40, pages 190--200. ACM, 2005.
+\bibitem{matsui1994linear}
+Mitsuru Matsui.
+\newblock Linear cryptanalysis method for des cipher.
+\newblock In {\em Advances in Cryptology—EUROCRYPT’93}, pages 386--397.
+  Springer, 1994.
 
-\bibitem{nethercote2007valgrind}
-Nicholas Nethercote and Julian Seward.
-\newblock Valgrind: a framework for heavyweight dynamic binary instrumentation.
-\newblock In {\em ACM Sigplan notices}, volume~42, pages 89--100. ACM, 2007.
+\bibitem{fips1977des}
+NIST~FIPS PUB.
+\newblock 46-3: Data encryption standard.
+\newblock {\em Federal Information Processing Standards, National Bureau of
+  Standards, US Department of Commerce}, 1977.
 
-\bibitem{teuwen2015movfuscator}
-Philippe Teuwen.
-\newblock Movfuscator writeup.
-\newblock {\em Philippe Teuwen's blog}, 2015.
-\newblock Permalink:
-  http://wiki.yobi.be/index.php?title=MoVfuscator_Writeup\&oldid=9714.
+\bibitem{fips2001aes}
+NIST~FIPS PUB.
+\newblock 197: Advanced encryption standard (aes).
+\newblock {\em Federal Information Processing Standards Publication},
+  197:441--0311, 2001.
 
 \end{thebibliography}

@@ -1,18 +1,24 @@
 \chapter{Practical Attack \& Results}
 \label{chap:results}
 
-Two implementations will be considered for the attack -- a naive AES implementation in C++ and Dušan Klinec's implementation of wbAES. The attack will perform as follows:
-\begin{enumerate}
-	\item acquire memory traces,
-	\item process memory traces,
-	\item run DCA attack.
-\end{enumerate}
-In the following sections we describe these steps in detail, finally we present practical results of the attack.
+%~ nemá bejt manuál pro moje scripty, ale
+%~ co jsem použil za implmentace, kolik traců, jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
+%~ že jsem se pokoušel neúspěšně útočit na netriv. indexy při čtení z tabulek
+%~ a proč to s tou javou nešlo ... (ale vyzkoušet)
+%~ de facto takovej protokol
+%~ pokud bych našel v kódu kde to leakuje, uměl to vyčíst z indexů popř. nák přímo z tabulek -> 4 Analysis
 
-\input{./include/3-results_1-trace-acq.tex}
+%~ Two (?) implementations will be considered for the attack:
+%~ \begin{itemize}
+	%~ \item our naive AES implementation (C++), and
+	%~ \item Klinec's implementation of White-Box AES \cite{klinec2013white} (C++).
+%~ \end{itemize}
+%~ The attack will perform as follows:
+%~ \begin{enumerate}
+	%~ \item acquire memory traces,
+	%~ \item filter memory traces,
+	%~ \item run DCA attack.
+%~ \end{enumerate}
+%~ In the following sections (?) we describe these steps in detail, finally we present practical results of the attack.
 
-\input{./include/3-results_2-trace-proc.tex}
-
-\input{./include/3-results_3-attack.tex}
-
-\input{./include/3-results_4-results.tex}
+%~ teoreticky by mělo bejt popsáno v předch. kapitole, tady už bych jenom zmínil co jsem použil a co vypadlo

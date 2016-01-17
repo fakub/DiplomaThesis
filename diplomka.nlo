@@ -1,2 +1,2 @@
-\nomenclatureentry{a$N$@[{$N$}]\begingroup Positive integers\nomeqref {0}|nompageref}{1}
-\nomenclatureentry{a$a$@[{$a$}]\begingroup The number of angels per unit area\nomeqref {0}|nompageref}{1}
+\nomenclatureentry{a$\GF(p^n)$@[{$\GF(p^n)$}]\begingroup Galois Field with $p^n$ elements, $p$ prime\nomeqref {1.0}|nompageref}{4}
+\nomenclatureentry{a$F[x]$@[{$F[x]$}]\begingroup Ring of polynomials over $F$\nomeqref {1.0}|nompageref}{4}

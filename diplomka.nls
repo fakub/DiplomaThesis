@@ -2,9 +2,9 @@
 
  \nomgroup{A}
 
-  \item [{$a$}]\begingroup The number of angels per unit area\nomeqref {1.0}
-		\nompageref{2}
-  \item [{$N$}]\begingroup Positive integers\nomeqref {1.0}
-		\nompageref{2}
+  \item [{$\GF(p^n)$}]\begingroup Galois Field with $p^n$ elements, $p$ prime\nomeqref {1.0}
+		\nompageref{4}
+  \item [{$F[x]$}]\begingroup Ring of polynomials over $F$\nomeqref {1.0}
+		\nompageref{4}
 
 \end{thenomenclature}

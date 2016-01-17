@@ -3,9 +3,11 @@
 %  use packages
 % --------------
 \usepackage[utf8]{inputenc}
-\usepackage{geometry,amsmath, amsthm, amssymb}   % , units, dsfont, algorithmicx, algpseudocode, nicefrac, caption
+\usepackage{geometry,amsmath, amsthm, amssymb}   % , units, dsfont, nicefrac, caption
 % enumerate: \begin{enumerate}[{Example} I)] ... Roman numbering
-\usepackage{graphicx,color,tabularx,float,subcaption}
+\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode}
+\usepackage[table]{xcolor}
+\usepackage[titletoc]{appendix}
 \usepackage{nomencl}
 \makenomenclature
 
@@ -26,7 +28,7 @@
 %  customize
 % -----------
 \let\tmpitem\item
-\renewcommand{\item}{\setlength{\itemsep}{2pt}\tmpitem}   % míň roztahovačný seznamy
+\renewcommand{\item}{\setlength{\itemsep}{0pt}\tmpitem}   % míň roztahovačný seznamy
 \renewcommand{\labelitemi}{$\circ$}
 
 \let\epsilon\varepsilon
@@ -58,14 +60,24 @@
 % -------------
 \renewcommand{\iff}{\Leftrightarrow}
 \newcommand{\then}{\Rightarrow}
+
 \renewcommand{\P}{\mathbb{P}}
-\newcommand{\GF}[1]{\mathrm{GF(#1)}}
+\newcommand{\GF}{\mathrm{GF}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
+
+\newcommand{\SubBytes}{\texttt{SubBytes}}
+\newcommand{\ShiftRows}{\texttt{ShiftRows}}
+\newcommand{\MixColumns}{\texttt{MixColumns}}
+\newcommand{\AddRoundKey}{\texttt{AddRoundKey}}
+\newcommand{\ExpandedKey}{\texttt{ExpandedKey}}
+\newcommand{\KeySchedule}{\texttt{KeySchedule}}
+
 \newcommand{\atob}[2]{#1 , \ldots , #2}
 \newcommand{\link}[1]{\href{http://#1}{\tt #1}}
 
+\newcommand{\cg}[1]{\cellcolor{gray!#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   k vyplnění ZAČÁTEK
@@ -235,6 +247,16 @@ A very interesting and universal approach has been recently introduced in a pape
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   Z A Č Á T E K   P R Á C E
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		% FINAL CHECK:
+		% 	abstrakty a keywords
+		% 	V Praze dne \today -> český datum
+		% 	
+		% 	section \ref{...} -> Section \ref{...}
+		% 	\mod vs \pmod
+		% 	bib: title={{Bla Bla ... 2x závorky aby byly velký písmena}}
+		% 	$\SubBytes$ -> {\tt $\SubBytes$} ...
+		% 	
 		
 		
 		%%% PŘEDMLUVA

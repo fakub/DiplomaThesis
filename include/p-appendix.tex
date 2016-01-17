@@ -1,10 +1,8 @@
-\appendix
-\cleardoublepage\phantomsection   % cleardoublepage a phantomsection udělají že odkaz z obsahu vede NAD nadpis, jinak vede POD
-\chapter{Contents of attached CD}
+\setcounter{tocdepth}{0}   %!% appendices without sections, does not work
+\begin{appendices}
 
-\begin{tabularx}{\textwidth}{p{7em} X}
-	{\tt /README} & README file,\\
-	{\tt /diploma-thesis.pdf} & Diploma Thesis in Portable Document Format,\\
-	{\tt /implementations/} & folder with (whitebox) AES implementations,\\
-	{\tt /implementations/naiveAES/} & folder with sources of my naive AES implementation.
-\end{tabularx}
+\input{./include/p-appendix_1-contents-CD.tex}
+
+\input{./include/p-appendix_2-manual.tex}
+
+\end{appendices}
