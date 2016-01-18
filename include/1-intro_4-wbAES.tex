@@ -1,10 +1,18 @@
 \section{White-Box AES}
 \label{sec:wbaes}
 
-%~ že udělal i DES
+In this section we describe White-Box AES (WBAES) as introduced by Chow et al. \cite{chow2003white}. Note that it has already been broken by Billet et al. \cite{billet2005cryptanalysis}, see Section \ref{sec:known}.   %!% ref to subsection
 
-%~ Introduced by Chow et al. Show the principle at least. The idea is to create tables with composed self-inverting bijections (???).
-%~ 
+The core idea of WBAES is based on usage of lookup tables as outlined in Section \ref{sec:aeslookup}, these are further improved in three ways:
+\begin{enumerate}
+	\item the key is hidden into tables by composition of consecutive steps into single table,
+	\item tables are wrapped around by appropriately self-inverting random bijections,
+	\item the boundary is extended into the containing application. \label{item:boundary}
+\end{enumerate}
+Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it has been broken by Jacob et al. \cite{jacob2003attacking} much earlier than WBAES because was lacking the feature \ref{item:boundary} from the previous list.
+
+
+
 %~ \subsection{Mixing Bijection}
 	%~ 
 	%~ And so on\ldots

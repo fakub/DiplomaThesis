@@ -51,7 +51,10 @@ Definitions of the $4$ operations follow.
 	
 	$\SubBytes$ is the only source of nonlinearity in AES thus it shall have excellent nonlinearity properties. This was the major theoretical weakness of DES, its predecessor. Practical linear attack against DES was introduced by Matsui \cite{matsui1994linear} and analyzed in detail and successfuly performed by Junod \cite{junod2001complexity}.
 	
-	Since $\SubBytes$ has only $256$ possible inputs, it is usually precomputed and implemented as a lookup table.   %!% dát do appendixu tabulku?
+	\begin{note}
+	\label{note:sboxtable}
+		Since $\SubBytes$ has only $256$ possible inputs, it is usually precomputed and implemented as a lookup table.   %!% dát do appendixu tabulku?
+	\end{note}
 
 \subsubsection{ShiftRows}
 	
@@ -98,7 +101,8 @@ Definitions of the $4$ operations follow.
 	Note that $c(z)$ is coprime to $z^4+1$ therefore invertible$\mod{z^4+1}$. It follows that $\MixColumns$ is invertible.
 	
 	Unlike $\SubBytes$, $MixColumns$ operates on a substantially larger domain therefore cannot be implemented as a lookup table. Rather let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly} which is performed in $F[z]$ can be rewritten into matrix multiplication back in $F$, indeed
-	\begin{equation*}
+	\begin{equation}
+	\label{eq:mixcolmatr}
 		\begin{pmatrix}
 			B_0 \\ B_1 \\ B_2 \\ B_3
 		\end{pmatrix}
@@ -112,7 +116,7 @@ Definitions of the $4$ operations follow.
 		\begin{pmatrix}
 			A_0 \\ A_1 \\ A_2 \\ A_3
 		\end{pmatrix}.
-	\end{equation*}
+	\end{equation}
 	
 	The goal of $\MixColumns$ is to introduce inter-byte diffusion within a column.
 
@@ -154,5 +158,48 @@ AES, as already stated, consists of $10$ rounds of $4$ operations except for the
 \end{alg}
 
 \begin{note}
-	Since we have commented on every step about how it can be inverted, AES decryption exists and also has $10$ rounds.
+	Since we have commented on every step about how it can be inverted, AES Encryption is also invertible by executing its steps inverted and in reverse order. This leads to AES Decryption algorithm.
 \end{note}
+
+\subsection{AES Implementation}
+\label{sec:aeslookup}
+
+As already stated in Note \ref{note:sboxtable}, $\ShiftRows$ can be implemented as a lookup table for performance reasons. Such approach can be used for $\MixColumns$ as well. Let us denote
+\begin{equation}
+	\C =
+	\begin{pmatrix}
+		\texttt{02} & \texttt{03} & \texttt{01} & \texttt{01} \\
+		\texttt{01} & \texttt{02} & \texttt{03} & \texttt{01} \\
+		\texttt{01} & \texttt{01} & \texttt{02} & \texttt{03} \\
+		\texttt{03} & \texttt{01} & \texttt{01} & \texttt{02}
+	\end{pmatrix} .
+\end{equation}
+Since $\MixColumns$ is a linear operation, it follows from Equation \ref{eq:mixcolmatr}
+\begin{equation}
+	\begin{pmatrix}
+			B_0 \\ B_1 \\ B_2 \\ B_3
+		\end{pmatrix}
+		=
+		\C
+		\begin{pmatrix}
+			A_0 \\ 0 \\ 0 \\ 0
+		\end{pmatrix}
+		+
+		\C
+		\begin{pmatrix}
+			0 \\ A_1 \\ 0 \\ 0
+		\end{pmatrix}
+		+
+		\C
+		\begin{pmatrix}
+			0 \\ 0 \\ A_2 \\ 0
+		\end{pmatrix}
+		+
+		\C
+		\begin{pmatrix}
+			0 \\ 0 \\ 0 \\ A_3
+		\end{pmatrix}.
+\end{equation}
+Note that each addend only depends on a single byte i.e. there are just $256$ possible input values. Therefore $\MixColumns$ can be implemented as a fourtuple of lookup tables, the result is then simple XOR of their $4$-byte output values.
+
+This was just to give an idea about how AES operations can be turned into lookup tables. These can be further improved, see \cite[Chapter~4]{daemen2013rijndael} for detail.
