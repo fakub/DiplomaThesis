@@ -73,7 +73,7 @@ Definitions of the $4$ operations follow.
 			A_{3,0} & \cg{15} A_{3,1} & \cg{30} A_{3,2} & \cg{45} A_{3,3} \\
 			\hline
 		\end{array}
-		\quad\longrightarrow\quad
+		\quad\xrightarrow{\ShiftRows}\quad
 		\begin{array}{|c|c|c|c|}
 			\hline
 			A_{0,0} & \cg{15} A_{0,1} & \cg{30} A_{0,2} & \cg{45} A_{0,3} \\
@@ -161,7 +161,7 @@ AES, as already stated, consists of $10$ rounds of $4$ operations except for the
 	Since we have commented on every step about how it can be inverted, AES Encryption is also invertible by executing its steps inverted and in reverse order. This leads to AES Decryption algorithm.
 \end{note}
 
-\subsection{AES Implementation}
+\subsection{AES Implementation Note}
 \label{sec:aeslookup}
 
 As already stated in Note \ref{note:sboxtable}, $\ShiftRows$ can be implemented as a lookup table for performance reasons. Such approach can be used for $\MixColumns$ as well. Let us denote
@@ -200,6 +200,6 @@ Since $\MixColumns$ is a linear operation, it follows from Equation \ref{eq:mixc
 			0 \\ 0 \\ 0 \\ A_3
 		\end{pmatrix}.
 \end{equation}
-Note that each addend only depends on a single byte i.e. there are just $256$ possible input values. Therefore $\MixColumns$ can be implemented as a fourtuple of lookup tables, the result is then simple XOR of their $4$-byte output values.
+Note that each addend only depends on a single byte i.e. there are just $256$ possible input values. Therefore $\MixColumns$ can be implemented as a fourtuple of lookup tables, the result is then a simple bitwise XOR of their $4$-byte output values.
 
 This was just to give an idea about how AES operations can be turned into lookup tables. These can be further improved, see \cite[Chapter~4]{daemen2013rijndael} for detail.

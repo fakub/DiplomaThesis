@@ -23,7 +23,7 @@ Stanley Chow, Phil Eisen, Harold Johnson, and Paul~C Van~Oorschot.
 \newblock A white-box des implementation for drm applications.
 \newblock In {\em Digital Rights Management}, pages 1--15. Springer, 2003.
 
-\bibitem{chow2003white}
+\bibitem{chow2003aes}
 Stanley Chow, Philip Eisen, Harold Johnson, and Paul~C Van~Oorschot.
 \newblock White-box cryptography and an aes implementation.
 \newblock In {\em Selected Areas in Cryptography}, pages 250--270. Springer,

@@ -10,15 +10,25 @@
 \contentsline {subsubsection}{AddRoundKey}{5}{section*.11}
 \contentsline {subsubsection}{KeySchedule}{6}{section*.12}
 \contentsline {subsection}{\numberline {1.3.2}AES Algorithm Description}{6}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}AES Implementation}{6}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{6}{subsection.1.3.3}
 \contentsline {section}{\numberline {1.4}White-Box AES}{7}{section.1.4}
-\contentsline {section}{\numberline {1.5}Known Attacks}{7}{section.1.5}
-\contentsline {chapter}{\numberline {2}Attack using Differential Computation Analysis}{8}{chapter.2}
-\contentsline {section}{\numberline {2.1}Side-Channel Attack}{8}{section.2.1}
-\contentsline {section}{\numberline {2.2}Using SCA tools in WBC}{8}{section.2.2}
-\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{9}{chapter.3}
-\contentsline {chapter}{\numberline {4}Future Work}{10}{chapter.4}
-\contentsline {chapter}{Conclusion}{11}{section*.13}
-\contentsline {chapter}{References}{12}{section*.15}
+\contentsline {subsection}{\numberline {1.4.1}Encodings}{7}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Fully-Table Representation}{8}{subsection.1.4.2}
+\contentsline {subsubsection}{T-Boxes}{8}{section*.13}
+\contentsline {subsubsection}{MixColumns}{9}{section*.14}
+\contentsline {subsubsection}{ShiftRows}{9}{section*.15}
+\contentsline {subsection}{\numberline {1.4.3}WBAES Construction}{9}{subsection.1.4.3}
+\contentsline {subsubsection}{Mixing Bijection}{9}{section*.16}
+\contentsline {subsubsection}{Input Mixing Bijection}{9}{section*.17}
+\contentsline {subsubsection}{Table Composition}{9}{section*.18}
+\contentsline {subsubsection}{Inserting Encodings}{10}{section*.19}
+\contentsline {section}{\numberline {1.5}Known Attacks}{10}{section.1.5}
+\contentsline {chapter}{\numberline {2}Attack using Differential Computation Analysis}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}Side-Channel Attack}{11}{section.2.1}
+\contentsline {section}{\numberline {2.2}Using SCA tools in WBC}{11}{section.2.2}
+\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{12}{chapter.3}
+\contentsline {chapter}{\numberline {4}Future Work}{13}{chapter.4}
+\contentsline {chapter}{Conclusion}{14}{section*.20}
+\contentsline {chapter}{References}{15}{section*.22}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Manual}{II}{Appendix.a.B}
