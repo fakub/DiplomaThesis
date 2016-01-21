@@ -1,9 +1,239 @@
-\section{Basic Cryptography Principles}
+%!% udělat chapter? Principles nebo Concepts?
+\section{Basic Cryptography Concepts}
 \label{sec:cryptobasics}
 
+\subsection{The Goal of Cryptography}
+
+% goal: introduce crypto in a broader context, yet not too much in detail
+
+% starý jako lidstvo samo, bla bla, trochu ukázky z historie a jak to bylo špatný a jak se to umí lámat, security by obscurity, využívá cool matiku
+% co po crypto vlastně chci
+
+%~ effective algorithm
+%~ uniformly random: $k\xleftarrow{R}K$.
+
+%~ crypto = basis for security mechanisms
+%~ CONFIDENTIALITY and much more (e.g. integrity, digital signature, anonymity) or magic: zero knowledge proof of knowledge, FHE
+%~  or a complicated construction of crypto primitives (e.g. digital currency, electronic election, electronic auction)
+%~ 1. threat model (WB vs. BB later)
+%~ 2. propose sth
+%~ 3. prove that breaking it would break an underlying hard problem
+%~ security by obscurity, on the other hand the useful approach
 %~ PRF/PRP, black-box ...
 
-%~ \subsection{Black-Box Model}
+Let us give an example of a primitive cipher.
+
+\begin{example}
+\label{ex:shift}
+	{\em Shift cipher} is an ancient cipher used already by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|\cal A|-1$ and adds a constant $c\in\{\atob{0}{|\cal A|-1}\}$ modulo $|\cal A|$ to each number. Finally it maps the numbers back to letters yielding a string ``shifted'' by $c$ which can be interpreted as an element of $\cal A$ as well.
+	
+	Decryption can be done simply by substracting $c$ from the ciphertext in a similar way.
+\end{example}
+
+Shift cipher can be easily broken by pen and paper only since there are as many keys as letters in the alphabet, typically $26$ english letters. You simply try them all until the plaintext makes sense.
+
+There are two large families of ciphers -- symmetric and asymmetric. Shift cipher belongs to the symmetric family which can be recognized from the fact that it uses the same key for both encryption and decryption while asymmetric ciphers use distinct keys for encryption and decryption. Asymmetric ciphers are also referred to as public key ciphers but in this thesis we will only deal with symmetric ciphers, a definition follows.
+
+\begin{defn}[Symmetric Cipher]
+	Let $K$ denote the key space, $M$ the message space and $C$ the ciphertext space. {\em Symmetric cipher} is a pair of efficient (possibly randomized) algorithms $(E,D)$, $E:M\times K\rarr C$, $D:C\times K\rarr M$, such that $\forall m\in M, k\in K$ it holds $\Pr\left(D(E(m,k),k)=m\right) = 1$.   %?% \footnote{In some use cases it might be useful to require only so called {\em overwhelming} probability; not needed in this thesis.}
+\end{defn}
+\nomenclature{$\Pr(\omega)$}{Probability of the event $\omega$}
+
+\begin{note}
+	Going back to Example \ref{ex:shift}, the key space is $\{\atob{0}{|\cal A|-1}\}\sim\cal A$, the message and ciphertext spaces are $\cal A^*$ which stands for the set of all strings over the alphabet $\cal A$.
+\end{note}
+
+According to the previous definition, we do not seem to have a definition of a proper cipher at all -- the only requirement is corectness but it totally lacks any security requirement. As we will see later, it is actually quite complicated to define ``security'' appropriately.
+
+
+% ======================================================================
+% ===   I N T R O D U C I N G   S E C U R I T Y                      ===
+% ======================================================================
+
+\subsection{Introducing Security}
+
+Our goal for now is to address at least some security requirements. Let us imagine a typical situation where Alice wants to talk to Bob over an insecure channel while Eve is eavesdropping on the channel. In the beginning, let us suppose that Alice and Bob share a secret key for a symmetric cipher and both control a secure execution environment where they intend to run the ciphering algorithms so that Eve can only observe what they send over the channel.
+
+The list of such attacker's abilities is referred to as {\em threat model}. Note that under the previous threat model the attacker is quite weak -- she can only read the traffic. If she were for instance able to manipulate the traffic, Alice and Bob would need to add another features to their protocol which could detect forged messages.
+
+Back to our eavesdropping-only model. Our first intuitive requirements on Alice and Bob's symmetric cipher could be expressed as follows: no matter what plaintext Alice and Bob encrypt and send over the channel, Eve shall {\em not} be able to
+\begin{enumerate}
+	\item recover any portion of any plaintext, \label{item:plainrecov}
+	\item recover the secret key. \label{item:keyrecov}
+\end{enumerate}
+The item \ref{item:plainrecov} requirement is also referred to as {\em confidentiality}. Note that key recovery would lead to plaintext recovery as well, on the other hand not necessarily the other way around.
+
+\subsubsection{Information Security}
+
+Still we do not have any definition of ``security'', what it means? Shannon's groundbreaking work \cite{shannon1949mathematical} on the mathematics of communication gives us a tool -- information-theoretic approach. We can then define secure cipher as a cipher which outputs a ciphertext which carries no information about respective plaintext. Note that this can be rewritten in a more friendly form, a definition follows.
+
+\begin{defn}
+	Let $(E,D)$ be a cipher. It is called {\em perfectly secure} if $\forall m_0,m_1\in M$ such that $|m_0| = |m_1|$ and $\forall c\in C$ it holds $\Pr\left(E(k,m_0)=c\right) = \Pr\left(E(k,m_1)=c\right)$ where $k\unirand K$.
+\end{defn}
+
+This seems to be exactly what we want from a secure cipher but the following theorem shows that we want far too much.
+
+\begin{thm}
+	Let $(E,D)$ be a perfect cipher. Then $|K| \geq |M|$.
+\end{thm}
+
+There is a cipher which is perfectly secure, see the following example.
+
+\begin{example}[Vernam cipher]
+	Let $K = M = C = \{0,1\}^n$ and $k\unirand K$. Given a plaintext $m$, {\em Vernam cipher} applies bitwise XOR of the key $k$ yielding ciphertext $c$ i.e. $c = m\xor k$.
+\end{example}
+
+\begin{note}
+	Vernam cipher is also referred to as {\em One Time Pad} (OTP). Note that it is crucial that each key is only used once otherwise you can attack the cipher very easily: given two ciphertexts using the same key i.e. $c_0=m_0\xor k$ and $c_1=m_1\xor k$, one can compute $c_0\xor c_1 = m_0\xor m_1$. This can be practically attacked using some apriori knowledge about plaintexts, e.g. encoding (ASCII), format and language of plaintext (XML and english), \ldots which reduce the amount of possibilities, typically recovering both plaintexts.
+\end{note}
+
+But this approach does not seem to address our intention -- we would like to establish a shared secret key and then, using the key, be able to encrypt as much information as we want. For this reason we need to weaken our assumptions. Note that previously there was no assumption on adversary's computing power -- the requirement was actually to hide plaintext from {\em any} adversary i.e. including an adversary with unlimited computing power.
+
+\subsubsection{Computational Security}
+
+Therefore we would like to utilize the fact that adversary typically does not have unlimited computing power but rather polynomial. Let us give some definitions first.   %!% navazuje ten text potom ???
+
+\begin{defn}[Negligible Function]
+\label{def:neglfunc}
+	Let $\epsilon:\N\rarr\R$. $\epsilon$ is called {\em negligible} if $\forall d\in\N\exists \lambda_0\in\N$ such that $\forall \lambda>\lambda_0$ it holds $\epsilon(\lambda)\leq\frac{1}{\lambda^d}$. In the opposite case, $\epsilon$ is called {\em non-negligible}.
+\end{defn}
+\nomenclature{$\N$}{Positive integers}
+\nomenclature{$\R$}{Real numbers}
+
+\begin{note}
+\label{note:neglconst}
+	In practice, the term {\em negligible} is often used with concrete constants as well. $\epsilon<\frac{1}{2^{80}}$ is considered negligible i.e. events with such probability are not considered to occur during our lives, on the other hand $\epsilon>\frac{1}{2^{30}}$ is considered non-negligible i.e. it is likely to observe an event with such probability.
+\end{note}
+
+Now we have a reasonable meter to define practical security. But first we introduce some notions.
+
+\begin{defn}[Pseudorandom Function]   %!% $|k|$ polynomial w.r.t. $|x|$
+	Let $F: K\times X\rarr Y$. We call $F$ a {\em pseudorandom function} (PRF) if there exists an efficient algorithm which evaluates $F$.
+\end{defn}
+
+\begin{defn}[Pseudorandom Permutation]
+	Let $E: K\times X\rarr Y$. We call $E$ a {\em pseudorandom permutation} (PRP) if there exists an efficient algorithm which evaluates $E$, the function $E(k,\cdot): X\rarr Y$ is a bijection and there exists an efficient algorithm to compute $E^{-1}(k,\cdot)$ for every $k\in K$.
+\end{defn}
+
+\begin{note}
+	If a function is a PRP then it is a PRF as well.
+\end{note}
+
+Pseudorandom permutations will play the main role from now. What we need is some definition of security of PRPs.
+
+\begin{defn}[Oracle]
+	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time.
+\end{defn}
+
+\begin{defn}[Statistical Test]   %!% security parameter? effective in terms of what?
+	Let $F:X\rarr Y$. {\em Statistical test} is a (possibly randomized) effective algorithm $A$ which only has an access to an oracle evaluating $F$ and which outputs $0$ or $1$, denoted by $A(F)$.
+\end{defn}
+
+\begin{note}
+	Statistical test will be also referred to as {\em adversary}.
+\end{note}
+
+% stat test examples, what is the motivation -- decide some properties from I/O only, how we will use it
+
+\begin{defn}[Advantage]
+\label{def:advant}
+	Let $\cal F$, $\cal G$ be two distinct subsets of the set of all functions from $X$ to $Y$ and $A$ an adversary. We define {\em advantage} of adversary $A$ as
+	\[
+		\Adv(A,{\cal F},{\cal G}) = \left| \Pr\limits_{F\unirand {\cal F}}\left(A(F)=1\right) - \Pr\limits_{G\unirand {\cal G}}\left(A(G)=1\right) \right| .
+	\]
+\end{defn}
+
+In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set. According to these sets, advantage can be ``customized'' for a specific purpose, let us define such advantage for an adversary tempting to distinguish a pseudorandom function parameterized by $k$ from a truly random one.
+
+\begin{defn}[PRF, PRP Advantage]
+\label{def:prfadvant}\label{def:prpadvant}
+	Let $F: K\times X\rarr Y$ be a PRF and $E: K\times X\rarr Y$ a PRP, $\cal F$ the set of all functions from $X$ to $Y$, $\cal E$ the set of all permutations from $X$ to $Y$ and $A$ an adversary. We define {\em PRF} and {\em PRP advantage} of adversary $A$ as
+	\[
+		\AdvPRF(A,F) = \Adv(A,\{F(k,\cdot)|k\in K\},{\cal F}) ,
+	\]
+	\[
+		\AdvPRP(A,E) = \Adv(A,\{E(k,\cdot)|k\in K\},{\cal E}) ,
+	\]
+	respectively.
+\end{defn}
+
+
+
+\begin{example}
+	Bla. % příklad na adversaryho a jeho advántyč
+\end{example}
+
+Now we can finally define the concept of secure PRFs and PRPs.
+
+\begin{defn}[Secure PRF and PRP]
+\label{def:secprf}\label{def:secprp}
+	Let $F: K\times X\rarr Y$ be a PRF or PRP, respectively. Let further $\cal F$ denote the set of all functions from $X$ to $Y$ and $\cal P$ denote the set of all bijections between $X$ and $Y$. $F$ is called {\em secure} PRF or PRP if for {\em any} adversary $A$ the advantage $\Adv(A,F,{\cal F})$ or $\Adv(A,F,{\cal P})$, respectively, is negligible.   %!% negligible in terms of what?
+\end{defn}
+
+In other words, PRF or PRP, given a random key, is secure if it is indistinguishable from a truly random function or permutation, respectively. Secure PRP is what we call a {\em block cipher}.
+
+\subsubsection{Provable vs. Real-World Security}
+
+Note that there is no provably secure block cipher known; if there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $F$ were a secure PRP then adversary could, given a certain (polynomial) amount of plaintext-ciphertext pairs $(pt_i,ct_i)$, look for a key $k$ such that $ct_i = F(k,pt_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ exists, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
+\nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
+\nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
+
+Instead, real-world block ciphers are {\em beleived} to be secure based on a simple fact: no known attack is far better than exhaustive search. One such block cipher is called {\em AES} and will be of top interest in this thesis. AES will be described in detail in Section \ref{sec:aes}.
+
+
+% ======================================================================
+% ===   W H I T E - B O X   A T T A C K   C O N T E X T              ===
+% ======================================================================
+
+\subsection{White-Box Attack Context}
+
+The other central topic of this thesis is {\em white-box attack context} but we rather begin with {\em black box attack context}. Black box can understood like an oracle -- given an input, it provides an output in a unit time. Thus we do not get any information but input-output pairs. Note that black box model is considered for design of most ciphers, for example classical AES implementation is totally insecure if certain byproducts or even some information related to them is revealed; covered in detail in Section \ref{sec:side}.
+
+In the black box attack context of certain block cipher, there is usually defined the following ``game''. There are two parties -- a challenger and an adversary. First, the challenger chooses the key $k\unirand K$ and $b\unirand\{0,1\}$. Then the adversary provides two plaintexts $m_0$, $m_1$ to the challenger who encrypts $m_b$ (according to $b$ he has chosen) and sends the resulting ciphertext back to the adversary. The aim of the adversary is to distinguish which $b$ has been chosen by the challenger while an advantage is defined similarly as in Definition \ref{def:advant}. Note that if the block cipher is secure then such advantage is also negligible.
+
+% black box: like an oracle, everything holds. ciphers designed wrt black box, why wb? what it is? ...
+
+\begin{defn}
+	
+\end{defn}
+
+\begin{defn}
+	
+\end{defn}
+
+
+
+
+
+%~ \subsubsection{Black-Box Model}
 	
 	%~ What pseudo-random permutation is?
 	%~ approach: feistel, iterated; diffusion vs. confusion
+
+
+
+
+%~ odpad:
+
+%~ \subsection{Pseudorandomness}
+%~ \begin{defn}
+	%~ PRG is a function $G:\{0,1\}^s\rarr\{0,1\}^n$ such that $n>>s$. It input is referred to as {\em seed}.
+	%~ % eff. computable by a determ. algorithm
+%~ \end{defn}
+
+%~ Note that OTP using PRG (called stream cipher) can never have perfect secrecy since the key length is smaller than message length. Need for different definition. Security lies in PRG ``unpredictability''.
+
+%~ Predictable means: $\exists i$ s.t. given $G(k)|_{\atob{1}{i}}$, there exists an efficient algorithm which can compute $G(k)|_{\atob{i+1}{n}}$ ... CPA using $i$ bits would lead to plaintext recovery.
+%~ 
+%~ Predictable (2): $\exists eff. alg. A$ and $\exists i<n$ s.t. $Pr(A(G(k)|_{\atob{1}{i}}) = G(k)|_{i+1}) > 1/2 + \epsilon$ for non-negligible $\epsilon$. ... unpredictable iff it's not predictable.
+%~ 
+%~ Example: linear congruence generator:
+%~ r[i] = a . r[i-1] + b mod p
+%~ output bits of r[i]
+%~ i++
+%~ repeat
+%~ ... implemented as random() in glibc, cannot be used in crypto
+
+%~ \begin{defn}
+	%~ Let $G_\lambda:K_lambda\rarr\{0,1\}^{n(\lambda)}$ be a PRG parameterized by $\lambda\in\N$, $i\in\N$, $i<n(\lambda)$ and $\epsilon$ a non-negligible function. We say that $G_\lambda$ is {\em predictable} at position $i$ if there exists a polynomial-time algorithm $A$ such that $Pr(A(\lambda, G_\lambda(k)|_{\atob{1}{i}}) = G_\lambda(k)|_{i+1}) > 1/2 + \epsilon(\lambda)$.
+%~ \end{defn}

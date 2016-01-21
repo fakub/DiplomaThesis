@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry,amsmath, amsthm, amssymb}   % , units, dsfont, nicefrac, caption
 % enumerate: \begin{enumerate}[{Example} I)] ... Roman numbering
-\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode}
+\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools}
 \usepackage[table]{xcolor}
 \usepackage[titletoc]{appendix}
 \usepackage{nomencl}
@@ -61,7 +61,14 @@
 % -------------
 \renewcommand{\iff}{\Leftrightarrow}
 \newcommand{\then}{\Rightarrow}
+\newcommand{\rarr}{\rightarrow}
+\newcommand{\larr}{\leftarrow}
 \newcommand{\xor}{\oplus}
+%~ \DeclareMathOperator*{\Prob}{\mathbb{Pr}}   % operátor* bude umět používat \limit :) ... \Pr už existuje! a \mathbb neumí malý písmena
+\DeclareMathOperator*{\Adv}{Adv}
+\DeclareMathOperator*{\AdvPRF}{Adv_{PRF}}
+\DeclareMathOperator*{\AdvPRP}{Adv_{PRP}}
+\newcommand{\unirand}{\xleftarrow{R}}
 
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\GF}{\mathrm{GF}}
@@ -69,6 +76,8 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Pclass}{\mathsf{P}}
+\newcommand{\NPclass}{\mathsf{NP}}
 
 \newcommand{\SubBytes}{\texttt{SubBytes}}
 \newcommand{\ShiftRows}{\texttt{ShiftRows}}
@@ -78,8 +87,10 @@
 \newcommand{\KeySchedule}{\texttt{KeySchedule}}
 
 \newcommand{\TBox}{\texttt{TBox}}
+\newcommand{\MC}{\texttt{MC}}
 \newcommand{\MB}{\texttt{MB}}
 \newcommand{\IMB}{\texttt{IMB}}
+\newcommand{\Enc}{\texttt{Enc}}
 
 \newcommand{\atob}[2]{#1 , \ldots , #2}
 \newcommand{\link}[1]{\href{http://#1}{\tt #1}}
@@ -258,7 +269,7 @@ A very interesting and universal approach has been recently introduced in a pape
 		% FINAL CHECK:
 		% 	abstrakty a keywords
 		% 	V Praze dne \today -> český datum
-		% 	
+		% 	\section{Capital Letters}
 		% 	section \ref{...} -> Section \ref{...}
 		% 	\mod vs \pmod
 		% 	bib: title={{Bla Bla ... 2x závorky aby byly velký písmena}}
@@ -267,6 +278,12 @@ A very interesting and universal approach has been recently introduced in a pape
 		% 	concatenation -- spelling
 		% 	you vs. WE
 		% 	an $8 ...
+		% 	compose vs. concat !!!
+		% 	E(k,m) instead of E(m,k)
+		% 	vočekovat nomenklaturu
+		% 	adversary -> she
+		% 	referred to as (the?)
+		% 	start -> begin with
 		% 	
 		
 		

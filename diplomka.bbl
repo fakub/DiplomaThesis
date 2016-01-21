@@ -3,7 +3,7 @@
 \bibitem{americantripple}
 American~Bankers Association et~al.
 \newblock Tripple data encryption algorithm modes of operation.
-\newblock {\em ANSI X9}, pages 52--1998.
+\newblock {\em ANSI X9}, pages 52--1998, 1998.
 
 \bibitem{billet2005cryptanalysis}
 Olivier Billet, Henri Gilbert, and Charaf Ech-Chatbi.
@@ -66,6 +66,12 @@ Mitsuru Matsui.
 \newblock In {\em Advances in Cryptology—EUROCRYPT’93}, pages 386--397.
   Springer, 1994.
 
+\bibitem{muir2013tutorial}
+James~A Muir.
+\newblock A tutorial on white-box aes.
+\newblock Technical report, Technical report, Cryptology ePrint Archive, Report
+  2013/104. \url{http://eprint. iacr. org/2013/104}, 2013.
+
 \bibitem{fips1977des}
 NIST~FIPS PUB.
 \newblock 46-3: Data encryption standard.
@@ -77,5 +83,10 @@ NIST~FIPS PUB.
 \newblock 197: Advanced encryption standard (aes).
 \newblock {\em Federal Information Processing Standards Publication},
   197:441--0311, 2001.
+
+\bibitem{shannon1949mathematical}
+Claude~E Shannon and Warren Weaver.
+\newblock The mathematical theory of communication.
+\newblock {\em University of Illinois Press}, 1949.
 
 \end{thebibliography}

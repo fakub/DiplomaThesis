@@ -7,6 +7,11 @@ In 1998, NIST chose $15$ candidates and asked cryptology community for help with
 
 Today, 15 years later, AES is used worldwide and, although extensively analysed, is still beleived to be secure enough.
 
+
+% ======================================================================
+% ===   A E S   A L G O R I T H M   P R E R E Q U I S I T I E S      ===
+% ======================================================================
+
 \subsection{AES Algorithm Prerequisities}
 
 AES encryption\footnote{Decryption will be treated separately at the end of this section.} consists of $10$ rounds, each round (except for the last one) consists of $4$ different operations which will be described later. All of these operations work with $128$-bit words, let us call them {\em states}.
@@ -100,7 +105,7 @@ Definitions of the $4$ operations follow.
 	
 	Note that $c(z)$ is coprime to $z^4+1$ therefore invertible$\mod{z^4+1}$. It follows that $\MixColumns$ is invertible.
 	
-	Unlike $\SubBytes$, $MixColumns$ operates on a substantially larger domain therefore cannot be implemented as a lookup table. Rather let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly} which is performed in $F[z]$ can be rewritten into matrix multiplication back in $F$, indeed
+	Unlike $\SubBytes$, $MixColumns$ operates on a substantially larger domain therefore cannot be directly implemented as a lookup table. Rather let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly} which is performed in $F[z]$ can be rewritten into matrix multiplication back in $F$, indeed
 	\begin{equation}
 	\label{eq:mixcolmatr}
 		\begin{pmatrix}
@@ -132,11 +137,17 @@ Definitions of the $4$ operations follow.
 	
 	The most important thing for us is that $\ExpandedKey$ begins with plain encryption key. We omit further details here because $\KeySchedule$ is specified rather in algorithmic than algebraic manner, see \cite[pp.43-45]{daemen2013rijndael} for detail.
 
+
+% ======================================================================
+% ===   A E S   A L G O R I T H M   D E S C R I P T I O N            ===
+% ======================================================================
+
 \subsection{AES Algorithm Description}
 
 AES, as already stated, consists of $10$ rounds of $4$ operations except for the last one where $\MixColumns$ is missing, see the following algorithm.
 
 \begin{alg}
+\label{alg:aes}
 	Given a $128$-bit plaintext and key, return its AES encryption.
 	\begin{algorithmic}[1]
 		\Function{AES\_Encryption}{$Plaintext,Key$}
@@ -160,6 +171,11 @@ AES, as already stated, consists of $10$ rounds of $4$ operations except for the
 \begin{note}
 	Since we have commented on every step about how it can be inverted, AES Encryption is also invertible by executing its steps inverted and in reverse order. This leads to AES Decryption algorithm.
 \end{note}
+
+
+% ======================================================================
+% ===   A E S   I M P L E M E N T A T I O N   N O T E                ===
+% ======================================================================
 
 \subsection{AES Implementation Note}
 \label{sec:aeslookup}

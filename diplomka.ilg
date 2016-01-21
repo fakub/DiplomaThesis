@@ -7,8 +7,8 @@ Scanning style file ./nomencl.ist.......
 ** Input style error (file = ./nomencl.ist, line = 72):
    -- Unknown specifier lethead_flag.
 ...done (10 attributes redefined, 3 ignored).
-Scanning input file diplomka.nlo....done (2 entries accepted, 0 rejected).
-Sorting entries....done (2 comparisons).
-Generating output file diplomka.nls....done (10 lines written, 0 warnings).
+Scanning input file diplomka.nlo....done (7 entries accepted, 0 rejected).
+Sorting entries....done (21 comparisons).
+Generating output file diplomka.nls....done (19 lines written, 0 warnings).
 Output written in diplomka.nls.
 Transcript written in diplomka.ilg.
