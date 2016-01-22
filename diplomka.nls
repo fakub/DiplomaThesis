@@ -4,6 +4,8 @@
 
   \item [{$\GF(p^n)$}]\begingroup Galois Field with $p^n$ elements, $p$ prime\nomeqref {1.0}
 		\nompageref{7}
+  \item [{$\mid S\mid$}]\begingroup Cardinality of the set $S$\nomeqref {1.0}
+		\nompageref{2}
   \item [{$\N$}]\begingroup Positive integers\nomeqref {1.0}
 		\nompageref{4}
   \item [{$\NPclass$}]\begingroup Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time\nomeqref {1.0}

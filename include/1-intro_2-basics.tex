@@ -25,10 +25,11 @@ Let us give an example of a primitive cipher.
 
 \begin{example}
 \label{ex:shift}
-	{\em Shift cipher} is an ancient cipher used already by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|\cal A|-1$ and adds a constant $c\in\{\atob{0}{|\cal A|-1}\}$ modulo $|\cal A|$ to each number. Finally it maps the numbers back to letters yielding a string ``shifted'' by $c$ which can be interpreted as an element of $\cal A$ as well.
+	{\em Shift cipher} is an ancient cipher used already by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|{\cal A}|-1$ and adds a constant $c\in\{\atob{0}{|{\cal A}|-1}\}$ modulo $|\cal A|$ to each number. Finally it maps the numbers back to letters yielding a string ``shifted'' by $c$ which can be interpreted as an element of $\cal A$ as well.
 	
 	Decryption can be done simply by substracting $c$ from the ciphertext in a similar way.
 \end{example}
+\nomenclature{$\mid S\mid$}{Cardinality of the set $S$}
 
 Shift cipher can be easily broken by pen and paper only since there are as many keys as letters in the alphabet, typically $26$ english letters. You simply try them all until the plaintext makes sense.
 
@@ -40,7 +41,7 @@ There are two large families of ciphers -- symmetric and asymmetric. Shift ciphe
 \nomenclature{$\Pr(\omega)$}{Probability of the event $\omega$}
 
 \begin{note}
-	Going back to Example \ref{ex:shift}, the key space is $\{\atob{0}{|\cal A|-1}\}\sim\cal A$, the message and ciphertext spaces are $\cal A^*$ which stands for the set of all strings over the alphabet $\cal A$.
+	Going back to Example \ref{ex:shift}, the key space is $\{\atob{0}{|{\cal A}|-1}\}\sim\cal A$, the message and ciphertext spaces are ${\cal A}^*$ which stands for the set of all strings over the alphabet $\cal A$.
 \end{note}
 
 According to the previous definition, we do not seem to have a definition of a proper cipher at all -- the only requirement is corectness but it totally lacks any security requirement. As we will see later, it is actually quite complicated to define ``security'' appropriately.
@@ -95,7 +96,7 @@ Therefore we would like to utilize the fact that adversary typically does not ha
 
 \begin{defn}[Negligible Function]
 \label{def:neglfunc}
-	Let $\epsilon:\N\rarr\R$. $\epsilon$ is called {\em negligible} if $\forall d\in\N\exists \lambda_0\in\N$ such that $\forall \lambda>\lambda_0$ it holds $\epsilon(\lambda)\leq\frac{1}{\lambda^d}$. In the opposite case, $\epsilon$ is called {\em non-negligible}.
+	Let $\epsilon:\N\rarr\R$. $\epsilon$ is called {\em negligible} if $\forall d\in\N$ $\exists \lambda_0\in\N$ such that $\forall \lambda>\lambda_0$ it holds $\epsilon(\lambda)\leq\frac{1}{\lambda^d}$. In the opposite case, $\epsilon$ is called {\em non-negligible}.
 \end{defn}
 \nomenclature{$\N$}{Positive integers}
 \nomenclature{$\R$}{Real numbers}
@@ -119,7 +120,16 @@ Now we have a reasonable meter to define practical security. But first we introd
 	If a function is a PRP then it is a PRF as well.
 \end{note}
 
-Pseudorandom permutations will play the main role from now. What we need is some definition of security of PRPs.
+Pseudorandom permutations will play the main role from now. What we need is some definition of security of PRPs. Let us first demonstrate a possible approach on such a game.
+
+\begin{game}
+\label{game:prp}
+	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random $k\unirand K$ (a key), a random permutation $F$ from $X$ to $Y$ and a random bit value $b\unirand\{0,1\}$. Then the adversary sends $x\in X$ (a plaintext) of his choice to the challenger. The challenger then applies $E(k,\cdot)$ or $F$ if $b=0$ or $1$, respectively, and sends the result (a ciphertext) back to the adversary.
+	
+	The aim of the adversary is to distinguish which $b$ has been chosen by the challenger.
+\end{game}
+
+Our goal will be to create a PRP hardly distinguishable from a truly random permutation which ensures its security. Before we give the formal definition, let us introduce some notion.
 
 \begin{defn}[Oracle]
 	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time.
@@ -130,7 +140,7 @@ Pseudorandom permutations will play the main role from now. What we need is some
 \end{defn}
 
 \begin{note}
-	Statistical test will be also referred to as {\em adversary}.
+	Statistical test will be also referred to as {\em adversary}. Note that its oracle access count may be explicitly limited.
 \end{note}
 
 % stat test examples, what is the motivation -- decide some properties from I/O only, how we will use it
@@ -143,7 +153,7 @@ Pseudorandom permutations will play the main role from now. What we need is some
 	\]
 \end{defn}
 
-In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set. According to these sets, advantage can be ``customized'' for a specific purpose, let us define such advantage for an adversary tempting to distinguish a pseudorandom function parameterized by $k$ from a truly random one.
+In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set based on input/output behavior only. According to these sets, advantage can be ``customized'' for a specific purpose, let us define such advantage for an adversary tempting to distinguish a pseudorandom function parameterized by $k$ from a truly random one.
 
 \begin{defn}[PRF, PRP Advantage]
 \label{def:prfadvant}\label{def:prpadvant}
@@ -157,7 +167,8 @@ In other words, advantage tells us how likely adversary $A$ is able to distingui
 	respectively.
 \end{defn}
 
-
+PRP advantage tells us how likely adversary $A$ is able to distinguish a result of a PRP with a random key from a truly random permutation. Note that this is the same problem as introduced in Game \ref{game:prp}.   %!% ale trochu formálnějc
+% že bude example?
 
 \begin{example}
 	Bla. % příklad na adversaryho a jeho advántyč
@@ -170,10 +181,97 @@ Now we can finally define the concept of secure PRFs and PRPs.
 	Let $F: K\times X\rarr Y$ be a PRF or PRP, respectively. Let further $\cal F$ denote the set of all functions from $X$ to $Y$ and $\cal P$ denote the set of all bijections between $X$ and $Y$. $F$ is called {\em secure} PRF or PRP if for {\em any} adversary $A$ the advantage $\Adv(A,F,{\cal F})$ or $\Adv(A,F,{\cal P})$, respectively, is negligible.   %!% negligible in terms of what?
 \end{defn}
 
-In other words, PRF or PRP, given a random key, is secure if it is indistinguishable from a truly random function or permutation, respectively. Secure PRP is what we call a {\em block cipher}.
+In other words, PRF or PRP, given a random key, is secure if it is computationaly indistinguishable from a truly random function or permutation, respectively. Secure PRP is what we call a {\em block cipher}. Also note that this definition formalizes Game \ref{game:prp}.
+
+\subsubsection{Semantic Security}   %!% mělo by vlastně bejt \subsubsubsection
+
+Now we introduce another interesting approach to cipher's security. Before we give the formal definition, let us us start with another game similar to \ref{game:prp}.
+
+\begin{game}
+	There are two parties again -- a {\em challenger} and an {\em adversary}. First, the challenger chooses a key $k\unirand K$ and a bit value $b\unirand\{0,1\}$. Then the adversary sends two plaintexts $m_0$, $m_1$ of his choice to the challenger. The challenger then encrypts $m_b$ (according to $b$ he has chosen) and sends the resulting ciphertext $c$ back to the adversary.
+	
+	The aim of the adversary is to distinguish which $b$ has been chosen by the challenger.
+\end{game}
+
+%!% a figure of the game
+
+Resistency of a cipher to this kind of attack is referred to as {\em semantic security}. In a manner analogous to Definitions \ref{def:advant} and \ref{def:prpadvant}, attacker's advantage is defined as follows.
+
+\begin{defn}[Semantic Security Advantage]
+\label{def:ssadvant}
+	Let $E: K\times X\rarr Y$ be a PRP, $k\unirand K$, ${\cal E}_b = \{E_b:X^2\rarr Y \mid E_b(m_0,m_1) = E(k,m_b)\}$ for $b=0,1$ and $A^{(1)}$ a single-access adversary. We define {\em semantic security advantage} of single-access adversary $A^{(1)}$ as
+	\[
+		\AdvSS(A^{(1)},E) = \Adv(A^{(1)},{\cal E}_0,{\cal E}_1) .
+	\]
+\end{defn}
+
+Based on the previous definition formalizing the idea of the game, we can define another notion of security.
+
+\begin{defn}{Semantically Secure PRP}
+\label{def:semsecprp}
+	Let $E: K\times X\rarr Y$ be a PRP. $E$ is called {\em semantically secure} PRP if for {\em any} single-access adversary $A^{(1)}$ the semantic security advantage $\AdvSS(A^{(1)},E)$ is negligible.
+\end{defn}
+
+\begin{note}
+	Note that in previous definitions we had to limit adversary's access to the oracle to one otherwise there is a trivially winning adversary. Indeed, the adversary picks three distinct plaintexts $m_0$, $m_1$, $m_2$ (well, let us suppose there are at least three plaintexts in $M$) and sends $(m_0,m_1)$ to the challenger, he gets back some ciphertext $c_a$. In his second query, the attacker sends $(m_0,m_2)$ to the challenger and receives another ciphertext, let say $c_b$. Since PRP is a deterministic bijection, he can decide with certainty:
+	\begin{itemize}
+		\item $b=0$ if $c_a = c_b$, or
+		\item $b=1$ if $c_a \neq c_b$.
+	\end{itemize}
+	
+	Therefore it is clear that if we wanted semantic security with respect to an adversary with unlimited access, the encryption would {\em have to} encrypt the same plaintext differently each time. This can be achieved using randomization or counters. In case of block ciphers this leads to {\em modes of operation}, e.g. Cipher Block Chaining (CBC) mode or Counter (CTR) mode, but this is out of the scope of this thesis.
+\end{note}
+
+So far we have two distinct notions of security -- we have {\em secure PRP} according to Definition \ref{def:secprp} and {\em semantically secure PRP} according to Definition \ref{def:semsecprp}. And there is a relation between them as stated in the following theorem.
+
+\begin{thm}
+	Let $E: K\times X\rarr Y$ be a secure PRP. Then it is also a semantically secure PRP.
+\end{thm}
+\begin{proof}
+	We show that for every semantic security adversary $A$ (i.e. an adversary distinguishing $E(k,m_0)$ from $E(k,m_1)$) there exist security adversaries $B_0$, $B_1$ (i.e. adversaries distinguishing PRPs from truly random ones) such that
+	\begin{equation}
+	\label{eq:aleqbb}
+		\AdvSS(A,E) \leq \AdvPRP(B_0,E) + \AdvPRP(B_1,E) .
+	\end{equation}
+	The claim follows -- if $E$ is a secure PRP i.e. $\AdvPRP(B_0,E) + \AdvPRP(B_1,E)$ is negligible then also $\AdvSS(A,E)$ is negligible therefore $E$ is semantically secure.
+	
+	Let us first denote $W_b$ the event when adversary answers $1$ while the true value of the semantic security game with PRP $E$ is $b$ for $b=0,1$. In this notation it holds
+	\[
+		\AdvSS(A,E) = \left| \Pr(W_1) - \Pr(W_0) \right| .
+	\]
+	
+	Let us further denote $R_b$ the same event with only difference -- the semantic security game uses a random permutation instead with advantage denoted $\AdvSS'(A)$. It holds
+	\[
+		\AdvSS'(A) = \left| \Pr(R_1) - \Pr(R_0) \right| = 0
+	\]
+	since $b\unirand\{0,1\}$ and both $R_b$ provide a truly random permutation independent from $b$.
+	
+	Now we construct adversaries $B_0$, $B_1$ distinguishing PRPs from truly random ones while we make use of adversary $A$.
+	
+	Let us construct $B_0$ first. We ask $A$ to provide $m_0$ and $m_1$, then we feed the oracle with $m_0$ obtaining $c$ as a result. Note that either $c=E(k,m_0)$ or $c=F(m_0)$ according to $b$ where $F$ is a truly random permutation. We provide this $c$ to adversary $A$ and output what $A$ outputs. Now the advantage of such adversary is
+	\[
+		\AdvPRP(B_0,E) = \left| \Pr(W_0) - \Pr(R_0) \right| .
+	\]
+	
+	We construct $B_1$ in a similar manner and get
+	\[
+		\AdvPRP(B_1,E) = \left| \Pr(W_1) - \Pr(R_1) \right| .
+	\]
+	
+	Finally we get
+	\[
+		\AdvPRP(B_1,E) = \left| \Pr(W_1) - \Pr(R_1) \right|
+	\]
+	which proves Equation \ref{eq:aleqbb} which was to be proved.
+\end{proof}
+
+Semantic security is usually what we rather require from a secure cipher. Note that secure PRP might be too strong requirement: ...
+
+% pokračovat, dát příklad, block cipher že je spíš teda secure PRP, semantic security vhodná do secure communication
 
 \subsubsection{Provable vs. Real-World Security}
 
+%!% přidat nákej kec že jsme zase zpátky u secure PRP
 Note that there is no provably secure block cipher known; if there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $F$ were a secure PRP then adversary could, given a certain (polynomial) amount of plaintext-ciphertext pairs $(pt_i,ct_i)$, look for a key $k$ such that $ct_i = F(k,pt_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ exists, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
 \nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
 \nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
@@ -187,9 +285,21 @@ Instead, real-world block ciphers are {\em beleived} to be secure based on a sim
 
 \subsection{White-Box Attack Context}
 
-The other central topic of this thesis is {\em white-box attack context} but we rather begin with {\em black box attack context}. Black box can understood like an oracle -- given an input, it provides an output in a unit time. Thus we do not get any information but input-output pairs. Note that black box model is considered for design of most ciphers, for example classical AES implementation is totally insecure if certain byproducts or even some information related to them is revealed; covered in detail in Section \ref{sec:side}.
+The other central topic of this thesis is {\em white-box attack context}. In order to explain what it is, let us introduce {\em black box attack context} first.
 
-In the black box attack context of certain block cipher, there is usually defined the following ``game''. There are two parties -- a challenger and an adversary. First, the challenger chooses the key $k\unirand K$ and $b\unirand\{0,1\}$. Then the adversary provides two plaintexts $m_0$, $m_1$ to the challenger who encrypts $m_b$ (according to $b$ he has chosen) and sends the resulting ciphertext back to the adversary. The aim of the adversary is to distinguish which $b$ has been chosen by the challenger while an advantage is defined similarly as in Definition \ref{def:advant}. Note that if the block cipher is secure then such advantage is also negligible.
+\subsubsection{Black Box}
+
+%!% přepsat, game už umim
+Black box can understood like an oracle -- given an input, it provides an output in a unit time. Thus we do not get any other information but input-output pairs. Note that black box attack context was considered during the design of most ciphers; for example straightforward AES implementation is totally insecure if certain byproducts or even some information related to them is revealed. An attack exploiting such information leaks is covered in detail in Section \ref{sec:side}.
+
+%!% přesun do přechozí sekce, přidat hru i před secure PRF/PRP
+
+
+
+%~ Note that if a block cipher is secure then such advantage is also negligible.
+
+% implementation can help, e.g. timing attacks
+% RSA, an asymmetric cipher, could serve as a good example
 
 % black box: like an oracle, everything holds. ciphers designed wrt black box, why wb? what it is? ...
 
