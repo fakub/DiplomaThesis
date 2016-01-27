@@ -2,7 +2,7 @@
 \nomenclatureentry{a$\Pr(\omega)$@[{$\Pr(\omega)$}]\begingroup Probability of the event $\omega$\nomeqref {1.0}|nompageref}{2}
 \nomenclatureentry{a$\N$@[{$\N$}]\begingroup Positive integers\nomeqref {1.0}|nompageref}{4}
 \nomenclatureentry{a$\R$@[{$\R$}]\begingroup Real numbers\nomeqref {1.0}|nompageref}{4}
-\nomenclatureentry{a$\Pclass$@[{$\Pclass$}]\begingroup Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time\nomeqref {1.1}|nompageref}{8}
-\nomenclatureentry{a$\NPclass$@[{$\NPclass$}]\begingroup Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time\nomeqref {1.1}|nompageref}{8}
-\nomenclatureentry{a$\GF(p^n)$@[{$\GF(p^n)$}]\begingroup Galois Field with $p^n$ elements, $p$ prime\nomeqref {1.1}|nompageref}{9}
-\nomenclatureentry{a$F[x]$@[{$F[x]$}]\begingroup Ring of polynomials over $F$\nomeqref {1.1}|nompageref}{9}
+\nomenclatureentry{a$\Pclass$@[{$\Pclass$}]\begingroup Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time\nomeqref {1.1}|nompageref}{9}
+\nomenclatureentry{a$\NPclass$@[{$\NPclass$}]\begingroup Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time\nomeqref {1.1}|nompageref}{9}
+\nomenclatureentry{a$\GF(p^n)$@[{$\GF(p^n)$}]\begingroup Galois Field with $p^n$ elements, $p$ prime\nomeqref {1.1}|nompageref}{10}
+\nomenclatureentry{a$F[x]$@[{$F[x]$}]\begingroup Ring of polynomials over $F$\nomeqref {1.1}|nompageref}{10}

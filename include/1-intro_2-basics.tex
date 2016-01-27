@@ -106,7 +106,12 @@ Therefore we would like to utilize the fact that adversary typically does not ha
 	In practice, the term {\em negligible} is often used with concrete constants as well. $\epsilon<\frac{1}{2^{80}}$ is considered negligible i.e. events with such probability are not considered to occur during our lives, on the other hand $\epsilon>\frac{1}{2^{30}}$ is considered non-negligible i.e. it is likely to observe an event with such probability.
 \end{note}
 
-Now we have a reasonable meter to define practical security. But first we introduce some notions.
+\begin{defn}[Overwhelming Function]
+\label{def:overwh}
+	Let $\epsilon:\N\rarr\R$. $\epsilon$ is called {\em overwhelming} if $1-\epsilon$ is negligible.
+\end{defn}
+
+Now we have a reasonable meter to define practical security. But first we introduce some notions.   %!% PRP je jen building block!!!
 
 \begin{defn}[Pseudorandom Function]   %!% $|k|$ polynomial w.r.t. $|x|$
 	Let $F: K\times X\rarr Y$. We call $F$ a {\em pseudorandom function} (PRF) if there exists an efficient algorithm which evaluates $F$.
@@ -143,7 +148,7 @@ Our goal will be to create a PRP hardly distinguishable from a truly random perm
 	Statistical test will be also referred to as {\em adversary}. Note that its oracle access count may be explicitly limited.
 \end{note}
 
-% stat test examples, what is the motivation -- decide some properties from I/O only, how we will use it
+% stat test examples, what is the motivation -- decide some properties from I/O only, how we will use it ?
 
 \begin{defn}[Advantage]
 \label{def:advant}
@@ -157,22 +162,17 @@ In other words, advantage tells us how likely adversary $A$ is able to distingui
 
 \begin{defn}[PRF, PRP Advantage]
 \label{def:prfadvant}\label{def:prpadvant}
-	Let $F: K\times X\rarr Y$ be a PRF and $E: K\times X\rarr Y$ a PRP, $\cal F$ the set of all functions from $X$ to $Y$, $\cal E$ the set of all permutations from $X$ to $Y$ and $A$ an adversary. We define {\em PRF} and {\em PRP advantage} of adversary $A$ as
+	Let $F: K\times X\rarr Y$ be a PRF and $E: K\times X\rarr Y$ a PRP, $\cal F$ the set of all functions from $X$ to $Y$, $\cal P$ the set of all permutations from $X$ to $Y$ and $A$ an adversary. We define {\em PRF} and {\em PRP advantage} of adversary $A$ as
 	\[
 		\AdvPRF(A,F) = \Adv(A,\{F(k,\cdot)|k\in K\},{\cal F}) ,
 	\]
 	\[
-		\AdvPRP(A,E) = \Adv(A,\{E(k,\cdot)|k\in K\},{\cal E}) ,
+		\AdvPRP(A,E) = \Adv(A,\{E(k,\cdot)|k\in K\},{\cal P}) ,
 	\]
 	respectively.
 \end{defn}
 
 PRP advantage tells us how likely adversary $A$ is able to distinguish a result of a PRP with a random key from a truly random permutation. Note that this is the same problem as introduced in Game \ref{game:prp}.   %!% ale trochu formálnějc
-% že bude example?
-
-\begin{example}
-	Bla. % příklad na adversaryho a jeho advántyč
-\end{example}
 
 Now we can finally define the concept of secure PRFs and PRPs.
 
@@ -181,7 +181,25 @@ Now we can finally define the concept of secure PRFs and PRPs.
 	Let $F: K\times X\rarr Y$ be a PRF or PRP, respectively. Let further $\cal F$ denote the set of all functions from $X$ to $Y$ and $\cal P$ denote the set of all bijections between $X$ and $Y$. $F$ is called {\em secure} PRF or PRP if for {\em any} adversary $A$ the advantage $\Adv(A,F,{\cal F})$ or $\Adv(A,F,{\cal P})$, respectively, is negligible.   %!% negligible in terms of what?
 \end{defn}
 
-In other words, PRF or PRP, given a random key, is secure if it is computationaly indistinguishable from a truly random function or permutation, respectively. Secure PRP is what we call a {\em block cipher}. Also note that this definition formalizes Game \ref{game:prp}.
+In other words, PRF or PRP, given a random key, is secure if it is computationaly indistinguishable from a truly random function or permutation, respectively. Secure PRP is what we call a {\em block cipher}. Also note that this definition formalizes Game \ref{game:prp}. A complete example follows.
+
+\begin{example}
+	Let $E:\{0,1\}^{128}\times\{0,1\}^{128}\rarr\{0,1\}^{128}$ be a PRP defined as
+	\[
+		E(k,x) = \bin\bigl((k)_2 + (x)_2 \mod{2^{128}}\bigr)
+	\]
+	where $\bin(\cdot)$ stands for number's $128$-bit binary representation and $(\cdot)_2$ stands for a number represented by given binary string.
+	
+	Now let us construct an adversary $A$ as follows: it generates two arbitrary but distinct $x_0,x_1\in\{0,1\}^{128}$ and feeds them to an oracle computing either PRP $E$ or a truly random permutation. The oracle returns $y_0$ and $y_1$, respectively, and the adversary compares values $(y_i)_2 - (x_i)_2 \mod{2^{128}}$ for $i=0,1$ with each other. If these values are equal, $A$ returns $1$, $0$ otherwise.
+	
+	Note that if the oracle computes PRP $E$ then these values are always equal. Otherwise, i.e. the oracle computes a truly random permutation, the values are distinct with overwhelming probability. Therefore the PRP advantage of such adversary is
+	\[
+		\AdvPRP(A,E) = \left| \Pr\limits_{k\unirand \{0,1\}^{128}}\Bigl(A\bigl(E(k,\cdot)\bigr)=1\Bigr) - \Pr\limits_{P\unirand {\cal P}}\Bigl(A(P)=1\Bigr) \right| = 1 - \epsilon
+	\]
+	where $\cal P$ stands for the set of all permutations on $\{0,1\}^{128}$ and $\epsilon$ is negligible.
+	
+	It follows that such PRP is totally insecure since there exists an attacker with overwhelming advantage and only non-negligible advantage is required to break the PRP.
+\end{example}
 
 \subsubsection{Semantic Security}   %!% mělo by vlastně bejt \subsubsubsection
 
@@ -195,7 +213,10 @@ Now we introduce another interesting approach to cipher's security. Before we gi
 
 %!% a figure of the game
 
-Resistency of a cipher to this kind of attack is referred to as {\em semantic security}. In a manner analogous to Definitions \ref{def:advant} and \ref{def:prpadvant}, attacker's advantage is defined as follows.
+Resistency of a cipher to this kind of attack is referred to as {\em semantic security}.
+%!% (1) proč je to jenom pro single access? neboli PRP je vlastně jenom building block?
+
+In a manner analogous to Definitions \ref{def:advant} and \ref{def:prpadvant}, attacker's advantage is defined as follows.
 
 \begin{defn}[Semantic Security Advantage]
 \label{def:ssadvant}
@@ -207,13 +228,14 @@ Resistency of a cipher to this kind of attack is referred to as {\em semantic se
 
 Based on the previous definition formalizing the idea of the game, we can define another notion of security.
 
-\begin{defn}{Semantically Secure PRP}
+\begin{defn}[Semantically Secure PRP]
 \label{def:semsecprp}
 	Let $E: K\times X\rarr Y$ be a PRP. $E$ is called {\em semantically secure} PRP if for {\em any} single-access adversary $A^{(1)}$ the semantic security advantage $\AdvSS(A^{(1)},E)$ is negligible.
 \end{defn}
 
+%!% (2) proč je to jenom pro single access? neboli PRP je vlastně jenom building block?
 \begin{note}
-	Note that in previous definitions we had to limit adversary's access to the oracle to one otherwise there is a trivially winning adversary. Indeed, the adversary picks three distinct plaintexts $m_0$, $m_1$, $m_2$ (well, let us suppose there are at least three plaintexts in $M$) and sends $(m_0,m_1)$ to the challenger, he gets back some ciphertext $c_a$. In his second query, the attacker sends $(m_0,m_2)$ to the challenger and receives another ciphertext, let say $c_b$. Since PRP is a deterministic bijection, he can decide with certainty:
+	Note that in previous definitions we had to limit adversary's access to the oracle to one otherwise there is a trivially winning adversary. Indeed, such adversary picks three distinct plaintexts $m_0$, $m_1$, $m_2$ (well, let us suppose there are at least three plaintexts in $M$) and sends $(m_0,m_1)$ to the challenger, he gets back some ciphertext $c_a$. In his second query, the attacker sends $(m_0,m_2)$ to the challenger and receives another ciphertext, let say $c_b$. Since PRP is a deterministic bijection, he can decide with certainty:
 	\begin{itemize}
 		\item $b=0$ if $c_a = c_b$, or
 		\item $b=1$ if $c_a \neq c_b$.
@@ -264,6 +286,10 @@ So far we have two distinct notions of security -- we have {\em secure PRP} acco
 	\]
 	which proves Equation \ref{eq:aleqbb} which was to be proved.
 \end{proof}
+
+\begin{note}
+	A semantically secure PRP does not need to be a secure PRP. Indeed, let $E: K\times X\rarr Y$ be a secure PRP and define $E'(k,x) = E(k,x)|1$. Obviously $E'$ is semantically secure i.e. it remains hard to distinguish encryptions but it can be easily distinguished from a truly random bijection since it always ends with $1$.
+\end{note}
 
 Semantic security is usually what we rather require from a secure cipher. Note that secure PRP might be too strong requirement: ...
 
