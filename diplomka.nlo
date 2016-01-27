@@ -1,7 +1,7 @@
 \nomenclatureentry{a$\mid S\mid$@[{$\mid S\mid$}]\begingroup Cardinality of the set $S$\nomeqref {1.0}|nompageref}{3}
 \nomenclatureentry{a$\Pr(\omega)$@[{$\Pr(\omega)$}]\begingroup Probability of the event $\omega$\nomeqref {1.1}|nompageref}{3}
-\nomenclatureentry{a$\N$@[{$\N$}]\begingroup Positive integers\nomeqref {1.1}|nompageref}{4}
-\nomenclatureentry{a$\R$@[{$\R$}]\begingroup Real numbers\nomeqref {1.1}|nompageref}{4}
+\nomenclatureentry{a$\N$@[{$\N$}]\begingroup Positive integers\nomeqref {1.1}|nompageref}{5}
+\nomenclatureentry{a$\R$@[{$\R$}]\begingroup Real numbers\nomeqref {1.1}|nompageref}{5}
 \nomenclatureentry{a$\Pclass$@[{$\Pclass$}]\begingroup Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time\nomeqref {1.2}|nompageref}{9}
 \nomenclatureentry{a$\NPclass$@[{$\NPclass$}]\begingroup Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time\nomeqref {1.2}|nompageref}{9}
 \nomenclatureentry{a$\GF(p^n)$@[{$\GF(p^n)$}]\begingroup Galois Field with $p^n$ elements, $p$ prime\nomeqref {1.2}|nompageref}{10}

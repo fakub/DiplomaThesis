@@ -22,7 +22,7 @@
 Let us imagine a typical situation where Alice wants to talk to Bob over an insecure channel while Eve may eavesdrop on the channel. In the beginning, let us suppose that Alice and Bob share certain portion of secret information referred to as {\em secret key} and both control a secure execution environment where they intend to run their ciphering algorithm so that Eve can only observe what they send over the channel.
 
 \begin{note}
-	The list of such attacker's abilities is referred to as {\em threat model}. Note that under the previous threat model the attacker is quite weak -- she can only read the traffic. If she were for instance able to manipulate the traffic, Alice and Bob would need to introduce another features to their protocol which could detect forged messages. We will only consider eavesdropping for now.
+	The list of such attacker's abilities is referred to as {\em threat model}. Note that in the previous threat model the attacker is quite weak -- she can only read the traffic. If she were for instance able to manipulate the traffic, Alice and Bob would need to introduce another features to their protocol so that they could detect forged messages. We will only consider eavesdropping for now.
 \end{note}
 
 Our first intuitive requirements on Alice and Bob's ciphering algorithm could be expressed as follows: no matter what plaintext Alice and Bob encrypt and send over the channel, Eve shall {\em not} be able to
@@ -34,9 +34,9 @@ The item \ref{item:plainrecov} requirement is also referred to as {\em confident
 
 \begin{example}
 \label{ex:shift}
-	{\em Shift cipher} is an ancient cipher used already by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|{\cal A}|-1$ and adds a constant $c\in\{\atob{0}{|{\cal A}|-1}\}$ modulo $|\cal A|$ to each number. Finally it maps the numbers back to letters yielding a string ``shifted'' by $c$ which can be interpreted as an element of $\cal A$ as well. Decryption can be done simply by substracting $c$ from the ciphertext in a similar way.
+	{\em Shift cipher} is an ancient cipher used already by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|{\cal A}|-1$ and adds a constant $c\in\{\atob{0}{|{\cal A}|-1}\}$ modulo $|\cal A|$ to each number. Finally it maps the numbers back to letters yielding a string ``shifted'' by $c$ where $c$ can be interpreted as an element of $\cal A$ as well. Decryption can be done simply by substracting $c$ from the ciphertext in a similar way.
 	
-	Shift cipher can be easily broken by pen and paper only since there are as many keys as letters in the alphabet, typically $26$ english letters. You simply try them all until the plaintext makes sense.
+	Shift cipher can be easily broken by pen and paper only since there are as many keys as letters in the alphabet, typically $26$ english letters. You simply try them all until the plaintext makes sense. Such approach is referred to as {\em brute force attack} or {\em exhaustive search}.
 \end{example}
 \nomenclature{$\mid S\mid$}{Cardinality of the set $S$}
 
@@ -51,9 +51,10 @@ As we could see in the previous example, shift cipher is not much secure cipher.
 There are two large families of ciphers -- symmetric and asymmetric. Shift cipher from Example \ref{ex:shift} belongs to the symmetric family which follows from the fact that it uses the same key for both encryption and decryption while asymmetric ciphers use distinct keys for encryption and decryption. Asymmetric ciphers are also referred to as public key ciphers but we will only consider symmetric ciphers in this thesis, a definition follows.
 
 \begin{defn}[Symmetric Cipher]
-	Let $K$ denote the key space, $M$ the message space and $C$ the ciphertext space. {\em Symmetric cipher} is a pair of efficiently computable (possibly randomized) function $(E,D)$, $E:K\times M\rarr C$, $D:K\times C\rarr M$, such that $\forall m\in M, k\in K$ it holds
+	Let $K$ denote the key space, $M$ the message space and $C$ the ciphertext space. {\em Symmetric cipher} is a pair of efficiently computable (possibly randomized) functions $(E,D)$, $E:K\times M\rarr C$, $D:K\times C\rarr M$, such that $\forall m\in M, k\in K$ it holds
 	\begin{equation}
-		\Pr\left(D(k,E(k,m))=m\right) = 1 . \label{eq:correct}
+		%~ \Pr\left(D(k,E(k,m))=m\right) = 1 . \label{eq:correct}
+		\Pr\left(D(E(l,k),k)=l\right) = 1 . \label{eq:correct}
 	\end{equation}
 	%?% \footnote{In some use cases it might be useful to require only so called {\em overwhelming} probability; not needed in this thesis.}
 \end{defn}
@@ -63,7 +64,7 @@ There are two large families of ciphers -- symmetric and asymmetric. Shift ciphe
 	Going back to Example \ref{ex:shift}, the key space is $\{\atob{0}{|{\cal A}|-1}\}\sim\cal A$, the message and ciphertext spaces are ${\cal A}^*$ which stands for the set of all strings over the alphabet $\cal A$.
 \end{note}
 
-According to the previous definition, we do not seem to have a definition of a proper cipher at all -- the only requirement is corectness (see Equation \ref{eq:correct}) but it totally lacks any security requirement. As we will see later, it is actually quite complicated to define ``security'' appropriately.
+According to the previous definition, we do not seem to have a definition of a proper cipher at all -- the only requirement is corectness (cf. Equation \ref{eq:correct}) -- but it totally lacks any security requirement. As we will see later, it is actually quite complicated to define ``security'' appropriately.
 
 \subsubsection{Information Security}
 
@@ -74,6 +75,11 @@ Shannon's groundbreaking work \cite{shannon1949mathematical} on the mathematics 
 	Let $(E,D)$ be a cipher. It is called {\em perfectly secure} if $\forall m_0,m_1\in M$ such that $|m_0| = |m_1|$ and $\forall c\in C$ it holds $\Pr\left(E(k,m_0)=c\right) = \Pr\left(E(k,m_1)=c\right)$ where $k\unirand K$.
 \end{defn}
 
+\begin{note}
+\label{note:indist}
+	In other words, the adversary is not able to {\em distinguish} encryption of $m_0$ from encryption of $m_1$ by {\em any} means.
+\end{note}
+
 There is a cipher which is perfectly secure, see the following example.
 
 \begin{example}[Vernam cipher]
@@ -81,31 +87,35 @@ There is a cipher which is perfectly secure, see the following example.
 \end{example}
 
 \begin{note}
-	Vernam cipher is also referred to as {\em One Time Pad} (OTP). Note that it is crucial that each key is only used once otherwise you can attack the cipher very easily: given two ciphertexts using the same key i.e. $c_0=m_0\xor k$ and $c_1=m_1\xor k$, one can compute $c_0\xor c_1 = m_0\xor m_1$. This can be practically attacked using some apriori knowledge about plaintexts, e.g. encoding (ASCII), format and language of plaintext (XML and english), \ldots which reduce the amount of possibilities, typically recovering both plaintexts.
+	Vernam cipher is also referred to as {\em One Time Pad} (OTP). Note that it is crucial that each key is only used once otherwise you can attack the cipher easily: given two ciphertexts using the same key $c_0=m_0\xor k$ and $c_1=m_1\xor k$, one can compute $c_0\xor c_1 = m_0\xor m_1$. This can be practically attacked using some apriori knowledge about plaintexts (e.g. encoding (ASCII), format and language of plaintext (XML and english) and so on) which reduces the amount of possibilities and typically leads to complete plaintext recovery.
 \end{note}
 
-This property seems to be exactly what we want from a secure cipher but the following theorem shows that we want far too much.
+Perfect security seems to be exactly what we want from a secure cipher but the following theorem shows that it implies certain inconveniences.
 
 \begin{thm}
 	Let $(E,D)$ be a perfect cipher. Then $|K| \geq |M|$.
 \end{thm}
 
-% bla bla že to je fakt blbý aby byl klíč stejně dlouhej?
-But this approach does not seem to address our intention -- we would like to establish a shared secret key and then, using the key, be able to encrypt as much information as we want. For this reason we need to weaken our assumptions. Note that previously there was no assumption on adversary's computing power -- the requirement was actually to hide plaintext from {\em any} adversary i.e. including an adversary with unlimited computing power.
+This consequence seems to go against our intention -- we would like to establish a shared secret key of a limited length and then, using the key, be able to encrypt as much information as we want. For this reason we need to weaken our security assumption. Note that previously there was no assumption on adversary's computing power -- the requirement was actually to hide plaintext from {\em any} adversary i.e. including an adversary with unlimited computing power.
 
 \subsubsection{Computational Security}
 
-We would like to utilize the fact that the adversary typically does not have unlimited computing power but rather polynomial. For this reason we need to change our requirement on ciphertext from ``carries no information'' to ``is computationally impossible to gain some information''. As in Definition \ref{def:perfsec}, we would like to distinguish which plaintext has been encrypted. For this reason we introduce the following game.
+We would like to utilize the fact that the adversary typically does not have unlimited computing power but can rather solve only polynomial problems. For this reason we need to change our requirement on ciphertext from ``carries no information'' to ``is computationally impossible to gain some information''. As stated in Note \ref{note:indist}, we would like to make impossible to distinguish which plaintext has been encrypted. We present this idea in the following game.
 
 \begin{game}
 \label{game:semsec}
-	There are two parties -- a {\em challenger} and an {\em adversary}. First, the challenger chooses a random key $k\unirand K$ and a bit value $b\unirand\{0,1\}$. Then the adversary sends two equally long plaintexts $m_0$, $m_1$ of his choice to the challenger. The challenger then encrypts $m_b$ (according to $b$ he has chosen) and sends the resulting ciphertext $c$ back to the adversary.
+	There are two parties -- a {\em challenger} and an {\em adversary}. First, the challenger chooses a random key $k\unirand K$ and a random bit $b\unirand\{0,1\}$. Then the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger then encrypts $m_b$ (according to $b$ she has chosen) and sends the resulting ciphertext $c$ back to the adversary.
 	
-	The aim of the adversary is to distinguish which $b$ has been chosen by the challenger.
+	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
 %!% a figure of the game
 
-Resistency of a cipher to this kind of attack is referred to as {\em semantic security}. Before we give a formal definition, let us introduce some notion first.
+\begin{note}
+\label{note:semsec}
+	Resistency of a cipher to this kind of attack is referred to as {\em semantic security}.
+\end{note}
+
+Before we give a formal definition, let us introduce some notion first.
 
 \begin{defn}[Negligible Function]
 \label{def:neglfunc}
@@ -135,18 +145,18 @@ Resistency of a cipher to this kind of attack is referred to as {\em semantic se
 \end{defn}
 
 \begin{note}
-	Statistical test will be also referred to as {\em adversary}. Note that its oracle access count may be explicitly limited.
+	Statistical test will be also referred to as {\em adversary}.
 \end{note}
-
-% stat test examples, what is the motivation -- decide some properties from I/O only, how we will use it ?
 
 \begin{defn}[Advantage]
 \label{def:advant}
 	Let $\cal F$, $\cal G$ be two distinct subsets of the set of all functions from $X$ to $Y$ and $A$ an adversary. We define {\em advantage} of adversary $A$ as
 	\[
-		\Adv(A,{\cal F},{\cal G}) = \left| \Pr\limits_{F\unirand {\cal F}}\left(A(F)=1\right) - \Pr\limits_{G\unirand {\cal G}}\left(A(G)=1\right) \right| .
+		\Adv(A,{\cal F},{\cal G}) = \left| \Pr\limits_{F\unirand {\cal F}}\bigl(A(F)=1\bigr) - \Pr\limits_{G\unirand {\cal G}}\bigl(A(G)=1\bigr) \right| .
 	\]
 \end{defn}
+
+In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set based on their input/output behavior only. According to these sets, advantage can be ``customized'' for a specific purpose. Let us define such advantage for an adversary tempting to distinguish which of her plaintexts has been encrypted i.e. tells us how likely she is to win the Game \ref{game:semsec}.
 
 \begin{defn}[Semantic Security Advantage]
 \label{def:ssadvant}
@@ -156,29 +166,22 @@ Resistency of a cipher to this kind of attack is referred to as {\em semantic se
 	\]
 \end{defn}
 
-Based on the previous definitions formalizing the idea of the game, we can define another notion of security.
+Semantic security gives us a formalization of Game \ref{game:semsec}. We use this to define another notion of security.
 
 \begin{defn}[Semantically Secure Cipher]
 \label{def:semsec}
-	Let ${\cal C} = (E,D)$ be a symmetric cipher. Then it is called {\em semantically secure} if for {\em any} adversary $A$ the semantic security advantage $\AdvSS(A,E)$ is negligible.
+	Let $(E,D)$ be a symmetric cipher. Then it is called {\em semantically secure} if for {\em any} adversary $A$ the semantic security advantage $\AdvSS(A,E)$ is negligible.
 \end{defn}
+
+
 
 ------------------------------------------------------------------------
 
-------
-\begin{note}
-	Note that in previous definitions we had to limit adversary's access to the oracle to one otherwise there is a trivially winning adversary. Indeed, such adversary picks three distinct plaintexts $m_0$, $m_1$, $m_2$ (well, let us suppose there are at least three plaintexts in $M$) and sends $(m_0,m_1)$ to the challenger, he gets back some ciphertext $c_a$. In his second query, the attacker sends $(m_0,m_2)$ to the challenger and receives another ciphertext, let say $c_b$. Since PRP is a deterministic bijection, he can decide with certainty:
-	\begin{itemize}
-		\item $b=0$ if $c_a = c_b$, or
-		\item $b=1$ if $c_a \neq c_b$.
-	\end{itemize}
-	
-	Therefore it is clear that if we wanted semantic security with respect to an adversary with unlimited access, the encryption would {\em have to} encrypt the same plaintext differently each time. This can be achieved using randomization or counters. In case of block ciphers this leads to {\em modes of operation}, e.g. Cipher Block Chaining (CBC) mode or Counter (CTR) mode, but this is out of the scope of this thesis.
-\end{note}
-------
 
+%!% kecy jak se od SS dostanu k block cipher: jsou stream a block, block potřebujou módy, stream inicializaci, a co že jsou to ty block? pojdme na to s definicí:
+Here we justify why we wanna introduce block ciphers\ldots
 
-
+%!% uplně smazat jakoukoliv zmínku o PRF, nemá smysl a dělá bordel
 \begin{defn}[Pseudorandom Function]   %!% $|k|$ polynomial w.r.t. $|x|$
 	Let $F: K\times X\rarr Y$. We call $F$ a {\em pseudorandom function} (PRF) if there exists an efficient algorithm which evaluates $F$.
 \end{defn}
@@ -191,52 +194,36 @@ Based on the previous definitions formalizing the idea of the game, we can defin
 	If a function is a PRP then it is a PRF as well.
 \end{note}
 
-Pseudorandom permutations will play the main role from now. What we need is some definition of security of PRPs. Let us first demonstrate a possible approach on such a game.
-
-%~ Now we introduce an interesting approach to cipher's security. Before we give the formal definition, let us us start with another game similar to \ref{game:semsec}.
+Pseudorandom permutations will play the main role from now and $k$ the role of their key. In order to achieve semantic security of certain constructions using a PRP, we need the PRP to behave like a truly random bijection i.e. indistinguishable from each other. Let us demonstrate a possible approach on another game similar to Game \ref{game:semsec}.
 
 \begin{game}
 \label{game:prp}
-	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random $k\unirand K$ (a key), a random bijection $F$ from $X$ to $Y$ and a random bit value $b\unirand\{0,1\}$. Then the adversary sends $x\in X$ (a plaintext) of his choice to the challenger. The challenger then applies $E(k,\cdot)$ or $F$ if $b=0$ or $1$, respectively, and sends the result (a ciphertext) back to the adversary.
+	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random key $k\unirand K$, a random bijection $F:X\rarr Y$ and a random bit $b\unirand\{0,1\}$. Then the adversary sends $x\in X$ of her choice to the challenger. The challenger then applies $E(k,\cdot)$ or $F$ if $b=0$ or $1$, respectively, and sends the result back to the adversary.
 	
-	The aim of the adversary is to distinguish which $b$ has been chosen by the challenger.
-	
-	
-	
-	
-	There are two parties again -- a {\em challenger} and an {\em adversary}. First, the challenger chooses a key $k\unirand K$ and a bit value $b\unirand\{0,1\}$. Then the adversary sends two equally long plaintexts $m_0$, $m_1$ of his choice to the challenger. The challenger then encrypts $m_b$ (according to $b$ he has chosen) and sends the resulting ciphertext $c$ back to the adversary.
-	
-	The aim of the adversary is to distinguish which $b$ has been chosen by the challenger.
+	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
 
-Our goal will be to create a PRP hardly distinguishable from a truly random bijection which ensures its security. Before we give the formal definition, let us introduce some notion.
+% přiblížit kecům co následujou první game
+Before we give a formal definition of a secure PRF and PRP, we define adversary's advantage in the previous game in a manner analogous to Definition \ref{def:ssadvant}.
 
-In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set based on input/output behavior only. According to these sets, advantage can be ``customized'' for a specific purpose, let us define such advantage for an adversary tempting to distinguish a pseudorandom function parameterized by $k$ from a truly random one.
-
-In a manner analogous to Definition \ref{def:ssadvant}, attacker's advantage is defined as follows.
-
-\begin{defn}[PRF, PRP Advantage]
-\label{def:prfadvant}\label{def:prpadvant}
-	Let $F: K\times X\rarr Y$ be a PRF and $E: K\times X\rarr Y$ a PRP, $\cal F$ the set of all functions from $X$ to $Y$, $\cal P$ the set of all bijection from $X$ to $Y$ and $A$ an adversary. We define {\em PRF} and {\em PRP advantage} of adversary $A$ as
+\begin{defn}[PRP Advantage]
+\label{def:prpadvant}
+	Let $E: K\times X\rarr Y$ be a PRP, $\cal P$ the set of all bijections from $X$ to $Y$ and $A$ an adversary. We define {\em PRP advantage} of adversary $A$ as
 	\[
-		\AdvPRF(A,F) = \Adv(A,\{F(k,\cdot)|k\in K\},{\cal F}) ,
+		\AdvPRP(A,E) = \Adv(A,\{E(k,\cdot)|k\in K\},{\cal P}) .
 	\]
-	\[
-		\AdvPRP(A,E) = \Adv(A,\{E(k,\cdot)|k\in K\},{\cal P}) ,
-	\]
-	respectively.
 \end{defn}
 
-PRP advantage tells us how likely adversary $A$ is able to distinguish a result of a PRP with a random key from a truly random bijection. Note that this is the same problem as introduced in Game \ref{game:prp}.   %!% ale trochu formálnějc
+% přiblížit kecům co následujou první game
+PRP advantage tells us how likely adversary $A$ is able to distinguish a PRP with a random key from a truly random bijection based on its input/output behavior only. The definition of secure PRP follows.
 
-Now we can finally define the concept of secure PRFs and PRPs.
-
-\begin{defn}[Secure PRF and PRP]
-\label{def:secprf}\label{def:secprp}
-	Let $F: K\times X\rarr Y$ be a PRF or PRP, respectively. Let further $\cal F$ denote the set of all functions from $X$ to $Y$ and $\cal P$ denote the set of all bijections between $X$ and $Y$. $F$ is called {\em secure} PRF or PRP if for {\em any} adversary $A$ the advantage $\Adv(A,F,{\cal F})$ or $\Adv(A,F,{\cal P})$, respectively, is negligible.   %!% negligible in terms of what?
+\begin{defn}[Secure PRP]
+\label{def:secprp}
+	Let $E: K\times X\rarr Y$ be a PRP and $\cal P$ the set of all bijections from $X$ to $Y$. $E$ is called {\em secure PRP} if for {\em any} adversary $A$ the advantage $\Adv(A,F,{\cal P})$ is negligible.   %!% negligible in terms of what?
 \end{defn}
 
-In other words, PRF or PRP, given a random key, is secure if it is computationaly indistinguishable from a truly random function or bijection, respectively. Secure PRP is what we call a {\em block cipher}. Also note that this definition formalizes Game \ref{game:prp}. A complete example follows.
+% přiblížit kecům co následujou první game
+In other words, PRP given a random key is secure if it is computationaly indistinguishable from a truly random bijection. Secure PRP is what we call a {\em block cipher}. An example covering most introduced concepts follows.
 
 \begin{example}
 	Let $E:\{0,1\}^{128}\times\{0,1\}^{128}\rarr\{0,1\}^{128}$ be a PRP defined as
@@ -256,6 +243,19 @@ In other words, PRF or PRP, given a random key, is secure if it is computational
 	It follows that such PRP is totally insecure since there exists an attacker with overwhelming advantage and only non-negligible advantage is required to break the PRP.
 \end{example}
 
+------------------------------------------------------------------------
+\begin{note}
+	Note that in previous definitions we had to limit adversary's access to the oracle to one otherwise there is a trivially winning adversary. Indeed, such adversary picks three distinct plaintexts $m_0$, $m_1$, $m_2$ (well, let us suppose there are at least three plaintexts in $M$) and sends $(m_0,m_1)$ to the challenger, she gets back some ciphertext $c_a$. In her second query, the adversary sends $(m_0,m_2)$ to the challenger and receives another ciphertext, let say $c_b$. Since PRP is a deterministic bijection, she can decide with certainty:
+	\begin{itemize}
+		\item $b=0$ if $c_a = c_b$, or
+		\item $b=1$ if $c_a \neq c_b$.
+	\end{itemize}
+	
+	Therefore it is clear that if we wanted semantic security with respect to an adversary with unlimited access, the encryption would {\em have to} encrypt the same plaintext differently each time. This can be achieved using randomization or counters. In case of block ciphers this leads to {\em modes of operation}, e.g. Cipher Block Chaining (CBC) mode or Counter (CTR) mode, but this is out of the scope of this thesis.
+\end{note}
+------------------------------------------
+
+% uplně do háje...
 So far we have two distinct notions of security -- we have {\em secure PRP} according to Definition \ref{def:secprp} and {\em semantically secure PRP} according to Definition \ref{def:semsecprp}. And there is a relation between them as stated in the following theorem.
 
 \begin{thm}
@@ -303,13 +303,13 @@ So far we have two distinct notions of security -- we have {\em secure PRP} acco
 	A semantically secure PRP does not need to be a secure PRP. Indeed, let $E: K\times X\rarr Y$ be a secure PRP and define $E'(k,x) = E(k,x)|1$. Obviously $E'$ is semantically secure i.e. it remains hard to distinguish encryptions but it can be easily distinguished from a truly random bijection since it always ends with $1$.
 \end{note}
 
+% no a nějak navázat
 Semantic security is usually what we rather require from a secure cipher. Note that secure PRP might be too strong requirement: ...
 
 % pokračovat, dát příklad, block cipher že je spíš teda secure PRP, semantic security vhodná do secure communication
 
 \subsubsection{Provable vs. Real-World Security}
 
-%!% přidat nákej kec že jsme zase zpátky u secure PRP
 Note that there is no provably secure block cipher known; if there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $F$ were a secure PRP then adversary could, given a certain (polynomial) amount of plaintext-ciphertext pairs $(pt_i,ct_i)$, look for a key $k$ such that $ct_i = F(k,pt_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ exists, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
 \nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
 \nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
