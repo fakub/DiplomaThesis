@@ -1,8 +1,5 @@
-%!% udělat chapter? Principles nebo Concepts?
-\section{Basic Cryptography Concepts}
-\label{sec:cryptobasics}
-
-\subsection{Introduction to Cryptography}
+\section{Introduction to Cryptography}
+\label{sec:introcrypto}
 
 % goal: introduce crypto in a broader context, yet not too much in detail
 % starý jako lidstvo samo, bla bla, trochu ukázky z historie a jak to bylo špatný a jak se to umí lámat, security by obscurity, využívá cool matiku
@@ -18,10 +15,13 @@
 
 % bla bla ...
 \ldots\\
-Let us imagine a typical situation where Alice wants to talk to Bob over an insecure channel while Eve may eavesdrop on the channel. In the beginning, let us suppose that Alice and Bob share certain portion of secret information referred to as {\em secret key} and both control a secure execution environment where they intend to run their ciphering algorithm so that Eve can only observe what they send over the channel.
+Let us imagine a typical situation where Alice wants to communicate with Bob confidentially over an insecure channel while Eve may eavesdrop on the channel. In the beginning, let us suppose that Alice and Bob share certain portion of secret information referred to as {\em secret key} and both control a secure execution environment where they intend to run their ciphering algorithm so that Eve can only observe what they send over the channel.
 
 \begin{note}
-	The list of such attacker's abilities is referred to as {\em threat model}. Note that in the previous threat model the attacker is quite weak -- she can only read the traffic. If she were for instance able to manipulate the traffic, Alice and Bob would need to introduce another features to their protocol so that they could detect forged messages. We will only consider eavesdropping for now.
+\label{note:threat}
+	The list of such attacker's abilities is referred to as {\em threat model}. Note that in the previous threat model the attacker is quite weak -- she can only read the traffic. If she were for instance able to manipulate the traffic, Alice and Bob would need to introduce another features to their protocol so that they could detect forged messages.
+	
+	Before we start introducing any means of security, we always need to identify the threat model first. For now we will only consider eavesdropping.   %!% no hrůza
 \end{note}
 
 Our first intuitive requirements on Alice and Bob's ciphering algorithm could be expressed as follows: no matter what plaintext Alice and Bob encrypt and send over the channel, Eve shall {\em not} be able to
@@ -149,6 +149,7 @@ Let us introduce some notion first.
 \end{note}
 
 \begin{defn}[Oracle]
+\label{def:oracle}
 	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time.
 \end{defn}
 
@@ -184,6 +185,9 @@ Semantic security advantage gives us a reasonable meter for formalization of Gam
 \label{def:semsec}
 	Let $(E,D)$ be a symmetric cipher. Then it is called {\em semantically secure} if for {\em any} adversary $A$ the semantic security advantage $\AdvSS(A,E)$ is negligible.
 \end{defn}
+
+%!% přidat někam útok využívající zkrácení plaintextu po komprimaci
+% it makes sense to compress -> encrypt but it might be insecure!
 
 Semantically secure cipher therefore cannot be broken by any probabilistic-polynomial attack with overwhelming probability. On the other hand it might be broken by an attacker with unlimited computing power unlike perfectly secure cipher which cannot be broken either, see Note \ref{note:indist}.
 
@@ -267,7 +271,11 @@ In other words, given a random key, PRP is secure if it is computationaly indist
 	Such approach hiding the design of a cipher is referred to as {\em security by obscurity} and shall be strictly avoided.
 \end{note}
 
-\subsection{S}
+% ======================================================================
+% ===   P R O V A B L E   S E C U R I T Y   P R O O F S              ===
+% ======================================================================
+
+\subsection{Provable Security Proofs}
 
 Now we know what it is a secure PRP (or a secure block cipher) -- it is based on Game \ref{game:prp} where the aim of the adversary is to distinguish a PRP from a truly random bijection. The obvious question is what happens if we put a secure PRP into Game \ref{game:semsec} where the adversary tries distinguish which of his two inputs has been processed by a cipher. Note that PRP is a cipher (cf. Definition \ref{def:symcipher} and \ref{def:prp}) so it makes a sense. Indeed, given a PRP, there exists an effective algorithm evaluating it and since it is invertible, also Equation \ref{eq:correct} holds.
 
@@ -343,88 +351,48 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 \end{proof}
 
 \begin{note}
-	A semantically secure PRP does not need to be a secure PRP. Indeed, let $E: K\times X\rarr Y$ be a secure PRP and define $E'(k,x) = E(k,x)|1$. Obviously $E'$ is semantically secure i.e. it remains hard to distinguish encryptions but it can be easily distinguished from a truly random bijection since it always ends with $1$.
+	A semantically secure PRP does not need to be a secure PRP. Indeed, let $E: K\times X\rarr Y$ be a secure PRP and define $E'(k,x) = E(k,x)|1$ where $|$ stands for string concatenation. $E'$ is obviously semantically secure (it remains hard to distinguish encryptions of dinstinct plaintexts) but it can be easily distinguished from a truly random bijection since it always ends with $1$. Advantage of such adversary would be $\AdvPRP(A,E') = \nicefrac{1}{2}$ which is clearly non-negligible.
 \end{note}
 
-The previous theorem is especially important for the idea of its proof.
+The previous theorem is especially important for the idea behind its proof which is used in many other proofs related to provable-security. In this proof we construct adversaries $B_0$, $B_1$ which internally employ adversary $A$ and then we use advantage of $A$ to estimate advantages of $B_0$ and $B_1$.
 
-------------------------------------------------------------------------
+% ======================================================================
+% ===   P R O V A B L E   V S   R E A L - W O R L D                  ===
+% ======================================================================
 
-% no a nějak navázat
+\subsection{Provable vs. Real-World Security}
 
-\subsubsection{Provable vs. Real-World Security}
-
-Note that there is no provably secure block cipher known; if there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $F$ were a secure PRP then adversary could, given a certain (polynomial) amount of plaintext-ciphertext pairs $(pt_i,ct_i)$, look for a key $k$ such that $ct_i = F(k,pt_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ exists, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
+Provable security is one aspect, the other is practical construction of a cipher. Note that there is no provably secure block cipher known. If there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $E$ were a PRP then adversary could, given a certain (polynomial) amount of plaintext-ciphertext pairs $(m_i,c_i)$, look for a key $k$ such that $c_i = E(k,m_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ exists, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
 \nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
 \nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
 
-Instead, real-world block ciphers are {\em beleived} to be secure based on a simple fact: no known attack is far better than exhaustive search. One such block cipher is called {\em AES} and will be of top interest in this thesis. AES will be described in detail in Section \ref{sec:aes}.
+Instead, real-world block ciphers are {\em beleived} to be secure based on a simple fact: no known attack is far better than exhaustive search. One such block cipher is called {\em Advanced Encryption Standard} (AES) and will be of top interest in this thesis. AES will be described in detail in Section \ref{sec:aes}.
 
 
 % ======================================================================
-% ===   W H I T E - B O X   A T T A C K   C O N T E X T              ===
+% ===   F R O M   B L A C K - B O X   T O   W H I T E - B O X        ===
 % ======================================================================
 
-\subsection{White-Box Attack Context}
+\subsection{From Black-Box to White-Box Attack Context}
 
-The other central topic of this thesis is {\em white-box attack context}. In order to explain what it is, let us introduce {\em black box attack context} first.
+The other central topic of this thesis is {\em white-box attack context}. In order to explain what it is, let us start with {\em black-box attack context}.
 
-\subsubsection{Black Box}
+\subsubsection{Black-Box}
 
-%!% přepsat, game už umim
-Black box can understood like an oracle -- given an input, it provides an output in a unit time. Thus we do not get any other information but input-output pairs. Note that black box attack context was considered during the design of most ciphers; for example straightforward AES implementation is totally insecure if certain byproducts or even some information related to them is revealed. An attack exploiting such information leaks is covered in detail in Section \ref{sec:side}.
+As we stated in Note \ref{note:threat}, first of all we need to address attacker's abilities -- the threat model. In the black box model, the attacker is given an access to an oracle (see Definition \ref{def:oracle}) evaluating given encryption algorithm $E$ with a random secret key $k$ while the (primary) goal of the attacker is to recover the key. The attacker has absolutely no information but inputs and respective outputs, she cannot observe any internal routines of encryption, hence black box.
 
-%!% přesun do přechozí sekce, přidat hru i před secure PRP
+\begin{note}
+	There could be many other goals than just key recovery, e.g. guessing the ciphertext in advance or be able to decrypt certain/given ciphertext with non-negligible probability and so on. Actually whatever you can imagine which could be in principle possible with a PRP but could not be possible with a truly random bijection.
+\end{note}
 
+Most ciphers are designed under the assumption of black-box attack context thus their implementation must be extremely careful. The attacker could for example measure the time of encryption and exploit this information which was not considered during the design of the cipher.
 
+\subsubsection{Gray-Box}
 
-%~ Note that if a block cipher is secure then such advantage is also negligible.
+Gray-box attack context is closer to the reality since we do not encrypt using oracles but rather using some physical devices which run a specific implementation of given cipher. In the gray box model, cipher is thus supposed to be implemented and run while the attacker can observe some information related to cipher's byproducts as well.
 
-% implementation can help, e.g. timing attacks
-% RSA, an asymmetric cipher, could serve as a good example
+Such information leaks can be modelled as a set of distributions conditioned by byproducts and are referred to as {\em leakage model}. There is an area of theoretical cryptography studying leakages -- {\em Leakage Resilient Cryptography}. A practical attack exploiting such leaks will be described in Section \ref{sec:side}.   %?% LRC introduced by?
 
-% black box: like an oracle, everything holds. ciphers designed wrt black box, why wb? what it is? ...
+\subsubsection{White-Box}
 
-\begin{defn}
-	
-\end{defn}
-
-\begin{defn}
-	
-\end{defn}
-
-
-
-
-
-%~ \subsubsection{Black-Box Model}
-	
-	%~ approach: feistel, iterated; diffusion vs. confusion
-
-
-
-
-%~ odpad:
-
-%~ \subsection{Pseudorandomness}
-%~ \begin{defn}
-	%~ PRG is a function $G:\{0,1\}^s\rarr\{0,1\}^n$ such that $n>>s$. It input is referred to as {\em seed}.
-	%~ % eff. computable by a determ. algorithm
-%~ \end{defn}
-
-%~ Note that OTP using PRG (called stream cipher) can never have perfect secrecy since the key length is smaller than message length. Need for different definition. Security lies in PRG ``unpredictability''.
-
-%~ Predictable means: $\exists i$ s.t. given $G(k)|_{\atob{1}{i}}$, there exists an efficient algorithm which can compute $G(k)|_{\atob{i+1}{n}}$ ... CPA using $i$ bits would lead to plaintext recovery.
-%~ 
-%~ Predictable (2): $\exists eff. alg. A$ and $\exists i<n$ s.t. $Pr(A(G(k)|_{\atob{1}{i}}) = G(k)|_{i+1}) > 1/2 + \epsilon$ for non-negligible $\epsilon$. ... unpredictable iff it's not predictable.
-%~ 
-%~ Example: linear congruence generator:
-%~ r[i] = a . r[i-1] + b mod p
-%~ output bits of r[i]
-%~ i++
-%~ repeat
-%~ ... implemented as random() in glibc, cannot be used in crypto
-
-%~ \begin{defn}
-	%~ Let $G_\lambda:K_lambda\rarr\{0,1\}^{n(\lambda)}$ be a PRG parameterized by $\lambda\in\N$, $i\in\N$, $i<n(\lambda)$ and $\epsilon$ a non-negligible function. We say that $G_\lambda$ is {\em predictable} at position $i$ if there exists a polynomial-time algorithm $A$ such that $Pr(A(\lambda, G_\lambda(k)|_{\atob{1}{i}}) = G_\lambda(k)|_{i+1}) > 1/2 + \epsilon(\lambda)$.
-%~ \end{defn}
+Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter byproducts in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden but still usable for encryption.
