@@ -1,7 +1,7 @@
 \section{Advanced Encryption Standard}
 \label{sec:aes}
 
-In 1997, Curtin and Dolske were the first to publicly announce (in \cite{curtin1998brute}) that they have cracked Data Encryption Standard (DES) \cite{fips1977des} -- a symmetric block cipher which had been in use for $20$ years. In the same year, the National Institute of Standards and Technology (NIST) started a selection process for a new encryption standard. During the process, DES was partially replaced with Triple-DES described in ANSI draft X9.52 \cite{americantripple}.
+In 1997, Curtin and Dolske were the first to publicly announce \cite{curtin1998brute} that they have cracked Data Encryption Standard (DES, \cite{fips1977des}) -- a symmetric block cipher which had been in use for $20$ years. In the same year, the National Institute of Standards and Technology (NIST) started a selection process for a new encryption standard. During the process, DES was partially replaced with Triple-DES described in ANSI draft X9.52 \cite{americantripple}.
 
 In 1998, NIST chose $15$ candidates and asked cryptology community for help with analyzing the candidates. After a careful analysis, NIST proposed Rijndael\footnote{From authors' names: Vincent Rijmen and Joan Daemen.} \cite{daemen1999aes} as the new standard called Advanced Encryption Standard (AES) \cite{fips2001aes} on November 26, 2001. The standard specifies the Rijndael algorithm with block-length of $128$ bits and key-lengths of $128$, $192$ and $256$ bits. Note that the original Rijndael algorithm \cite{daemen2013rijndael} describes more block- and key-length variants. On the other hand, we will only consider its $128$-bit variant in the following text, unless stated otherwise.
 
@@ -135,7 +135,12 @@ Definitions of the $4$ operations follow.
 	
 	$\KeySchedule$ is a routine which expands $128$-bit encryption key into $11$-times longer $\ExpandedKey$. It will be indexed from $0$ by $128$-bit blocks.
 	
-	The most important thing for us is that $\ExpandedKey$ begins with plain encryption key. We omit further details here because $\KeySchedule$ is specified rather in algorithmic than algebraic manner, see \cite[pp.43-45]{daemen2013rijndael} for detail.
+	\begin{note}
+	\label{note:expkey}
+		The most important thing for us is that $\ExpandedKey$ begins with plain encryption key.
+	\end{note}
+	
+	We omit further details here because $\KeySchedule$ is specified rather in algorithmic than algebraic manner, see \cite[pp.43-45]{daemen2013rijndael} for detail.
 
 
 % ======================================================================
@@ -148,12 +153,12 @@ AES, as already stated, consists of $10$ rounds of $4$ operations except for the
 
 \begin{alg}
 \label{alg:aes}
-	Given a $128$-bit plaintext and key, return its AES encryption.
+	Given a $128$-bit plaintext and a key, return its AES encryption.
 	\begin{algorithmic}[1]
 		\Function{AES\_Encryption}{$Plaintext,Key$}
 			\State $\ExpandedKey \gets \KeySchedule(Key)$
-			\State $State \gets Plaintext$
-			\State $\AddRoundKey(State, \ExpandedKey[0])$
+			\State $State \gets Plaintext$ \label{line:stateplain}
+			\State $\AddRoundKey(State, \ExpandedKey[0])$ \label{line:addrk}
 			\For{$Round = 1 \to 9$}
 				\State $\SubBytes(State)$
 				\State $\ShiftRows(State)$

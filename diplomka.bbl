@@ -1,9 +1,26 @@
 \begin{thebibliography}{10}
 
+\bibitem{agrawal2002side}
+D~Agrawal, B~Archambeault, J~Rao, and P~Rohatgi.
+\newblock The em side-channel (s): Attacks and assessment methodologies.
+\newblock {\em Internet Security Group, IBM Watson Research Center. ps}, 2(3),
+  2002.
+
+\bibitem{asonov2004keyboard}
+Dmitri Asonov and Rakesh Agrawal.
+\newblock Keyboard acoustic emanations.
+\newblock In {\em Proceeding of the IEEE Symposium on Security and Privacy
+  2004}, pages 3--11. IEEE, 2004.
+
 \bibitem{americantripple}
 American~Bankers Association et~al.
 \newblock Tripple data encryption algorithm modes of operation.
 \newblock {\em ANSI X9}, pages 52--1998, 1998.
+
+\bibitem{auguste1883cryptographie}
+Kerckhoffs Auguste.
+\newblock La cryptographie militaire.
+\newblock {\em Journal des sciences militaires}, 9:538, 1883.
 
 \bibitem{billet2005cryptanalysis}
 Olivier Billet, Henri Gilbert, and Charaf Ech-Chatbi.
@@ -44,6 +61,18 @@ Joan Daemen and Vincent Rijmen.
 \newblock {\em The design of Rijndael: AES-the advanced encryption standard}.
 \newblock Springer Science \& Business Media, 2013.
 
+\bibitem{gandolfi2001electromagnetic}
+Karine Gandolfi, Christophe Mourtel, and Francis Olivier.
+\newblock Electromagnetic analysis: Concrete results.
+\newblock In {\em Cryptographic Hardware and Embedded Systems—CHES 2001},
+  pages 251--261. Springer, 2001.
+
+\bibitem{chipwhisperer}
+NewAE~Technology Inc.
+\newblock {ChipWhisperer\texttrademark Project}.
+\newblock \url{http://newae.com/chipwhisperer}.
+\newblock Accessed: 2016-02-07.
+
 \bibitem{jacob2003attacking}
 Matthias Jacob, Dan Boneh, and Edward Felten.
 \newblock Attacking an obfuscated cipher by injecting faults.
@@ -60,6 +89,36 @@ Du{\v{s}}an Klinec.
 \newblock White-box attack resistant cryptography.
 \newblock 2013.
 
+\bibitem{koc2008cryptographic}
+{\c{C}}.K. Ko{\c{c}}.
+\newblock {\em Cryptographic Engineering}.
+\newblock Springer US, 2008.
+
+\bibitem{kocher1999differential}
+Paul Kocher, Joshua Jaffe, and Benjamin Jun.
+\newblock Differential power analysis.
+\newblock In {\em Advances in Cryptology—CRYPTO’99}, pages 388--397.
+  Springer, 1999.
+
+\bibitem{kocher1996timing}
+Paul~C Kocher.
+\newblock Timing attacks on implementations of diffie-hellman, rsa, dss, and
+  other systems.
+\newblock In {\em Advances in Cryptology—CRYPTO’96}, pages 104--113.
+  Springer, 1996.
+
+\bibitem{kuhn2002optical}
+Markus~G Kuhn.
+\newblock Optical time-domain eavesdropping risks of crt displays.
+\newblock In {\em Security and Privacy, 2002. Proceedings. 2002 IEEE Symposium
+  on}, pages 3--18. IEEE, 2002.
+
+\bibitem{loughry2002information}
+Joe Loughry and David~A Umphress.
+\newblock Information leakage from optical emanations.
+\newblock {\em ACM Transactions on Information and System Security (TISSEC)},
+  5(3):262--289, 2002.
+
 \bibitem{matsui1994linear}
 Mitsuru Matsui.
 \newblock Linear cryptanalysis method for des cipher.
@@ -71,6 +130,19 @@ James~A Muir.
 \newblock A tutorial on white-box aes.
 \newblock Technical report, Technical report, Cryptology ePrint Archive, Report
   2013/104. \url{http://eprint. iacr. org/2013/104}, 2013.
+
+\bibitem{exampletraces}
+Colin O'Flynn.
+\newblock {Example Captures}.
+\newblock
+  \url{https://www.assembla.com/spaces/chipwhisperer/wiki/Example_Captures}.
+\newblock Accessed: 2016-02-07.
+
+\bibitem{petitcolas2016kerckhoffs}
+Fabien Petitcolas.
+\newblock Kerckhoffs -- cryptographie militaire.
+\newblock \url{http://www.petitcolas.net/kerckhoffs/#english}.
+\newblock Accessed: 2016-02-03.
 
 \bibitem{fips1977des}
 NIST~FIPS PUB.
@@ -84,9 +156,23 @@ NIST~FIPS PUB.
 \newblock {\em Federal Information Processing Standards Publication},
   197:441--0311, 2001.
 
+\bibitem{quisquater2001electromagnetic}
+Jean-Jacques Quisquater and David Samyde.
+\newblock Electromagnetic analysis (ema): Measures and counter-measures for
+  smart cards.
+\newblock In {\em Smart Card Programming and Security}, pages 200--210.
+  Springer, 2001.
+
 \bibitem{shannon1949mathematical}
 Claude~E Shannon and Warren Weaver.
 \newblock The mathematical theory of communication.
 \newblock {\em University of Illinois Press}, 1949.
+
+\bibitem{teuwen2015movfuscator}
+Philippe Teuwen.
+\newblock Movfuscator writeup.
+\newblock
+  \url{http://wiki.yobi.be/index.php?title=MoVfuscator_Writeup&oldid=9714}.
+\newblock Accessed: 2015-11-03.
 
 \end{thebibliography}

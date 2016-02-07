@@ -1,10 +1,11 @@
 \section{Introduction to Cryptography}
 \label{sec:introcrypto}
 
+%?% přesun mimo section přímo pod chapter?
 % goal: introduce crypto in a broader context, yet not too much in detail
 % starý jako lidstvo samo, bla bla, trochu ukázky z historie a jak to bylo špatný a jak se to umí lámat, security by obscurity, využívá cool matiku
 % co po crypto vlastně chci
-%~ effective algorithm, uniformly random: $k\xleftarrow{R}K$.
+%~ uniformly random: $k\xleftarrow{R}K$.
 %~ crypto = basis for security mechanisms
 %~ CONFIDENTIALITY and much more (e.g. integrity, digital signature, anonymity) or magic: zero knowledge proof of knowledge, FHE
 %~  or a complicated construction of crypto primitives (e.g. digital currency, electronic election, electronic auction)
@@ -21,7 +22,7 @@ Let us imagine a typical situation where Alice wants to communicate with Bob con
 \label{note:threat}
 	The list of such attacker's abilities is referred to as {\em threat model}. Note that in the previous threat model the attacker is quite weak -- she can only read the traffic. If she were for instance able to manipulate the traffic, Alice and Bob would need to introduce another features to their protocol so that they could detect forged messages.
 	
-	Before we start introducing any means of security, we always need to identify the threat model first. For now we will only consider eavesdropping.   %!% no hrůza
+	Before we start introducing any means of security, we always need to identify the threat model first. For now we will only consider eavesdropping.
 \end{note}
 
 Our first intuitive requirements on Alice and Bob's ciphering algorithm could be expressed as follows: no matter what plaintext Alice and Bob encrypt and send over the channel, Eve shall {\em not} be able to
@@ -51,10 +52,10 @@ There are two large families of ciphers -- symmetric and asymmetric. Shift ciphe
 
 \begin{defn}[Symmetric Cipher]
 \label{def:symcipher}
-	Let $K$ denote the key space, $M$ the message space and $C$ the ciphertext space. {\em Symmetric cipher} is a pair of efficiently computable (possibly randomized) functions $(E,D)$, $E:K\times M\rarr C$, $D:K\times C\rarr M$, such that $\forall m\in M, k\in K$ it holds
+	Let $K$ denote the key space, $M$ the message space and $C$ the ciphertext space. {\em Symmetric cipher} is a pair of efficiently computable (possibly randomized) functions $(E,D)$, $E:K\times M\rarr C$, $D:K\times C\rarr M$, such that $\forall m\in M$ and $\forall k\in K$ it holds
+	%~ \Pr\left(D(E(l,k),k)=l\right) = 1 . \label{eq:correct}
 	\begin{equation}
-		%~ \Pr\left(D(k,E(k,m))=m\right) = 1 . \label{eq:correct}
-		\Pr\left(D(E(l,k),k)=l\right) = 1 . \label{eq:correct}
+		\Pr\Bigl(D\bigl(k,E(k,m)\bigr)=m\Bigr) = 1 . \label{eq:correct}
 	\end{equation}
 	%?% \footnote{In some use cases it might be useful to require only so called {\em overwhelming} probability; not needed in this thesis.}
 \end{defn}
@@ -76,8 +77,9 @@ Shannon's groundbreaking work \cite{shannon1949mathematical} on the mathematics 
 
 \begin{defn}[Perfectly Secure Cipher]
 \label{def:perfsec}
-	Let $(E,D)$ be a symmetric cipher. Then it is called {\em perfectly secure} if $\forall m_0,m_1\in M$ such that $|m_0| = |m_1|$ and $\forall c\in C$ it holds $\Pr\left(E(k,m_0)=c\right) = \Pr\left(E(k,m_1)=c\right)$ where $k\unirand K$.
+	Let $(E,D)$ be a symmetric cipher. Then it is called {\em perfectly secure} if $\forall m_0,m_1\in M$ such that $|m_0| = |m_1|$ and $\forall c\in C$ it holds $\Pr\bigl(E(k,m_0)=c\bigr) = \Pr\bigl(E(k,m_1)=c\bigr)$ where $k$ is uniformly random in $K$, further denoted by $k\unirand K$.
 \end{defn}
+\nomenclature{$k\unirand K$}{$k$ is taken uniformly random from $K$}
 
 \begin{note}
 \label{note:indist}
@@ -112,20 +114,34 @@ Perfect security seems to be exactly what we want from a secure cipher but the f
 
 \subsection{Complexity-Theoretic Approach}
 
-We would like to utilize the fact that the attacker typically does not possess unlimited computing power but can rather solve only polynomial problems. For this reason we need to change our requirement on ciphertext from ``carries no information'' to ``is computationally impossible to gain some information''. As stated in Note \ref{note:indist}, we would like to make impossible to distinguish which plaintext has been encrypted. We present this idea in the following game.
+We would like to utilize the fact that the attacker typically does not possess unlimited computing power but she can rather only solve probabilistic polynomial problems.
+
+\begin{note}
+\label{note:polyinterms}
+	There arises a natural question: {\em Probabilistic polynomial in terms of what?} In cryptography, there is a meter for that referred to as {\em security parameter} which is typically the key-length. In the following text and for this purpose, the expression {\em effective} will be used frequently.
+\end{note}
+
+With this assumption, we can weaken our requirement on ciphertext from ``carries no information'' to ``is computationally impossible to gain some information''. In a manner analogous to Note \ref{note:indist}, we would like to make impossible to distinguish which plaintext has been encrypted, now considering an effective attacker only. We present this idea in the following game.
 
 \begin{game}
 \label{game:semsec}
-	There are two parties -- a {\em challenger} and an {\em adversary}. First, the challenger chooses a random key $k\unirand K$ and a random bit $b\unirand\{0,1\}$. Then the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger then encrypts $m_b$ (according to $b$ she has chosen) and sends the resulting ciphertext $c$ back to the adversary.
+	There are two parties -- a {\em challenger} and an {\em adversary}. First, the challenger chooses a random key $k\unirand K$ and a random bit $b\unirand\{0,1\}$. Then the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger then encrypts $m_b$ (according to $b$ she has chosen) and sends the resulting ciphertext $c$ back to the adversary. The adversary is allowed to perform multiple such queries while the challenger keeps constant key $k$ and bit $b$; the adversary is only limited by polynomial time.
 	
-	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
+	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger. See Figure \ref{fig:semsecgame} depicting this game.
 \end{game}
-%!% a figure of the game
 
 \begin{note}
 \label{note:semsec}
 	Resistency of a cipher to this kind of attack is referred to as {\em semantic security}.
 \end{note}
+
+\begin{figure}[H]
+\begin{center}
+	\includegraphics{./figures/game_semsec/game_semsec-1.pdf}
+	\caption{Game \ref{game:semsec} depicted.}
+	\label{fig:semsecgame}
+\end{center}
+\end{figure}
 
 \subsubsection{Definition of Semantic Security}
 
@@ -153,7 +169,7 @@ Let us introduce some notion first.
 	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time.
 \end{defn}
 
-\begin{defn}[Statistical Test]   %!% security parameter? effective in terms of what?
+\begin{defn}[Statistical Test]
 	Let $F:X\rarr Y$. {\em Statistical test} is a (possibly randomized) effective algorithm $A$ which only has an access to an oracle evaluating $F$ and which outputs $0$ or $1$, denoted by $A(F)$.
 \end{defn}
 
@@ -189,11 +205,11 @@ Semantic security advantage gives us a reasonable meter for formalization of Gam
 %!% přidat někam útok využívající zkrácení plaintextu po komprimaci
 % it makes sense to compress -> encrypt but it might be insecure!
 
-Semantically secure cipher therefore cannot be broken by any probabilistic-polynomial attack with overwhelming probability. On the other hand it might be broken by an attacker with unlimited computing power unlike perfectly secure cipher which cannot be broken either, see Note \ref{note:indist}.
+Semantically secure cipher therefore cannot be broken by any probabilistic-polynomial attack with overwhelming probability. On the other hand, it might be broken by an attacker with unlimited computing power unlike perfectly secure cipher which cannot be broken anyways, see Note \ref{note:indist}.
 
 The benefit of semantic security over perfect security is that semantic security does not imply any inconvenient consequence analogous to Theorem \ref{thm:kgeqm} (i.e.\ addresses our intention as stated in Note \ref{note:intent}) and practically provides similar security.
 
-Semantic security is usually achieved using smaller building blocks which are required to have certain properties. The following section describes a building block of one possible approach.
+Semantic security is usually achieved using smaller building blocks which are required to have certain properties. The following section describes a building block of one such possible approach.
 
 % ======================================================================
 % ===   B L O C K   C I P H E R                                      ===
@@ -206,7 +222,7 @@ There are two main approaches how to construct a semantically secure cipher. The
 	\item a {\em stream cipher}, or
 	\item a {\em block cipher},
 \end{enumerate}
-respectively. In this thesis we will only consider block ciphers, a definition follows.
+respectively. Stream ciphers then achieve semantic security by proper initialization and block ciphers use initialization together with {\em modes of operation}, e.g.\ {\em Cipher Block Chaining} (CBC) or {\em Counter Mode} (CTR). Modes of operation will not be covered in this thesis; only block ciphers and their desired properties will be described, a bunch of definitions follows.
 
 \begin{defn}[Pseudorandom Permutation]
 \label{def:prp}
@@ -221,7 +237,7 @@ Pseudorandom permutations will play the main role from now and $k$ will play the
 
 \begin{game}
 \label{game:prp}
-	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random key $k\unirand K$, a random bijection $F:X\rarr Y$ and a random bit $b\unirand\{0,1\}$. Then the adversary sends $x\in X$ of her choice to the challenger. The challenger then applies $E(k,\cdot)$ or $F$ if $b=0$ or $1$, respectively, and sends the result back to the adversary.
+	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random key $k\unirand K$, a random bijection $F:X\rarr Y$ and a random bit $b\unirand\{0,1\}$. Then the adversary sends $x\in X$ of her choice to the challenger. The challenger then applies $E(k,\cdot)$ or $F$ if $b=0$ or $1$, respectively, and sends the result back to the adversary. The adversary is allowed to perform multiple such queries again.
 	
 	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
@@ -240,7 +256,7 @@ PRP advantage tells us how likely adversary $A$ is able to distinguish a PRP wit
 
 \begin{defn}[Secure PRP]
 \label{def:secprp}
-	Let $E: K\times X\rarr Y$ be a PRP. Then $E$ is called {\em secure PRP} if for {\em any} adversary $A$ the PRP advantage $\AdvPRP(A,E)$ is negligible.   %!% negligible in terms of what?
+	Let $E: K\times X\rarr Y$ be a PRP. Then $E$ is called {\em secure PRP} if for {\em any} adversary $A$ the PRP advantage $\AdvPRP(A,E)$ is negligible.
 \end{defn}
 
 In other words, given a random key, PRP is secure if it is computationaly indistinguishable from a truly random bijection. An example covering most introduced concepts follows.
@@ -264,12 +280,27 @@ In other words, given a random key, PRP is secure if it is computationaly indist
 \end{example}
 
 \begin{note}
+\label{note:secbyobsc}
 	In the previous example, the adversary exploits the knowledge of the cipher's internal structure -- she knows everything but the key. One could have an idea to hide the structure from the attacker but this is actually a {\em very} bad idea. Once your construction leaks, you need to deploy a new ciphering algorithm confidentially but you have no way how to do so.
 	
-	You shall rather use a secure publicly known cipher and only rely on the key. Once your key is compromised, you simply establish a new key. Also note that your key is only to be protected within your device but the ciphering algorithm would need to be protected globally.
+	You shall rather use a secure publicly known cipher and only rely on the key. Once your key is compromised, you simply establish a new key. Also note that your key is only to be protected within your device but the ciphering algorithm would have to be protected globally.
 	
 	Such approach hiding the design of a cipher is referred to as {\em security by obscurity} and shall be strictly avoided.
 \end{note}
+
+This idea has already been addressed in 1883 by Kerckhoffs \cite{auguste1883cryptographie}. It is usually referred to as {\em Kerckhoffs's Principle} and its six rules follow (originally french, english translation taken from \cite{petitcolas2016kerckhoffs}):
+\begin{princ}[Kerckhoffs]
+	~
+	\begin{enumerate}
+		\item The system must be substantially, if not mathematically, undecipherable;
+		\item The system must not require secrecy and can be stolen by the enemy without causing trouble;\label{item:kerck}
+		\item It must be easy to communicate and retain the key without the aid of written notes, it must also be easy to change or modify the key at the discretion of the correspondents;
+		\item The system ought to be compatible with telegraph communication;
+		\item The system must be portable, and its use must not require more than one person;
+		\item Finally, given the circumstances in which such system is applied, it must be easy to use and must neither stress the mind or require the knowledge of a long series of rules.
+	\end{enumerate}
+\end{princ}
+Hence harming rule \ref{item:kerck} from the previous list leads to security by obscurity as introduced in Note \ref{note:secbyobsc}.
 
 % ======================================================================
 % ===   P R O V A B L E   S E C U R I T Y   P R O O F S              ===
@@ -300,7 +331,7 @@ Let us modify Game \ref{game:semsec} in a manner described within Note \ref{note
 
 \begin{game}
 \label{game:semsecprp}
-	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random bit $b\unirand\{0,1\}$ and before each round also a random key $k\unirand K$. In each round the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger then computes $c = E(k,m_b)$ and sends it back to the adversary.
+	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random bit $b\unirand\{0,1\}$ and before each round also a random key $k\unirand K$. In each round the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger then computes $c = E(k,m_b)$ and sends it back to the adversary. Note that the adversary is allowed to perform multiple queries again but, unlike the previous games, the key changes over and over again.
 	
 	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
@@ -374,6 +405,7 @@ Instead, real-world block ciphers are {\em beleived} to be secure based on a sim
 % ======================================================================
 
 \subsection{From Black-Box to White-Box Attack Context}
+\label{sec:bbtowb}
 
 The other central topic of this thesis is {\em white-box attack context}. In order to explain what it is, let us start with {\em black-box attack context}.
 
@@ -385,13 +417,13 @@ As we stated in Note \ref{note:threat}, first of all we need to address attacker
 	There could be many other goals than just key recovery, e.g. guessing the ciphertext in advance or be able to decrypt certain/given ciphertext with non-negligible probability and so on. Actually whatever you can imagine which could be in principle possible with a PRP but could not be possible with a truly random bijection.
 \end{note}
 
-Most ciphers are designed under the assumption of black-box attack context thus their implementation must be extremely careful. The attacker could for example measure the time of encryption and exploit this information which was not considered during the design of the cipher.
+Classical ciphers are designed under the assumption of black-box attack context thus their implementation must be extremely careful. The attacker could for example measure the time of encryption and exploit this information which was not considered during the design of the cipher.
 
 \subsubsection{Gray-Box}
 
 Gray-box attack context is closer to the reality since we do not encrypt using oracles but rather using some physical devices which run a specific implementation of given cipher. In the gray box model, cipher is thus supposed to be implemented and run while the attacker can observe some information related to cipher's byproducts as well.
 
-Such information leaks can be modelled as a set of distributions conditioned by byproducts and are referred to as {\em leakage model}. There is an area of theoretical cryptography studying leakages -- {\em Leakage Resilient Cryptography}. A practical attack exploiting such leaks will be described in Section \ref{sec:side}.   %?% LRC introduced by?
+Such information leaks can be modelled as a set of distributions conditioned by byproducts and are referred to as {\em leakage model}. There is an area of theoretical cryptography studying leakages -- {\em Leakage Resilient Cryptography}. A practical attack exploiting such leaks will be described in Chapter \ref{chap:attack} in Section \ref{sec:side}.   %?% LRC introduced by?
 
 \subsubsection{White-Box}
 

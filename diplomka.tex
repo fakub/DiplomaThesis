@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry,amsmath, amsthm, amssymb}   % , units, dsfont, caption
 % enumerate: \begin{enumerate}[{Example} I)] ... Roman numbering
-\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools}
+\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools,textcomp}
 \usepackage[table]{xcolor}
 \usepackage[titletoc]{appendix}
 \usepackage{nomencl}
@@ -51,6 +51,7 @@
 \newtheorem{defn}[thm]{Definition}
 \newtheorem{example}[thm]{Example}
 \newtheorem{game}[thm]{Game}
+\newtheorem{princ}[thm]{Principle}
 \newtheorem{alg}[thm]{Algorithm}
 
 \theoremstyle{remark} 
@@ -65,13 +66,15 @@
 \newcommand{\rarr}{\rightarrow}
 \newcommand{\larr}{\leftarrow}
 \newcommand{\xor}{\oplus}
+\newcommand{\unirand}{\xleftarrow{R}}
 %~ \DeclareMathOperator*{\Prob}{\mathbb{Pr}}   % operátor* bude umět používat \limit :) ... \Pr už existuje! a \mathbb neumí malý písmena
 \DeclareMathOperator*{\Adv}{Adv}
 \DeclareMathOperator*{\AdvPRP}{Adv_{PRP}}
 \DeclareMathOperator*{\AdvSS}{Adv_{SS}}
 \DeclareMathOperator*{\AdvPRPSS}{Adv_{PRPSS}}
 \DeclareMathOperator*{\bin}{bin}
-\newcommand{\unirand}{\xleftarrow{R}}
+\DeclareMathOperator*{\Corr}{Corr}
+\DeclareMathOperator*{\Mean}{Mean}
 
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\GF}{\mathrm{GF}}
@@ -284,26 +287,27 @@ A very interesting and universal approach has been recently introduced in a pape
 		% 	an $8 ...
 		% 	compose vs. concat !!!
 		% 	E(k,m) instead of E(m,k)
-		% 	vočekovat nomenklaturu
 		% 	adversary -> she
-		% 	referred to as (the?)
+		% 	referred to as (-the?)
 		% 	start -> begin with
 		% 	závorky \left(\right)
 		% 	setřídit nomenclaturu: \nomenclature[01]{$|S|$}{Cardinality of the set $S$}
 		% 	| -> \mid (kde se hodí)
 		% 	sofar -> so far
 		% 	notion vs. notation
-		% 	závorky...
+		% 	závorky \bigl( \bigr)
 		% 	adversary vs. attacker
-		% 	referred to as -the
 		% 	see vs. cf. (compare)
 		% 	for this reason comma?
-		% 	\Pr D E l ??
+		% 	\Pr D E l k_a ??
 		% 	e.g. -> e.g.\ 
 		% 	všechno dát jako podmnožiny \{0,1\}^* !!!
 		% 	přečíst si kydy z turku/sec eng a případně zařadit "historky z natáčení"
 		% 	color box -> color-box
 		% 	whitebox -> white-box
+		% 	odkaz na section mimo chapter -> přidat chapter
+		% 	introduced -> described (já asi těžko něco představil že ...)
+		% 	hloubka obsahu?
 		% 	
 		
 		

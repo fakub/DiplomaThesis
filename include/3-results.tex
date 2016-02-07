@@ -22,3 +22,20 @@
 %~ In the following sections (?) we describe these steps in detail, finally we present practical results of the attack.
 
 %~ teoreticky by mělo bejt popsáno v předch. kapitole, tady už bych jenom zmínil co jsem použil a co vypadlo
+
+% bla bla co se podařilo, kam až ...
+% chtěl jsem ale pokračovat ve smyslu:
+% 	najít debuggerem místo v kódu, kde to leakuje, a zjistit tak kterej index to je, případně se to naučit počítat
+% 	alternatively, přímo vypsat všechny možný indexy použitý v tabulkách a zkusit útočit na tohle místo memtrace
+% 	z toho poskládat přímej útok
+% 	...
+% ale nedařilo se, přestože jsem vyzkoušel několik způsobů:
+% 	pustil jsem to v gdb, to ale leakující adresu vůbec nezachytilo (! záleží na input plaintextu, ohlídal jsem si to)
+% 	zkusil jsem gdb připojit na pin, ale to nešlo vůbec, hned hlásí že Could not insert hardware breakpoints: You may have requested too many hardware breakpoints/watchpoints.
+% 	další mě nenapadá ... (zkusit valgrind a porovnat tracy?)
+% 	
+
+
+%~ NaiveAES implementation was broken by both algorithms, CPA attack required $x$ traces, bitwise DPA attack required $y$ traces.
+%~ 
+%~ White-Box-AES implementation was only broken by bitwise DPA attack and many interesting things occured.
