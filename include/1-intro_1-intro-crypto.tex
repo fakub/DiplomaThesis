@@ -312,7 +312,7 @@ Now we know what it is a secure PRP (or a secure block cipher) -- it is based on
 
 \begin{note}
 \label{note:singleaccess}
-	A drawback of PRPs is that they cannot be randomized therefore we will need to limit the amount of adversary-challenger queries to one or, equivalently, change the key after each query. If we do not do so then there exists a trivially winning adversary $A$.
+	A drawback of PRPs is that they cannot be randomized, therefore we will need to limit the amount of adversary-challenger queries to one or, equivalently, change the key after each query. If we do not do so then there exists a trivially winning adversary $A$.
 	
 	Indeed, such adversary picks three distinct plaintexts $m_0$, $m_1$, $m_2$ (well, let us suppose there are at least three plaintexts in $M$) and sends $(m_0,m_1)$ to the challenger while she gets back some ciphertext $c_a$. In her second query, the adversary sends $(m_0,m_2)$ to the challenger and receives another ciphertext, let say $c_b$. Since PRP is a deterministic bijection, she can decide with certainty:
 	\begin{itemize}
@@ -352,7 +352,7 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 	\begin{equation}\label{eq:aleqbb}
 		\AdvPRPSS(A,E) \leq \AdvPRP(B_0,E) + \AdvPRP(B_1,E) .
 	\end{equation}
-	The claim then follows -- if $E$ is a secure PRP i.e. $\AdvPRP(B_0,E) + \AdvPRP(B_1,E)$ is negligible then also $\AdvPRPSS(A,E)$ is negligible therefore $E$ is a semantically secure PRP.
+	The claim then follows -- if $E$ is a secure PRP i.e. $\AdvPRP(B_0,E) + \AdvPRP(B_1,E)$ is negligible then also $\AdvPRPSS(A,E)$ is negligible, therefore $E$ is a semantically secure PRP.
 	
 	Let us first denote $W_b$ the event when adversary $A$ answers $1$ while the true value of the PRP semantic security game is $b$ for $b=0,1$. In this notation it holds
 	\begin{equation}\label{eq:prpssae}

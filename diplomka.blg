@@ -5,45 +5,47 @@ The style file: plain.bst
 Database file #1: biblio.bib
 Warning--empty journal in daemen1999aes
 Warning--empty journal in klinec2013white
-You've used 30 entries,
+Warning--can't use both volume and number fields in luk2005pin
+Warning--can't use both volume and number fields in nethercote2007valgrind
+You've used 33 entries,
             2118 wiz_defined-function locations,
-            653 strings with 8263 characters,
-and the built_in function-call counts, 10192 in all, are:
-= -- 1065
-> -- 366
-< -- 14
-+ -- 152
-- -- 116
-* -- 550
-:= -- 1606
-add.period$ -- 107
-call.type$ -- 30
-change.case$ -- 147
+            674 strings with 8988 characters,
+and the built_in function-call counts, 11870 in all, are:
+= -- 1237
+> -- 450
+< -- 19
++ -- 185
+- -- 146
+* -- 674
+:= -- 1853
+add.period$ -- 119
+call.type$ -- 33
+change.case$ -- 171
 chr.to.int$ -- 0
-cite$ -- 32
-duplicate$ -- 455
-empty$ -- 868
-format.name$ -- 116
-if$ -- 2271
+cite$ -- 37
+duplicate$ -- 523
+empty$ -- 989
+format.name$ -- 146
+if$ -- 2645
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 26
-newline$ -- 157
-num.names$ -- 60
-pop$ -- 212
+int.to.str$ -- 33
+missing$ -- 29
+newline$ -- 172
+num.names$ -- 66
+pop$ -- 241
 preamble$ -- 1
-purify$ -- 117
+purify$ -- 138
 quote$ -- 0
-skip$ -- 333
+skip$ -- 387
 stack$ -- 0
-substring$ -- 609
-swap$ -- 144
-text.length$ -- 14
+substring$ -- 715
+swap$ -- 178
+text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 116
-warning$ -- 2
-while$ -- 107
-width$ -- 32
-write$ -- 337
-(There were 2 warnings)
+type$ -- 128
+warning$ -- 4
+while$ -- 122
+width$ -- 35
+write$ -- 375
+(There were 4 warnings)

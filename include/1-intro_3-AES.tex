@@ -52,7 +52,7 @@ Definitions of the $4$ operations follow.
 	\begin{equation*}
 		S(A) = (x^4 + x^3 + x^2 + x + 1)A' + x^6 + x^5 + x + 1 \pmod{x^8+1} .
 	\end{equation*}
-	Note that although $x^8+1$ is not irreducible (e.g. $x+1$ is a factor), $x^4 + x^3 + x^2 + x + 1$ is coprime to $x^8+1$ therefore it has an inverse$\mod{x^8+1}$. It follows that $\SubBytes$ is an invertible bijection.
+	Note that although $x^8+1$ is not irreducible (e.g. $x+1$ is a factor), $x^4 + x^3 + x^2 + x + 1$ is coprime to $x^8+1$, therefore it has an inverse$\mod{x^8+1}$. It follows that $\SubBytes$ is an invertible bijection.
 	
 	$\SubBytes$ is the only source of nonlinearity in AES thus it shall have excellent nonlinearity properties. This was the major theoretical weakness of DES, its predecessor. Practical linear attack against DES was introduced by Matsui \cite{matsui1994linear} and analyzed in detail and successfuly performed by Junod \cite{junod2001complexity}.
 	
@@ -105,7 +105,7 @@ Definitions of the $4$ operations follow.
 	
 	Note that $c(z)$ is coprime to $z^4+1$ therefore invertible$\mod{z^4+1}$. It follows that $\MixColumns$ is invertible.
 	
-	Unlike $\SubBytes$, $MixColumns$ operates on a substantially larger domain therefore cannot be directly implemented as a lookup table. Rather let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly} which is performed in $F[z]$ can be rewritten into matrix multiplication back in $F$, indeed
+	Unlike $\SubBytes$, $MixColumns$ operates on a substantially larger domain, therefore cannot be directly implemented as a lookup table. Rather let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly} which is performed in $F[z]$ can be rewritten into matrix multiplication back in $F$, indeed
 	\begin{equation}
 	\label{eq:mixcolmatr}
 		\begin{pmatrix}

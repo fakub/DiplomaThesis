@@ -1,30 +1,69 @@
 \section{Using SCA Tools in White-Box Cryptography}
 \label{sec:scawbc}
 
-%~ Groundbreaking approach -- use SCA tools in WBC, even though there is no justification why it should work, it actually works. It is especially useful since it brings another and totally different way of attacking white-box crypto.
-
 %~ bude o útoku Bos et al. z teoretickýho pohledu, high level popis, vč. toho jak vzniknul
 %~ trace acquisition, trace filtering, row & address filtering (theoreticaly describe the whole attack)
 
+In the previous section we presented seemingly unrelated algorithms. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a groundbreaking approach introduced by Bos et al. \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
 
+The idea was inspired by Delerabl{\'e}e et al. \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations by SCA tools.
 
+The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}.
 
+% RISCURE motivation:
+%~ Back in November 2015, I had no results at all, therefore I waited until now, until I have some results. In my diploma thesis I am analyzing a novel attack published in a recent paper by Bos et al. \cite{bos2015differential}. Now I can successfuly reproduce the attack with own tools and identify the exact address locations where the keying material leaks.
+%~ 
+%~ Most interestingly, the attack breaks Klinec's implementation \cite{klinec2013white} of White-Box AES by Chow et al. \cite{chow2003aes}. To the best of my knowledge, there is no reasonable explanation why this is actually possible. The best known attack is BGE attack \cite{billet2005cryptanalysis} which is pure algebraic, on the other hand, Bos' attack utilizes side-channel tools to attack memory traces instead.
+%~ 
+%~ Even though it is not fully understood, the benefit of the attack is obvious -- it introduces a principially different approach to break white-box implementations. The attack may help to address weak points of an implementation and increase its resistancy to this kind of attack.
+%~ 
+%~ Since curious people tempt to break mysteries, I wanted to know why it works, too. I tried to set a watchpoint to the leaking address in a debugger and find the corresponding location in the source code. For some reason, standalone GDB did not catch the address previously caught by PIN and GDB connected to PIN debugger was not able to set any watchpoint at all. Hence I tried to print and attack all possible indexes used during encryption which should be later transformed to memory addresses, but surprisingly got absolutely nothing.
 
-%~ \section{Trace Acquisition}
-%~ \label{sec:tracq}
-%~ 
-%~ First of all we need to acquire memory traces which can be done with tools like Valgrind \cite{nethercote2007valgrind} or Pin \cite{luk2005pin}. Both of them are open-source and both allow you to write your own tools.
-%~ 
-%~ We used Pin together with an existing memory tracing tool by Teuwen \cite{teuwen2015movfuscator}, we provide this tool on attached CD as well. See Appendix \ref{app:howto} for a detailed how-to.
-%~ 
-%~ \section{Trace Processing}
-%~ \label{sec:trproc}
-%~ 
-%~ Once we have memory traces, we need to filter constant parts.
-%~ 
-%~ Display it, see 10 rounds, filter it.
-%~ 
-%~ \section{Attacking Traces}
-%~ \label{sec:attack}
-%~ 
-%~ Use side-channel attack tools and press GO!
+\subsection{Trace Acquisition}
+\label{sec:tracq}
+
+In order to acquire a memory trace we use Dynamic Binary Instrumentation (DBI) tools. These tools insert additional instructions to the original code of the program at run-time enabling one to debug or detect memory leaks. The most advanced DBI tools like Valgrind \cite{nethercote2007valgrind} or PIN \cite{luk2005pin} include a programmable interface where you can write tools of your will. Both tools are open-source.
+
+We modified a tool for PIN by Teuwen \cite{teuwen2015movfuscator} for $4$ use cases. These acquire
+\begin{enumerate}
+	\item addresses of memory reads, \label{item:readaddr}
+	\item addresses of memory writes,   %!% neni
+	\item contents of memory reads, and   %!% neni
+	\item contents of memory writes, \label{item:writecnt}
+\end{enumerate}
+respectively. Tool nr.\ \ref{item:writecnt} is obviously most useful for unprotected implementations since it can directly observe byproducts, tool nr.\ \ref{item:readaddr} will be surprisingly used as well.
+
+Using chosen tool we acquire certain amount of memory traces for different, possibly random, plaintexts. We save these plaintexts along corresponding traces, of course, and proceed towards trace filtering.
+
+\subsection{Trace Filtering}
+\label{sec:filter}
+
+Once we have acquired memory traces, we perform two kinds of filtering. We filter trace entries
+\begin{itemize}
+	\item by address and temporal range, and
+	\item by constant value.
+\end{itemize}
+
+\subsubsection{Address and Temporal Filtering}
+
+We have developed own tool displaying a memory trace. Given $n$, this tool splits the trace by address into $n$ ``compact'' segments and displays these parts separately. See Figure \ref{fig:memtrace} for an example memory trace. Horizontal axis represents address range, vertical axis represents the order of addresses from the top (temporal range).
+
+\begin{figure}[h]
+\begin{center}
+	\includegraphics[width=0.9\textwidth]{./figures/memtrace/memtrace.png}
+	\caption{Illustrative memory trace of a run of a simple AES implementation. Addresses of memory writes were acquired. Note $10$ AES rounds with $4$ inner steps.}
+	\label{fig:memtrace}
+\end{center}
+\end{figure}
+
+In this example trace we can see $10$ distinct AES rounds even with its $4$ inner steps. In general, if possible, we can estimate address and temporal range of the first round\footnote{Note that we are only interested in the first round, see Equation \ref{eq:byprod} and its context.} based on visual observation. Then we filter all traces according to this range. Note that this step brings the most substantial speedup of the attack since its speed depends on the size of traces.
+
+\subsubsection{Constant Entries Filtering}
+
+In the second stage we filter out such entries which are constant across all acquired traces because they do not carry any information. Indeed, both presented SCA algorithms exploit changes across traces.
+
+Practically we first create a filter mask based on a small set of traces, $10$ shows to be sufficient. Such mask carries $0$ if all corresponding addresses in the small set of traces are equal, $1$ otherwise. This mask is then simply applied to filter all the remaining traces, possibly hundreds or thousands of them.
+
+\subsection{Attacking Traces}
+\label{sec:attack}
+

@@ -61,6 +61,13 @@ Joan Daemen and Vincent Rijmen.
 \newblock {\em The design of Rijndael: AES-the advanced encryption standard}.
 \newblock Springer Science \& Business Media, 2013.
 
+\bibitem{delerablee2013white}
+C{\'e}cile Delerabl{\'e}e, Tancr{\`e}de Lepoint, Pascal Paillier, and Matthieu
+  Rivain.
+\newblock White-box security notions for symmetric encryption schemes.
+\newblock In {\em Selected Areas in Cryptography--SAC 2013}, pages 247--264.
+  Springer, 2013.
+
 \bibitem{gandolfi2001electromagnetic}
 Karine Gandolfi, Christophe Mourtel, and Francis Olivier.
 \newblock Electromagnetic analysis: Concrete results.
@@ -119,6 +126,13 @@ Joe Loughry and David~A Umphress.
 \newblock {\em ACM Transactions on Information and System Security (TISSEC)},
   5(3):262--289, 2002.
 
+\bibitem{luk2005pin}
+Chi-Keung Luk, Robert Cohn, Robert Muth, Harish Patil, Artur Klauser, Geoff
+  Lowney, Steven Wallace, Vijay~Janapa Reddi, and Kim Hazelwood.
+\newblock Pin: building customized program analysis tools with dynamic
+  instrumentation.
+\newblock In {\em ACM Sigplan Notices}, volume~40, pages 190--200. ACM, 2005.
+
 \bibitem{matsui1994linear}
 Mitsuru Matsui.
 \newblock Linear cryptanalysis method for des cipher.
@@ -130,6 +144,11 @@ James~A Muir.
 \newblock A tutorial on white-box aes.
 \newblock Technical report, Technical report, Cryptology ePrint Archive, Report
   2013/104. \url{http://eprint. iacr. org/2013/104}, 2013.
+
+\bibitem{nethercote2007valgrind}
+Nicholas Nethercote and Julian Seward.
+\newblock Valgrind: a framework for heavyweight dynamic binary instrumentation.
+\newblock In {\em ACM Sigplan notices}, volume~42, pages 89--100. ACM, 2007.
 
 \bibitem{exampletraces}
 Colin O'Flynn.
