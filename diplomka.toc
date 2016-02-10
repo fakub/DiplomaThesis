@@ -1,56 +1,58 @@
 \contentsline {chapter}{Preface}{1}{section*.3}
-\contentsline {chapter}{\numberline {1}Introduction to Whitebox Cryptography}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Introduction to Cryptography}{3}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}Symmetric and Asymmetric Cipher}{4}{subsection.1.1.1}
-\contentsline {subsection}{\numberline {1.1.2}Information-Theoretic Approach}{4}{subsection.1.1.2}
-\contentsline {subsection}{\numberline {1.1.3}Complexity-Theoretic Approach}{5}{subsection.1.1.3}
-\contentsline {subsubsection}{Definition of Semantic Security}{6}{section*.9}
-\contentsline {subsection}{\numberline {1.1.4}Block cipher}{8}{subsection.1.1.4}
-\contentsline {subsection}{\numberline {1.1.5}Provable Security Proofs}{10}{subsection.1.1.5}
-\contentsline {subsection}{\numberline {1.1.6}Provable vs. Real-World Security}{12}{subsection.1.1.6}
-\contentsline {subsection}{\numberline {1.1.7}From Black-Box to White-Box Attack Context}{13}{subsection.1.1.7}
-\contentsline {subsubsection}{Black-Box}{13}{section*.10}
-\contentsline {subsubsection}{Gray-Box}{13}{section*.11}
-\contentsline {subsubsection}{White-Box}{13}{section*.12}
-\contentsline {section}{\numberline {1.2}White-Box Cryptography}{14}{section.1.2}
-\contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{14}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{14}{subsection.1.3.1}
-\contentsline {subsubsection}{SubBytes}{15}{section*.13}
-\contentsline {subsubsection}{ShiftRows}{15}{section*.14}
-\contentsline {subsubsection}{MixColumns}{15}{section*.15}
-\contentsline {subsubsection}{AddRoundKey}{16}{section*.16}
-\contentsline {subsubsection}{KeySchedule}{16}{section*.17}
-\contentsline {subsection}{\numberline {1.3.2}AES Algorithm Description}{16}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{17}{subsection.1.3.3}
+\contentsline {chapter}{\numberline {1}Introduction to Whitebox Cryptography}{2}{chapter.1}
+\contentsline {section}{\numberline {1.1}Introduction to Cryptography}{2}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Symmetric and Asymmetric Cipher}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Information-Theoretic Approach}{3}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Complexity-Theoretic Approach}{4}{subsection.1.1.3}
+\contentsline {subsubsection}{Definition of Semantic Security}{5}{section*.9}
+\contentsline {subsection}{\numberline {1.1.4}Block cipher}{7}{subsection.1.1.4}
+\contentsline {subsection}{\numberline {1.1.5}Provable Security Proofs}{9}{subsection.1.1.5}
+\contentsline {subsection}{\numberline {1.1.6}Provable vs. Real-World Security}{11}{subsection.1.1.6}
+\contentsline {subsection}{\numberline {1.1.7}From Black-Box to White-Box Attack Context}{11}{subsection.1.1.7}
+\contentsline {subsubsection}{Black-Box}{12}{section*.10}
+\contentsline {subsubsection}{Gray-Box}{12}{section*.11}
+\contentsline {subsubsection}{White-Box}{12}{section*.12}
+\contentsline {section}{\numberline {1.2}White-Box Cryptography}{12}{section.1.2}
+\contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{12}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{13}{subsection.1.3.1}
+\contentsline {subsubsection}{SubBytes}{14}{section*.14}
+\contentsline {subsubsection}{ShiftRows}{14}{section*.15}
+\contentsline {subsubsection}{MixColumns}{15}{section*.17}
+\contentsline {subsubsection}{AddRoundKey}{15}{section*.18}
+\contentsline {subsubsection}{KeySchedule}{15}{section*.19}
+\contentsline {subsection}{\numberline {1.3.2}AES Algorithm Description}{15}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{16}{subsection.1.3.3}
 \contentsline {section}{\numberline {1.4}White-Box AES}{17}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}Encodings}{18}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {1.4.2}Reorded AES}{19}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {1.4.3}Fully-Table Representation}{19}{subsection.1.4.3}
-\contentsline {subsubsection}{T-Boxes}{19}{section*.18}
-\contentsline {subsubsection}{MixColumns}{20}{section*.19}
-\contentsline {subsubsection}{ShiftRows}{20}{section*.20}
-\contentsline {subsection}{\numberline {1.4.4}WBAES Construction}{20}{subsection.1.4.4}
-\contentsline {subsubsection}{Mixing Bijection}{20}{section*.21}
-\contentsline {subsubsection}{Input Mixing Bijection}{20}{section*.22}
-\contentsline {subsubsection}{Table Composition}{21}{section*.23}
-\contentsline {subsubsection}{Inserting Encodings}{21}{section*.24}
-\contentsline {section}{\numberline {1.5}Known Attacks}{21}{section.1.5}
-\contentsline {chapter}{\numberline {2}Attack using Differential Computation Analysis}{22}{chapter.2}
-\contentsline {section}{\numberline {2.1}Side-Channel Attack}{22}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Correlation Power Analysis Attack}{23}{subsection.2.1.1}
-\contentsline {subsubsection}{Vulnerable Byproduct}{23}{section*.26}
-\contentsline {subsubsection}{Utilizing Power Traces}{23}{section*.27}
-\contentsline {subsection}{\numberline {2.1.2}Bit-Wise Differential Power Analysis}{25}{subsection.2.1.2}
-\contentsline {subsubsection}{Attack}{25}{section*.28}
-\contentsline {section}{\numberline {2.2}Using SCA Tools in White-Box Cryptography}{26}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{26}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{27}{subsection.2.2.2}
-\contentsline {subsubsection}{Address and Temporal Filtering}{27}{section*.29}
+\contentsline {subsection}{\numberline {1.4.1}Encodings}{17}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Reorded AES}{18}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}Fully-Table Representation}{18}{subsection.1.4.3}
+\contentsline {subsubsection}{T-Boxes}{19}{section*.20}
+\contentsline {subsubsection}{MixColumns}{19}{section*.21}
+\contentsline {subsubsection}{ShiftRows}{19}{section*.22}
+\contentsline {subsection}{\numberline {1.4.4}WBAES Construction}{19}{subsection.1.4.4}
+\contentsline {subsubsection}{Mixing Bijection}{19}{section*.23}
+\contentsline {subsubsection}{Input Mixing Bijection}{20}{section*.24}
+\contentsline {subsubsection}{Table Composition}{20}{section*.25}
+\contentsline {subsubsection}{Inserting Encodings}{20}{section*.26}
+\contentsline {section}{\numberline {1.5}Known Attacks}{20}{section.1.5}
+\contentsline {chapter}{\numberline {2}Using Side-Channel Attack Tools}{21}{chapter.2}
+\contentsline {section}{\numberline {2.1}Side-Channel Attack}{21}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Correlation Power Analysis Attack}{21}{subsection.2.1.1}
+\contentsline {subsubsection}{Vulnerable Byproduct}{22}{section*.28}
+\contentsline {subsubsection}{Utilizing Power Traces}{22}{section*.29}
+\contentsline {subsection}{\numberline {2.1.2}Bit-Wise Differential Power Analysis}{24}{subsection.2.1.2}
+\contentsline {subsubsection}{Attack}{24}{section*.30}
+\contentsline {section}{\numberline {2.2}Using SCA Tools in White-Box Cryptography}{25}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{25}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{26}{subsection.2.2.2}
 \contentsline {subsubsection}{Constant Entries Filtering}{27}{section*.31}
-\contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{27}{subsection.2.2.3}
-\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{29}{chapter.3}
-\contentsline {chapter}{\numberline {4}Future Work}{30}{chapter.4}
-\contentsline {chapter}{Conclusion}{31}{section*.32}
-\contentsline {chapter}{References}{32}{section*.34}
+\contentsline {subsubsection}{Address and Temporal Filtering}{27}{section*.33}
+\contentsline {paragraph}{Trace Visualization}{27}{section*.34}
+\contentsline {paragraph}{Trace Filtering}{29}{section*.36}
+\contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{29}{subsection.2.2.3}
+\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{30}{chapter.3}
+\contentsline {chapter}{\numberline {4}Future Work}{31}{chapter.4}
+\contentsline {chapter}{Conclusion}{32}{section*.37}
+\contentsline {chapter}{References}{33}{section*.39}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Manual}{II}{Appendix.a.B}

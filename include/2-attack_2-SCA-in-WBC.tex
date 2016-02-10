@@ -1,18 +1,13 @@
 \section{Using SCA Tools in White-Box Cryptography}
 \label{sec:scawbc}
 
-%~ bude o útoku Bos et al. z teoretickýho pohledu, high level popis, vč. toho jak vzniknul
-%~ trace acquisition, trace filtering, row & address filtering (theoreticaly describe the whole attack)
+In the previous section we presented some algorithms seemingly unrelated to what we have done so far. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a groundbreaking approach introduced recently by Bos et al. \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
 
-In the previous section we presented seemingly unrelated algorithms. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a groundbreaking approach introduced by Bos et al. \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
+The idea was inspired by Delerabl{\'e}e et al. \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations with SCA tools.
 
-The idea was inspired by Delerabl{\'e}e et al. \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations by SCA tools.
-
-The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}.
+The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context it makes no sense to talk about differential power analysis since there is no {\em power}, it is rather referred to as {\em differential computation analysis} (DCA).
 
 % RISCURE motivation:
-%~ Back in November 2015, I had no results at all, therefore I waited until now, until I have some results. In my diploma thesis I am analyzing a novel attack published in a recent paper by Bos et al. \cite{bos2015differential}. Now I can successfuly reproduce the attack with own tools and identify the exact address locations where the keying material leaks.
-%~ 
 %~ Most interestingly, the attack breaks Klinec's implementation \cite{klinec2013white} of White-Box AES by Chow et al. \cite{chow2003aes}. To the best of my knowledge, there is no reasonable explanation why this is actually possible. The best known attack is BGE attack \cite{billet2005cryptanalysis} which is pure algebraic, on the other hand, Bos' attack utilizes side-channel tools to attack memory traces instead.
 %~ 
 %~ Even though it is not fully understood, the benefit of the attack is obvious -- it introduces a principially different approach to break white-box implementations. The attack may help to address weak points of an implementation and increase its resistancy to this kind of attack.
@@ -31,39 +26,118 @@ We modified a tool for PIN by Teuwen \cite{teuwen2015movfuscator} for $4$ use ca
 	\item contents of memory reads, and   %!% neni
 	\item contents of memory writes, \label{item:writecnt}
 \end{enumerate}
-respectively. Tool nr.\ \ref{item:writecnt} is obviously most useful for unprotected implementations since it can directly observe byproducts, tool nr.\ \ref{item:readaddr} will be surprisingly used as well.
+respectively. Tool nr.\ \ref{item:writecnt} is obviously most useful for unprotected implementations since it can directly observe byproducts, tool nr.\ \ref{item:readaddr} will be surprisingly used as well. The other tools will not be used.
 
-Using chosen tool we acquire certain amount of memory traces for different, possibly random, plaintexts. We save these plaintexts along corresponding traces, of course, and proceed towards trace filtering.
+\begin{note}
+\label{note:lsb}
+	So far we have not specified any possible limitations on memory traces. Note that in case we are catching addresses, we can limit our attention to the least significant byte only. Indeed, the rest of the address does not contain any relevant information, only the global position in memory. On the other hand, the least significant byte carries information about the position within an array representing a WBAES table.
+	
+	In case of reading memory contents, we can only be interested in $1$ byte memory reads/writes since AES tables are constructed based on byte-wise representation.
+\end{note}
+
+Using chosen tool we acquire certain amount of memory traces with different, possibly random, plaintexts on input. We save these plaintexts along corresponding traces, of course.
+
+\begin{note}
+\label{note:optim}
+	In order to attack by SCA tools, traces must be properly aligned. It could happen that compiling C/C++ programs with high levels of optimization would produce misaligned traces; we actually experienced different lengths of traces.
+	
+	Therefore we recommend to compile C/C++ programs with different levels of optimization and acquire just a few traces for each level. We check traces' lengths and apply the highest optimization level where the traces were equally long and use this optimization level for trace acquisition.
+\end{note}
+
+One may wonder whether traces can ever be properly aligned at all because then it would require additional effort to align them. According to our experience, traces are well aligned hence there should be no need for this.
+
+\begin{note}
+\label{note:aslr}
+	There is another issue with trace acquisition, now it is related to the next step which is trace filtering. It will be appreciated if the program uses very the same addresses for instructions which are not plaintext related. Later we will try to filter them out since they do not carry any useful information.
+	
+	For this reason it might be helpful to switch off Address Space Layout Randomization (ASLR) and acquire all traces in a single terminal session.
+\end{note}
+
+Having traces properly acquired, let us proceed to trace filtering.
 
 \subsection{Trace Filtering}
 \label{sec:filter}
 
 Once we have acquired memory traces, we perform two kinds of filtering. We filter trace entries
 \begin{itemize}
-	\item by address and temporal range, and
-	\item by constant value.
+	\item by constant value, and
+	\item by address and temporal range.
 \end{itemize}
 
-\subsubsection{Address and Temporal Filtering}
-
-We have developed own tool displaying a memory trace. Given $n$, this tool splits the trace by address into $n$ ``compact'' segments and displays these parts separately. See Figure \ref{fig:memtrace} for an example memory trace. Horizontal axis represents address range, vertical axis represents the order of addresses from the top (temporal range).
-
-\begin{figure}[h]
-\begin{center}
-	\includegraphics[width=0.9\textwidth]{./figures/memtrace/memtrace.png}
-	\caption{Illustrative memory trace of a run of a simple AES implementation. Addresses of memory writes were acquired. Note $10$ AES rounds with $4$ inner steps.}
-	\label{fig:memtrace}
-\end{center}
-\end{figure}
-
-In this example trace we can see $10$ distinct AES rounds even with its $4$ inner steps. In general, if possible, we can estimate address and temporal range of the first round\footnote{Note that we are only interested in the first round, see Equation \ref{eq:byprod} and its context.} based on visual observation. Then we filter all traces according to this range. Note that this step brings the most substantial speedup of the attack since its speed depends on the size of traces.
-
 \subsubsection{Constant Entries Filtering}
+	
+	In the first stage we filter out such entries which are constant across all acquired traces because they do not carry any information. Indeed, both presented SCA algorithms exploit changes across traces.
+	
+	Practically we first create a filter mask based on a small set of traces, $10$ shows to be sufficient. Such mask carries $0$ if all corresponding addresses in the small set of traces are equal, $1$ otherwise, see Figure \ref{fig:mask}. This mask is then simply applied to filter all the remaining traces, possibly hundreds or thousands of them. Note that we keep the mask, we will use it for the following filtering method as well.
+	
+	\begin{figure}[H]
+	\[
+	\arraycolsep=.5em\def\arraystretch{1.5}
+		\begin{array}{|c|ccccccccc|}
+			\hline
+			\textnormal{Trace 0} & \texttt{65} & \texttt{de} & \texttt{37} & \texttt{7e} & \texttt{63} & \texttt{30} & \texttt{c0} & \texttt{62} & \texttt{61} \\
+			\textnormal{Trace 1} & \texttt{65} & \texttt{de} & \texttt{31} & \texttt{7e} & \texttt{23} & \texttt{30} & \texttt{b1} & \texttt{62} & \texttt{61} \\
+			\textnormal{Trace 2} & \texttt{65} & \texttt{de} & \texttt{1f} & \texttt{7e} & \texttt{d5} & \texttt{30} & \texttt{77} & \texttt{62} & \texttt{61} \\
+			\textnormal{Trace 3} & \texttt{65} & \texttt{de} & \texttt{97} & \texttt{7e} & \texttt{5c} & \texttt{30} & \texttt{c4} & \texttt{62} & \texttt{61} \\
+			\hline
+			\textnormal{Mask}    & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} \\
+			\hline
+		\end{array}
+	\]
+	\caption{An example of a mask used for trace filtering.}
+	\label{fig:mask}
+	\end{figure}
+	
+	\begin{note}
+	\label{note:filter}
+		Filtering of constant entries typically decreases the size of the traces by tens of percent. If you do not observe any or extremely small decrease, it might have happened that the traces are not properly aligned. In such case it might be very difficult to align them. Luckily we did not experience this problem and give some advices how to avoid it in Note \ref{note:aslr}.
+	\end{note}
 
-In the second stage we filter out such entries which are constant across all acquired traces because they do not carry any information. Indeed, both presented SCA algorithms exploit changes across traces.
+\subsubsection{Address and Temporal Filtering}
+	
+	In the second stage we will filter the traces based on visual observation. Note that for this purpose we will need to acquire another trace with full read/write addresses for all memory trace types, unlike Note \ref{note:lsb}. We will refer to such trace as {\em full trace}.
+	
+	We will proceed as follows: first we acquire a full trace and filter it by the mask from the previous method. Then we visualize it and try to find out in which address and temporal range encryption takes place. Based on our observation we filter our traces using this range.
+	
+	\begin{note}
+	\label{note:fullfilter}
+		Once we filter the full trace, we get rid of tons of ballast yielding a trace which is much smaller and easier to understand. Note that the full trace is also correctly aligned to the rest of our traces after filtering.
+	\end{note}
+	
+	\paragraph{Trace Visualization}
+		
+		We developed own tool displaying a full memory trace for this purpose. Given $n$ and a trace, this tool splits the trace by addresses into $n$ ``compact'' segments and displays these parts separately. See Figure \ref{fig:memtrace} for an illustrative memory trace of a run of a simple AES implementation. Horizontal axis represents address range, vertical axis represents the order of addresses from the top (temporal range).
+		
+		\begin{figure}[h!] %!% opravit nakonec
+		\begin{center}
+			\includegraphics[width=0.9\textwidth]{./figures/memtrace/memtrace_emph.png}
+			\caption{Illustrative memory trace of a run of an AES implementation. Addresses of memory writes were acquired.}
+			\label{fig:memtrace}
+		\end{center}
+		\end{figure}
+		
+		In this example trace we can clearly recoginze $10$ distinct AES rounds even with its $4$ subroutines. In general, if possible, we try to estimate the address and temporal range of the first round\footnote{Note that we are only interested in the first round, see Equation \ref{eq:byprod} and its context.} based on visual observation. In our example the first round is emphasized by a red rectangle.
 
-Practically we first create a filter mask based on a small set of traces, $10$ shows to be sufficient. Such mask carries $0$ if all corresponding addresses in the small set of traces are equal, $1$ otherwise. This mask is then simply applied to filter all the remaining traces, possibly hundreds or thousands of them.
+	\paragraph{Trace Filtering}
+		
+		Given an address and temporal range, we filter our traces so that we only keep their entries which fall into this range. But our traces do not contain full address information, see Note \ref{note:lsb}. The idea could be to use full traces instead.
+		
+		If we had all full traces, we could filter them easily based on both ranges. But in this case there may occur a position for which some traces contain an address falling inside or outside the address range, respectively. Note that this would immediately violate the alignment!
+		
+		\begin{remark}
+		\label{rem:rangemask}
+			There is a better way how to filter our traces by address and temporal range. We simply take our single full trace and create another mask. Then we filter our traces with this mask as we did before. This approach ensures that the traces keep aligned.
+		\end{remark}
+		
+		Note that address and temporal filtering brings the most substantial speedup of the whole attack since its speed depends heavily on the size of the traces. On the other hand, it may happen that we filter our traces too much and loose valuable information i.e.\ the attack does not succeed. In such case we broaden the address and/or temporal range and try again.
+		
+		Also note that there may occur several $10$-part patterns resembling $10$ AES rounds. Then we need to keep trying them all until we succeed with our attack.
+		
+		In the worst case, all our filtering attempts fail or we just cannot see any relevant pattern in the memory trace visualization. Then we omit address and temporal filtering at all and attack for instance only the first byte while (hopefuly) obtaining the position\footnote{We can modify both attacks to get this information, see Note \ref{note:leakpos}.} where the key leaks i.e.\ where encryption takes place. We can look at this position in the visualization and guess some reasonable address and temporal range, use it for filtering and finally attack all $16$ bytes with much smaller traces.
 
 \subsection{Attacking Traces}
 \label{sec:attack}
 
+Once the traces are acquired, possibly filtered and, most importantly, properly aligned -- it can be deduced from Note \ref{note:filter} and achieved with ideas from Note \ref{note:aslr} --, we can perform the attack. We can use both SCA algorithms presented in this thesis, i.e.\ Algorithm \ref{alg:cpa} and \ref{alg:bitwisedpa}, or any other SCA algorithm of our choice.
+
+In this thesis we will only use these two SCA algorithms while both have shown to work. Our results are given in the following chapter.

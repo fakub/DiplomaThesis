@@ -74,6 +74,15 @@ Given power traces and respective plaintexts, recover the AES key.
 	\end{algorithmic}
 \end{alg}
 
+\begin{note}
+\label{note:leakpos}
+	It is useful to modify this algorithm to output the whole list of key candidates together with the value of their correlation for each key byte. That is because if $BestKey$ is not equal to the true key, we still have a good chance to recover the key since the true key is likely to have high correlation.
+	
+	It might be also helpful to save and output the positions of maximal correlation for each candidate. This information might be valuable for any further analysis purposes.
+	
+	Note that we can verify correctness of our key guess by simply checking whether the resulting ciphertext equals to the ciphertext we expect.
+\end{note}
+
 There are several solutions implementing CPA including an open-source ChipWhisperer\texttrademark Project \cite{chipwhisperer} which is a toolkit providing a complete toolchain from trace acquisition to key extraction.
 
 \subsection{Bit-Wise Differential Power Analysis}

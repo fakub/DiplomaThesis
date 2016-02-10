@@ -5,15 +5,15 @@ In this section we describe White-Box AES (WBAES) as introduced by Chow et al. \
 
 The core idea of WBAES is based on usage of lookup tables as outlined in Section \ref{sec:aeslookup}, these are further improved in three ways:
 \begin{enumerate}
-	\item the implementation is turned into fully-table representation i.e. the key is incorporated into tables as well,
+	\item the implementation is turned into fully table representation i.e. the key is incorporated into tables as well,
 	\item tables are wrapped around by appropriately self-vanishing random bijections, \label{item:wrap}
 	\item the boundary is extended into the containing application. \label{item:boundary}
 \end{enumerate}
-Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it has been broken by Jacob et al. \cite{jacob2003attacking} much earlier than WBAES because it was lacking the feature \ref{item:boundary} from the previous list.
+Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it has been broken by Jacob et al. \cite{jacob2003attacking} much earlier than WBAES because it was lacking feature \ref{item:boundary} from the previous list.
 
 \begin{notion}
 \label{notion:table}
-	Since WBAES will be a lot about lookup tables, let us introduce a simplifying notion: a table will be told to have dimensions $m\times n$ if it has $m$-bit input values and $n$-bit output values. Note that the real size (i.e. memory consumption) of such table is $2^m\cdot n$ bits since you need $2^m$ entries of size $m$ to treat all possible $m$-bit input values.
+	Since WBAES will heavily use lookup tables, let us introduce a simplifying notion: a table will be told to have dimensions $m\times n$ if it has $m$-bit input values and $n$-bit output values. Note that the real size (i.e. memory consumption) of such table is $2^m\cdot n$ bits since you need $2^m$ entries of size $n$ to treat all possible $m$-bit input values.
 \end{notion}
 
 
@@ -23,13 +23,13 @@ Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it ha
 
 \subsection{Encodings}
 
-Let us first define some notion for the feature \ref{item:wrap} from the previous list as defined by Chow et al. \cite{chow2003aes}.
+Let us first introduce some notion for feature \ref{item:wrap} from the previous list as defined by Chow et al. \cite{chow2003aes}.
 
 \begin{defn}[Encoding]
 	Let $X$ be a transformation from $m$ bits to $n$ bits. Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. Call $X' = G \circ X \circ F^{-1}$ an {\em encoded} version of $X$. $F$ is an {\em input encoding} and $G$ is an {\em output encoding}.
 \end{defn}
 
-Note that, given a fixed key, AES itself is a $128$-bit bijection which can obviously never be implemented as a lookup table because its size would be $2^{128}\times 128$ bits. (On the other hand, this would be black-box equivalent -- you only know the input/output behavior.) Thus we will rather consider only a special kind of bijections -- we will use a couple of smaller bijections and concatenate their outputs, a definition follows.
+Note that, given a fixed key, AES itself is a $128$-bit bijection which can obviously never be implemented as a lookup table because its size would be $2^{128}\times 128$ bits. (On the other hand, this would be black-box equivalent -- you only know the input/output behavior.) Hence we will rather consider only a special kind of bijections -- we will use a series of smaller bijections and concatenate their outputs, a definition follows.
 
 \begin{defn}[Concatenated encoding]
 \label{def:concat}
@@ -56,10 +56,10 @@ Note that, given only tables for $Y'$ and $X'$, $G$ can be totally forgotten to 
 
 \subsection{Reorded AES}
 
-In order to begin with fully-table representation, we need to reorder AES operations so that the resulting tables can be easily composed; let us first have a brief look at AES algorithm \ref{alg:aes}. Note that we can ``move'' the forcycle one row upwards with appropriate shift of indexes in $\ExpandedKey$. Then we switch $\ShiftRows$ and $\SubBytes$ without any side-effect since $\SubBytes$ operates byte-wise. Finally we switch $\ShiftRows$ and $\AddRoundKey$ while we moreover have to apply $\ShiftRows$ on $\ExpandedKey$ so that we get equivalent algorithm. The modified version is as follows:
+In order to begin with fully-table representation, we need to reorder AES operations so that the resulting tables can be easily composed; let us first have a brief look at AES algorithm \ref{alg:aes}. Note that we can ``move'' the forcycle one row upwards with appropriate shift of indexes in $\ExpandedKey$. Then we switch $\ShiftRows$ and $\SubBytes$ without any side-effect since $\SubBytes$ operates byte-wise. Finally we switch $\ShiftRows$ and $\AddRoundKey$ while we moreover have to apply $\ShiftRows$ on $\ExpandedKey$ so that we get equivalent algorithm. The modified version looks as follows:
 \begin{alg}
 \label{alg:reordaes}
-	Reordered AES encryption.
+	~
 	\begin{algorithmic}[1]
 		\Function{Reordered\_AES\_Encryption}{$Plaintext,Key$}
 			\State $\ExpandedKey \gets \KeySchedule(Key)$
@@ -86,11 +86,11 @@ In order to begin with fully-table representation, we need to reorder AES operat
 
 \subsection{Fully-Table Representation}
 
-As outlined earlier, WBAES construction turns AES operations into table lookups only. Moreover we compose certain tables and wrap them all by internal encodings in the fashion of Definition \ref{def:netw}. WBAES generator thus inputs an AES key and a random seed and outputs key-dependent tables which can serve as a WBAES instance.
+As outlined earlier, WBAES construction turns AES operations into table lookups only. Moreover we compose certain tables and wrap them all by internal encodings in the fashion of Definition \ref{def:netw}. WBAES generator thus inputs an AES key and a random seed and outputs key-dependent tables which serve as a WBAES instance.
 
 \subsubsection{T-Boxes}
 	
-	First we compose $\AddRoundKey$ with the following $\SubBytes$ step yielding a $\TBox$, also denoted by $T_{i,j}^r$,
+	First we compose $\AddRoundKey$ with the subsequent $\SubBytes$ step yielding an operation referred to as $\TBox$, also denoted by $T_{i,j}^r$ for $r$-th round and $(i,j)$-th position in the state array. We get
 	\begin{equation}
 		T_{i,j}^r(x) = S(x\xor k_{sr(i,j)}^r) , \qquad i,j=\atob{0}{3},\;r=\atob{0}{8}
 	\end{equation}
@@ -98,17 +98,18 @@ As outlined earlier, WBAES construction turns AES operations into table lookups 
 	\begin{equation}
 		T_{i,j}^{9}(x) = S(x\xor k_{sr(i,j)}^9) \xor k_{i,j}^{10} , \qquad i,j=\atob{0}{3} .
 	\end{equation}
-	$\TBox$ can be implemented as $8\times 8$\footnote{According to Notion \ref{notion:table}.} lookup table and there are $16\cdot 10 = 160$ of them.
+	
+	Single $\TBox$ can be implemented as an $8\times 8$ lookup table\footnote{According to Notion \ref{notion:table}.} and there are $16\cdot 10 = 160$ of them.   %!% musim teda všude napsat kolik jich je
 
 \subsubsection{MixColumns}
 	
-	$\MixColumns$ (here $\MC$) can be turned into four $8\times 32$ lookup tables followed by three XOR operations as outlined in Section \ref{sec:aeslookup}. The difference from classical implementation is that the following XOR operations must be turned into lookup tables as well.
+	$\MixColumns$ (here also denoted by $\MC$) can be turned into four $8\times 32$ lookup tables followed by three XOR operations as outlined in Section \ref{sec:aeslookup}. The difference from classical implementation is that the following XOR operations must be turned into lookup tables as well.
 	
-	Since the input size of such XOR operation would be $2\cdot 32$ bits, we first split inputs into smaller $4$-bit segments which can be treated separately. In the end we simply concatenate them obtaining the final result. Such smaller XOR table is then $2\cdot 4\times 4$ and you need to perform $8\cdot 3=24$ such lookups per one column.
+	Since the input size of such XOR operation would be $2\cdot 32$ bits, we first need to split inputs into smaller $4$-bit segments which can be treated separately. In the end we simply concatenate them obtaining the final result in the sense of Definition \ref{def:concat}. Single small XOR table is then $2\cdot 4\times 4$ and you need to perform $32/4\cdot 3=24$ such lookups per one column.
 
 \subsubsection{ShiftRows}
 	
-	$\ShiftRows$ does not need table representation since it only moves bytes. We will see later that it can be implemented correctly.
+	$\ShiftRows$ does not need table representation since it only moves bytes. We will see later how it can be implemented.
 
 
 % ======================================================================
@@ -117,11 +118,11 @@ As outlined earlier, WBAES construction turns AES operations into table lookups 
 
 \subsection{WBAES Construction}
 
-So far we can represent the whole AES by lookup tables only. Now we will introduce a diffusion feature called {\em Mixing Bijection}, compose certain tables together and insert encodings which are actually a confusion feature.
+So far we have trated all AES operations by lookup tables only. Now we will introduce a diffusion feature called {\em Mixing Bijection}, compose certain tables together and insert encodings which are actually a confusion feature.
 
 \subsubsection{Mixing Bijection}
 	
-	Mixing bijection ($\MB$) is a random column-wise (i.e. $32$-bit) linear bijection inserted after $\MC$ and inverted in a separate step. Since it inputs the output of $\MC$, it can be composed together into $\MB\circ\MC$. The table implementation is then created in very the same manner as for $\MC$ itself.
+	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e. $32$-bit) linear bijection inserted after $\MC$ and inverted in a separate step. Since it inputs the output of $\MC$, it can be composed together yielding $\MB\circ\MC$. Note that the table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as for $\MC$ itself.
 	
 	%!% 4x4 submatrices of full rank !!!
 
@@ -131,11 +132,11 @@ So far we can represent the whole AES by lookup tables only. Now we will introdu
 
 \subsubsection{Table Composition}
 	
-	Note that $\TBox$ is implemented as an $8\times 8$ table which is followed by an $8\times 32$ table of $\MB\circ\MC$. Therefore it is reasonable to compose those appropriately subsequent tables together -- we save both space and time.
+	Note that $\TBox$ is implemented as an $8\times 8$ table which is followed by an $8\times 32$ table of $\MB\circ\MC$. Therefore it is reasonable to compose those appropriately subsequent tables together -- we save both space and time, moreover we do not need to care about any byproducts.
 
 \subsubsection{Inserting Encodings}
 	
-	Note that the (partial) outputs of linear operations are first split into $4$-bit blocks and then two independent $4$-bit words are XORed together yielding $4$-bit blocks. Thus we can only use $4$-bit internal encodings ($\Enc$) on both sides of each XOR. This is also the reason why input mixing bijection has been introduced -- it diffuses two $4$-bit blocks together before $4$-bit encoding is applied.
+	Note that the (partial) $32$-bit outputs of linear operations are first split into $4$-bit words and then two independent $4$-bit words are XORed together yielding a new $4$-bit word. Thus we can only use $4$-bit internal encodings (denoted by $\Enc$) on both sides of each XOR. This is also the reason why input mixing bijection has been introduced -- it diffuses two $4$-bit blocks together.
 	
 	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e. not the first nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names as introduced by Chow et al. \cite{chow2003aes}.
 	\begin{align}
@@ -143,4 +144,5 @@ So far we can represent the whole AES by lookup tables only. Now we will introdu
 		&\rarr\underbracket{\Enc\rarr\IMB\circ\MB^{-1}}_{\textnormal{Type III}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\ldots
 	\end{align}
 	
+	\ldots append Muir's figure depicting all operations together with their I/O sizes.
 	%!% připojit Muirovo obrázek

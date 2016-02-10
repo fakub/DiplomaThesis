@@ -5,16 +5,13 @@
 % goal: introduce crypto in a broader context, yet not too much in detail
 % starý jako lidstvo samo, bla bla, trochu ukázky z historie a jak to bylo špatný a jak se to umí lámat, security by obscurity, využívá cool matiku
 % co po crypto vlastně chci
-%~ uniformly random: $k\xleftarrow{R}K$.
 %~ crypto = basis for security mechanisms
 %~ CONFIDENTIALITY and much more (e.g. integrity, digital signature, anonymity) or magic: zero knowledge proof of knowledge, FHE
 %~  or a complicated construction of crypto primitives (e.g. digital currency, electronic election, electronic auction)
 %~ 1. threat model (WB vs. BB later)
 %~ 2. propose sth
 %~ 3. prove that breaking it would break an underlying hard problem
-%~ security by obscurity, on the other hand the useful approach
 
-% bla bla ...
 \ldots\\
 Let us imagine a typical situation where Alice wants to communicate with Bob confidentially over an insecure channel while Eve may eavesdrop on the channel. In the beginning, let us suppose that Alice and Bob share certain portion of secret information referred to as {\em secret key} and both control a secure execution environment where they intend to run their ciphering algorithm so that Eve can only observe what they send over the channel.
 
@@ -230,7 +227,8 @@ respectively. Stream ciphers then achieve semantic security by proper initializa
 \end{defn}
 
 \begin{note}
-	For $X$ and $Y$ being a set of fixed-length strings, e.g. $X = Y = \{0,1\}^n$, pseudorandom permutation is usually referred to as {\em block cipher}. Note that the previous definition is in some sense very similar to Definition \ref{def:symcipher} -- it does not introduce any security requirements either.
+	%~ For $X$ and $Y$ being a set of fixed-length strings, e.g. $X = Y = \{0,1\}^n$   %?%
+	Pseudorandom permutation is usually referred to as {\em block cipher}. Note that the previous definition is in some sense very similar to Definition \ref{def:symcipher} -- it does not introduce any security requirements either.
 \end{note}
 
 Pseudorandom permutations will play the main role from now and $k$ will play the role of their key. In order to achieve semantic security of certain constructions using a PRP, we need the PRP to behave like a truly random bijection. Let us demonstrate a possible approach on a game similar to Game \ref{game:semsec}.
@@ -382,7 +380,7 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 \end{proof}
 
 \begin{note}
-	A semantically secure PRP does not need to be a secure PRP. Indeed, let $E: K\times X\rarr Y$ be a secure PRP and define $E'(k,x) = E(k,x)|1$ where $|$ stands for string concatenation. $E'$ is obviously semantically secure (it remains hard to distinguish encryptions of dinstinct plaintexts) but it can be easily distinguished from a truly random bijection since it always ends with $1$. Advantage of such adversary would be $\AdvPRP(A,E') = \nicefrac{1}{2}$ which is clearly non-negligible.
+	A semantically secure PRP does not need to be a secure PRP. Indeed, let $E: K\times X\rarr Y$ be a secure PRP and define $E'(k,x) = E(k,x)\|1$ where $\|$ stands for string concatenation. $E'$ is obviously semantically secure (it remains hard to distinguish encryptions of dinstinct plaintexts) but it can be easily distinguished from a truly random bijection since it always ends with $1$. Advantage of such adversary would be $\AdvPRP(A,E') = \nicefrac{1}{2}$ which is clearly non-negligible.
 \end{note}
 
 The previous theorem is especially important for the idea behind its proof which is used in many other proofs related to provable-security. In this proof we construct adversaries $B_0$, $B_1$ which internally employ adversary $A$ and then we use advantage of $A$ to estimate advantages of $B_0$ and $B_1$.
