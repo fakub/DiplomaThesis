@@ -61,9 +61,10 @@ Now let us move on to definitions of the $4$ operations.
 		\item $0$, if $A = 0$.
 	\end{itemize}
 	Before we define $\SubBytes$ we must emphasize that the following multiplication is {\em not} performed in $F$ but in the ring $\GF(2)[x]$ instead. $\SubBytes$ is defined as follows:
-	\begin{equation*}
+	\begin{equation}
+	\label{eq:sbox}
 		S(A) = (x^4 + x^3 + x^2 + x + 1)A' + x^6 + x^5 + x + 1 \pmod{x^8+1} .
-	\end{equation*}
+	\end{equation}
 	Note that although $x^8+1$ is not irreducible (e.g. $x+1$ is a factor), $x^4 + x^3 + x^2 + x + 1$ is coprime to $x^8+1$, therefore it has an inverse$\mod(x^8+1)$. It follows that $\SubBytes$ is an invertible bijection.
 	
 	$\SubBytes$ is the only source of nonlinearity in AES thus it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui in 1993 \cite{matsui1994linear} and analyzed in detail and successfuly performed by Junod in 2001 \cite{junod2001complexity}.

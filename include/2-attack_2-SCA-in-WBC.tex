@@ -5,7 +5,7 @@ In the previous section we presented some algorithms seemingly unrelated to what
 
 The idea was inspired by Delerabl{\'e}e et al. \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
 
-The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context it makes no sense to talk about differential power analysis since there is no {\em power}, it is rather referred to as {\em Differential Computation Analysis} (DCA).
+The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context differential power analysis might sound wierd since there is no {\em power}, it is rather referred to as {\em Differential Computation Analysis} (DCA).
 
 
 % ======================================================================
@@ -141,11 +141,11 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 					\hline
 					\textnormal{Row} & \textnormal{Filtered Full Trace} & \textnormal{Mask} \\
 					\hline
-					0 & {\tt 0x7fffe314f028} & 0 \\
-					1 & {\tt 0x7fffe3150ac8} & 1 \\
-					2 & {\tt 0x7fffe3151dc8} & 1 \\
-					3 & {\tt 0x7fffe3152d18} & 0 \\
-					4 & {\tt 0x7fffe3153948} & 0 \\
+					0 & {\tt 0x7fffe314f028} & {\tt 0} \\
+					1 & {\tt 0x7fffe3150ac8} & {\tt 1} \\
+					2 & {\tt 0x7fffe3151dc8} & {\tt 1} \\
+					3 & {\tt 0x7fffe3152d18} & {\tt 0} \\
+					4 & {\tt 0x7fffe3153948} & {\tt 0} \\
 					\hline
 				\end{array}
 			\]

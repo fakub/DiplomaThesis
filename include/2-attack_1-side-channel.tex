@@ -22,7 +22,7 @@ Let us present this idea on a concrete attack.
 
 \subsection{Correlation Power Analysis Attack}
 
-In this section we describe CPA attack (an advanced form of DPA attack) mounted on an unprotected AES implementation where the attacker can measure power consumption, referred to as {\em power trace}; see Figure \ref{fig:powertrace} for an example power trace. First we show which AES byproduct leads to immediate key recovery, then we describe how the attacker can utilize information related to this byproduct hidden in power traces to recover the key. See Algorithm \ref{alg:aes} in Section \ref{sec:aes} in Chapter \ref{chap:intro} for AES construction.
+In this section we describe CPA attack (an advanced form of DPA attack) mounted on an unprotected AES implementation where the attacker can measure power consumption, referred to as {\em power trace}; see Figure \ref{fig:powertrace} for an example power trace. First we show which AES byproduct leads to immediate key recovery, then we describe how the attacker can utilize information related to this byproduct hidden in power traces to recover the key. See Algorithm \ref{alg:aes} in Section \ref{sec:aes} for AES construction.
 
 \begin{figure}[h]
 \begin{center}
@@ -88,7 +88,7 @@ In this section we describe CPA attack (an advanced form of DPA attack) mounted 
 		Note that we can verify correctness of our key guess by simply checking whether the resulting ciphertext equals to the ciphertext we expect.
 	\end{note}
 	
-	There are several solutions implementing CPA including an open-source ChipWhisperer\texttrademark Project \cite{chipwhisperer} which is a toolkit providing a complete toolchain from trace acquisition to key extraction.
+	There are several solutions implementing CPA including an open-source ChipWhisperer\texttrademark\ Project \cite{chipwhisperer} which is a toolkit providing a complete toolchain from trace acquisition to key extraction. We derived this algorithm from the documentation of ChipWhisperer\texttrademark.
 
 
 % ======================================================================
