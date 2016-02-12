@@ -3,16 +3,14 @@
 
 In the previous section we presented some algorithms seemingly unrelated to what we have done so far. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a groundbreaking approach introduced recently by Bos et al. \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
 
-The idea was inspired by Delerabl{\'e}e et al. \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations with SCA tools.
+The idea was inspired by Delerabl{\'e}e et al. \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
 
-The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context it makes no sense to talk about differential power analysis since there is no {\em power}, it is rather referred to as {\em differential computation analysis} (DCA).
+The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context it makes no sense to talk about differential power analysis since there is no {\em power}, it is rather referred to as {\em Differential Computation Analysis} (DCA).
 
-% RISCURE motivation:
-%~ Most interestingly, the attack breaks Klinec's implementation \cite{klinec2013white} of White-Box AES by Chow et al. \cite{chow2003aes}. To the best of my knowledge, there is no reasonable explanation why this is actually possible. The best known attack is BGE attack \cite{billet2005cryptanalysis} which is pure algebraic, on the other hand, Bos' attack utilizes side-channel tools to attack memory traces instead.
-%~ 
-%~ Even though it is not fully understood, the benefit of the attack is obvious -- it introduces a principially different approach to break white-box implementations. The attack may help to address weak points of an implementation and increase its resistancy to this kind of attack.
-%~ 
-%~ Since curious people tempt to break mysteries, I wanted to know why it works, too. I tried to set a watchpoint to the leaking address in a debugger and find the corresponding location in the source code. For some reason, standalone GDB did not catch the address previously caught by PIN and GDB connected to PIN debugger was not able to set any watchpoint at all. Hence I tried to print and attack all possible indexes used during encryption which should be later transformed to memory addresses, but surprisingly got absolutely nothing.
+
+% ======================================================================
+% ===   T R A C E   A C Q U I S I T I O N                            ===
+% ======================================================================
 
 \subsection{Trace Acquisition}
 \label{sec:tracq}
@@ -55,6 +53,11 @@ One may wonder whether traces can ever be properly aligned at all because then i
 
 Having traces properly acquired, let us proceed to trace filtering.
 
+
+% ======================================================================
+% ===   T R A C E   F I L T E R I N G                                ===
+% ======================================================================
+
 \subsection{Trace Filtering}
 \label{sec:filter}
 
@@ -68,24 +71,24 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 	
 	In the first stage we filter out such entries which are constant across all acquired traces because they do not carry any information. Indeed, both presented SCA algorithms exploit changes across traces.
 	
-	Practically we first create a filter mask based on a small set of traces, $10$ shows to be sufficient. Such mask carries $0$ if all corresponding addresses in the small set of traces are equal, $1$ otherwise, see Figure \ref{fig:mask}. This mask is then simply applied to filter all the remaining traces, possibly hundreds or thousands of them. Note that we keep the mask, we will use it for the following filtering method as well.
+	Practically we first create a filter mask based on a small set of traces, $10$ shows to be sufficient. Such mask carries $0$ if all corresponding addresses in the small set of traces are equal, $1$ otherwise, see Figure \ref{fig:constmask}. This mask is then simply applied to filter all the remaining traces, possibly hundreds or thousands of them. Note that we keep the mask, we will use it for the following filtering method as well.
 	
 	\begin{figure}[H]
 	\[
 	\arraycolsep=.5em\def\arraystretch{1.5}
 		\begin{array}{|c|ccccccccc|}
 			\hline
-			\textnormal{Trace 0} & \texttt{65} & \texttt{de} & \texttt{37} & \texttt{7e} & \texttt{63} & \texttt{30} & \texttt{c0} & \texttt{62} & \texttt{61} \\
-			\textnormal{Trace 1} & \texttt{65} & \texttt{de} & \texttt{31} & \texttt{7e} & \texttt{23} & \texttt{30} & \texttt{b1} & \texttt{62} & \texttt{61} \\
-			\textnormal{Trace 2} & \texttt{65} & \texttt{de} & \texttt{1f} & \texttt{7e} & \texttt{d5} & \texttt{30} & \texttt{77} & \texttt{62} & \texttt{61} \\
-			\textnormal{Trace 3} & \texttt{65} & \texttt{de} & \texttt{97} & \texttt{7e} & \texttt{5c} & \texttt{30} & \texttt{c4} & \texttt{62} & \texttt{61} \\
+			\textnormal{Trace 0} & {\tt 65} & {\tt de} & {\tt 37} & {\tt 7e} & {\tt 63} & {\tt 30} & {\tt c0} & {\tt 62} & {\tt 61} \\
+			\textnormal{Trace 1} & {\tt 65} & {\tt de} & {\tt 31} & {\tt 7e} & {\tt 23} & {\tt 30} & {\tt b1} & {\tt 62} & {\tt 61} \\
+			\textnormal{Trace 2} & {\tt 65} & {\tt de} & {\tt 1f} & {\tt 7e} & {\tt d5} & {\tt 30} & {\tt 77} & {\tt 62} & {\tt 61} \\
+			\textnormal{Trace 3} & {\tt 65} & {\tt de} & {\tt 97} & {\tt 7e} & {\tt 5c} & {\tt 30} & {\tt c4} & {\tt 62} & {\tt 61} \\
 			\hline
-			\textnormal{Mask}    & \texttt{0} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{1} & \texttt{0} & \texttt{0} \\
+			\textnormal{Mask}    & {\tt 0}  & {\tt 0}  & {\tt 1}  & {\tt 0}  & {\tt 1}  & {\tt 0}  & {\tt 1}  & {\tt 0}  & {\tt 0} \\
 			\hline
 		\end{array}
 	\]
 	\caption{An example of a mask used for trace filtering.}
-	\label{fig:mask}
+	\label{fig:constmask}
 	\end{figure}
 	
 	\begin{note}
@@ -101,7 +104,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 	
 	\begin{note}
 	\label{note:fullfilter}
-		Once we filter the full trace, we get rid of tons of ballast yielding a trace which is much smaller and easier to understand. Note that the full trace is also correctly aligned to the rest of our traces after filtering.
+		Once we filter the full trace, we get rid of tons of ballast yielding a trace which is much smaller and easier to understand. Note that the filtered full trace is also correctly aligned to the rest of our traces after filtering.
 	\end{note}
 	
 	\paragraph{Trace Visualization}
@@ -126,14 +129,38 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		
 		\begin{remark}
 		\label{rem:rangemask}
-			There is a better way how to filter our traces by address and temporal range. We simply take our single full trace and create another mask. Then we filter our traces with this mask as we did before. This approach ensures that the traces keep aligned.
+			There is a better way how to filter our traces by address and temporal range. We simply take our single filtered full trace and create another mask, see Example \ref{ex:rangemask}. Then we filter our traces with this mask as we did before. This approach ensures that the traces keep aligned.
 		\end{remark}
+		
+		\begin{example}
+		\label{ex:rangemask}
+			Let say we have deduced from trace visualization that the first round of AES encryption takes place between rows $0$ and $2$ and in an address range from {\tt 0x7fffe3150000} to {\tt 0x7fffe3158000}. Then we get the mask as follows.
+			\[
+			\arraycolsep=.5em\def\arraystretch{1.5}
+				\begin{array}{|c|c|c|}
+					\hline
+					\textnormal{Row} & \textnormal{Filtered Full Trace} & \textnormal{Mask} \\
+					\hline
+					0 & {\tt 0x7fffe314f028} & 0 \\
+					1 & {\tt 0x7fffe3150ac8} & 1 \\
+					2 & {\tt 0x7fffe3151dc8} & 1 \\
+					3 & {\tt 0x7fffe3152d18} & 0 \\
+					4 & {\tt 0x7fffe3153948} & 0 \\
+					\hline
+				\end{array}
+			\]
+		\end{example}
 		
 		Note that address and temporal filtering brings the most substantial speedup of the whole attack since its speed depends heavily on the size of the traces. On the other hand, it may happen that we filter our traces too much and loose valuable information i.e.\ the attack does not succeed. In such case we broaden the address and/or temporal range and try again.
 		
 		Also note that there may occur several $10$-part patterns resembling $10$ AES rounds. Then we need to keep trying them all until we succeed with our attack.
 		
 		In the worst case, all our filtering attempts fail or we just cannot see any relevant pattern in the memory trace visualization. Then we omit address and temporal filtering at all and attack for instance only the first byte while (hopefuly) obtaining the position\footnote{We can modify both attacks to get this information, see Note \ref{note:leakpos}.} where the key leaks i.e.\ where encryption takes place. We can look at this position in the visualization and guess some reasonable address and temporal range, use it for filtering and finally attack all $16$ bytes with much smaller traces.
+
+
+% ======================================================================
+% ===   A T T A C K I N G   T R A C E S                              ===
+% ======================================================================
 
 \subsection{Attacking Traces}
 \label{sec:attack}

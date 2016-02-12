@@ -39,6 +39,7 @@ The item \ref{item:plainrecov} requirement is also referred to as {\em confident
 
 As we could see in the previous example, shift cipher is not much secure cipher. Therefore we would like to formalize the concept of cipher and its security.
 
+
 % ======================================================================
 % ===   S Y M M E T R I C   A N D   A S Y M M E T R I C   C I P H.   ===
 % ======================================================================
@@ -63,6 +64,7 @@ There are two large families of ciphers -- symmetric and asymmetric. Shift ciphe
 \end{note}
 
 According to the previous definition, we do not seem to have a definition of a proper cipher at all -- the only requirement is corectness (cf. Equation \ref{eq:correct}) -- but it totally lacks any security requirement. As we will see later, it is actually quite complicated to define ``security'' appropriately.
+
 
 % ======================================================================
 % ===   I N F O R M A T I O N - T H E O R E T I C   A P P R O A C H  ===
@@ -104,6 +106,7 @@ Perfect security seems to be exactly what we want from a secure cipher but the f
 \label{note:intent}
 	This consequence of perfect secrecy seems to go against our intention -- we would like to establish a shared secret key of a limited length and then, using the key, be able to encrypt as much information as we want. For this reason we need to weaken our security assumption. Note that previously there was no assumption on attacker's computing power -- the requirement was actually to hide the  plaintext from {\em any} attacker i.e. including an attacker with unlimited computing power.
 \end{note}
+
 
 % ======================================================================
 % ===   C O M P L E X I T Y - T H E O R E T I C   A P P R O A C H    ===
@@ -208,6 +211,7 @@ The benefit of semantic security over perfect security is that semantic security
 
 Semantic security is usually achieved using smaller building blocks which are required to have certain properties. The following section describes a building block of one such possible approach.
 
+
 % ======================================================================
 % ===   B L O C K   C I P H E R                                      ===
 % ======================================================================
@@ -257,7 +261,11 @@ PRP advantage tells us how likely adversary $A$ is able to distinguish a PRP wit
 	Let $E: K\times X\rarr Y$ be a PRP. Then $E$ is called {\em secure PRP} if for {\em any} adversary $A$ the PRP advantage $\AdvPRP(A,E)$ is negligible.
 \end{defn}
 
-In other words, given a random key, PRP is secure if it is computationaly indistinguishable from a truly random bijection. An example covering most introduced concepts follows.
+In other words, given a random key, PRP is secure if it is computationaly indistinguishable from a truly random bijection. 
+
+%~ diffusion vs. confusion
+
+An example covering most introduced concepts follows.
 
 \begin{example}
 	Let $E:\{0,1\}^{128}\times\{0,1\}^{128}\rarr\{0,1\}^{128}$ be a PRP defined as
@@ -299,6 +307,7 @@ This idea has already been addressed in 1883 by Kerckhoffs \cite{auguste1883cryp
 	\end{enumerate}
 \end{princ}
 Hence harming rule \ref{item:kerck} from the previous list leads to security by obscurity as introduced in Note \ref{note:secbyobsc}.
+
 
 % ======================================================================
 % ===   P R O V A B L E   S E C U R I T Y   P R O O F S              ===
@@ -385,13 +394,17 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 
 The previous theorem is especially important for the idea behind its proof which is used in many other proofs related to provable-security. In this proof we construct adversaries $B_0$, $B_1$ which internally employ adversary $A$ and then we use advantage of $A$ to estimate advantages of $B_0$ and $B_1$.
 
+
 % ======================================================================
 % ===   P R O V A B L E   V S   R E A L - W O R L D                  ===
 % ======================================================================
 
 \subsection{Provable vs. Real-World Security}
+\label{sec:provable}
 
-Provable security is one aspect, the other is practical construction of a cipher. Note that there is no provably secure block cipher known. If there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $E$ were a PRP then adversary could, given a certain (polynomial) amount of plaintext-ciphertext pairs $(m_i,c_i)$, look for a key $k$ such that $c_i = E(k,m_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ exists, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
+Provable security is one aspect, the other is practical construction of a cipher. Note that there is no provably secure block cipher known.
+
+If there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $E$ were a PRP, then the adversary could, given certain (polynomial) amount of plaintext-ciphertext pairs $(m_i,c_i)$, look for a key $k$ such that $c_i = E(k,m_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ was found, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
 \nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
 \nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
 

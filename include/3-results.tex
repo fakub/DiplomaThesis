@@ -1,41 +1,84 @@
 \chapter{Practical Attack \& Results}
 \label{chap:results}
 
-%~ nemá bejt manuál pro moje scripty, ale
+First we describe what tools we needed to perform a practical attack, then we present our results and finally we discuss possible enhancements of the attack and how this attack can be useful for white-box cipher design.
+
+\section{Attack Tools}
+
+Since there is no open-source toolkit for the purpose of DCA described in Section \ref{sec:scawbc} in Chapter \ref{chap:attack}, we implemented it ourselves. Our toolkit consists of several tools and subtools, see the following list.
+\begin{itemize}
+	\item Acquire traces (see Section \ref{sec:tracq}):
+	\begin{itemize}
+		\item acquire single trace (PIN tools, modified versions of Teuwen's one \cite{teuwen2015movfuscator}),
+		\begin{itemize}
+			\item memory reads/writes and their addresses/contents,
+		\end{itemize}
+		\item manage trace acquisition (generate \& save respective plaintexts along).
+	\end{itemize}
+	\item Filter traces (see Section \ref{sec:filter}):
+	\begin{itemize}
+		\item filter constant entries \& save its mask $M_C$ (see Figure \ref{fig:constmask}),
+		\item filter by address and temporal range,
+		\begin{itemize}
+			\item acquire another {\em full} trace $T$ (preferably in the same terminal session),
+			\item filter it with mask $M_C$ yielding $T_C$,
+			\item visualize $T_C$,
+			\item estimate address \& temporal range,
+			\item create another mask $M_R$ based on the range using $T_C$,
+			\item filter all traces with $M_R$ (see Remark \ref{rem:rangemask}).
+		\end{itemize}
+	\end{itemize}
+	\item Attack traces (see Section \ref{sec:attack}):
+	\begin{itemize}
+		\item run attack,
+		\begin{itemize}
+			\item CPA attack (Algorithm \ref{alg:cpa}), or
+			\item bit-wise DPA attack (Algorithm \ref{alg:bitwisedpa}),
+		\end{itemize}
+		\item display results.
+	\end{itemize}
+\end{itemize}
+
+First we used out toolkit to attack our straightforward implementation of AES which was used just as a proof-of-concept. Then we performed the most interesting attack Bos et al. \cite{bos2015differential} did -- we successfuly attacked Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al. \cite{chow2003aes}.
+
+%!% nápad: podle toho co vidim v memtrace, neni lepší útočit na 0x........??..; na 0x.........??. nebo dokonce na 0x........???? místo 0x..........??
+% zkus vimdiff 0.txt 1.txt v attack/enhancements
+
+\section{Results}
+
 %~ co jsem použil za implmentace, kolik traců, jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
-%~ že jsem se pokoušel neúspěšně útočit na netriv. indexy při čtení z tabulek
+%~ teoreticky by mělo bejt popsáno v předch. kapitole, tady už bych jenom zmínil co jsem použil a co vypadlo
 %~ a proč to s tou javou nešlo ... (ale vyzkoušet)
 %~ de facto takovej protokol
-%~ pokud bych našel v kódu kde to leakuje, uměl to vyčíst z indexů popř. nák přímo z tabulek -> 4 Analysis
-
 %~ Two (?) implementations will be considered for the attack:
 %~ \begin{itemize}
 	%~ \item our naive AES implementation (C++), and
 	%~ \item Klinec's implementation of White-Box AES \cite{klinec2013white} (C++).
 %~ \end{itemize}
-%~ The attack will perform as follows:
-%~ \begin{enumerate}
-	%~ \item acquire memory traces,
-	%~ \item filter memory traces,
-	%~ \item run DCA attack.
-%~ \end{enumerate}
-%~ In the following sections (?) we describe these steps in detail, finally we present practical results of the attack.
+%~ NaiveAES implementation was broken by both algorithms, CPA attack required $x$ traces, bitwise DPA attack required $y$ traces.
+%~ White-Box-AES implementation was only broken by bitwise DPA attack and many interesting things occured.
+% provést útok s několikrát nagenerovanejma tabulkama (v manuálu pak popsat co je pro to potřeba udělat)
 
-%~ teoreticky by mělo bejt popsáno v předch. kapitole, tady už bych jenom zmínil co jsem použil a co vypadlo
+\section{Enhancements of the Attack}
 
-% bla bla co se podařilo, kam až ...
-% chtěl jsem ale pokračovat ve smyslu:
+%~ zmínka o inverzi, že zas nic ...
+
+
+%?% vlastní kapitola?
+\section{Use in White-Box Crypto Design}
+
+%~ pokud bych našel v kódu kde to leakuje, uměl to vyčíst z indexů popř. nák přímo z tabulek -> 4 Analysis
+
+% chtěl jsem pokračovat ve smyslu:
 % 	najít debuggerem místo v kódu, kde to leakuje, a zjistit tak kterej index to je, případně se to naučit počítat
-% 	alternatively, přímo vypsat všechny možný indexy použitý v tabulkách a zkusit útočit na tohle místo memtrace
-% 	z toho poskládat přímej útok
-% 	...
 % ale nedařilo se, přestože jsem vyzkoušel několik způsobů:
 % 	pustil jsem to v gdb, to ale leakující adresu vůbec nezachytilo (! záleží na input plaintextu, ohlídal jsem si to)
 % 	zkusil jsem gdb připojit na pin, ale to nešlo vůbec, hned hlásí že Could not insert hardware breakpoints: You may have requested too many hardware breakpoints/watchpoints.
 % 	další mě nenapadá ... (zkusit valgrind a porovnat tracy?)
-% 	
+% alternatively, přímo vypsat všechny možný indexy použitý v tabulkách a zkusit útočit na tohle místo memtrace
+% 	z toho poskládat přímej útok
 
-
-%~ NaiveAES implementation was broken by both algorithms, CPA attack required $x$ traces, bitwise DPA attack required $y$ traces.
-%~ 
-%~ White-Box-AES implementation was only broken by bitwise DPA attack and many interesting things occured.
+% proposed countermeasures against DCA?
+%~ To the best of my knowledge, there is no reasonable explanation why this is actually possible. The best known attack is BGE attack \cite{billet2005cryptanalysis} which is pure algebraic, on the other hand, Bos' attack utilizes side-channel tools to attack memory traces instead.
+%~ Even though it is not fully understood, the benefit of the attack is obvious -- it introduces a principially different approach to break white-box implementations. The attack may help to address weak points of an implementation and increase its resistancy to this kind of attack.
+%~ I tried to set a watchpoint to the leaking address in a debugger and find the corresponding location in the source code. For some reason, standalone GDB did not catch the address previously caught by PIN and GDB connected to PIN debugger was not able to set any watchpoint at all. Hence I tried to print and attack all possible indexes used during encryption which should be later transformed to memory addresses, but surprisingly got absolutely nothing.

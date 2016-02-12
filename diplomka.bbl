@@ -80,16 +80,21 @@ NewAE~Technology Inc.
 \newblock \url{http://newae.com/chipwhisperer}.
 \newblock Accessed: 2016-02-07.
 
-\bibitem{jacob2003attacking}
+\bibitem{jacob2002attacking}
 Matthias Jacob, Dan Boneh, and Edward Felten.
 \newblock Attacking an obfuscated cipher by injecting faults.
-\newblock In {\em Digital Rights Management}, pages 16--31. Springer, 2003.
+\newblock In {\em Digital Rights Management}, pages 16--31. Springer, 2002.
 
 \bibitem{junod2001complexity}
 Pascal Junod.
 \newblock On the complexity of matsui’s attack.
 \newblock In {\em Selected Areas in Cryptography}, pages 199--211. Springer,
   2001.
+
+\bibitem{klinec2013implementation}
+D.~Klinec.
+\newblock {Whitebox-crypto-AES}.
+\newblock Git repository. \url{https://github.com/ph4r05/Whitebox-crypto-AES}.
 
 \bibitem{klinec2013white}
 Du{\v{s}}an Klinec.

@@ -1,17 +1,25 @@
 % previously: Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter byproducts in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden but still usable for encryption.
 
 \section{White-Box Cryptography}
-	
-	
-	
+
 %~ detailně popsat kde se vzala vč. citací, vývoj, hra na kočku a myš, impos. results
-%~ že neni žádnej public key wb
 
-% je to de facto threat model
-%~ straightforward AES implementation is totally insecure if certain byproducts or even some information related to them is revealed. An attack exploiting such information leaks is covered in detail in Section \ref{sec:side}.
+As we already mentioned, classical ciphers are designed with respect to black-box attack context and even under this assumption it has not been theoretically shown that there exists a secure one, see Section \ref{sec:provable}. We also introduced gray-box and white-box attack contexts in Section \ref{sec:bbtowb} with a short reasoning of the gray-box model.
 
-% implementation can help, e.g. timing attacks
-% RSA, an asymmetric cipher, could serve as a good example
-% black box: like an oracle, everything holds. ciphers designed wrt black box, why wb? what it is? ...
+Let us now justify why we are introducing so extreme case as white-box attack context (WBAC). \ldots %!% až jednou pochopim k čemu že to je dobrý ..?
+%~ There were several attempts to introduce a ``secure'' white-box variant of a known cipher. Note that there is no known white-box variant of a public key cipher.
 
-%~ diffusion vs. confusion
+\subsection{Impossibility Results}
+\label{sec:impos}
+
+
+
+%~ straightforward implementation of a classical cipher is usually insecure ..?
+
+% In ... \cite{} they shown that ..., a seemingly related result. But it actually does not mean that 
+
+\subsection{Cat and Mouse Game}
+\label{sec:catmouse}
+
+
+
