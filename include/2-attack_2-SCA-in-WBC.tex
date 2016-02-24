@@ -155,7 +155,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		
 		Also note that there may occur several $10$-part patterns resembling $10$ AES rounds. Then we need to keep trying them all until we succeed with our attack.
 		
-		In the worst case, all our filtering attempts fail or we just cannot see any relevant pattern in the memory trace visualization. Then we omit address and temporal filtering at all and attack for instance only the first byte while (hopefuly) obtaining the position\footnote{We can modify both attacks to get this information, see Note \ref{note:leakpos}.} where the key leaks i.e.\ where encryption takes place. We can look at this position in the visualization and guess some reasonable address and temporal range, use it for filtering and finally attack all $16$ bytes with much smaller traces.
+		In the worst case, all our filtering attempts fail or we just cannot see any relevant pattern in the memory trace visualization. Then we omit address and temporal filtering at all and attack for instance only the first byte while, hopefuly, obtaining the position where the key leaks i.e.\ where encryption takes place, see Note \ref{note:leakpos}. We can look at this position in the visualization and guess some reasonable address and temporal range, use it for filtering and finally attack all $16$ bytes with much smaller traces.
 
 
 % ======================================================================
@@ -165,6 +165,48 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 \subsection{Attacking Traces}
 \label{sec:attack}
 
-Once the traces are acquired, possibly filtered and, most importantly, properly aligned -- it can be deduced from Note \ref{note:filter} and achieved with ideas from Note \ref{note:aslr} --, we can perform the attack. We can use both SCA algorithms presented in this thesis, i.e.\ Algorithm \ref{alg:cpa} and \ref{alg:bitwisedpa}, or any other SCA algorithm of our choice.
+Once the traces are acquired, possibly filtered and, most importantly, properly aligned -- it can be deduced from Note \ref{note:filter} and achieved with ideas from Note \ref{note:aslr} --, we can perform the attack. We can use both SCA algorithms presented in this thesis, i.e.\ Algorithm \ref{alg:cpa} and \ref{alg:bitwisedpa}, or any other SCA algorithm of our choice. In this thesis we will only use these two SCA algorithms while both have shown to work but Algorithm \ref{alg:bitwisedpa} shows to be much more powerful. Our results are given in the following chapter.
 
-In this thesis we will only use these two SCA algorithms while both have shown to work. Our results are given in the following chapter.
+\subsubsection{Processing results}
+	
+	The best result we obtain from our SCA algorithm does not need to be necessarily the correct one, especially when we use it for attacking white-box implementations where there is absolutely no physical interpretation of what we ``measure''.
+	
+	In Note \ref{note:fulllist} we suggested to output the full list of key candidates together with their ``value'' for each key byte. The original purpose of this was to have some rating of key candidates and then loop through them according to their order. In physical world scenario this would likely recover the key in a relatively short time since we assume certain bias in our measurements caused by execution of the cipher.
+	% \footnote{Each SCA algorithm may use different meter to compare key candidates, in Algorithm \ref{alg:cpa} it was correlation, in Algorithm \ref{alg:bitwisedpa} it was difference of means.}
+	
+	But it turns out that looping would be useless in white-box scenario. Indeed, by empirical observation, the true key byte is typically either on the top separated by a considerable gap from the second candidate, or somewhere in between while the first candidate is not separated by any substantial gap. This is especially useful in Algorithm \ref{alg:bitwisedpa}, see the following remark.   %!% podpořit výsledkem
+	
+	\begin{remark}
+	\label{rem:gap}
+		In Algorithm \ref{alg:bitwisedpa} we change the criterion for the best candidate. Previously we did not make use of bit index denoted by $j$, referred to as {\em target bit}, see the loop starting on Line \ref{line:tbcycle}.
+		
+		Now we construct $8$ lists of candidates for each target bit separately and choose the candidate which is on the top of any list and has the highest gap to the second candidate, see the following example.
+		
+		Note that other empirical criterions can be introduced, for example sum of gaps to the next candidate.   %!% implementovat
+	\end{remark}
+	
+	\begin{example}
+	\label{ex:gap}
+	See the following table for partial results of a real experiment. The maximal gap is reached for $3.$ target bit and its value is $0.0330$. Hence the best candidate is {\tt 15}. Note that the best candidate according to the previous criterion would be {\tt 09} which was actually incorrect in this experiment, the true key byte was really {\tt 15}.   %!% czenglish: nabývá? místo reached...
+		\begin{table}[H]
+			\begin{center}
+			\begin{tabular}{| c | c | c | c | c | c | c | c |}
+				\hline
+				\multicolumn{2}{|c|}{3. bit} & \multicolumn{2}{c|}{4. bit} & \multicolumn{2}{c|}{6. bit} & \multicolumn{2}{c|}{7. bit} \\
+				\hline
+					Value & Cand.   & Value & Cand.   & Value & Cand.   & Value & Cand.  \\
+				\hline
+					0.3477 & {\tt 15}  & 0.3970 & {\tt 09}  & 0.3374 & {\tt 9d}  & 0.3730 & {\tt 6f} \\
+					0.3147 & {\tt b5}  & 0.3884 & {\tt d1}  & 0.3196 & {\tt f5}  & 0.3521 & {\tt 8b} \\
+					0.3110 & {\tt e7}  & 0.3699 & {\tt 65}  & 0.3183 & {\tt 37}  & 0.3451 & {\tt 7b} \\
+					\vdots & \vdots    & \vdots & \vdots    & \vdots & \vdots    & \vdots & \vdots   \\
+				\hline
+			\end{tabular}
+			\end{center}
+		\caption{Partial results to support criterion introduced in Remark \ref{rem:gap}.}
+		\label{tab:gap}
+		\end{table}
+	\end{example}
+	
+	%!% dyť někde musim popsat jak z výsledků dostanu seznam kandidátů (tim i toho nejlepšího)
+	% v praxi neberu toho s nejvyšší korelací ale toho s největším rozdílem na druhýho (robustní heuristika: součet?)

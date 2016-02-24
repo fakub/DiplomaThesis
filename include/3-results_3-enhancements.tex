@@ -1,0 +1,30 @@
+\section{Enhancements to the Attack}   %!% to/of ?
+
+Since Chow is eqivalent to Karroumi according to Klinec, Bos et al. came up with the idea of attacking different target instead of the output of $\SubBytes$. Let us remind the definition of $\SubBytes$ (originally defined in Equation \ref{eq:sbox}),
+
+\begin{equation}
+\label{eq:sbox2}
+	S(A) = (x^4 + x^3 + x^2 + x + 1)A' + x^6 + x^5 + x + 1 \pmod{x^8+1} .
+\end{equation}
+
+Note that it is an affine mapping of its input's inverse, indeed it holds for $P = x^4 + x^3 + x^2 + x + 1$ and $Q = x^6 + x^5 + x + 1$ that $S(A) = P\cdot A' + Q$. Now remind that Karroumi's approach changes the original affine mapping in $\SubBytes$ to a different one.
+
+So the idea was not to attack the output of $\SubBytes$ which is an affine mapping applied to input's inverse but attack the inverse itself. Surprisingly, this recovers the key even faster!
+
+%!% asi jsem to z mailu Teuwena pochopil: žádnej SBox ale jenom inverze inputu i.e. $(k\oplus m)^{-1}$
+
+Idea of Bos et al.: use multiplicative inverse only instead of full $SBox$, see Equation \ref{eq:sbox}. Hence we get $(k\oplus m)^{-1}$ as a new attack target.
+
+% psal já / Teuwen:
+%~ > I only wonder about the reasoning why Karroumi is more than Chow since
+%~ > it seems to have been shown to be equal (based on what I wrote in my
+%~ > previous email).
+%~ 
+%~ Well I've no problem to break completely Chow with standard DCA so there
+%~ is something a bit more in Karroumi. Obviously not enough to make it
+%~ robust enough...
+
+%!% nápad: podle toho co vidim v memtrace, neni lepší útočit na 0x........??..; na 0x.........??. nebo dokonce na 0x........???? místo 0x..........??
+% zkus vimdiff 0.txt 1.txt v attack/enhancements
+% to je ale asi uplná sračka
+

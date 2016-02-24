@@ -1,0 +1,18 @@
+%?% vlastní kapitola?
+\section{Use in White-Box Crypto Design}
+
+%~ pokud bych našel v kódu kde to leakuje, uměl to vyčíst z indexů popř. nák přímo z tabulek -> 4 Analysis
+
+% chtěl jsem pokračovat ve smyslu:
+% 	najít debuggerem místo v kódu, kde to leakuje, a zjistit tak kterej index to je, případně se to naučit počítat
+% ale nedařilo se, přestože jsem vyzkoušel několik způsobů:
+% 	pustil jsem to v gdb, to ale leakující adresu vůbec nezachytilo (! záleží na input plaintextu, ohlídal jsem si to)
+% 	zkusil jsem gdb připojit na pin, ale to nešlo vůbec, hned hlásí že Could not insert hardware breakpoints: You may have requested too many hardware breakpoints/watchpoints.
+% 	další mě nenapadá ... (zkusit valgrind a porovnat tracy?)
+% alternatively, přímo vypsat všechny možný indexy použitý v tabulkách a zkusit útočit na tohle místo memtrace
+% 	z toho poskládat přímej útok
+
+% proposed countermeasures against DCA?
+%~ To the best of my knowledge, there is no reasonable explanation why this is actually possible. The best known attack is BGE attack \cite{billet2005cryptanalysis} which is pure algebraic, on the other hand, Bos' attack utilizes side-channel tools to attack memory traces instead.
+%~ Even though it is not fully understood, the benefit of the attack is obvious -- it introduces a principially different approach to break white-box implementations. The attack may help to address weak points of an implementation and increase its resistancy to this kind of attack.
+%~ I tried to set a watchpoint to the leaking address in a debugger and find the corresponding location in the source code. For some reason, standalone GDB did not catch the address previously caught by PIN and GDB connected to PIN debugger was not able to set any watchpoint at all. Hence I tried to print and attack all possible indexes used during encryption which should be later transformed to memory addresses, but surprisingly got absolutely nothing.

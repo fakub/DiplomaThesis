@@ -188,8 +188,10 @@
 \@writefile{toc}{\contentsline {subsubsection}{Utilizing Power Traces}{23}{section*.30}}
 \newlabel{note:brutevssca}{{2.1}{24}{}{thm.2.1}{}}
 \newlabel{alg:cpa}{{2.1}{24}{}{alg.2.1}{}}
-\newlabel{note:leakpos}{{2.2}{24}{}{thm.2.2}{}}
+\newlabel{line:corr}{{5}{24}{}{alg.2.1}{}}
+\newlabel{note:fulllist}{{2.2}{24}{}{thm.2.2}{}}
 \citation{chipwhisperer}
+\newlabel{note:leakpos}{{2.3}{25}{}{thm.2.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Bit-Wise Differential Power Analysis}{25}{subsection.2.1.2}}
 \@writefile{toc}{\contentsline {subsubsection}{Attack}{25}{section*.31}}
 \newlabel{alg:bitwisedpa}{{2.2}{25}{}{alg.2.2}{}}
@@ -199,59 +201,67 @@
 \citation{delerablee2013white}
 \citation{nethercote2007valgrind}
 \citation{luk2005pin}
-\citation{teuwen2015movfuscator}
+\newlabel{line:tbcycle}{{5}{26}{}{alg.2.2}{}}
+\newlabel{line:diffmean}{{8}{26}{}{alg.2.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.2}Using SCA Tools in White-Box Cryptography}{26}{section.2.2}}
 \newlabel{sec:scawbc}{{2.2}{26}{Using SCA Tools in White-Box Cryptography}{section.2.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{26}{subsection.2.2.1}}
-\newlabel{sec:tracq}{{2.2.1}{26}{Trace Acquisition}{subsection.2.2.1}{}}
+\citation{teuwen2015movfuscator}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{27}{subsection.2.2.1}}
+\newlabel{sec:tracq}{{2.2.1}{27}{Trace Acquisition}{subsection.2.2.1}{}}
 \newlabel{item:readaddr}{{1}{27}{Trace Acquisition}{Item.17}{}}
 \newlabel{item:writecnt}{{4}{27}{Trace Acquisition}{Item.20}{}}
-\newlabel{note:lsb}{{2.4}{27}{}{thm.2.4}{}}
-\newlabel{note:optim}{{2.5}{27}{}{thm.2.5}{}}
-\newlabel{note:aslr}{{2.6}{27}{}{thm.2.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{27}{subsection.2.2.2}}
-\newlabel{sec:filter}{{2.2.2}{27}{Trace Filtering}{subsection.2.2.2}{}}
+\newlabel{note:lsb}{{2.5}{27}{}{thm.2.5}{}}
+\newlabel{note:optim}{{2.6}{27}{}{thm.2.6}{}}
+\newlabel{note:aslr}{{2.7}{27}{}{thm.2.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{28}{subsection.2.2.2}}
+\newlabel{sec:filter}{{2.2.2}{28}{Trace Filtering}{subsection.2.2.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Constant Entries Filtering}{28}{section*.32}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces An example of a mask used for trace filtering.\relax }}{28}{figure.caption.33}}
 \newlabel{fig:constmask}{{2.2}{28}{An example of a mask used for trace filtering.\relax }{figure.caption.33}{}}
-\newlabel{note:filter}{{2.7}{28}{}{thm.2.7}{}}
+\newlabel{note:filter}{{2.8}{28}{}{thm.2.8}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Address and Temporal Filtering}{28}{section*.34}}
-\newlabel{note:fullfilter}{{2.8}{28}{}{thm.2.8}{}}
+\newlabel{note:fullfilter}{{2.9}{29}{}{thm.2.9}{}}
 \@writefile{toc}{\contentsline {paragraph}{Trace Visualization}{29}{section*.35}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Illustrative memory trace of a run of an AES implementation. Addresses of memory writes were acquired.\relax }}{29}{figure.caption.36}}
-\newlabel{fig:memtrace}{{2.3}{29}{Illustrative memory trace of a run of an AES implementation. Addresses of memory writes were acquired.\relax }{figure.caption.36}{}}
-\@writefile{toc}{\contentsline {paragraph}{Trace Filtering}{30}{section*.37}}
-\newlabel{rem:rangemask}{{2.9}{30}{}{thm.2.9}{}}
-\newlabel{ex:rangemask}{{2.10}{30}{}{thm.2.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{Trace Filtering}{29}{section*.37}}
+\newlabel{rem:rangemask}{{2.10}{29}{}{thm.2.10}{}}
+\newlabel{ex:rangemask}{{2.11}{29}{}{thm.2.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Illustrative memory trace of a run of an AES implementation. Addresses of memory writes were acquired.\relax }}{30}{figure.caption.36}}
+\newlabel{fig:memtrace}{{2.3}{30}{Illustrative memory trace of a run of an AES implementation. Addresses of memory writes were acquired.\relax }{figure.caption.36}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{31}{subsection.2.2.3}}
 \newlabel{sec:attack}{{2.2.3}{31}{Attacking Traces}{subsection.2.2.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Processing results}{31}{section*.38}}
+\newlabel{rem:gap}{{2.12}{31}{}{thm.2.12}{}}
+\newlabel{ex:gap}{{2.13}{31}{}{thm.2.13}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Partial results to support criterion introduced in Remark \ref  {rem:gap}.\relax }}{32}{table.caption.39}}
+\newlabel{tab:gap}{{2.1}{32}{Partial results to support criterion introduced in Remark \ref {rem:gap}.\relax }{table.caption.39}{}}
 \citation{teuwen2015movfuscator}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{32}{chapter.3}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{33}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:results}{{3}{32}{Practical Attack \& Results}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Attack Tools}{32}{section.3.1}}
-\newlabel{sec:tools}{{3.1}{32}{Attack Tools}{section.3.1}{}}
+\newlabel{chap:results}{{3}{33}{Practical Attack \& Results}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Attack Tools}{33}{section.3.1}}
+\newlabel{sec:tools}{{3.1}{33}{Attack Tools}{section.3.1}{}}
 \citation{bos2015differential}
 \citation{klinec2013implementation}
 \citation{chow2003aes}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Results}{33}{section.3.2}}
-\newlabel{sec:results}{{3.2}{33}{Results}{section.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}\tt  naiveAES}{33}{subsection.3.2.1}}
-\newlabel{sec:naiveaes}{{3.2.1}{33}{\tt naiveAES}{subsection.3.2.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{CPA against {\tt  naiveAES}}{33}{section*.38}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces CPA against \relax }}{33}{table.caption.39}}
-\newlabel{tab:naiveaes}{{3.1}{33}{CPA against \relax }{table.caption.39}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Bit-Wise DPA against {\tt  naiveAES}}{33}{section*.40}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}\tt  KlinecWBAES}{33}{subsection.3.2.2}}
-\newlabel{sec:klinecwbaes}{{3.2.2}{33}{\tt KlinecWBAES}{subsection.3.2.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Enhancements to the Attack}{33}{section.3.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{33}{section.3.4}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Future Work}{34}{chapter.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Results}{34}{section.3.2}}
+\newlabel{sec:results}{{3.2}{34}{Results}{section.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}\tt  naiveAES}{34}{subsection.3.2.1}}
+\newlabel{sec:naiveaes}{{3.2.1}{34}{\tt naiveAES}{subsection.3.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{CPA against {\tt  naiveAES}}{34}{section*.40}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces CPA against \relax }}{34}{table.caption.41}}
+\newlabel{tab:naiveaes}{{3.1}{34}{CPA against \relax }{table.caption.41}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Bit-Wise DPA against {\tt  naiveAES}}{34}{section*.42}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}\tt  KlinecWBAES}{34}{subsection.3.2.2}}
+\newlabel{sec:klinecwbaes}{{3.2.2}{34}{\tt KlinecWBAES}{subsection.3.2.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Enhancements to the Attack}{34}{section.3.3}}
+\newlabel{eq:sbox2}{{3.1}{35}{Enhancements to the Attack}{equation.3.3.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{35}{section.3.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Future Work}{36}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:future}{{4}{34}{Future Work}{chapter.4}{}}
-\@writefile{toc}{\contentsline {chapter}{Conclusion}{35}{section*.41}}
+\newlabel{chap:future}{{4}{36}{Future Work}{chapter.4}{}}
+\@writefile{toc}{\contentsline {chapter}{Conclusion}{37}{section*.43}}
 \bibstyle{plain}
 \bibdata{biblio}
 \bibcite{agrawal2002side}{1}
@@ -266,7 +276,7 @@
 \bibcite{daemen1999aes}{10}
 \bibcite{daemen2013rijndael}{11}
 \bibcite{delerablee2013white}{12}
-\@writefile{toc}{\contentsline {chapter}{References}{36}{section*.43}}
+\@writefile{toc}{\contentsline {chapter}{References}{38}{section*.45}}
 \bibcite{gandolfi2001electromagnetic}{13}
 \bibcite{chipwhisperer}{14}
 \bibcite{jacob2002attacking}{15}
@@ -293,7 +303,7 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \newlabel{app:cd}{{A}{I}{Contents of Attached CD}{Appendix.a.A}{}}
-\@writefile{toc}{\contentsline {chapter}{Appendix \numberline {B}User Manual}{II}{Appendix.a.B}}
+\@writefile{toc}{\contentsline {chapter}{Appendix \numberline {B}User Guide}{II}{Appendix.a.B}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{app:howto}{{B}{II}{User Manual}{Appendix.a.B}{}}
+\newlabel{app:guide}{{B}{II}{User Guide}{Appendix.a.B}{}}
