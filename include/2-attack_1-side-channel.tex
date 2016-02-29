@@ -101,7 +101,7 @@ In this section we describe CPA attack (an advanced form of DPA attack) mounted 
 % ===   B I T - W I S E   D P A                                      ===
 % ======================================================================
 
-\subsection{Bit-Wise Differential Power Analysis}
+\subsection{Bit-Wise Differential Power Analysis Attack}
 
 Let us continue with another attack on an unprotected AES implementation. For now, let us suppose a more powerful attacker who can probe individual wires of a vulnerable bus and measure its voltage. Let us further suppose that transfers of byproduct $b = \SubBytes(k\xor m)$ are transferred over this bus.
 
@@ -129,8 +129,8 @@ Therefore such attacker is not limited to observing values related to Hamming we
 					\State $max \gets 0$
 					\For{$KGuess = \texttt{00} \to \texttt{ff}$}
 						\For{$j = 0 \to 7$}\label{line:tbcycle}
-							\State $S_0 \gets \Bigl\{ Traces[n] \Bigm| S\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\}$
-							\State $S_1 \gets \Bigl\{ Traces[n] \Bigm| S\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\}$
+							\State $S_0 \gets \Bigl\{ Traces[n] \Bigm| S\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\}$ \label{line:s0}
+							\State $S_1 \gets \Bigl\{ Traces[n] \Bigm| S\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\}$ \label{line:s1}
 							\State $tmpmax \gets \max\limits_{t\in T} \Bigl| \Mean\limits_{Trace\in S_1}\bigl(Trace[t]\bigr) - \Mean\limits_{Trace\in S_0}\bigl(Trace[t]\bigr) \Bigr|$
 								\label{line:diffmean}
 							\If{$tmpmax > max$}

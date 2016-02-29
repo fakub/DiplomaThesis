@@ -1,9 +1,9 @@
 \section{Results}
 \label{sec:results}
 
-First we used our toolkit to attack our straightforward implementation of AES, here named {\tt naiveAES}, which served just as a proof-of-concept. Then we performed the most interesting attack which Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2003aes}, here named {\tt KlinecWBAES}.
+First of all we used our toolkit to attack our straightforward C++ implementation of AES, here named {\tt naiveAES}, which served just as a proof-of-concept. Then we performed the most interesting attack which Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2003aes}, here named {\tt KlinecWBAES}.
 
-Note that the following Section \ref{sec:naiveaes} giving results of attack against {\tt naiveAES} does not fully cover many details, these are given separately in the subsequent Section \ref{sec:klinecwbaes} with results of the attack against {\tt KlinecWBAES}.
+Note that the following section giving results of attack against {\tt naiveAES} does not fully cover many details, these are given separately in the subsequent section with results of the attack against {\tt KlinecWBAES}.
 
 
 % ======================================================================
@@ -15,32 +15,40 @@ Note that the following Section \ref{sec:naiveaes} giving results of attack agai
 
 In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them.
 
-\subsubsection{CPA against {\tt naiveAES}}
+\subsubsection{CPA Attack against {\tt naiveAES}}
 	
-	We repeated CPA attack (i.e. Algorithm \ref{alg:cpa}) with $10$ different keys and for different amounts of plaintexts. See results in Table \ref{tab:naiveaes}.
+	What experiment we made \ldots
+	% We repeated CPA attack (i.e. Algorithm \ref{alg:cpa}) with $10$ different keys and for different amounts of plaintexts. See results in Table \ref{tab:naiveaes}.
+	%~ CPA attack required $x$ traces, bitwise DPA attack required $y$ traces.
 	
 	\begin{table}[H]
 		\begin{center}
 		\begin{tabular}{| c | c | c | c |}
 			\hline
-			~ & \multicolumn{2}{c|}{\bf $n\times n$ squares} & {\bf Computational} \\
-			~ & \multicolumn{1}{c}{Lower bound} & \multicolumn{1}{c|}{Upper bound} & {\bf Power}\\
-			\hline
-			2D & \multicolumn{2}{c|}{See see} & Universal \\
-			\hline
-			2D & see & see & Unknown \\
+			Results & of attack & against {\tt naiveAES} & . \\
 			\hline
 		\end{tabular}
 		\end{center}
-	\caption{CPA against }
-	\label{tab:naiveaes}
+	\caption{CPA attack against {\tt naiveAES}}
+	\label{tab:naiveaescpa}
 	\end{table}
 
-\subsubsection{Bit-Wise DPA against {\tt naiveAES}}
+\subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}.}
 	
-	Algorithm \ref{alg:bitwisedpa}
+	Algorithm \ref{alg:bitwisedpa}.
 	
-	%?% vyzkoušet rijinv na naiveAES, nemělo by jít
+	\begin{table}[H]
+		\begin{center}
+		\begin{tabular}{| c | c | c | c |}
+			\hline
+			Results & of attack & against {\tt naiveAES} & . \\
+			\hline
+		\end{tabular}
+		\end{center}
+	\caption{Bit-Wise DPA attack against {\tt naiveAES}.}
+	\label{tab:naiveaesdca}
+	\end{table}
+	%?% vyzkoušet rijinv na naiveAES, nemělo by jít, a taky nejde
 
 
 % ======================================================================
@@ -49,19 +57,25 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 
 \subsection{\tt KlinecWBAES}
 \label{sec:klinecwbaes}
-
-
-
-%~ co jsem použil za implmentace, kolik traců, jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
-%~ teoreticky by mělo bejt popsáno v předch. kapitole, tady už bych jenom zmínil co jsem použil a co vypadlo
-%~ a proč to s tou javou nešlo ... (ale vyzkoušet)
-%~ de facto takovej protokol
-%~ Two (?) implementations will be considered for the attack:
-%~ \begin{itemize}
-	%~ \item our naive AES implementation (C++), and
-	%~ \item Klinec's implementation of White-Box AES \cite{klinec2013white} (C++).
-%~ \end{itemize}
-%~ NaiveAES implementation was broken by both algorithms, CPA attack required $x$ traces, bitwise DPA attack required $y$ traces.
+	
+	See results in Table \ref{tab:klinecsbox}.
+	
+	\begin{table}[H]
+		\begin{center}
+		\begin{tabular}{| c | c | c | c |}
+			\hline
+			Results & of attack & against {\tt KlinecWBAES} & . \\
+			\hline
+		\end{tabular}
+		\end{center}
+	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES}.}
+	\label{tab:klinecsbox}
+	\end{table}
+	
+%~ kolik traců, jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
+%~ co jsem použil a co vypadlo, de facto takovej protokol
 %~ White-Box-AES implementation was only broken by bitwise DPA attack and many interesting things occured.
 % provést útok s několikrát nagenerovanejma tabulkama (v manuálu pak popsat co je pro to potřeba udělat)
 
+%!% další implementace??
+%~ proč to s tou javou nešlo ... (ale vyzkoušet)

@@ -76,7 +76,7 @@ Karine Gandolfi, Christophe Mourtel, and Francis Olivier.
 
 \bibitem{chipwhisperer}
 NewAE~Technology Inc.
-\newblock {ChipWhisperer\texttrademark Project}.
+\newblock {ChipWhisperer\texttrademark\ Project}.
 \newblock \url{http://newae.com/chipwhisperer}.
 \newblock Accessed: 2016-02-07.
 
@@ -90,6 +90,12 @@ Pascal Junod.
 \newblock On the complexity of matsui’s attack.
 \newblock In {\em Selected Areas in Cryptography}, pages 199--211. Springer,
   2001.
+
+\bibitem{karroumi2011protecting}
+Mohamed Karroumi.
+\newblock Protecting white-box aes with dual ciphers.
+\newblock In {\em Information Security and Cryptology-ICISC 2010}, pages
+  278--291. Springer, 2011.
 
 \bibitem{klinec2013implementation}
 D.~Klinec.

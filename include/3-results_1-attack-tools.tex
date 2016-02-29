@@ -5,35 +5,35 @@ Since there is no open-source toolkit\footnote{At the time of writing. However, 
 
 %!% vočekovat, Teuwen psal mail že to brzy uvolní jako open-source
 
-\begin{itemize}
+\begin{enumerate}
 	\item Acquire traces (see Section \ref{sec:tracq}):
-	\begin{itemize}
+	\begin{enumerate}
 		\item acquire single trace (PIN tools, modified versions of Teuwen's one \cite{teuwen2015movfuscator}),
-		\begin{itemize}
+		\begin{enumerate}
 			\item memory reads/writes and their addresses/contents,
-		\end{itemize}
+		\end{enumerate}
 		\item manage trace acquisition (generate \& save respective plaintexts along).
-	\end{itemize}
+	\end{enumerate}
 	\item Filter traces (see Section \ref{sec:filter}):
-	\begin{itemize}
+	\begin{enumerate}
 		\item filter constant entries \& save its mask $M_C$ (see Figure \ref{fig:constmask}),
 		\item filter by address and temporal range,
-		\begin{itemize}
+		\begin{enumerate}
 			\item acquire another {\em full} trace $T$ (preferably in the same terminal session),
 			\item filter it with mask $M_C$ yielding $T_C$,
 			\item visualize $T_C$,
 			\item estimate address \& temporal range,
 			\item create another mask $M_R$ based on the range using $T_C$,
 			\item filter all traces with $M_R$ (see Remark \ref{rem:rangemask}).
-		\end{itemize}
-	\end{itemize}
+		\end{enumerate}
+	\end{enumerate}
 	\item Attack traces (see Section \ref{sec:attack}):
-	\begin{itemize}
+	\begin{enumerate}
 		\item run attack,
-		\begin{itemize}
+		\begin{enumerate}
 			\item CPA attack (Algorithm \ref{alg:cpa}), or
 			\item bit-wise DPA attack (Algorithm \ref{alg:bitwisedpa}),
-		\end{itemize}
+		\end{enumerate}
 		\item process \& display results.
-	\end{itemize}
-\end{itemize}
+	\end{enumerate}
+\end{enumerate}

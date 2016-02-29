@@ -1,19 +1,52 @@
 \section{Enhancements to the Attack}   %!% to/of ?
 
-Since Chow is eqivalent to Karroumi according to Klinec, Bos et al. came up with the idea of attacking different target instead of the output of $\SubBytes$. Let us remind the definition of $\SubBytes$ (originally defined in Equation \ref{eq:sbox}),
+WBAES by Chow et al.\ \cite{chow2003aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2011protecting}. Remind that Karroumi's enhancement uses different affine mappings inside SBoxes.
 
+Let us first remind the definition of the original SBox (originally Equation \ref{eq:sbox}),
+\[
+	\defsbox .
+\]
+Note that the original SBox is a specific affine mapping of Rijndael inverse of its input while in Karroumi's approach, this affine mapping is not fixed. Such a new SBox could be rewritten as
 \begin{equation}
-\label{eq:sbox2}
-	S(A) = (x^4 + x^3 + x^2 + x + 1)A' + x^6 + x^5 + x + 1 \pmod{x^8+1} .
+	S_{p,q}(A) = p\cdot A' + q \pmod{x^8+1}
 \end{equation}
+for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously for $p=1$ and $q=0$ which yields $S(A) = A'$ i.e.\ only a Rijndael inverse.
 
-Note that it is an affine mapping of its input's inverse, indeed it holds for $P = x^4 + x^3 + x^2 + x + 1$ and $Q = x^6 + x^5 + x + 1$ that $S(A) = P\cdot A' + Q$. Now remind that Karroumi's approach changes the original affine mapping in $\SubBytes$ to a different one.
+Since these SBoxes are equivalent in WBAES, Bos et al.\ came up with the idea of changing the target of the attack from the original SBox to its simplest variant -- Rijndael inverse.
+%?% And, surprisingly, this recovers the key even faster! (does it?)
 
-So the idea was not to attack the output of $\SubBytes$ which is an affine mapping applied to input's inverse but attack the inverse itself. Surprisingly, this recovers the key even faster!
+\begin{remark}
+	Technically we substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} in Algorithm \ref{alg:bitwisedpa} with Rijndael inverse, hence yielding
+	\begin{align*}
+		S_0 &\gets \Bigl\{ Traces[n] \Bigm| \bigl(KGuess\xor PTs[n][i]\bigr)'[j] = 0 \Bigr\} , \\
+		S_1 &\gets \Bigl\{ Traces[n] \Bigm| \bigl(KGuess\xor PTs[n][i]\bigr)'[j] = 1 \Bigr\} .
+	\end{align*}
+\end{remark}
 
-%!% asi jsem to z mailu Teuwena pochopil: žádnej SBox ale jenom inverze inputu i.e. $(k\oplus m)^{-1}$
+We performed the same attack as in Section \ref{sec:klinecwbaes} with only this change, see results in Table \ref{tab:klinecrijinv}.
 
-Idea of Bos et al.: use multiplicative inverse only instead of full $SBox$, see Equation \ref{eq:sbox}. Hence we get $(k\oplus m)^{-1}$ as a new attack target.
+\begin{table}[H]
+	\begin{center}
+	\begin{tabular}{| c | c | c | c |}
+		\hline
+		Results & of attack & against {\tt KlinecWBAES} & . \\
+		\hline
+	\end{tabular}
+	\end{center}
+\caption{Bit-Wise DPA attack against {\tt KlinecWBAES}, Rijndael inverse taken as target.}
+\label{tab:klinecrijinv}
+\end{table}
+
+In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are usually only few target bits which actually leak or nothing leaks at all, for each key byte. The most substantial practical benefit of attacking different targets (i.e.\ either SBox or Rijndael inverse) is that leaking bits change, therefore we can likely unveil another key bytes.
+
+This led us to the idea of using yet another affine mappings
+% nápad: co vlastně dělá $q$? že nic? no asi jo, ale radši bych si to nejdřív vyzkoušel: různý $q$ jestli daj stejný výsledky
+% pokud jo, dalo by se to asi i tvrdit: jenom se totiž prohodí $S_0$ a $S_1$
+% => potom zbejvá jenom tolik targetů, kolik je čísel nesoudělných s $x^8+1$ !!!
+
+We came up with another obvious idea to try several other invertible affine mappings of Rijndael inverse besides the original SBox and the trivial mapping as a new target of the attack.
+
+% The fact that the attack works is surprising itself
 
 % psal já / Teuwen:
 %~ > I only wonder about the reasoning why Karroumi is more than Chow since
