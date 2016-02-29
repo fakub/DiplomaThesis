@@ -1,7 +1,7 @@
 \section{White-Box AES}
 \label{sec:wbaes}
 
-In this section we describe White-Box AES (WBAES) as introduced by Chow et al. \cite{chow2003aes} and revised by Muir \cite{muir2013tutorial} (which we highly recommend). Note that it has already been broken by Billet et al. \cite{billet2005cryptanalysis}, see Section \ref{sec:known}.   %!% ref to subsection, def linear?
+In this section we describe White-Box AES (WBAES) as introduced by Chow et al.\ \cite{chow2003aes} and revised by Muir \cite{muir2013tutorial} (which we highly recommend). Note that it has already been broken by Billet et al.\ \cite{billet2005cryptanalysis}, see Section \ref{sec:known}.   %!% ref to subsection, def linear?
 
 The core idea of WBAES is based on usage of lookup tables as outlined in Section \ref{sec:aeslookup}, these are further improved in three ways:
 \begin{enumerate}
@@ -9,7 +9,7 @@ The core idea of WBAES is based on usage of lookup tables as outlined in Section
 	\item tables are wrapped around by appropriately self-vanishing random bijections, \label{item:wrap}
 	\item the boundary is extended into the containing application. \label{item:boundary}
 \end{enumerate}
-Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it has been broken by Jacob et al. \cite{jacob2002attacking} much earlier than WBAES because it was lacking feature \ref{item:boundary} from the previous list.
+Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it has been broken by Jacob et al.\ \cite{jacob2002attacking} much earlier than WBAES because it was lacking feature \ref{item:boundary} from the previous list.
 
 \begin{notion}
 \label{notion:table}
@@ -23,7 +23,7 @@ Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it ha
 
 \subsection{Encodings}
 
-Let us first introduce some notion for feature \ref{item:wrap} from the previous list as defined by Chow et al. \cite{chow2003aes}.
+Let us first introduce some notion for feature \ref{item:wrap} from the previous list as defined by Chow et al.\ \cite{chow2003aes}.
 
 \begin{defn}[Encoding]
 	Let $X$ be a transformation from $m$ bits to $n$ bits. Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. Call $X' = G \circ X \circ F^{-1}$ an {\em encoded} version of $X$. $F$ is an {\em input encoding} and $G$ is an {\em output encoding}.
@@ -138,7 +138,7 @@ So far we have trated all AES operations by lookup tables only. Now we will intr
 	
 	Note that the (partial) $32$-bit outputs of linear operations are first split into $4$-bit words and then two independent $4$-bit words are XORed together yielding a new $4$-bit word. Thus we can only use $4$-bit internal encodings (denoted by $\Enc$) on both sides of each XOR. This is also the reason why input mixing bijection has been introduced -- it diffuses two $4$-bit blocks together.
 	
-	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e. not the first nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names as introduced by Chow et al. \cite{chow2003aes}.
+	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e. not the first nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names as introduced by Chow et al.\ \cite{chow2003aes}.
 	\begin{align}
 		\ldots&\rarr\underbracket{\Enc\rarr\IMB^{-1}\xrightarrow{\textnormal{plain}}\TBox\xrightarrow{\textnormal{plain}}\MB\circ\MC\rarr\Enc^{-1}}_{\textnormal{Type II}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\nonumber\\[.5em]
 		&\rarr\underbracket{\Enc\rarr\IMB\circ\MB^{-1}}_{\textnormal{Type III}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\ldots

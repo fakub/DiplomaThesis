@@ -1,9 +1,9 @@
 \section{Using SCA Tools in White-Box Cryptography}
 \label{sec:scawbc}
 
-In the previous section we presented some algorithms seemingly unrelated to what we have done so far. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a groundbreaking approach introduced recently by Bos et al. \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
+In the previous section we presented some algorithms seemingly unrelated to what we have done so far. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a groundbreaking approach introduced recently by Bos et al.\ \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
 
-The idea was inspired by Delerabl{\'e}e et al. \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
+The idea was inspired by Delerabl{\'e}e et al.\ \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
 
 The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context differential power analysis might sound wierd since there is no {\em power}, it is rather referred to as {\em Differential Computation Analysis} (DCA).
 
@@ -182,7 +182,7 @@ As outlined in the previous Remark, since now we will consider Algorithm \ref{al
 	
 	As already stated in Note \ref{note:fulllist}, the best key candidate we obtain from a SCA algorithm does not need to be necessarily the correct one, especially when we use it for attacking white-box implementations where there is absolutely no interpretation of what we ``measure'' and no reasoning why it should work at all.
 	
-	In that note we suggested to output the full list of key candidates together with their ``value'' for each key byte. The original purpose of this was to have some rating of key candidates and then loop through them according to their order. In physical world scenario this would likely recover the key in a relatively short time since we assume certain bias in our measurements caused by execution of the cipher.
+	In that note we suggested to output the full list of key candidates together with their ``value'' for each key byte. The original purpose of this was to have some rating of key candidates and then loop through them according to their order and value. In physical world scenario this would likely recover the key in a relatively short time since we assume certain bias in our measurements caused by execution of the cipher.
 	% \footnote{Each SCA algorithm may use different meter to compare key candidates, in Algorithm \ref{alg:cpa} it was correlation, in Algorithm \ref{alg:bitwisedpa} it was difference of means.}
 	
 	But it turns out that looping would be useless in the white-box scenario. Indeed, by empirical observation, the true key byte is typically
@@ -194,12 +194,12 @@ As outlined in the previous Remark, since now we will consider Algorithm \ref{al
 	
 	\begin{example}
 	\label{ex:gap}
-	See the following table for partial results of a real experiment, further comments are below.
+	See the following table for partial results of a real experiment, further comments below.
 		\begin{table}[H]
 			\begin{center}
 			\begin{tabular}{| c | c | c | c | c | c | c | c | c |}
 				\hline
-				\multirow{2}{*}{Rank} & \multicolumn{2}{c|}{3. bit} & \multicolumn{2}{c|}{4. bit} & \multicolumn{2}{c|}{6. bit} & \multicolumn{2}{c|}{7. bit} \\
+				\multirow{2}{*}{Rank} & \multicolumn{2}{c|}{\nth{3} bit} & \multicolumn{2}{c|}{\nth{4} bit} & \multicolumn{2}{c|}{\nth{6} bit} & \multicolumn{2}{c|}{\nth{7} bit} \\
 				\cline{2-9}
 					~ & Value & Cand.   & Value & Cand.   & Value & Cand.   & Value & Cand.  \\
 				\hline
@@ -224,19 +224,19 @@ As outlined in the previous Remark, since now we will consider Algorithm \ref{al
 		\caption{Partial results of a real experiment. The true key byte is {\tt 15} and is emphasized with brackets.}
 		\label{tab:gap}
 		\end{table}
-		According to the original criterion (i.e.\ picking the candidate with highest value) we would get {\tt 09} which is not the correct one, in this experiment the true candidate does not have the highest value.
+		According to the original criterion (i.e.\ picking the candidate with the highest value) we would get {\tt 09} in the \nth{4} bit column, but it is not the correct one -- in this experiment, the true candidate does not have the highest value.
 		
-		But considering the previous observation, we can modify our criterion as follows: we choose that candidate which is on the top of any list and has the highest gap to the second candidate. With this rule we find the maximal gap for $3.$ target bit, its value is $0.0330$. Hence the best candidate with this rule is {\tt 15} which is the correct one.   %!% czenglish: nabývá? místo reached...
+		On the other hand, if we consider the gap and modify our criterion to take it into account, we can still get the correct candidate.
 	\end{example}
 	
 	\begin{remark}
 	\label{rem:gap}
-		Note that other empirical criterions can be introduced, for example sum of gaps to the next candidate.   %!% mrdka, má bejt jenom pro první místa nějakýho listu! jinak nedává smysl, e.g. 0.43, 0.42, 0.40, 0.32, 0.31, ...
-		%!% implementovat
+		According to the observation in the previous example, we can modify our criterion as follows: we choose the candidate which is on the top of any list and has the biggest gap to the second candidate. Note that we can use various methods how to evaluate this gap, e.g. absolute or relative differences of values, and we may obtain different results.
+		
+		We can further improve this rule by combining gaps\footnote{Depends how we evaluated the gap, e.g. we use summing.} of the same candidate (only when it is on the top). On the other hand, note that if the correct candidate is not on the top of any list, improving this rule does not help either.
+		
+		Similarly to the idea of Note \ref{note:fulllist}, we can create a list of maximum $8$ candidates (one candidate from each of $8$ lists, see Note \ref{note:eightlists}) and loop through them if the key was not revealed.
 	\end{remark}
 	
-	Note that we do not consider absolute values anymore, only the difference to the second candidate. 
+	Applying the rule from the previous remark to the previous example, we find the maximal gap for the \nth{3} target bit, its absolute value is $0.0330$ compared to $0.0086$, $0.0178$ and $0.0209$, its relative value is $9.5\%$ compared to $2.2\%$, $5.3\%$ and $5.6\%$. Hence the best candidate with this rule is {\tt 15} which is the correct one.   %!% implementovat
 	
-	
-	%!% dyť někde musim popsat jak z výsledků dostanu seznam kandidátů (tim i toho nejlepšího)
-	% v praxi neberu toho s nejvyšší korelací ale toho s největším rozdílem na druhýho (robustní heuristika: součet?)

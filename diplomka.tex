@@ -1,11 +1,12 @@
-\documentclass[11pt,a4paper]{report}
+\documentclass[11pt,a4paper,twoside,openright]{report}
 
 %  use packages
 % --------------
 \usepackage[utf8]{inputenc}
 \usepackage{geometry,amsmath, amsthm, amssymb}   % , units, dsfont, caption
 % enumerate: \begin{enumerate}[{Example} I)] ... Roman numbering
-\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools,textcomp,multirow}
+\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools,textcomp,multirow,emptypage}
+\usepackage[super]{nth}
 \usepackage[table]{xcolor}
 \usepackage[titletoc]{appendix}
 \usepackage{nomencl}
@@ -18,12 +19,17 @@
 						pdfkeywords={White-Box AES, Side-Channel Attack},
 						pdfcreator=pdflatex]{hyperref}
 
+% fix left/right margins
+\let\tmp\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tmp
+\reversemarginpar
+
 \usepackage{fancyhdr}
 	\pagestyle{fancy}
 	\fancyhf{}
 	\fancyhead[L]{\slshape \rightmark}   % \leftmark .. kapitola
 	\fancyhead[R]{\thepage}
-	\oddsidemargin=10mm   % jednostranný tisk
 
 %  customize
 % -----------
@@ -160,7 +166,7 @@ A very interesting and universal approach has been recently introduced in a pape
 	{
 		\Large \misto, \rok \hfill \autor
 	}
-	\newpage
+	\cleardoublepage
 	
 	
 	%%% 2. úvodní strana
@@ -184,7 +190,7 @@ A very interesting and universal approach has been recently introduced in a pape
 		Akademický rok: & \akadRok
 		\end{tabular}
 	}
-	\newpage
+	\cleardoublepage
 	
 	
 	%%% sem přijde ofic. zadání
@@ -195,7 +201,7 @@ A very interesting and universal approach has been recently introduced in a pape
 	\vspace{4mm}
 	V~jednom z~výtisků musí být \textbf{originál} zadání, v~ostatních kopie.
 	\normalsize
-	\newpage
+	\cleardoublepage
 	
 	
 	%%% prohlášení
@@ -215,7 +221,7 @@ A very interesting and universal approach has been recently introduced in a pape
 		. . . . . . . . . . . . . . . . . . . . . . .\\
 		\autor
 		\end{tabular}
-	\newpage
+	\cleardoublepage
 	
 	
 	%%% poděkování
@@ -231,7 +237,7 @@ A very interesting and universal approach has been recently introduced in a pape
 	\begin{flushright}
 	\autor
 	\end{flushright}
-	\newpage
+	\cleardoublepage
 	
 	
 	%%% abstrakt atp.
@@ -251,19 +257,19 @@ A very interesting and universal approach has been recently introduced in a pape
 		{\em Abstract:} & \abstrEN \\[4mm]
 		{\em Keywords:} & \keyword
 	\end{tabularx}
-	\newpage
+	\cleardoublepage
 	
 	
 	%%% obsah
 	\thispagestyle{empty}
 	\tableofcontents
-	\newpage
+	\cleardoublepage
 	
 	
 	%%% nomenklatura
 	\thispagestyle{empty}
 	\printnomenclature
-	\newpage
+	\cleardoublepage
 	
 \end{titlepage}
 
