@@ -62,8 +62,9 @@
 \contentsline {subsubsection}{CPA Attack against {\tt naiveAES}}{36}{section*.40}
 \contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}.}{36}{section*.42}
 \contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{36}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Enhancements to the Attack}{37}{section.3.3}
-\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{37}{section.3.4}
+\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{37}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Adding Another Targets}{37}{subsection.3.3.1}
+\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{38}{section.3.4}
 \contentsline {chapter}{\numberline {4}Future Work}{39}{chapter.4}
 \contentsline {chapter}{Conclusion}{41}{section*.46}
 \contentsline {chapter}{References}{43}{section*.48}

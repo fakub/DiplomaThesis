@@ -1,4 +1,4 @@
-\section{Enhancements to the Attack}   %!% to/of ?
+\section{Enhancements of the Attack}   %!% to/of ?
 
 WBAES by Chow et al.\ \cite{chow2003aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2011protecting}. Remind that Karroumi's enhancement uses different affine mappings inside SBoxes.
 
@@ -39,12 +39,37 @@ We performed the same attack as in Section \ref{sec:klinecwbaes} with only this 
 
 In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are usually only few target bits which actually leak or nothing leaks at all, for each key byte. The most substantial practical benefit of attacking different targets (i.e.\ either SBox or Rijndael inverse) is that leaking bits change, therefore we can likely unveil another key bytes.
 
-This led us to the idea of using yet another affine mappings
+\subsection{Adding Another Targets}
+\label{sec:16targets}
+
+The benefit of attacking different targets led us to the idea of using yet another affine mappings. There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$ (then the mapping is invertible$\mod{x^8+1}$), there are $128$ of them. Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings. But we realized that there are certain classes of mappings which give similar results.
+
+\begin{description}
+\item[Effect of $q$'s]
+First let us see what happens if we change one bit of $q$ (here considered as a byte). It obviously only changes the output at the same bit, finally yielding a swap of $S_0$ and $S_1$ in the attack algorithm (only at this target bit, of course). Note that this swap has no effect on results since we are only interested in absolute difference of means. We will consider $q = 0$.
+
+\item[Effect of $p$'s]
+Second let us study the effect of different $p$'s. Note that $x$ is comprime with $x^8+1$, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
+
+Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g.\ $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g.\ $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end so the shift is actually a cyclical shift. Hence repeating this we obtain $8$ polynomials which we put in an equivalence class i.e.\ we get $128/8=16$ classes. Note that the same happens with bits representing polynomials.
+
+Since we assumed $q = 0$, the actual output of two sboxes using $p$'s from a single class is thus also only cyclically shifted. It follows that it only cyclically shifts the results among target bits. Hence the information which target bit leaks is irrelevant.
+\end{description}
+
+
 % nápad: co vlastně dělá $q$? že nic? no asi jo, ale radši bych si to nejdřív vyzkoušel: různý $q$ jestli daj stejný výsledky
 % pokud jo, dalo by se to asi i tvrdit: jenom se totiž prohodí $S_0$ a $S_1$
 % => potom zbejvá jenom tolik targetů, kolik je čísel nesoudělných s $x^8+1$ !!!
 
-We came up with another obvious idea to try several other invertible affine mappings of Rijndael inverse besides the original SBox and the trivial mapping as a new target of the attack.
+% JOO! něco pude tvrdit !!!
+% pro některý kombinace jsou shodný korelace, tže bude stačit i mín jak 128
+% konkrétně platí, že násobení $x$ jenom protočí target bity
+% což vlastně zní docela logicky ...
+% $x$ je samo o sobě coprime, můžu jim libovolně násobit, všechny takový tam budou
+% => osmice dají stejnej výsledek
+% zbejvá tak už jenom 16 možností
+
+%~ We came up with another obvious idea to try several other invertible affine mappings of Rijndael inverse besides the original SBox and the trivial mapping as a new target of the attack.
 
 % The fact that the attack works is surprising itself
 
