@@ -65,8 +65,8 @@
 \contentsline {section}{\numberline {3.3}Enhancements of the Attack}{37}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Adding Another Targets}{37}{subsection.3.3.1}
 \contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{38}{section.3.4}
-\contentsline {chapter}{\numberline {4}Future Work}{39}{chapter.4}
-\contentsline {chapter}{Conclusion}{41}{section*.46}
-\contentsline {chapter}{References}{43}{section*.48}
+\contentsline {chapter}{\numberline {4}Future Work}{41}{chapter.4}
+\contentsline {chapter}{Conclusion}{43}{section*.47}
+\contentsline {chapter}{References}{45}{section*.49}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}

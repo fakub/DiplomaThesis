@@ -56,20 +56,53 @@ Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result 
 Since we assumed $q = 0$, the actual output of two sboxes using $p$'s from a single class is thus also only cyclically shifted. It follows that it only cyclically shifts the results among target bits. Hence the information which target bit leaks is irrelevant.
 \end{description}
 
+We attacked \nth{1} byte of {\tt KlinecWBAES} using all these $16$ attack targets and $256$ traces. Table \ref{tab:lintargets} shows the gap to the second candidate for each target bit and each attack target. If the candidate with the biggest gap among target bits is correct, it is emphasized with $\blacksquare$, otherwise (i.e.\ incorrect candidate has the biggest gap) it is marked with $\boxtimes$, other correct candidates have $\square$.
 
-% nápad: co vlastně dělá $q$? že nic? no asi jo, ale radši bych si to nejdřív vyzkoušel: různý $q$ jestli daj stejný výsledky
-% pokud jo, dalo by se to asi i tvrdit: jenom se totiž prohodí $S_0$ a $S_1$
-% => potom zbejvá jenom tolik targetů, kolik je čísel nesoudělných s $x^8+1$ !!!
+\begin{table}[h]
+	\begin{center}
+	\begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+		\hline
+		$p$ & \multicolumn{8}{c|}{Target bits} \\
+		\hline
+		{\tt 01}&\quad .0005&$\square$ .0682&\quad .0233&\quad .0142&\quad .0178&\quad .0033&$\square$ .0516&$\blacksquare$ .1054 \\
+		\hline
+		{\tt 07}&\quad .0172&\quad .0271&\quad .0122&$\blacksquare$ .2695&\quad .0291&$\square$ .1071&\quad .0009&\quad .0120 \\
+		\hline
+		{\tt 0b}&$\square$ .0005&\quad .0079&\quad .0006&\quad .0052&\quad .0008&\quad .0124&$\square$ .0664&$\blacksquare$ .2590 \\
+		\hline
+		{\tt 0d}&$\blacksquare$ .2498&\quad .0258&\quad .0088&\quad .0027&\quad .0244&\quad .0064&\quad .0102&\quad .0399 \\
+		\hline
+		{\tt 13}&\quad .0083&\quad .0467&$\blacksquare$ .1247&\quad .0069&\quad .0084&$\square$ .0114&\quad .0003&\quad .0053 \\
+		\hline
+		{\tt 15}&\quad .0004&\quad .0053&$\boxtimes$ .0482&\quad .0156&\quad .0028&\quad .0216&\quad .0007&$\square$ .0038 \\
+		\hline
+		{\tt 19}&\quad .0230&\quad .0131&\quad .0113&\quad .0096&$\square$ .0255&$\boxtimes$ .0483&\quad .0072&\quad .0104 \\
+		\hline
+		{\tt 1f}&$\square$ .0498&\quad .0591&\quad .0249&$\blacksquare$ .1865&\quad .0026&\quad .0110&\quad .0120&\quad .0210 \\
+		\hline
+		{\tt 25}&\quad .0167&\quad .0024&\quad .0013&\quad .0037&$\boxtimes$ .0526&\quad .0009&\quad .0277&\quad .0154 \\
+		\hline
+		{\tt 2f}&$\blacksquare$ .0706&\quad .0406&\quad .0089&\quad .0021&\quad .0005&\quad .0095&\quad .0207&\quad .0098 \\
+		\hline
+		{\tt 37}&\quad .0166&\quad .0090&\quad .0062&\quad .0499&$\square$ .0159&\quad .0021&$\boxtimes$ .0502&\quad .0025 \\
+		\hline
+		{\tt 3b}&\quad .0014&$\blacksquare$ .1426&\quad .0276&\quad .0126&\quad .0022&\quad .0087&$\square$ .0010&$\square$ .0780 \\
+		\hline
+		{\tt 3d}&\quad .0230&\quad .0028&\quad .0119&$\boxtimes$ .0321&\quad .0244&\quad .0195&\quad .0176&\quad .0171 \\
+		\hline
+		{\tt 57}&\quad .0061&\quad .0276&\quad .0439&\quad .0261&\quad .0027&$\blacksquare$ .0569&\quad .0071&\quad .0076 \\
+		\hline
+		{\tt 5b}&$\blacksquare$ .1094&\quad .0064&$\square$ .0102&\quad .0158&\quad .0527&\quad .0008&\quad .0337&\quad .0184 \\
+		\hline
+		{\tt 7f}&\quad .0144&\quad .0146&\quad .0222&\quad .0049&\quad .0006&$\blacksquare$ .2652&\quad .0041&\quad .0101 \\
+		\hline
+	\end{tabular}
+	\end{center}
+\caption{Gaps to the second candidate. Attack against \nth{1} byte of {\tt KlinecWBAES} using all $16$ targets and $256$ traces.}
+\label{tab:lintargets}
+\end{table}
 
-% JOO! něco pude tvrdit !!!
-% pro některý kombinace jsou shodný korelace, tže bude stačit i mín jak 128
-% konkrétně platí, že násobení $x$ jenom protočí target bity
-% což vlastně zní docela logicky ...
-% $x$ je samo o sobě coprime, můžu jim libovolně násobit, všechny takový tam budou
-% => osmice dají stejnej výsledek
-% zbejvá tak už jenom 16 možností
-
-%~ We came up with another obvious idea to try several other invertible affine mappings of Rijndael inverse besides the original SBox and the trivial mapping as a new target of the attack.
+Note that there are $11$ successful and $5$ unsuccessful targets. We repeated this attack for the rest of keybytes and obtained \ldots
 
 % The fact that the attack works is surprising itself
 
