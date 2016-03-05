@@ -72,7 +72,11 @@ Now let us move on to definitions of the $4$ operations.
 	\label{eq:sbox}
 		\defsbox .
 	\end{equation}
-	Note that although $x^8+1$ is not irreducible (e.g. $x+1$ is a factor), $x^4 + x^3 + x^2 + x + 1$ is coprime to $x^8+1$, therefore it has an inverse$\mod(x^8+1)$. It follows that $\SubBytes$ is an invertible bijection.
+	
+	\begin{note}
+	\label{note:sboxinv}
+		Although $x^8+1$ is not irreducible (it holds $x^8+1 = (x+1)^8$), $x^4 + x^3 + x^2 + x + 1$ is coprime to $x^8+1$, therefore it has an inverse$\mod(x^8+1)$. It follows that $\SubBytes$ is an invertible bijection.
+	\end{note}
 	
 	$\SubBytes$ is the only source of nonlinearity in AES thus it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui in 1993 \cite{matsui1994linear} and analyzed in detail and successfuly performed by Junod in 2001 \cite{junod2001complexity}.
 	

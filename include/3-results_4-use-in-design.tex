@@ -1,18 +1,28 @@
-%?% vlastní kapitola?
 \section{Use in White-Box Crypto Design}
 
-%~ pokud bych našel v kódu kde to leakuje, uměl to vyčíst z indexů popř. nák přímo z tabulek -> 4 Analysis
+Note that the attack allows us to reveal concrete physical addresses which contributed to the key recovery. Our intention was to find the corresponding piece of source code and later possibly also the value which is transformed into physical address -- it would most likely be an index in an array. We tried several approaches how to find that place in source code, see the following list.
 
-% chtěl jsem pokračovat ve smyslu:
-% 	najít debuggerem místo v kódu, kde to leakuje, a zjistit tak kterej index to je, případně se to naučit počítat
-% ale nedařilo se, přestože jsem vyzkoušel několik způsobů:
-% 	pustil jsem to v gdb, to ale leakující adresu vůbec nezachytilo (! záleží na input plaintextu, ohlídal jsem si to)
-% 	zkusil jsem gdb připojit na pin, ale to nešlo vůbec, hned hlásí že Could not insert hardware breakpoints: You may have requested too many hardware breakpoints/watchpoints.
-% 	další mě nenapadá ... (zkusit valgrind a porovnat tracy?)
-% alternatively, přímo vypsat všechny možný indexy použitý v tabulkách a zkusit útočit na tohle místo memtrace
-% 	z toho poskládat přímej útok
+\begin{description}
+	\item[Watchpoint in GDB.]
+		We set up a watchpoint in GDB running in the same terminal session while watching an address previously caught by PIN. Probably since PIN uses different environment, GDB did not catch the address at all.
+		%!% zkusit valgrind a pak GDB?
+	\item[GDB connected to PIN debugging interface.]
+		We set up a connection between PIN application debugging interface and GDB as described in PIN manual \cite{pin214manual}, but could not catch {\em any} address. GDB was complaining that it cannot insert hardware breakpoint, on the other hand, software breakpoints did not work either.
+		%!% vyzkoušet ten příklad z manuálu, jestli to jenom blbě nekompiluju ...
+	\item[Outputting all array indexes.]
+		Note that array indexes are very likely the values which are transformed to leaking physical addresses. Hence it should be possible to output and attack all indexes used within the encryption procedure. But, surprisingly, we did not succeed breaking the key from such ``traces''.
+\end{description}
+
+Each of these approaches appeared to bring valuable information about where the key leaks. The leakage position could be later used to identify a specific table access which leaks, hence it could possibly help us to clarify what is the actual reason why this attack works.
+
+Note that, to the best of our knowledge, there is no explanation why this attack is actually possible. It seems impossible since all of the AES byproducts we attack are hidden by internal encodings, in fact random bijections. Note that a random bijection is extremely unlikely to provide any correlation between any input and output bit.
+
+% třeba zkusit dokázat, že random bijection ani náhodou nezanechá korelaci v nákym bitu, mělo by tam bejt negligible
+% asi se trochu rozepsat a odůvodnit ...
+% třeba to, jak jsou ty bijekce generovaný, že to je z nákýho pejpru, kterej něco ukazuje
+%~ The best known attack is BGE attack \cite{billet2005cryptanalysis} which is pure algebraic, on the other hand, this attack utilizes side-channel tools to attack memory traces instead.
+Even though it is not fully understood, the benefit of this attack is obvious -- it introduces a principially different approach to break white-box crypto implementations. This attack may help to address weaknesses of a future white-box crypto implementation and possibly increase its resistancy to this kind of attack.
+
+\subsection{Countermeasures against DCA}
 
 % proposed countermeasures against DCA?
-%~ To the best of my knowledge, there is no reasonable explanation why this is actually possible. The best known attack is BGE attack \cite{billet2005cryptanalysis} which is pure algebraic, on the other hand, Bos' attack utilizes side-channel tools to attack memory traces instead.
-%~ Even though it is not fully understood, the benefit of the attack is obvious -- it introduces a principially different approach to break white-box implementations. The attack may help to address weak points of an implementation and increase its resistancy to this kind of attack.
-%~ I tried to set a watchpoint to the leaking address in a debugger and find the corresponding location in the source code. For some reason, standalone GDB did not catch the address previously caught by PIN and GDB connected to PIN debugger was not able to set any watchpoint at all. Hence I tried to print and attack all possible indexes used during encryption which should be later transformed to memory addresses, but surprisingly got absolutely nothing.

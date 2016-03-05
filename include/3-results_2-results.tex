@@ -32,6 +32,7 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	\caption{CPA attack against {\tt naiveAES}}
 	\label{tab:naiveaescpa}
 	\end{table}
+	
 
 \subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}.}
 	
@@ -58,19 +59,25 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 \subsection{\tt KlinecWBAES}
 \label{sec:klinecwbaes}
 	
-	See results in Table \ref{tab:klinecsbox}.
+	CPA attack did not work for {\tt KlinecWBAES} \ldots
 	
-	\begin{table}[H]
+	We attacked {\tt KlinecWBAES} with bit-wise DPA attack using $1024$ traces, see results in Table \ref{tab:klinecsbox}.
+	In this table we give percentual gap of the best candidate and rank of the true key byte for each key byte and target bit.
+	
+	\begin{note}
+	\label{note:tailrank}
+		There are remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table \ref{tab:klinecsbox}.
+	\end{note}
+	
+	\begin{landscape}
+	\begin{table}[H]   % přidat počty úspěšnejch?
 		\begin{center}
-		\begin{tabular}{| c | c | c | c |}
-			\hline
-			Results & of attack & against {\tt KlinecWBAES} & . \\
-			\hline
-		\end{tabular}
+		\input{./tables/3_2_3-klinec-sbox.tex}
 		\end{center}
-	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES}.}
+	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ top position) is replaced with $\blacksquare$ in order to be emphasized.}
 	\label{tab:klinecsbox}
 	\end{table}
+	\end{landscape}
 	
 %~ kolik traců, jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
 %~ co jsem použil a co vypadlo, de facto takovej protokol

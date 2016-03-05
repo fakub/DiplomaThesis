@@ -18,14 +18,14 @@
 \contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{14}{section.1.3}
 \contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{14}{subsection.1.3.1}
 \contentsline {subsubsection}{SubBytes}{15}{section*.14}
-\contentsline {subsubsection}{ShiftRows}{15}{section*.15}
+\contentsline {subsubsection}{ShiftRows}{16}{section*.15}
 \contentsline {subsubsection}{MixColumns}{16}{section*.17}
-\contentsline {subsubsection}{AddRoundKey}{16}{section*.18}
+\contentsline {subsubsection}{AddRoundKey}{17}{section*.18}
 \contentsline {subsubsection}{KeySchedule}{17}{section*.19}
 \contentsline {subsection}{\numberline {1.3.2}AES Algorithm Description}{17}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{17}{subsection.1.3.3}
+\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{18}{subsection.1.3.3}
 \contentsline {section}{\numberline {1.4}White-Box AES}{18}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}Encodings}{18}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.1}Encodings}{19}{subsection.1.4.1}
 \contentsline {subsection}{\numberline {1.4.2}Reorded AES}{19}{subsection.1.4.2}
 \contentsline {subsection}{\numberline {1.4.3}Fully-Table Representation}{20}{subsection.1.4.3}
 \contentsline {subsubsection}{T-Boxes}{20}{section*.20}
@@ -62,11 +62,14 @@
 \contentsline {subsubsection}{CPA Attack against {\tt naiveAES}}{36}{section*.40}
 \contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}.}{36}{section*.42}
 \contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{36}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{37}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Adding Another Targets}{37}{subsection.3.3.1}
-\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{38}{section.3.4}
-\contentsline {chapter}{\numberline {4}Future Work}{41}{chapter.4}
-\contentsline {chapter}{Conclusion}{43}{section*.47}
-\contentsline {chapter}{References}{45}{section*.49}
+\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{38}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Considering Another Targets}{40}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Attack Using All 16 Targets}{41}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Expanding Attack Targets to Non-Invertible Affine Mappings}{42}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{42}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Countermeasures against DCA}{43}{subsection.3.4.1}
+\contentsline {chapter}{\numberline {4}Future Work}{45}{chapter.4}
+\contentsline {chapter}{Conclusion}{47}{section*.48}
+\contentsline {chapter}{References}{49}{section*.50}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}

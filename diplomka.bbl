@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{pin214manual}
+Pin 2.14 user guide.
+\newblock
+  \url{https://software.intel.com/sites/landingpage/pintool/docs/71313/Pin/html/index.html#APPDEBUG_LINUX}.
+\newblock Accessed: 2016-01-22.
+
 \bibitem{agrawal2002side}
 D~Agrawal, B~Archambeault, J~Rao, and P~Rohatgi.
 \newblock The em side-channel (s): Attacks and assessment methodologies.

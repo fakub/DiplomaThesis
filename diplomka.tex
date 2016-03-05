@@ -5,7 +5,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{geometry,amsmath, amsthm, amssymb}   % , units, dsfont, caption
 % enumerate: \begin{enumerate}[{Example} I)] ... Roman numbering
-\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools,textcomp,multirow,emptypage}
+\usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools,textcomp}
+\usepackage{multirow,emptypage,dcolumn,pdflscape}
 \usepackage[super]{nth}
 \usepackage[table]{xcolor}
 \usepackage[titletoc]{appendix}
@@ -34,8 +35,8 @@
 %  customize
 % -----------
 \let\tmpitem\item
-\renewcommand{\item}{\setlength{\itemsep}{0pt}\tmpitem}   % míň roztahovačný seznamy
-\renewcommand{\labelitemi}{$\circ$}
+\renewcommand{\item}{\setlength{\itemsep}{0em}\tmpitem}   % míň roztahovačný seznamy
+%~ \renewcommand{\labelitemi}{$\circ$}
 
 \let\epsilon\varepsilon
 \let\phi\varphi

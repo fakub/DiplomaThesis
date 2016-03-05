@@ -1,110 +1,141 @@
 \section{Enhancements of the Attack}   %!% to/of ?
 
-WBAES by Chow et al.\ \cite{chow2003aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2011protecting}. Remind that Karroumi's enhancement uses different affine mappings inside SBoxes.
+WBAES by Chow et al.\ \cite{chow2003aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2011protecting}. Remind that Karroumi's enhancement uses different affine mappings inside SBoxes. %!% \ref
 
-Let us first remind the definition of the original SBox (originally Equation \ref{eq:sbox}),
+Let us first remind definition of the original SBox (originally Equation \ref{eq:sbox}),
 \[
 	\defsbox .
 \]
-Note that the original SBox is a specific affine mapping of Rijndael inverse of its input while in Karroumi's approach, this affine mapping is not fixed. Such a new SBox could be rewritten as
+Note that the original SBox is a specific affine mapping of Rijndael inverse of its input while in Karroumi's approach, this affine mapping is not fixed. Such a new SBox could be written as
 \begin{equation}
 	S_{p,q}(A) = p\cdot A' + q \pmod{x^8+1}
 \end{equation}
-for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously for $p=1$ and $q=0$ which yields $S(A) = A'$ i.e.\ only a Rijndael inverse.
-
-Since these SBoxes are equivalent in WBAES, Bos et al.\ came up with the idea of changing the target of the attack from the original SBox to its simplest variant -- Rijndael inverse.
-%?% And, surprisingly, this recovers the key even faster! (does it?)
+for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously for $p=1$ and $q=0$ which yields $S_{1,0}(A) = A'$ i.e.\ only a Rijndael inverse.
 
 \begin{remark}
-	Technically we substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} in Algorithm \ref{alg:bitwisedpa} with Rijndael inverse, hence yielding
+\label{rem:coprime}
+	The reason why $p$ must be coprime with $x^8+1$ was already given in the definition of the original SBox in Note \ref{note:sboxinv} -- it was due to its invertibility. Hence we would like to test whether $p$ is coprime with $x^8+1$.
+	
+	Note that $x^8+1 = (x+1)^8$, therefore if $p$ is not coprime with $x^8+1$, then $1$ must be its root, and vice versa. This can be easily tested, indeed $p(1) = 0$ if the number of its terms is even. It follows that $p$ is coprime with $x^8+1$ if and only if the number of terms of $p$ is odd.
+\end{remark}
+
+Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with the idea of changing the target\footnote{The word {\em target} will be heavily used in this context. Do not be confused with {\em target bit}, it keeps the original meaning.} of the attack from the original SBox to its simplest variant -- Rijndael inverse.
+
+\begin{remark}
+	Technically we only substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} of Algorithm \ref{alg:bitwisedpa} with their desired variant, hence yielding
 	\begin{align*}
-		S_0 &\gets \Bigl\{ Traces[n] \Bigm| \bigl(KGuess\xor PTs[n][i]\bigr)'[j] = 0 \Bigr\} , \\
-		S_1 &\gets \Bigl\{ Traces[n] \Bigm| \bigl(KGuess\xor PTs[n][i]\bigr)'[j] = 1 \Bigr\} .
+		S_0 &\gets \Bigl\{ Traces[n] \Bigm| S_{p,q}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\} , \\
+		S_1 &\gets \Bigl\{ Traces[n] \Bigm| S_{p,q}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\} .
 	\end{align*}
 \end{remark}
 
-We performed the same attack as in Section \ref{sec:klinecwbaes} with only this change, see results in Table \ref{tab:klinecrijinv}.
+We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijndael inverse as the target, see results in Table \ref{tab:klinecrijinv}.
 
+\begin{landscape}
 \begin{table}[H]
 	\begin{center}
-	\begin{tabular}{| c | c | c | c |}
-		\hline
-		Results & of attack & against {\tt KlinecWBAES} & . \\
-		\hline
-	\end{tabular}
+	\input{./tables/3_3_1-klinec-rijinv.tex}
 	\end{center}
-\caption{Bit-Wise DPA attack against {\tt KlinecWBAES}, Rijndael inverse taken as target.}
+\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ top position) is replaced with $\blacksquare$ in order to be emphasized.}
 \label{tab:klinecrijinv}
 \end{table}
+\end{landscape}
 
-In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are usually only few target bits which actually leak or nothing leaks at all, for each key byte. The most substantial practical benefit of attacking different targets (i.e.\ either SBox or Rijndael inverse) is that leaking bits change, therefore we can likely unveil another key bytes.
+In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{8} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{6} bit and at \nth{7} bit the gap is much larger for an incorrect candidate; this happens much more often if less traces are used). The most substantial practical benefit of attacking different targets is that those key bytes which did not leak with one target may possibly leak with another, cf. \nth{8} byte in both tables.
 
-\subsection{Adding Another Targets}
+\subsection{Considering Another Targets}
 \label{sec:16targets}
 
-The benefit of attacking different targets led us to the idea of using yet another affine mappings. There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$ (then the mapping is invertible$\mod{x^8+1}$), there are $128$ of them. Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings. But we realized that there are certain classes of mappings which give similar results.
+This benefit led us to the idea of using yet another invertible affine mappings besides the one of the original SBox and identity. There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$, there are $128$ of them (follows from Remark \ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings. But we realized that there are certain classes of mappings which give similar or even same results.
 
 \begin{description}
-\item[Effect of $q$'s]
-First let us see what happens if we change one bit of $q$ (here considered as a byte). It obviously only changes the output at the same bit, finally yielding a swap of $S_0$ and $S_1$ in the attack algorithm (only at this target bit, of course). Note that this swap has no effect on results since we are only interested in absolute difference of means. We will consider $q = 0$.
-
-\item[Effect of $p$'s]
-Second let us study the effect of different $p$'s. Note that $x$ is comprime with $x^8+1$, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
-
-Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g.\ $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g.\ $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end so the shift is actually a cyclical shift. Hence repeating this we obtain $8$ polynomials which we put in an equivalence class i.e.\ we get $128/8=16$ classes. Note that the same happens with bits representing polynomials.
-
-Since we assumed $q = 0$, the actual output of two sboxes using $p$'s from a single class is thus also only cyclically shifted. It follows that it only cyclically shifts the results among target bits. Hence the information which target bit leaks is irrelevant.
+	\item[Effect of $q$'s.]
+		First let us see what happens if we change one bit of $q$ (here considered as a byte). It obviously only changes the output of our SBox at the same bit, finally yielding a swap of $S_0$ and $S_1$ in the attack algorithm (only at this target bit, of course). Note that this swap has no effect on results, since we are only interested in absolute difference of means of values inside $S_0$ and $S_1$. We will consider $q = 0$, hence our SBoxes will be linear mappings of Rijndael inverse.
+	
+	\item[Effect of $p$'s.]
+		Second let us study the effect of different $p$'s. Note that $x$ is coprime with $x^8+1$ and $p$ is supposed to, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
+		
+		Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g.\ $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g.\ $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end so the shift is actually a cyclical shift.
+		
+		Remind that polynomials coprime with $x^8+1$ have even number of terms (see Remark \ref{rem:coprime}), hence repeating this we obtain $8$ distinct polynomials which we put in single equivalence class i.e.\ we get $128/8=16$ such classes, see Table \ref{tab:classrepre} for representants of each class. Note that the effect is the same on bits representing polynomials.
+		
+		Since we assumed $q = 0$, the actual output of two sboxes using $p$'s from single class is thus also only a cyclical shift of each other. It follows that the effect on results is that it only cyclically shifts the results among target bits. Hence also the information which target bit leaks is totally irrelevant.
+%?% neni zas tak irelevant ptž z pozice v trace zjistim která varianta to je, ze všech mi to pak může něco prozradit
+% => je irrelevant ptž ikdyž leaknou dva tak rozhodně nejsou od sebe jak by měly
+% original SBox is {\tt 1f}
 \end{description}
-
-We attacked \nth{1} byte of {\tt KlinecWBAES} using all these $16$ attack targets and $256$ traces. Table \ref{tab:lintargets} shows the gap to the second candidate for each target bit and each attack target. If the candidate with the biggest gap among target bits is correct, it is emphasized with $\blacksquare$, otherwise (i.e.\ incorrect candidate has the biggest gap) it is marked with $\boxtimes$, other correct candidates have $\square$.
 
 \begin{table}[h]
 	\begin{center}
-	\begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+	\begin{tabular}{| c | c | c | c | c | c | c | c |}
 		\hline
-		$p$ & \multicolumn{8}{c|}{Target bits} \\
+		{\tt 01} & {\tt 07} & {\tt 0b} & {\tt 0d} & {\tt 13} & {\tt 15} & {\tt 19} & {\tt 1f} \\
 		\hline
-		{\tt 01}&\quad .0005&$\square$ .0682&\quad .0233&\quad .0142&\quad .0178&\quad .0033&$\square$ .0516&$\blacksquare$ .1054 \\
-		\hline
-		{\tt 07}&\quad .0172&\quad .0271&\quad .0122&$\blacksquare$ .2695&\quad .0291&$\square$ .1071&\quad .0009&\quad .0120 \\
-		\hline
-		{\tt 0b}&$\square$ .0005&\quad .0079&\quad .0006&\quad .0052&\quad .0008&\quad .0124&$\square$ .0664&$\blacksquare$ .2590 \\
-		\hline
-		{\tt 0d}&$\blacksquare$ .2498&\quad .0258&\quad .0088&\quad .0027&\quad .0244&\quad .0064&\quad .0102&\quad .0399 \\
-		\hline
-		{\tt 13}&\quad .0083&\quad .0467&$\blacksquare$ .1247&\quad .0069&\quad .0084&$\square$ .0114&\quad .0003&\quad .0053 \\
-		\hline
-		{\tt 15}&\quad .0004&\quad .0053&$\boxtimes$ .0482&\quad .0156&\quad .0028&\quad .0216&\quad .0007&$\square$ .0038 \\
-		\hline
-		{\tt 19}&\quad .0230&\quad .0131&\quad .0113&\quad .0096&$\square$ .0255&$\boxtimes$ .0483&\quad .0072&\quad .0104 \\
-		\hline
-		{\tt 1f}&$\square$ .0498&\quad .0591&\quad .0249&$\blacksquare$ .1865&\quad .0026&\quad .0110&\quad .0120&\quad .0210 \\
-		\hline
-		{\tt 25}&\quad .0167&\quad .0024&\quad .0013&\quad .0037&$\boxtimes$ .0526&\quad .0009&\quad .0277&\quad .0154 \\
-		\hline
-		{\tt 2f}&$\blacksquare$ .0706&\quad .0406&\quad .0089&\quad .0021&\quad .0005&\quad .0095&\quad .0207&\quad .0098 \\
-		\hline
-		{\tt 37}&\quad .0166&\quad .0090&\quad .0062&\quad .0499&$\square$ .0159&\quad .0021&$\boxtimes$ .0502&\quad .0025 \\
-		\hline
-		{\tt 3b}&\quad .0014&$\blacksquare$ .1426&\quad .0276&\quad .0126&\quad .0022&\quad .0087&$\square$ .0010&$\square$ .0780 \\
-		\hline
-		{\tt 3d}&\quad .0230&\quad .0028&\quad .0119&$\boxtimes$ .0321&\quad .0244&\quad .0195&\quad .0176&\quad .0171 \\
-		\hline
-		{\tt 57}&\quad .0061&\quad .0276&\quad .0439&\quad .0261&\quad .0027&$\blacksquare$ .0569&\quad .0071&\quad .0076 \\
-		\hline
-		{\tt 5b}&$\blacksquare$ .1094&\quad .0064&$\square$ .0102&\quad .0158&\quad .0527&\quad .0008&\quad .0337&\quad .0184 \\
-		\hline
-		{\tt 7f}&\quad .0144&\quad .0146&\quad .0222&\quad .0049&\quad .0006&$\blacksquare$ .2652&\quad .0041&\quad .0101 \\
+		{\tt 25} & {\tt 2f} & {\tt 37} & {\tt 3b} & {\tt 3d} & {\tt 57} & {\tt 5b} & {\tt 7f} \\
 		\hline
 	\end{tabular}
 	\end{center}
-\caption{Gaps to the second candidate. Attack against \nth{1} byte of {\tt KlinecWBAES} using all $16$ targets and $256$ traces.}
+\caption{Representants of classes of $p$'s in hexadecimal form.}
+\label{tab:classrepre}
+\end{table}
+
+\subsection{Attack Using All 16 Targets}
+
+We attacked the \nth{1} byte of {\tt KlinecWBAES} using all these $16$ attack targets and $256$ traces. Table \ref{tab:lintargets} shows percentual gap to the second candidate for each target bit and each attack target. If the candidate with the biggest gap among all target bits is correct, it is emphasized with $\blacksquare$, otherwise (i.e.\ incorrect candidate has the biggest gap) it is marked with $\boxtimes$, other correct candidates have $\square$.
+
+\begin{table}[h]
+	\begin{center}
+	\input{./tables/3_3_2-invertible-targets.tex}
+	\end{center}
+\caption{Percentual gaps to the second candidate. Attack against the \nth{1} byte of {\tt KlinecWBAES} using all $16$ targets and $256$ traces.}
 \label{tab:lintargets}
 \end{table}
 
-Note that there are $11$ successful and $5$ unsuccessful targets. We repeated this attack for the rest of keybytes and obtained \ldots
+Note that there are $11$ successful and $5$ unsuccessful targets. In case of unsuccessful targets, there sometimes happens to be another target bit which reveals the correct key byte, but there are also targets (namely {\tt 25} and {\tt 3d}) using which the correct key byte does not leak at any target bit. On the other hand, these incorrect candidates have considerably smaller gaps, therefore could be easily detected. In such case we would repeat the attack with a different target.
 
-% The fact that the attack works is surprising itself
+% trochu statistiky přidat ...
+We repeated this attack against all key bytes using $1024$ traces and observed following:
+\begin{itemize}
+	\item $12.6$ targets per byte were successful ($\blacksquare$) on average (without any limit on gap),
+	\begin{itemize}
+		\item the rest gave incorrect candidate ($\boxtimes$),
+	\end{itemize}
+	\item correct candidates had average gap of $37\%$ with standard deviation of $11\%$,
+	\item incorrect candidates had average gap of $13.5\%$ with standard deviation of $4.5\%$,
+\end{itemize}
+We used this information and repeated the attack with only $128$ traces while
+\begin{itemize}
+	\item considering only candidates beyond $\mu_\textnormal{false}+3\sigma_\textnormal{false} = 27\%$, we get
+	\begin{itemize}
+		\item $10.6$ successful targets on average,
+		\item no false positive i.e.\ incorrect candidates are filtered out.
+	\end{itemize}
+\end{itemize}
+Therefore, in case of blind attack (i.e.\ no knowledge of actual key), we suggest to use less traces, but keep changing the target until the maximal gap exceeds $27\%$, then we accept that candidate. This is likely to happen soon since $10.6$ out of $16$ targets succeed on average.
+
+\subsection{Expanding Attack Targets to Non-Invertible Affine Mappings}
+
+% yet another WTF: works for certain singular linear mappings as well (study deeper? their rank?)
+% zase ale dávaj stejný výsledky (aspoň některý) jako regulární, e.g.:
+% 0x01 ~ 0x05 ... Rijndael inverse
+% 0x1f ~ 0x03 ... orig. SBox
+% některý jsou nový:
+% 0x09
+% 0x0f
+% 0x1b
+% 0x1d
+% 0x27
+% 0x2b
+% 0x2d
+% 0x2e
+% 0x35
+% 0x3f
+% 0x66
+% 0xbd
+% 0xbe
+% 0xde
+% a dvě v rámci novejch jsou stejný
+% 0xbd ~ 0xde
 
 % psal já / Teuwen:
 %~ > I only wonder about the reasoning why Karroumi is more than Chow since

@@ -3,49 +3,50 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: diplomka.aux
 The style file: plain.bst
 Database file #1: biblio.bib
+Warning--to sort, need author or key in pin214manual
 Warning--empty journal in daemen1999aes
 Warning--empty journal in klinec2013white
 Warning--can't use both volume and number fields in luk2005pin
 Warning--can't use both volume and number fields in nethercote2007valgrind
-You've used 35 entries,
+You've used 36 entries,
             2118 wiz_defined-function locations,
-            684 strings with 9250 characters,
-and the built_in function-call counts, 12504 in all, are:
-= -- 1305
-> -- 464
+            688 strings with 9405 characters,
+and the built_in function-call counts, 12672 in all, are:
+= -- 1322
+> -- 465
 < -- 20
-+ -- 191
++ -- 192
 - -- 150
-* -- 700
-:= -- 1946
-add.period$ -- 126
-call.type$ -- 35
-change.case$ -- 179
+* -- 705
+:= -- 1965
+add.period$ -- 129
+call.type$ -- 36
+change.case$ -- 182
 chr.to.int$ -- 0
-cite$ -- 39
-duplicate$ -- 554
-empty$ -- 1052
+cite$ -- 41
+duplicate$ -- 561
+empty$ -- 1075
 format.name$ -- 150
-if$ -- 2794
+if$ -- 2836
 int.to.chr$ -- 0
-int.to.str$ -- 35
+int.to.str$ -- 36
 missing$ -- 30
-newline$ -- 182
+newline$ -- 187
 num.names$ -- 70
-pop$ -- 256
+pop$ -- 266
 preamble$ -- 1
-purify$ -- 144
+purify$ -- 146
 quote$ -- 0
-skip$ -- 413
+skip$ -- 418
 stack$ -- 0
-substring$ -- 757
-swap$ -- 189
+substring$ -- 762
+swap$ -- 190
 text.length$ -- 20
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 136
-warning$ -- 4
+type$ -- 140
+warning$ -- 5
 while$ -- 129
-width$ -- 37
-write$ -- 396
-(There were 4 warnings)
+width$ -- 38
+write$ -- 405
+(There were 5 warnings)
