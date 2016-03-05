@@ -63,13 +63,15 @@
 \contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}.}{36}{section*.42}
 \contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{36}{subsection.3.2.2}
 \contentsline {section}{\numberline {3.3}Enhancements of the Attack}{38}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Considering Another Targets}{40}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Attack Using All 16 Targets}{41}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Expanding Attack Targets to Non-Invertible Affine Mappings}{42}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{42}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Countermeasures against DCA}{43}{subsection.3.4.1}
-\contentsline {chapter}{\numberline {4}Future Work}{45}{chapter.4}
-\contentsline {chapter}{Conclusion}{47}{section*.48}
-\contentsline {chapter}{References}{49}{section*.50}
+\contentsline {subsection}{\numberline {3.3.1}Changing Attack Target}{38}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Considering Another Targets}{40}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Attack Using All 16 Targets}{41}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Blind Attack}{43}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Expanding Attack Targets to Non-Invertible Affine Mappings}{43}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{45}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Countermeasures against DCA}{45}{subsection.3.4.1}
+\contentsline {chapter}{\numberline {4}Future Work}{47}{chapter.4}
+\contentsline {chapter}{Conclusion}{49}{section*.50}
+\contentsline {chapter}{References}{51}{section*.52}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}

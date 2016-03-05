@@ -3,6 +3,7 @@
 %  use packages
 % --------------
 \usepackage[utf8]{inputenc}
+%~ \usepackage[T1]{fontenc}   % the font looks strange ...
 \usepackage{geometry,amsmath, amsthm, amssymb}   % , units, dsfont, caption
 % enumerate: \begin{enumerate}[{Example} I)] ... Roman numbering
 \usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools,textcomp}
@@ -29,7 +30,7 @@
 \usepackage{fancyhdr}
 	\pagestyle{fancy}
 	\fancyhf{}
-	\fancyhead[L]{\slshape \rightmark}   % \leftmark .. kapitola
+	\fancyhead[L]{\slshape \rightmark}   % \leftmark .. chapter
 	\fancyhead[R]{\thepage}
 
 %  customize
@@ -37,6 +38,7 @@
 \let\tmpitem\item
 \renewcommand{\item}{\setlength{\itemsep}{0em}\tmpitem}   % míň roztahovačný seznamy
 %~ \renewcommand{\labelitemi}{$\circ$}
+%~ \newcommand*{\dittoclosing}{--- \raisebox{-0.5ex}{''} ---}   % use or not?
 
 \let\epsilon\varepsilon
 \let\phi\varphi
@@ -322,6 +324,7 @@ A very interesting and universal approach has been recently introduced in a pape
 		% 	XOR?
 		% 	referencování na SCA algoritmy, neni lepší je pojmenovat?
 		% 	polynomials in this thesis are with GF(2) coefficients, unless stated otherwise
+		% 	projede vlna i Section~\ref{...} ??
 		% 	
 		
 		

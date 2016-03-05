@@ -19,6 +19,13 @@ for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obvi
 	Note that $x^8+1 = (x+1)^8$, therefore if $p$ is not coprime with $x^8+1$, then $1$ must be its root, and vice versa. This can be easily tested, indeed $p(1) = 0$ if the number of its terms is even. It follows that $p$ is coprime with $x^8+1$ if and only if the number of terms of $p$ is odd.
 \end{remark}
 
+
+% ======================================================================
+% ===   C H A N G I N G   A T T A C K   T A R G E T                  ===
+% ======================================================================
+
+\subsection{Changing Attack Target}
+
 Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with the idea of changing the target\footnote{The word {\em target} will be heavily used in this context. Do not be confused with {\em target bit}, it keeps the original meaning.} of the attack from the original SBox to its simplest variant -- Rijndael inverse.
 
 \begin{remark}
@@ -36,34 +43,43 @@ We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijnd
 	\begin{center}
 	\input{./tables/3_3_1-klinec-rijinv.tex}
 	\end{center}
-\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ top position) is replaced with $\blacksquare$ in order to be emphasized.}
+\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.}
 \label{tab:klinecrijinv}
 \end{table}
 \end{landscape}
 
 In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{8} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{6} bit and at \nth{7} bit the gap is much larger for an incorrect candidate; this happens much more often if less traces are used). The most substantial practical benefit of attacking different targets is that those key bytes which did not leak with one target may possibly leak with another, cf. \nth{8} byte in both tables.
 
+
+% ======================================================================
+% ===   C O N S I D E R I N G   A N O T H E R   T A R G E T S        ===
+% ======================================================================
+
 \subsection{Considering Another Targets}
 \label{sec:16targets}
 
-This benefit led us to the idea of using yet another invertible affine mappings besides the one of the original SBox and identity. There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$, there are $128$ of them (follows from Remark \ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings. But we realized that there are certain classes of mappings which give similar or even same results.
+This benefit led us to the idea of using yet another invertible affine mappings besides the one of the original SBox and identity. There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$, there are $128$ of them (follows from Remark \ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings.
 
-\begin{description}
-	\item[Effect of $q$'s.]
-		First let us see what happens if we change one bit of $q$ (here considered as a byte). It obviously only changes the output of our SBox at the same bit, finally yielding a swap of $S_0$ and $S_1$ in the attack algorithm (only at this target bit, of course). Note that this swap has no effect on results, since we are only interested in absolute difference of means of values inside $S_0$ and $S_1$. We will consider $q = 0$, hence our SBoxes will be linear mappings of Rijndael inverse.
-	
-	\item[Effect of $p$'s.]
-		Second let us study the effect of different $p$'s. Note that $x$ is coprime with $x^8+1$ and $p$ is supposed to, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
+\begin{remark}
+\label{rem:pqeffect}
+	We realized that there are certain classes of mappings which give similar or even same results.
+	\begin{description}
+		\item[Effect of $q$'s.]
+			First let us see what happens if we change one bit of $q$ (here considered as a byte). It obviously only changes the output of our SBox at the same bit, finally yielding a swap of $S_0$ and $S_1$ in the attack algorithm (only at this target bit, of course). Note that this swap has no effect on results, since we are only interested in absolute difference of means of values inside $S_0$ and $S_1$. We will consider $q = 0$, hence our SBoxes will be linear mappings of Rijndael inverse.
 		
-		Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g.\ $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g.\ $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end so the shift is actually a cyclical shift.
-		
-		Remind that polynomials coprime with $x^8+1$ have even number of terms (see Remark \ref{rem:coprime}), hence repeating this we obtain $8$ distinct polynomials which we put in single equivalence class i.e.\ we get $128/8=16$ such classes, see Table \ref{tab:classrepre} for representants of each class. Note that the effect is the same on bits representing polynomials.
-		
-		Since we assumed $q = 0$, the actual output of two sboxes using $p$'s from single class is thus also only a cyclical shift of each other. It follows that the effect on results is that it only cyclically shifts the results among target bits. Hence also the information which target bit leaks is totally irrelevant.
-%?% neni zas tak irelevant ptž z pozice v trace zjistim která varianta to je, ze všech mi to pak může něco prozradit
-% => je irrelevant ptž ikdyž leaknou dva tak rozhodně nejsou od sebe jak by měly
-% original SBox is {\tt 1f}
-\end{description}
+		\item[Effect of $p$'s.]
+			Second let us study the effect of different $p$'s. Note that $x$ is coprime with $x^8+1$ and $p$ is supposed to, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
+			
+			Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g.\ $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g.\ $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end so the shift is actually a cyclical shift.
+			
+			Remind that polynomials coprime with $x^8+1$ have even number of terms (see Remark \ref{rem:coprime}), hence repeating this we obtain $8$ distinct polynomials which we put in single equivalence class i.e.\ we get $128/8=16$ such classes, see Table \ref{tab:classrepre} for representants of each class. Note that the effect is the same on bits representing polynomials.
+			
+			Since we assumed $q = 0$, the actual output of two sboxes using $p$'s from single class is thus also only a cyclical shift of each other. It follows that the effect on results is that it only cyclically shifts the results among target bits. Hence also the information which target bit leaks is totally irrelevant.
+	%?% neni zas tak irelevant ptž z pozice v trace zjistim která varianta to je, ze všech mi to pak může něco prozradit
+	% => je irrelevant ptž ikdyž leaknou dva tak rozhodně nejsou od sebe jak by měly
+	% original SBox is {\tt 1f}
+	\end{description}
+\end{remark}
 
 \begin{table}[h]
 	\begin{center}
@@ -79,63 +95,125 @@ This benefit led us to the idea of using yet another invertible affine mappings 
 \label{tab:classrepre}
 \end{table}
 
+
+% ======================================================================
+% ===   A T T A C K   U S I N G   A L L   1 6   T A R G E T S        ===
+% ======================================================================
+
 \subsection{Attack Using All 16 Targets}
 
-We attacked the \nth{1} byte of {\tt KlinecWBAES} using all these $16$ attack targets and $256$ traces. Table \ref{tab:lintargets} shows percentual gap to the second candidate for each target bit and each attack target. If the candidate with the biggest gap among all target bits is correct, it is emphasized with $\blacksquare$, otherwise (i.e.\ incorrect candidate has the biggest gap) it is marked with $\boxtimes$, other correct candidates have $\square$.
+We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ traces, see results of \nth{0} byte in Table \ref{tab:lintargets}. Note that the row of target {\tt 01} is equal to the row of \nth{0} byte in Table \ref{tab:klinecrijinv} and the row of target {\tt 1f} is equal to the row of \nth{0} byte in Table \ref{tab:klinecsbox}. This is not a coincidence since {\tt 01} is identity, therefore the target is plain Rijndael inverse, and {\tt 1f} is $p$ of the original SBox and $q$ does not have any result on effect, see Remark \ref{rem:pqeffect}. Also note that target {\tt 25} does not unravel the \nth{0} key byte even with $1024$ traces -- here we can clearly see the benefit of having many targets.
 
-\begin{table}[h]
+\begin{landscape}
+\begin{table}[H]
 	\begin{center}
 	\input{./tables/3_3_2-invertible-targets.tex}
 	\end{center}
-\caption{Percentual gaps to the second candidate. Attack against the \nth{1} byte of {\tt KlinecWBAES} using all $16$ targets and $256$ traces.}
+\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.}
 \label{tab:lintargets}
 \end{table}
+\end{landscape}
 
-Note that there are $11$ successful and $5$ unsuccessful targets. In case of unsuccessful targets, there sometimes happens to be another target bit which reveals the correct key byte, but there are also targets (namely {\tt 25} and {\tt 3d}) using which the correct key byte does not leak at any target bit. On the other hand, these incorrect candidates have considerably smaller gaps, therefore could be easily detected. In such case we would repeat the attack with a different target.
 
+% ======================================================================
+% ===   B L I N D   A T T A C K                                      ===
+% ======================================================================
+
+\subsection{Blind Attack}
+
+In a real-world scenario, the key is typically unknown. Therefore we do not have any information whether our best candidate is correct or not -- we need some robust rule to deduce so.
+
+\begin{remark}
+\label{rem:tail}
+	Especially note the attack against the \nth{11} byte using {\tt 0d} as its target in Table \ref{tab:lintargets}, here the most successful candidate has a gap of almost $22\%$. On the other hand, as already noted by the original authors, the correct candidate can be found mostly on the tail -- its ranks are three times $255$, once $254$ and twice $253$ --, hence it seems that we could exploit this information as well.
+\end{remark}
+
+But we rather suggest to use less traces and repeat the attack with several targets. Unfortunately in such case the correct candidate mostly cannot be found on the tail, hence we will actually not use the previous remark. % We rather suggest the following:
+%~ \begin{enumerate}
+	%~ \item pick a target, %!% Chi-square test of uniformity, pick random
+	%~ \item attack using $256$ traces
+%~ \end{enumerate}
+
+\ldots
+
+\ldots
+
+% how to detect correct candidates
+
+% If the best candidate is correct, it is emphasized with $\blacksquare$, otherwise (i.e.\ incorrect candidate has the biggest gap) it is marked with $\boxtimes$, other correct candidates have $\square$.
 % trochu statistiky přidat ...
-We repeated this attack against all key bytes using $1024$ traces and observed following:
-\begin{itemize}
-	\item $12.6$ targets per byte were successful ($\blacksquare$) on average (without any limit on gap),
-	\begin{itemize}
-		\item the rest gave incorrect candidate ($\boxtimes$),
-	\end{itemize}
-	\item correct candidates had average gap of $37\%$ with standard deviation of $11\%$,
-	\item incorrect candidates had average gap of $13.5\%$ with standard deviation of $4.5\%$,
-\end{itemize}
-We used this information and repeated the attack with only $128$ traces while
-\begin{itemize}
-	\item considering only candidates beyond $\mu_\textnormal{false}+3\sigma_\textnormal{false} = 27\%$, we get
-	\begin{itemize}
-		\item $10.6$ successful targets on average,
-		\item no false positive i.e.\ incorrect candidates are filtered out.
-	\end{itemize}
-\end{itemize}
-Therefore, in case of blind attack (i.e.\ no knowledge of actual key), we suggest to use less traces, but keep changing the target until the maximal gap exceeds $27\%$, then we accept that candidate. This is likely to happen soon since $10.6$ out of $16$ targets succeed on average.
+%~ We repeated this attack against all key bytes using $1024$ traces and observed following:
+%~ \begin{itemize}
+	%~ \item $12.6$ targets per byte were successful ($\blacksquare$) on average (without any limit on gap),
+	%~ \begin{itemize}
+		%~ \item the rest gave incorrect candidate ($\boxtimes$),
+	%~ \end{itemize}
+	%~ \item correct candidates had average gap of $37\%$ with standard deviation of $11\%$,
+	%~ \item incorrect candidates had average gap of $13.5\%$ with standard deviation of $4.5\%$,
+%~ \end{itemize}
+%~ We used this information and repeated the attack with only $128$ traces while
+%~ \begin{itemize}
+	%~ \item considering only candidates beyond $\mu_\textnormal{false}+3\sigma_\textnormal{false} = 27\%$, we get
+	%~ \begin{itemize}
+		%~ \item $10.6$ successful targets on average,
+		%~ \item no false positive i.e.\ incorrect candidates are filtered out.
+	%~ \end{itemize}
+%~ \end{itemize}
+%~ Therefore, in case of blind attack (i.e.\ no knowledge of actual key), we suggest to use less traces, but keep changing the target until the maximal gap exceeds $27\%$, then we accept that candidate. This is likely to happen soon since $10.6$ out of $16$ targets succeed on average.
+
+
+% ======================================================================
+% ===   E X P A N D I N G   A T T A C K   T A R G E T S              ===
+% ======================================================================
 
 \subsection{Expanding Attack Targets to Non-Invertible Affine Mappings}
+
+The most surprising results emerged with the idea of trying to use also non-invertible affine mappings in attack targets. Remind that the mappings were originally required to be invertible, otherwise the resulting cipher would not be invertible. But there is no such limitation on attack target -- actually the attack is only required to work, no matter why.
+
+As before, we only assumed linear mappings since the effect of $q$ remains the same, null. And we also only kept one representant of each class where elements are just a multiple of $x^i\pmod{x^8+1}$ of each other, for some $i$. See these representants in Table~\ref{tab:classreprenoninv}.
+
+\begin{table}[h]
+	\begin{center}
+	\begin{tabular}{| c | c | c | c | c | c | c | c | c | c |}
+		\hline
+		{\tt 00} & {\tt 03} & {\tt 05} & {\tt 09} & {\tt 0f} & {\tt 11} & {\tt 17} & {\tt 1b} & {\tt 1d} & {\tt 27} \\
+		\hline
+		{\tt 2b} & {\tt 2d} & {\tt 33} & {\tt 35} & {\tt 3f} & {\tt 55} & {\tt 5f} & {\tt 6f} & {\tt 77} & {\tt ff} \\
+		\hline
+	\end{tabular}
+	\end{center}
+\caption{Representants of classes of non-invertible $p$'s in hexadecimal form.}
+\label{tab:classreprenoninv}
+\end{table}
+
+We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Let us further see what the other extreme value {\tt ff} gives. It actually gives a sum of all eigth cyclical shifts, therefore it gives {\tt ff} if Hamming weight of Rijndael inverse is odd, {\tt 00} otherwise. One might want to discard {\tt ff} as well, but it could surprisingly break some keybytes! See results in Table~\ref{tab:noninvtargets}.
+
+Note that some targets only have partial results, e.g.\ $\texttt{11} = x^4+1$. This is because $\texttt{11}\cdot x^4 \pmod{x^8+1} = \texttt{11}$, hence the results would be the same in the second half. Remind that multiplication by $x\pmod{x^8+1}$ causes cyclical shift of results.
+
+\begin{landscape}
+\begin{table}[H]
+	\begin{center}
+	\input{./tables/3_3_3-noninvertible-targets.tex}
+	\end{center}
+\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.}
+\label{tab:noninvtargets}
+\end{table}
+\end{landscape}
+
+Comparing these results with those previous (i.e.\ Table \ref{tab:noninvtargets} and \ref{tab:lintargets}) reveals us an two interesting observations:
+\begin{itemize}
+	\item results of non-invertible target {\tt 03} are equal to the results of invertible target {\tt 1f}, which is actually the original SBox, and
+	\item results of non-invertible target {\tt 05} are equal to the results of invertible target {\tt 01}, which is actually only Rijndael inverse.
+\end{itemize}
+This does not hold only for \nth{0} byte, but for them all.
+
+% One may wonder whether it leaks at the same position i.e.\ the same values give results with different targets.
 
 % yet another WTF: works for certain singular linear mappings as well (study deeper? their rank?)
 % zase ale dávaj stejný výsledky (aspoň některý) jako regulární, e.g.:
 % 0x01 ~ 0x05 ... Rijndael inverse
 % 0x1f ~ 0x03 ... orig. SBox
-% některý jsou nový:
-% 0x09
-% 0x0f
-% 0x1b
-% 0x1d
-% 0x27
-% 0x2b
-% 0x2d
-% 0x2e
-% 0x35
-% 0x3f
-% 0x66
-% 0xbd
-% 0xbe
-% 0xde
-% a dvě v rámci novejch jsou stejný
-% 0xbd ~ 0xde
+% ostatní jsou nový (všechny?)
 
 % psal já / Teuwen:
 %~ > I only wonder about the reasoning why Karroumi is more than Chow since
