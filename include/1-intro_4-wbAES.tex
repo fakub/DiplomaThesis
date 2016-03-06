@@ -17,9 +17,9 @@ Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it ha
 \end{notion}
 
 
-% ======================================================================
-% ===   E N C O D I N G S                                            ===
-% ======================================================================
+% ==============================================================================
+% ===   E N C O D I N G S                                                    ===
+% ==============================================================================
 
 \subsection{Encodings}
 
@@ -50,9 +50,9 @@ The following definition introduces the self-vanishing property of the bijection
 Note that, given only tables for $Y'$ and $X'$, $G$ can be totally forgotten to be able to compute $Y\circ X$ provided that you know the input and output encoding. Such networked encoding can be obviously applied to much longer composition of transformations and you still only need to know the input and output encoding.   %!% někam popsat I/O encoding
 
 
-% ======================================================================
-% ===   R E O R D E R E D   A E S                                    ===
-% ======================================================================
+% ==============================================================================
+% ===   R E O R D E R E D   A E S                                            ===
+% ==============================================================================
 
 \subsection{Reorded AES}
 
@@ -80,9 +80,9 @@ In order to begin with fully-table representation, we need to reorder AES operat
 \end{alg}
 
 
-% ======================================================================
-% ===   F U L L Y - T A B L E   R E P R E S E N T A T I O N          ===
-% ======================================================================
+% ==============================================================================
+% ===   F U L L Y - T A B L E   R E P R E S E N T A T I O N                  ===
+% ==============================================================================
 
 \subsection{Fully-Table Representation}
 
@@ -112,9 +112,9 @@ As outlined earlier, WBAES construction turns AES operations into table lookups 
 	$\ShiftRows$ does not need table representation since it only moves bytes. We will see later how it can be implemented.
 
 
-% ======================================================================
-% ===   W B A E S   C O N S T R U C T I O N                          ===
-% ======================================================================
+% ==============================================================================
+% ===   W B A E S   C O N S T R U C T I O N                                  ===
+% ==============================================================================
 
 \subsection{WBAES Construction}
 

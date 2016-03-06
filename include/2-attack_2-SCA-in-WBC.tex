@@ -8,9 +8,9 @@ The idea was inspired by Delerabl{\'e}e et al.\ \cite{delerablee2013white}. As i
 The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context differential power analysis might sound wierd since there is no {\em power}, it is rather referred to as {\em Differential Computation Analysis} (DCA).
 
 
-% ======================================================================
-% ===   T R A C E   A C Q U I S I T I O N                            ===
-% ======================================================================
+% ==============================================================================
+% ===   T R A C E   A C Q U I S I T I O N                                    ===
+% ==============================================================================
 
 \subsection{Trace Acquisition}
 \label{sec:tracq}
@@ -54,9 +54,9 @@ One may wonder whether traces can ever be properly aligned at all because then i
 Having traces properly acquired, let us proceed to trace filtering.
 
 
-% ======================================================================
-% ===   T R A C E   F I L T E R I N G                                ===
-% ======================================================================
+% ==============================================================================
+% ===   T R A C E   F I L T E R I N G                                        ===
+% ==============================================================================
 
 \subsection{Trace Filtering}
 \label{sec:filter}
@@ -158,9 +158,9 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		In the worst case, all our filtering attempts fail or we just cannot see any relevant pattern in the memory trace visualization. Then we omit address and temporal filtering at all and attack for instance only the first byte while, hopefuly, obtaining the position where the key leaks i.e.\ where encryption takes place; here we employ the improved output of our SCA algorithm introduced in Note \ref{note:leakpos}. We can look at this position in the visualization and guess some reasonable address and temporal range, use it for filtering and finally attack all $16$ bytes with much smaller traces.
 
 
-% ======================================================================
-% ===   A T T A C K I N G   T R A C E S                              ===
-% ======================================================================
+% ==============================================================================
+% ===   A T T A C K I N G   T R A C E S                                      ===
+% ==============================================================================
 
 \subsection{Attacking Traces}
 \label{sec:attack}

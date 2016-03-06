@@ -20,9 +20,9 @@ for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obvi
 \end{remark}
 
 
-% ======================================================================
-% ===   C H A N G I N G   A T T A C K   T A R G E T                  ===
-% ======================================================================
+% ==============================================================================
+% ===   C H A N G I N G   A T T A C K   T A R G E T                          ===
+% ==============================================================================
 
 \subsection{Changing Attack Target}
 
@@ -51,9 +51,9 @@ We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijnd
 In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{8} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{6} bit and at \nth{7} bit the gap is much larger for an incorrect candidate; this happens much more often if less traces are used). The most substantial practical benefit of attacking different targets is that those key bytes which did not leak with one target may possibly leak with another, cf. \nth{8} byte in both tables.
 
 
-% ======================================================================
-% ===   C O N S I D E R I N G   A N O T H E R   T A R G E T S        ===
-% ======================================================================
+% ==============================================================================
+% ===   C O N S I D E R I N G   A N O T H E R   T A R G E T S                ===
+% ==============================================================================
 
 \subsection{Considering Another Targets}
 \label{sec:16targets}
@@ -96,9 +96,9 @@ This benefit led us to the idea of using yet another invertible affine mappings 
 \end{table}
 
 
-% ======================================================================
-% ===   A T T A C K   U S I N G   A L L   1 6   T A R G E T S        ===
-% ======================================================================
+% ==============================================================================
+% ===   A T T A C K   U S I N G   A L L   1 6   T A R G E T S                ===
+% ==============================================================================
 
 \subsection{Attack Using All 16 Targets}
 
@@ -115,9 +115,48 @@ We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ tr
 \end{landscape}
 
 
-% ======================================================================
-% ===   B L I N D   A T T A C K                                      ===
-% ======================================================================
+% ==============================================================================
+% ===   N O N - I N V E R T I B L E   A F F I N E   M A P P I N G S          ===
+% ==============================================================================
+
+\subsection{Non-Invertible Affine Mappings}
+
+The most surprising results emerged with the idea of trying to use also non-invertible affine mappings in attack targets. Remind that the mappings were originally required to be invertible, otherwise the resulting cipher would not be invertible. But there is no such limitation on attack target -- actually the attack is only required to work, no matter why.
+
+As before, we only assumed linear mappings since the effect of $q$ remains the same, null. And we also only kept one representant of each class where elements are just a multiple of $x^i\pmod{x^8+1}$ of each other, for some $i$. See these representants in Table~\ref{tab:classreprenoninv}.
+
+\begin{table}[h]
+	\begin{center}
+	\begin{tabular}{| c | c | c | c | c | c | c | c | c | c |}
+		\hline
+		{\tt 00} & {\tt 03} & {\tt 05} & {\tt 09} & {\tt 0f} & {\tt 11} & {\tt 17} & {\tt 1b} & {\tt 1d} & {\tt 27} \\
+		\hline
+		{\tt 2b} & {\tt 2d} & {\tt 33} & {\tt 35} & {\tt 3f} & {\tt 55} & {\tt 5f} & {\tt 6f} & {\tt 77} & {\tt ff} \\
+		\hline
+	\end{tabular}
+	\end{center}
+\caption{Representants of classes of non-invertible $p$'s in hexadecimal form.}
+\label{tab:classreprenoninv}
+\end{table}
+
+We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Let us further see what the other extreme value {\tt ff} gives. It actually gives a sum of all eigth cyclical shifts, therefore it gives {\tt ff} if Hamming weight of Rijndael inverse is odd, {\tt 00} otherwise. One might want to discard {\tt ff} as well, but it could surprisingly break some keybytes! See results in Table~\ref{tab:noninvtargets}.
+
+Note that some targets only have partial results, e.g.\ $\texttt{11} = x^4+1$. This is because $\texttt{11}\cdot x^4 \pmod{x^8+1} = \texttt{11}$, hence the results would be the same in the second half. Remind that multiplication by $x\pmod{x^8+1}$ causes cyclical shift of results.
+
+\begin{landscape}
+\begin{table}[H]
+	\begin{center}
+	\input{./tables/3_3_3-noninvertible-targets.tex}
+	\end{center}
+\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.}
+\label{tab:noninvtargets}
+\end{table}
+\end{landscape}
+
+
+% ==============================================================================
+% ===   B L I N D   A T T A C K                                              ===
+% ==============================================================================
 
 \subsection{Blind Attack}
 
@@ -160,60 +199,6 @@ But we rather suggest to use less traces and repeat the attack with several targ
 	%~ \end{itemize}
 %~ \end{itemize}
 %~ Therefore, in case of blind attack (i.e.\ no knowledge of actual key), we suggest to use less traces, but keep changing the target until the maximal gap exceeds $27\%$, then we accept that candidate. This is likely to happen soon since $10.6$ out of $16$ targets succeed on average.
-
-
-% ======================================================================
-% ===   E X P A N D I N G   A T T A C K   T A R G E T S              ===
-% ======================================================================
-
-\subsection{Expanding Attack Targets to Non-Invertible Affine Mappings}
-
-The most surprising results emerged with the idea of trying to use also non-invertible affine mappings in attack targets. Remind that the mappings were originally required to be invertible, otherwise the resulting cipher would not be invertible. But there is no such limitation on attack target -- actually the attack is only required to work, no matter why.
-
-As before, we only assumed linear mappings since the effect of $q$ remains the same, null. And we also only kept one representant of each class where elements are just a multiple of $x^i\pmod{x^8+1}$ of each other, for some $i$. See these representants in Table~\ref{tab:classreprenoninv}.
-
-\begin{table}[h]
-	\begin{center}
-	\begin{tabular}{| c | c | c | c | c | c | c | c | c | c |}
-		\hline
-		{\tt 00} & {\tt 03} & {\tt 05} & {\tt 09} & {\tt 0f} & {\tt 11} & {\tt 17} & {\tt 1b} & {\tt 1d} & {\tt 27} \\
-		\hline
-		{\tt 2b} & {\tt 2d} & {\tt 33} & {\tt 35} & {\tt 3f} & {\tt 55} & {\tt 5f} & {\tt 6f} & {\tt 77} & {\tt ff} \\
-		\hline
-	\end{tabular}
-	\end{center}
-\caption{Representants of classes of non-invertible $p$'s in hexadecimal form.}
-\label{tab:classreprenoninv}
-\end{table}
-
-We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Let us further see what the other extreme value {\tt ff} gives. It actually gives a sum of all eigth cyclical shifts, therefore it gives {\tt ff} if Hamming weight of Rijndael inverse is odd, {\tt 00} otherwise. One might want to discard {\tt ff} as well, but it could surprisingly break some keybytes! See results in Table~\ref{tab:noninvtargets}.
-
-Note that some targets only have partial results, e.g.\ $\texttt{11} = x^4+1$. This is because $\texttt{11}\cdot x^4 \pmod{x^8+1} = \texttt{11}$, hence the results would be the same in the second half. Remind that multiplication by $x\pmod{x^8+1}$ causes cyclical shift of results.
-
-\begin{landscape}
-\begin{table}[H]
-	\begin{center}
-	\input{./tables/3_3_3-noninvertible-targets.tex}
-	\end{center}
-\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.}
-\label{tab:noninvtargets}
-\end{table}
-\end{landscape}
-
-Comparing these results with those previous (i.e.\ Table \ref{tab:noninvtargets} and \ref{tab:lintargets}) reveals us an two interesting observations:
-\begin{itemize}
-	\item results of non-invertible target {\tt 03} are equal to the results of invertible target {\tt 1f}, which is actually the original SBox, and
-	\item results of non-invertible target {\tt 05} are equal to the results of invertible target {\tt 01}, which is actually only Rijndael inverse.
-\end{itemize}
-This does not hold only for \nth{0} byte, but for them all.
-
-% One may wonder whether it leaks at the same position i.e.\ the same values give results with different targets.
-
-% yet another WTF: works for certain singular linear mappings as well (study deeper? their rank?)
-% zase ale dávaj stejný výsledky (aspoň některý) jako regulární, e.g.:
-% 0x01 ~ 0x05 ... Rijndael inverse
-% 0x1f ~ 0x03 ... orig. SBox
-% ostatní jsou nový (všechny?)
 
 % psal já / Teuwen:
 %~ > I only wonder about the reasoning why Karroumi is more than Chow since

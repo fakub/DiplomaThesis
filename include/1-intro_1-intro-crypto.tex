@@ -40,9 +40,9 @@ The item \ref{item:plainrecov} requirement is also referred to as {\em confident
 As we could see in the previous example, shift cipher is not much secure cipher. Therefore we would like to formalize the concept of cipher and its security.
 
 
-% ======================================================================
-% ===   S Y M M E T R I C   A N D   A S Y M M E T R I C   C I P H.   ===
-% ======================================================================
+% ==============================================================================
+% ===   S Y M M E T R I C   A N D   A S Y M M E T R I C   C I P H.           ===
+% ==============================================================================
 
 \subsection{Symmetric and Asymmetric Cipher}
 
@@ -66,9 +66,9 @@ There are two large families of ciphers -- symmetric and asymmetric. Shift ciphe
 According to the previous definition, we do not seem to have a definition of a proper cipher at all -- the only requirement is corectness (cf. Equation \ref{eq:correct}) -- but it totally lacks any security requirement. As we will see later, it is actually quite complicated to define ``security'' appropriately.
 
 
-% ======================================================================
-% ===   I N F O R M A T I O N - T H E O R E T I C   A P P R O A C H  ===
-% ======================================================================
+% ==============================================================================
+% ===   I N F O R M A T I O N - T H E O R E T I C   A P P R O A C H          ===
+% ==============================================================================
 
 \subsection{Information-Theoretic Approach}
 
@@ -108,9 +108,9 @@ Perfect security seems to be exactly what we want from a secure cipher but the f
 \end{note}
 
 
-% ======================================================================
-% ===   C O M P L E X I T Y - T H E O R E T I C   A P P R O A C H    ===
-% ======================================================================
+% ==============================================================================
+% ===   C O M P L E X I T Y - T H E O R E T I C   A P P R O A C H            ===
+% ==============================================================================
 
 \subsection{Complexity-Theoretic Approach}
 
@@ -212,9 +212,9 @@ The benefit of semantic security over perfect security is that semantic security
 Semantic security is usually achieved using smaller building blocks which are required to have certain properties. The following section describes a building block of one such possible approach.
 
 
-% ======================================================================
-% ===   B L O C K   C I P H E R                                      ===
-% ======================================================================
+% ==============================================================================
+% ===   B L O C K   C I P H E R                                              ===
+% ==============================================================================
 
 \subsection{Block cipher}
 
@@ -309,9 +309,9 @@ This idea has already been addressed in 1883 by Kerckhoffs \cite{auguste1883cryp
 Hence harming rule \ref{item:kerck} from the previous list leads to security by obscurity as introduced in Note \ref{note:secbyobsc}.
 
 
-% ======================================================================
-% ===   P R O V A B L E   S E C U R I T Y   P R O O F S              ===
-% ======================================================================
+% ==============================================================================
+% ===   P R O V A B L E   S E C U R I T Y   P R O O F S                      ===
+% ==============================================================================
 
 \subsection{Provable Security Proofs}
 
@@ -395,9 +395,9 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 The previous theorem is especially important for the idea behind its proof which is used in many other proofs related to provable-security. In this proof we construct adversaries $B_0$, $B_1$ which internally employ adversary $A$ and then we use advantage of $A$ to estimate advantages of $B_0$ and $B_1$.
 
 
-% ======================================================================
-% ===   P R O V A B L E   V S   R E A L - W O R L D                  ===
-% ======================================================================
+% ==============================================================================
+% ===   P R O V A B L E   V S   R E A L - W O R L D                          ===
+% ==============================================================================
 
 \subsection{Provable vs. Real-World Security}
 \label{sec:provable}
@@ -411,9 +411,9 @@ If there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which 
 Instead, real-world block ciphers are {\em beleived} to be secure based on a simple fact: no known attack is far better than exhaustive search. One such block cipher is called {\em Advanced Encryption Standard} (AES) and will be of top interest in this thesis. AES will be described in detail in Section \ref{sec:aes}.
 
 
-% ======================================================================
-% ===   F R O M   B L A C K - B O X   T O   W H I T E - B O X        ===
-% ======================================================================
+% ==============================================================================
+% ===   F R O M   B L A C K - B O X   T O   W H I T E - B O X                ===
+% ==============================================================================
 
 \subsection{From Black-Box to White-Box Attack Context}
 \label{sec:bbtowb}
