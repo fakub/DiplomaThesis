@@ -36,7 +36,7 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 
 \subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}.}
 	
-	Algorithm \ref{alg:bitwisedpa}.
+	Algorithm \ref{alg:bitwisedpa} \ldots
 	
 	\begin{table}[H]
 		\begin{center}
@@ -63,11 +63,11 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	% still attacking very the same traces!
 	
 	We attacked {\tt KlinecWBAES} with bit-wise DPA attack using $1024$ traces, see results in Table \ref{tab:klinecsbox}.
-	In this table we give percentual gap of the best candidate and rank of the true key byte for each key byte and target bit.
+	In this table we give percentual gap of the best candidate and rank of the true key byte, for each key byte and target bit.
 	
 	\begin{note}
 	\label{note:tailrank}
-		There are remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table \ref{tab:klinecsbox}.
+		As already noted by the original authors, we can see remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table \ref{tab:klinecsbox}.
 	\end{note}
 	
 	\begin{landscape}
@@ -75,14 +75,12 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 		\begin{center}
 		\input{./tables/3_2_3-klinec-sbox.tex}
 		\end{center}
-	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ top position) is replaced with $\blacksquare$ in order to be emphasized.}
+	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare$ in order to be well emphasized.}
 	\label{tab:klinecsbox}
 	\end{table}
 	\end{landscape}
 	
-%~ kolik traců, jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
-%~ co jsem použil a co vypadlo, de facto takovej protokol
-%~ White-Box-AES implementation was only broken by bitwise DPA attack and many interesting things occured.
+%~ jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
 % provést útok s několikrát nagenerovanejma tabulkama (v manuálu pak popsat co je pro to potřeba udělat)
 
 %!% další implementace??

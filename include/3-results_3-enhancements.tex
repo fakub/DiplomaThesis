@@ -48,7 +48,7 @@ We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijnd
 \end{table}
 \end{landscape}
 
-In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{8} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{6} bit and at \nth{7} bit the gap is much larger for an incorrect candidate; this happens much more often if less traces are used). The most substantial practical benefit of attacking different targets is that those key bytes which did not leak with one target may possibly leak with another, cf. \nth{8} byte in both tables.
+In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{8} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{6} bit and at \nth{7} bit the gap is much larger for an incorrect candidate; this happens much more often if less traces are used). The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another, cf. \nth{8} byte in both tables.
 
 
 % ==============================================================================
@@ -102,7 +102,7 @@ This benefit led us to the idea of using yet another invertible affine mappings 
 
 \subsection{Attack Using All 16 Targets}
 
-We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ traces, see results of \nth{0} byte in Table \ref{tab:lintargets}. Note that the row of target {\tt 01} is equal to the row of \nth{0} byte in Table \ref{tab:klinecrijinv} and the row of target {\tt 1f} is equal to the row of \nth{0} byte in Table \ref{tab:klinecsbox}. This is not a coincidence since {\tt 01} is identity, therefore the target is plain Rijndael inverse, and {\tt 1f} is $p$ of the original SBox and $q$ does not have any result on effect, see Remark \ref{rem:pqeffect}. Also note that target {\tt 25} does not unravel the \nth{0} key byte even with $1024$ traces -- here we can clearly see the benefit of having many targets.
+We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ traces, see results of \nth{0} byte in Table \ref{tab:lintargets}. Note that the row of target {\tt 01} is equal to the row of \nth{0} byte in Table \ref{tab:klinecrijinv} and the row of target {\tt 1f} is equal to the row of \nth{0} byte in Table \ref{tab:klinecsbox}. This is not a coincidence since {\tt 01} is an identity, therefore the target is plain Rijndael inverse, and {\tt 1f} is the $p$ of the original SBox and $q$ does not have any result on effect, see Remark \ref{rem:pqeffect}. Also note that the target {\tt 25} does not unravel the \nth{0} key byte even with $1024$ traces -- here we can clearly see the benefit of having many targets.
 
 \begin{landscape}
 \begin{table}[H]
@@ -119,11 +119,11 @@ We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ tr
 % ===   N O N - I N V E R T I B L E   A F F I N E   M A P P I N G S          ===
 % ==============================================================================
 
-\subsection{Non-Invertible Affine Mappings}
+\subsection{Non-Invertible Linear Mappings}
 
-The most surprising results emerged with the idea of trying to use also non-invertible affine mappings in attack targets. Remind that the mappings were originally required to be invertible, otherwise the resulting cipher would not be invertible. But there is no such limitation on attack target -- actually the attack is only required to work, no matter why.
+The most surprising results emerged with the idea of trying to use also non-invertible linear mappings in the attack targets. Remind that the mappings were originally required to be invertible, otherwise the resulting cipher would not be invertible. But there is no such limitation on attack target -- actually the attack is only required to work, no matter why.
 
-As before, we only assumed linear mappings since the effect of $q$ remains the same, null. And we also only kept one representant of each class where elements are just a multiple of $x^i\pmod{x^8+1}$ of each other, for some $i$. See these representants in Table~\ref{tab:classreprenoninv}.
+As before, we only kept one representant of each class where elements are a multiple of $x^i\pmod{x^8+1}$ of each other, for some $i$. See these representants in Table~\ref{tab:classreprenoninv}.
 
 \begin{table}[h]
 	\begin{center}
@@ -139,7 +139,7 @@ As before, we only assumed linear mappings since the effect of $q$ remains the s
 \label{tab:classreprenoninv}
 \end{table}
 
-We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Let us further see what the other extreme value {\tt ff} gives. It actually gives a sum of all eigth cyclical shifts, therefore it gives {\tt ff} if Hamming weight of Rijndael inverse is odd, {\tt 00} otherwise. One might want to discard {\tt ff} as well, but it could surprisingly break some keybytes! See results in Table~\ref{tab:noninvtargets}.
+We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Let us further see what the other extreme value {\tt ff} gives. It actually gives a sum of all eigth cyclical shifts, therefore it gives {\tt ff} if Hamming weight of Rijndael inverse is odd, {\tt 00} otherwise. One might want to discard {\tt ff} as well, but it has surprisingly shown to be a competitive target! See results in Table~\ref{tab:noninvtargets}.
 
 Note that some targets only have partial results, e.g.\ $\texttt{11} = x^4+1$. This is because $\texttt{11}\cdot x^4 \pmod{x^8+1} = \texttt{11}$, hence the results would be the same in the second half. Remind that multiplication by $x\pmod{x^8+1}$ causes cyclical shift of results.
 
@@ -155,62 +155,28 @@ Note that some targets only have partial results, e.g.\ $\texttt{11} = x^4+1$. T
 
 
 % ==============================================================================
-% ===   B L I N D   A T T A C K                                              ===
+% ===   L I N E A R   M A P P I N G S   O V E R   G F ( 2 )                  ===
 % ==============================================================================
 
-\subsection{Blind Attack}
+\subsection{Linear Mappings Over $\GF(2)$}
 
-In a real-world scenario, the key is typically unknown. Therefore we do not have any information whether our best candidate is correct or not -- we need some robust rule to deduce so.
+Maybe we can discard all the previous results and show everything in a single uniting approach \ldots
 
-\begin{remark}
-\label{rem:tail}
-	Especially note the attack against the \nth{11} byte using {\tt 0d} as its target in Table \ref{tab:lintargets}, here the most successful candidate has a gap of almost $22\%$. On the other hand, as already noted by the original authors, the correct candidate can be found mostly on the tail -- its ranks are three times $255$, once $254$ and twice $253$ --, hence it seems that we could exploit this information as well.
-\end{remark}
-
-But we rather suggest to use less traces and repeat the attack with several targets. Unfortunately in such case the correct candidate mostly cannot be found on the tail, hence we will actually not use the previous remark. % We rather suggest the following:
-%~ \begin{enumerate}
-	%~ \item pick a target, %!% Chi-square test of uniformity, pick random
-	%~ \item attack using $256$ traces
-%~ \end{enumerate}
-
-\ldots
-
-\ldots
-
-% how to detect correct candidates
-
-% If the best candidate is correct, it is emphasized with $\blacksquare$, otherwise (i.e.\ incorrect candidate has the biggest gap) it is marked with $\boxtimes$, other correct candidates have $\square$.
-% trochu statistiky přidat ...
-%~ We repeated this attack against all key bytes using $1024$ traces and observed following:
-%~ \begin{itemize}
-	%~ \item $12.6$ targets per byte were successful ($\blacksquare$) on average (without any limit on gap),
-	%~ \begin{itemize}
-		%~ \item the rest gave incorrect candidate ($\boxtimes$),
-	%~ \end{itemize}
-	%~ \item correct candidates had average gap of $37\%$ with standard deviation of $11\%$,
-	%~ \item incorrect candidates had average gap of $13.5\%$ with standard deviation of $4.5\%$,
-%~ \end{itemize}
-%~ We used this information and repeated the attack with only $128$ traces while
-%~ \begin{itemize}
-	%~ \item considering only candidates beyond $\mu_\textnormal{false}+3\sigma_\textnormal{false} = 27\%$, we get
-	%~ \begin{itemize}
-		%~ \item $10.6$ successful targets on average,
-		%~ \item no false positive i.e.\ incorrect candidates are filtered out.
-	%~ \end{itemize}
-%~ \end{itemize}
-%~ Therefore, in case of blind attack (i.e.\ no knowledge of actual key), we suggest to use less traces, but keep changing the target until the maximal gap exceeds $27\%$, then we accept that candidate. This is likely to happen soon since $10.6$ out of $16$ targets succeed on average.
-
-% psal já / Teuwen:
-%~ > I only wonder about the reasoning why Karroumi is more than Chow since
-%~ > it seems to have been shown to be equal (based on what I wrote in my
-%~ > previous email).
-%~ 
-%~ Well I've no problem to break completely Chow with standard DCA so there
-%~ is something a bit more in Karroumi. Obviously not enough to make it
-%~ robust enough...
-
-%!% nápad: podle toho co vidim v memtrace, neni lepší útočit na 0x........??..; na 0x.........??. nebo dokonce na 0x........???? místo 0x..........??
-% zkus vimdiff 0.txt 1.txt v attack/enhancements
-% to je ale asi uplná sračka
-
-% we have not observed that the true key candidate would be on the bottom, or did we?
+%?% a proč se vlastně omezuju jenom na lineární zobrazení generovaný prvkama tělesa?
+% protože mi to asi stačí, přeci jen lin. zobrazení v GF(2^8) nad GF(2) je po řádcích složený z řádků který už mam v rámci tech mejch
+% a že já tám mam všechny možný řádky všelijak možně posunutý, tak asi nic jinýho nevymyslim, což?
+% a vůbec, všechny targety dostanu tim, že přenásobim vstup maticí
+%~ 1 0 0 0 0 0 0 0
+%~ 0 1 0 0 0 0 0 0
+%~ ...
+%~ 0 0 0 0 0 0 0 1
+%~ 1 1 0 0 0 0 0 0
+%~ 1 0 1 0 0 0 0 0
+%~ ...
+%~ 0 1 1 0 0 0 0 0
+%~ ...
+%~ 0 0 0 0 0 0 1 1
+%~ 1 1 1 0 0 0 0 0
+%~ ...
+%~ 1 1 1 1 1 1 1 1
+% ta už obsahuje bezpečně všechno a dost snadno se generuje

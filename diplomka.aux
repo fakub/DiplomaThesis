@@ -242,10 +242,10 @@
 \newlabel{tab:gap}{{2.1}{33}{Partial results of a real experiment. The true key byte is {\tt 15} and is emphasized with brackets.\relax }{table.caption.39}{}}
 \newlabel{rem:gap}{{2.15}{34}{}{thm.2.15}{}}
 \citation{teuwen2015movfuscator}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{35}{chapter.3}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Results \& Improvements}{35}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:results}{{3}{35}{Practical Attack \& Results}{chapter.3}{}}
+\newlabel{chap:results}{{3}{35}{Results \& Improvements}{chapter.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.1}Attack Tools}{35}{section.3.1}}
 \newlabel{sec:tools}{{3.1}{35}{Attack Tools}{section.3.1}{}}
 \citation{bos2015differential}
@@ -264,8 +264,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}\tt  KlinecWBAES}{36}{subsection.3.2.2}}
 \newlabel{sec:klinecwbaes}{{3.2.2}{36}{\tt KlinecWBAES}{subsection.3.2.2}{}}
 \newlabel{note:tailrank}{{3.1}{36}{}{thm.3.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ top position) is replaced with $\blacksquare $ in order to be emphasized.\relax }}{37}{table.caption.44}}
-\newlabel{tab:klinecsbox}{{3.3}{37}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ top position) is replaced with $\blacksquare $ in order to be emphasized.\relax }{table.caption.44}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ in order to be well emphasized.\relax }}{37}{table.caption.44}}
+\newlabel{tab:klinecsbox}{{3.3}{37}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ in order to be well emphasized.\relax }{table.caption.44}{}}
 \citation{chow2003aes}
 \citation{klinec2013white}
 \citation{karroumi2011protecting}
@@ -282,21 +282,33 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Attack Using All 16 Targets}{41}{subsection.3.3.3}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }}{42}{table.caption.47}}
 \newlabel{tab:lintargets}{{3.6}{42}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }{table.caption.47}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Affine Mappings}{43}{subsection.3.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{43}{subsection.3.3.4}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }}{43}{table.caption.48}}
 \newlabel{tab:classreprenoninv}{{3.7}{43}{Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }{table.caption.48}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.8}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }}{44}{table.caption.49}}
 \newlabel{tab:noninvtargets}{{3.8}{44}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }{table.caption.49}{}}
-\citation{pin214manual}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Blind Attack}{45}{subsection.3.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Linear Mappings Over $\mathrm  {GF}(2)$}{45}{subsection.3.3.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Blind Attack}{45}{section.3.4}}
+\newlabel{sec:blindattack}{{3.4}{45}{Blind Attack}{section.3.4}{}}
 \newlabel{rem:tail}{{3.5}{45}{}{thm.3.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{45}{section.3.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Countermeasures against DCA}{46}{subsection.3.4.1}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Future Work}{47}{chapter.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Remarks}{45}{subsection.3.4.1}}
+\@writefile{toc}{\contentsline {subsubsection}{Leaking Bits}{45}{section*.50}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Number of leaks at each bit.\relax }}{45}{figure.caption.51}}
+\newlabel{fig:leakbithist}{{3.1}{45}{Number of leaks at each bit.\relax }{figure.caption.51}{}}
+\citation{pin214manual}
+\@writefile{toc}{\contentsline {subsubsection}{Leaks per Target}{46}{section*.52}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Number of leaks with each target. The number was doubled at {\tt  11}, {\tt  33} and {\tt  77}, fourtupled at {\tt  55} and eighttupled at {\tt  ff} to fit the scale.\relax }}{46}{figure.caption.53}}
+\newlabel{fig:leaktargethist}{{3.2}{46}{Number of leaks with each target. The number was doubled at {\tt 11}, {\tt 33} and {\tt 77}, fourtupled at {\tt 55} and eighttupled at {\tt ff} to fit the scale.\relax }{figure.caption.53}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Using Less Traces}{46}{section*.54}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{46}{subsection.3.4.2}}
+\newlabel{sec:subblindattack}{{3.4.2}{46}{Blind Attack}{subsection.3.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{46}{section.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{47}{subsection.3.5.1}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Future Work}{49}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:future}{{4}{47}{Future Work}{chapter.4}{}}
-\@writefile{toc}{\contentsline {chapter}{Conclusion}{49}{section*.50}}
+\newlabel{chap:future}{{4}{49}{Future Work}{chapter.4}{}}
+\@writefile{toc}{\contentsline {chapter}{Conclusion}{51}{section*.55}}
 \bibstyle{plain}
 \bibdata{biblio}
 \bibcite{pin214manual}{1}
@@ -311,7 +323,7 @@
 \bibcite{curtin1998brute}{10}
 \bibcite{daemen1999aes}{11}
 \bibcite{daemen2013rijndael}{12}
-\@writefile{toc}{\contentsline {chapter}{References}{51}{section*.52}}
+\@writefile{toc}{\contentsline {chapter}{References}{53}{section*.57}}
 \bibcite{delerablee2013white}{13}
 \bibcite{gandolfi2001electromagnetic}{14}
 \bibcite{chipwhisperer}{15}

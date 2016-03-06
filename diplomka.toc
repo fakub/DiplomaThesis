@@ -55,7 +55,7 @@
 \contentsline {paragraph}{Trace Filtering}{30}{section*.37}
 \contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{32}{subsection.2.2.3}
 \contentsline {subsubsection}{Processing Results}{32}{section*.38}
-\contentsline {chapter}{\numberline {3}Practical Attack \& Results}{35}{chapter.3}
+\contentsline {chapter}{\numberline {3}Results \& Improvements}{35}{chapter.3}
 \contentsline {section}{\numberline {3.1}Attack Tools}{35}{section.3.1}
 \contentsline {section}{\numberline {3.2}Results}{36}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}\tt naiveAES}{36}{subsection.3.2.1}
@@ -66,12 +66,18 @@
 \contentsline {subsection}{\numberline {3.3.1}Changing Attack Target}{38}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Considering Another Targets}{40}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Attack Using All 16 Targets}{41}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Affine Mappings}{43}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Blind Attack}{45}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}Use in White-Box Crypto Design}{45}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Countermeasures against DCA}{46}{subsection.3.4.1}
-\contentsline {chapter}{\numberline {4}Future Work}{47}{chapter.4}
-\contentsline {chapter}{Conclusion}{49}{section*.50}
-\contentsline {chapter}{References}{51}{section*.52}
+\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{43}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Linear Mappings Over $\mathrm {GF}(2)$}{45}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}Blind Attack}{45}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Remarks}{45}{subsection.3.4.1}
+\contentsline {subsubsection}{Leaking Bits}{45}{section*.50}
+\contentsline {subsubsection}{Leaks per Target}{46}{section*.52}
+\contentsline {subsubsection}{Using Less Traces}{46}{section*.54}
+\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{46}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{46}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{47}{subsection.3.5.1}
+\contentsline {chapter}{\numberline {4}Future Work}{49}{chapter.4}
+\contentsline {chapter}{Conclusion}{51}{section*.55}
+\contentsline {chapter}{References}{53}{section*.57}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}
