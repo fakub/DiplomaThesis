@@ -23,6 +23,7 @@ We processed our results of attack against {\tt KlinecWBAES} with $1024$ traces 
 	
 	Remind that our trace is a bit-wise serialization of least significant bytes of memory addresses, hence we can identify which bit within that byte leaked -- simply by taking leaking position in trace modulo $8$ (note the difference from target bit). We noticed that it is not very well balanced, actually the \nth{0} and \nth{1} bits leaked slightly more and the \nth{3} bit did not leak at all! See histogram in Figure \ref{fig:leakbithist}. % vyfiltrováno pod 5%
 	
+	% asi má smysl uvažovat zvlášt invertibilní a neinvertibilní, co kdyby se něco ukázalo
 	\begin{figure}[h]
 	\begin{center}
 		\includegraphics{figures/leak_bit/plot.pdf}

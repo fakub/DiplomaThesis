@@ -67,15 +67,15 @@
 \contentsline {subsection}{\numberline {3.3.2}Considering Another Targets}{40}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Attack Using All 16 Targets}{41}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{43}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Linear Mappings Over $\mathrm {GF}(2)$}{45}{subsection.3.3.5}
-\contentsline {section}{\numberline {3.4}Blind Attack}{45}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Remarks}{45}{subsection.3.4.1}
-\contentsline {subsubsection}{Leaking Bits}{45}{section*.50}
+\contentsline {subsection}{\numberline {3.3.5}Considering All Linear Mappings in $\mathrm {GF}(2^8)$ Over $\mathrm {GF}(2)$}{45}{subsection.3.3.5}
+\contentsline {section}{\numberline {3.4}Blind Attack}{46}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Remarks}{46}{subsection.3.4.1}
+\contentsline {subsubsection}{Leaking Bits}{46}{section*.50}
 \contentsline {subsubsection}{Leaks per Target}{46}{section*.52}
-\contentsline {subsubsection}{Using Less Traces}{46}{section*.54}
-\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{46}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{46}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{47}{subsection.3.5.1}
+\contentsline {subsubsection}{Using Less Traces}{47}{section*.54}
+\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{47}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{47}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{48}{subsection.3.5.1}
 \contentsline {chapter}{\numberline {4}Future Work}{49}{chapter.4}
 \contentsline {chapter}{Conclusion}{51}{section*.55}
 \contentsline {chapter}{References}{53}{section*.57}
