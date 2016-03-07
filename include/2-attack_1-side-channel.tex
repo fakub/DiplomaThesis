@@ -80,6 +80,11 @@ In this section we describe CPA attack (an advanced form of DPA attack) mounted 
 		\end{algorithmic}
 	\end{alg}
 	
+	\begin{remark}
+	\label{rem:attacklookup}
+		We obviously do not compute SBox and Hamming weight at each step, but rather use a single precomputed table of the composition of $HW\circ S$. Clearly, this table has $256$ entries.
+	\end{remark}
+	
 	\begin{note}
 	\label{note:fulllist}
 		It is useful to modify the previous algorithm to output the whole list of key candidates together with their maximal correlation values for each key byte i.e.\ the result of Line \ref{line:corr}, not only $BestKey$.

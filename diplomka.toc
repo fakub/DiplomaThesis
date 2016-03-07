@@ -67,17 +67,18 @@
 \contentsline {subsection}{\numberline {3.3.2}Considering Another Targets}{40}{subsection.3.3.2}
 \contentsline {subsection}{\numberline {3.3.3}Attack Using All 16 Targets}{41}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{43}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Considering All Linear Mappings in $\mathrm {GF}(2^8)$ Over $\mathrm {GF}(2)$}{45}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.5}Considering Linear Mappings on $\mathrm {GF}(2)^8$ Over $\mathrm {GF}(2)$}{45}{subsection.3.3.5}
+\contentsline {subsubsection}{Implementation Note}{46}{section*.50}
 \contentsline {section}{\numberline {3.4}Blind Attack}{46}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Remarks}{46}{subsection.3.4.1}
-\contentsline {subsubsection}{Leaking Bits}{46}{section*.50}
-\contentsline {subsubsection}{Leaks per Target}{46}{section*.52}
-\contentsline {subsubsection}{Using Less Traces}{47}{section*.54}
-\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{47}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{47}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{48}{subsection.3.5.1}
-\contentsline {chapter}{\numberline {4}Future Work}{49}{chapter.4}
-\contentsline {chapter}{Conclusion}{51}{section*.55}
-\contentsline {chapter}{References}{53}{section*.57}
+\contentsline {subsubsection}{Leaking Bits}{47}{section*.51}
+\contentsline {subsubsection}{Leaks per Target}{47}{section*.53}
+\contentsline {subsubsection}{Using Less Traces}{47}{section*.55}
+\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{48}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{48}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{49}{subsection.3.5.1}
+\contentsline {chapter}{\numberline {4}Future Work}{51}{chapter.4}
+\contentsline {chapter}{Conclusion}{53}{section*.56}
+\contentsline {chapter}{References}{55}{section*.58}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}

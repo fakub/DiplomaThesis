@@ -422,7 +422,7 @@ The other central topic of this thesis is {\em white-box attack context}. In ord
 
 \subsubsection{Black-Box}
 
-As we stated in Note \ref{note:threat}, first of all we need to address attacker's abilities -- the threat model. In the black box model, the attacker is given an access to an oracle (see Definition \ref{def:oracle}) evaluating given encryption algorithm $E$ with a random secret key $k$ while the (primary) goal of the attacker is to recover the key. The attacker has absolutely no information but inputs and respective outputs, she cannot observe any internal routines of encryption, hence black box.
+First of all, as stated in Note \ref{note:threat}, we need to address attacker's abilities -- the threat model. In the black box model, the attacker is given an access to an oracle (see Definition \ref{def:oracle}) evaluating given encryption algorithm $E$ with a random secret key $k$ while the (primary) goal of the attacker is to recover the key. The attacker has absolutely no information but inputs and respective outputs, she cannot observe any internal routines of encryption, hence black box.
 
 \begin{note}
 	There could be many other goals than just key recovery, e.g. guessing the ciphertext in advance or be able to decrypt certain/given ciphertext with non-negligible probability and so on. Actually whatever you can imagine which could be in principle possible with a PRP but could not be possible with a truly random bijection.
