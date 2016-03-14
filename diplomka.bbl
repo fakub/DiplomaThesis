@@ -28,6 +28,13 @@ Kerckhoffs Auguste.
 \newblock La cryptographie militaire.
 \newblock {\em Journal des sciences militaires}, 9:538, 1883.
 
+\bibitem{barak2001possibility}
+Boaz Barak, Oded Goldreich, Rusell Impagliazzo, Steven Rudich, Amit Sahai,
+  Salil Vadhan, and Ke~Yang.
+\newblock On the (im) possibility of obfuscating programs.
+\newblock In {\em Advances in cryptology—CRYPTO 2001}, pages 1--18. Springer,
+  2001.
+
 \bibitem{billet2005cryptanalysis}
 Olivier Billet, Henri Gilbert, and Charaf Ech-Chatbi.
 \newblock Cryptanalysis of a white box aes implementation.
@@ -156,6 +163,12 @@ Mitsuru Matsui.
 \newblock In {\em Advances in Cryptology—EUROCRYPT’93}, pages 386--397.
   Springer, 1994.
 
+\bibitem{michiels2007cryptographic}
+Wilhelmus Petrus Adrianus~Johannus Michiels and Paulus Mathias Hubertus
+  Mechtildis~Antonius Gorissen.
+\newblock Cryptographic method for a white-box implementation, November~9 2007.
+\newblock US Patent App. 12/514,922.
+
 \bibitem{muir2013tutorial}
 James~A Muir.
 \newblock A tutorial on white-box aes.
@@ -210,5 +223,11 @@ Philippe Teuwen.
 \newblock
   \url{http://wiki.yobi.be/index.php?title=MoVfuscator_Writeup&oldid=9714}.
 \newblock Accessed: 2015-11-03.
+
+\bibitem{xiao2009secure}
+Yaying Xiao and Xuejia Lai.
+\newblock A secure implementation of white-box aes.
+\newblock In {\em Computer Science and its Applications, 2009. CSA'09. 2nd
+  International Conference on}, pages 1--6. IEEE, 2009.
 
 \end{thebibliography}

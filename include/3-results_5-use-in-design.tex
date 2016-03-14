@@ -11,6 +11,7 @@ Note that the attack allows us to reveal concrete physical addresses which contr
 		%!% vyzkoušet ten příklad z manuálu, jestli to jenom blbě nekompiluju ...
 	\item[Outputting all array indexes.]
 		Note that array indexes are very likely the values which are transformed to leaking physical addresses. Hence it should be possible to output and attack all indexes used within the encryption procedure. But, surprisingly, we did not succeed breaking the key from such ``traces''.
+	%!% vyzkoušet debugger CLionu !!!
 \end{description}
 
 Each of these approaches appeared to bring valuable information about where the key leaks. The leakage position could be later used to identify a specific table access which leaks, hence it could possibly help us to clarify what is the actual reason why this attack works.
@@ -19,6 +20,9 @@ Note that, to the best of our knowledge, there is no explanation why this attack
 
 \ldots
 
+% neni třeba problém v tom že to jsou concatenated encodings? i.e. ze 2x4 bitů postavený 8 bitový bijekce
+% jesli takovejch už třeba neni moc málo nebo jestli náhodou nedávaj docela často nákou korelaci
+% a ty skalární součiny neboli kousky lin. zobrazení jestli třeba nevylejzaj z input mixing bijection který jsou lin.
 % třeba zkusit dokázat, že random bijection ani náhodou nezanechá korelaci v nákym bitu, mělo by tam bejt negligible
 % asi se trochu rozepsat a odůvodnit ...
 % třeba to, jak jsou ty bijekce generovaný, že to je z nákýho pejpru, kterej něco ukazuje

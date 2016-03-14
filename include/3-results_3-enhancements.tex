@@ -202,9 +202,9 @@ Since the attack performs bit-wise, the result does not depend on any other bit 
 Note that we have $255$ of such non-zero rows and the output of this kind of target is a scalar product of this row with Rijndael inverse of input, hence not a byte anymore, but a single bit. Let us denote this mapping by
 \begin{equation}
 \label{eq:tba}
-	T_B(A) = B^T\cdot A' ,
+	T_B(A) = [B]^T\cdot [A'] ,
 \end{equation}
-where $B$ stands for the row, $A'$ for Rijndael inverse of $A$ and both are scalar-multiplied. Also note that there are indeed $255$ entries altogether in Table \ref{tab:lintargets} and \ref{tab:noninvtargets}, for each byte.
+where $B$ stands for the row, $A'$ for Rijndael inverse of $A$ and $[\cdot]$ for column vector representation, hence both are scalar-multiplied. Also note that there are indeed $255$ entries altogether in Table \ref{tab:lintargets} and \ref{tab:noninvtargets}, for each byte.
 
 This observation therefore does not bring anything new, but a unifying and simplifying approach. Hence we do not give any results since these are already given in Table \ref{tab:lintargets} and \ref{tab:noninvtargets}. We only wondered whether we should split our remarks in the following Section \ref{sec:remarks} by the origin of the linear mapping (i.e.\ either invertible, or non-invertible) and finally decided to do so, because there could possibly emerge some surprising results.
 

@@ -2,24 +2,60 @@
 
 \section{White-Box Cryptography}
 
-%~ detailně popsat kde se vzala vč. citací, vývoj, hra na kočku a myš, impos. results
+%~ detailně popsat kde se vzala vč. citací, vývoj
 
 As we already mentioned, classical ciphers are designed with respect to black-box attack context and even under this assumption it has not been theoretically shown that there exists a secure one, see Section \ref{sec:provable}. We also introduced gray-box and white-box attack contexts in Section \ref{sec:bbtowb} with a short reasoning of the gray-box model.
 
-Let us now justify why we are introducing so extreme case as white-box attack context (WBAC). \ldots %!% až jednou pochopim k čemu že to je dobrý ..?
+Let us now justify why we are introducing so extreme case as white-box attack context (WBAC). \ldots
+%!% až jednou pochopim k čemu že to je dobrý ..?
 %~ There were several attempts to introduce a ``secure'' white-box variant of a known cipher. Note that there is no known white-box variant of a public key cipher.
+
+
+% ==============================================================================
+% ===   I M P O S S I B I L I T Y   R E S U L T S                            ===
+% ==============================================================================
 
 \subsection{Impossibility Results}
 \label{sec:impos}
 
+The field of white-box cryptography is strongly related to program obfuscation. Let us first define what a program obfuscator is, then we give some consequences and finally we present a very interesting theoretical result of Barak et al.\ \cite{barak2001possibility}.
+
+\subsubsection{Program Obfuscator}
+	
+	Informally, a {\em program obfuscator} inputs a description of an algorithm (e.g.\ an input of universal Turing machine or a C code) and transforms it into a functionally equivalent obfuscated algorithm description. Such obfuscated program should prevent any effective attacker from learning anything she could not learn if she only had an oracle access to the program.
+	
+	\begin{defn}[Program obfuscator, taken from \cite{barak2001possibility}, simplified]
+	\label{def:obfus}
+		{\em Program obfuscator} is an effective (possibly randomized) algorithm, denoted by $O$, if the following three conditions hold:
+		\begin{enumerate}
+			\item {\em functionality:} for every encoding $C$ of an algorithm $A_C$, $O(C)$ encodes an algorithm which outputs the same as $A_C$ on each input,
+			\item {\em polynomial slowdown:} for every encoding $C$ of an algorithm $A_C$, the length and the running time of $O(C)$ is at most polynomially larger than that of $C$,
+			\item {\em virtual black box property:} for every effective algorithm $B$, there exists an effective adversary $A$ such that for every encoding $C$ of an algorithm $A_C$ it holds that
+			\[
+				\biggl| \Pr\Bigl(B\bigl(O(C)\bigr)=1\Bigr) - \Pr\bigl(A({\cal O}_{A_C})=1\bigr) \biggr| \
+			\]
+			is negligible in terms of $|C|$.
+		\end{enumerate}
+	\end{defn}
+	
+	In other words, the virtual black box property states that there is no effective algorithm which would be able to gain more information from an obfuscated code than any adversary with an oracle access only, hence black box.
+
+\subsubsection{Consequences in Cryptography}
+	
+	Besides several applications in software protection, a program obfuscator would allow several exotic cryptographic constructions as well. As an example, let us mention Fully Homomorphic Encryption (also called {\em the holy grail of cryptography}) or transformation of a private key encryption scheme into a public key one.
+
+\subsubsection{Main Result}
+	
+	The main result of Barak et al.\ \cite{barak2001possibility} basically claims that there is no algorithm which would meet the criteria from Definition \ref{def:obfus} i.e.\ no generic program obfuscator exists. Although this result might sound disappointedly, it actually claims that there exists {\em certain class} of algorithms which are unobfuscable. Hence there is no evidence that {\em any specific} algorithm is unobfuscable. This gives us the hope that there is some algorithm implementing a block cipher which is not in this class.
+	
+	But in general it is more important that the requirements on program obfuscator might be too strong (already suggested by Barak et al.). Indeed, in white-box cryptography context, we can weaken the virtual black box property since we probably do not care about any information which does not effectively lead to key recovery, even though we would not learn this information having an oracle access only.
 
 
-%~ straightforward implementation of a classical cipher is usually insecure ..?
-
-% In ... \cite{} they shown that ..., a seemingly related result. But it actually does not mean that 
+% ==============================================================================
+% ===   C A T   A N D   M O U S E   G A M E                                  ===
+% ==============================================================================
 
 \subsection{Cat and Mouse Game}
 \label{sec:catmouse}
 
-
-
+%!% odkazuju se sem na: ... soon after introduction of a new white-box implementation of a cipher somebody usually comes up with an effective attack

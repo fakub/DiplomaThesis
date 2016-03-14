@@ -59,6 +59,7 @@
 \newlabel{def:overwh}{{1.15}{6}{Overwhelming Function}{thm.1.15}{}}
 \newlabel{note:neglconst}{{1.16}{6}{}{thm.1.16}{}}
 \newlabel{def:oracle}{{1.17}{7}{Oracle}{thm.1.17}{}}
+\newlabel{def:stattest}{{1.18}{7}{Statistical Test}{thm.1.18}{}}
 \newlabel{def:advant}{{1.20}{7}{Advantage}{thm.1.20}{}}
 \newlabel{def:ssadvant}{{1.21}{7}{Semantic Security Advantage}{thm.1.21}{}}
 \newlabel{def:semsec}{{1.22}{7}{Semantically Secure Cipher}{thm.1.22}{}}
@@ -86,47 +87,54 @@
 \newlabel{sec:provable}{{1.1.6}{12}{Provable vs. Real-World Security}{subsection.1.1.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1.7}From Black-Box to White-Box Attack Context}{12}{subsection.1.1.7}}
 \newlabel{sec:bbtowb}{{1.1.7}{12}{From Black-Box to White-Box Attack Context}{subsection.1.1.7}{}}
-\citation{curtin1998brute}
-\citation{fips1977des}
-\citation{americantripple}
+\citation{barak2001possibility}
 \@writefile{toc}{\contentsline {subsubsection}{Black-Box}{13}{section*.10}}
 \@writefile{toc}{\contentsline {subsubsection}{Gray-Box}{13}{section*.11}}
 \@writefile{toc}{\contentsline {subsubsection}{White-Box}{13}{section*.12}}
 \@writefile{toc}{\contentsline {section}{\numberline {1.2}White-Box Cryptography}{13}{section.1.2}}
+\citation{barak2001possibility}
+\citation{barak2001possibility}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}Impossibility Results}{14}{subsection.1.2.1}}
+\newlabel{sec:impos}{{1.2.1}{14}{Impossibility Results}{subsection.1.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Program Obfuscator}{14}{section*.13}}
+\newlabel{def:obfus}{{1.38}{14}{Program obfuscator, taken from \cite {barak2001possibility}, simplified}{thm.1.38}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Consequences in Cryptography}{14}{section*.14}}
+\@writefile{toc}{\contentsline {subsubsection}{Main Result}{14}{section*.15}}
+\citation{curtin1998brute}
+\citation{fips1977des}
+\citation{americantripple}
 \citation{daemen1999aes}
 \citation{fips2001aes}
 \citation{daemen2013rijndael}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.1}Impossibility Results}{14}{subsection.1.2.1}}
-\newlabel{sec:impos}{{1.2.1}{14}{Impossibility Results}{subsection.1.2.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}Cat and Mouse Game}{14}{subsection.1.2.2}}
-\newlabel{sec:catmouse}{{1.2.2}{14}{Cat and Mouse Game}{subsection.1.2.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{14}{section.1.3}}
-\newlabel{sec:aes}{{1.3}{14}{Advanced Encryption Standard}{section.1.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{14}{subsection.1.3.1}}
-\newlabel{rem:aesstate}{{1.38}{14}{}{thm.1.38}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2.2}Cat and Mouse Game}{15}{subsection.1.2.2}}
+\newlabel{sec:catmouse}{{1.2.2}{15}{Cat and Mouse Game}{subsection.1.2.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{15}{section.1.3}}
+\newlabel{sec:aes}{{1.3}{15}{Advanced Encryption Standard}{section.1.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{15}{subsection.1.3.1}}
+\newlabel{rem:aesstate}{{1.39}{15}{}{thm.1.39}{}}
 \citation{matsui1994linear}
 \citation{junod2001complexity}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces A few of possible AES state representations.\relax }}{15}{figure.caption.13}}
-\newlabel{fig:aesnot}{{1.2}{15}{A few of possible AES state representations.\relax }{figure.caption.13}{}}
-\@writefile{toc}{\contentsline {subsubsection}{SubBytes}{15}{section*.14}}
-\newlabel{note:rijinv}{{1.39}{15}{}{thm.1.39}{}}
-\newlabel{eq:sbox}{{1.7}{15}{SubBytes}{equation.1.3.7}{}}
-\newlabel{note:sboxinv}{{1.40}{15}{}{thm.1.40}{}}
-\newlabel{note:sboxtable}{{1.41}{15}{}{thm.1.41}{}}
-\@writefile{toc}{\contentsline {subsubsection}{ShiftRows}{16}{section*.15}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces $\texttt  {ShiftRows}$ operation on a state array.\relax }}{16}{figure.caption.16}}
-\newlabel{fig:shiftrows}{{1.3}{16}{$\ShiftRows $ operation on a state array.\relax }{figure.caption.16}{}}
-\@writefile{toc}{\contentsline {subsubsection}{MixColumns}{16}{section*.17}}
-\newlabel{eq:mixcolpoly}{{1.8}{16}{MixColumns}{equation.1.3.8}{}}
-\newlabel{eq:mixcolmatr}{{1.9}{16}{MixColumns}{equation.1.3.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces A few of possible AES state representations.\relax }}{16}{figure.caption.16}}
+\newlabel{fig:aesnot}{{1.2}{16}{A few of possible AES state representations.\relax }{figure.caption.16}{}}
+\@writefile{toc}{\contentsline {subsubsection}{SubBytes}{16}{section*.17}}
+\newlabel{note:rijinv}{{1.40}{16}{}{thm.1.40}{}}
+\newlabel{eq:sbox}{{1.7}{16}{SubBytes}{equation.1.3.7}{}}
+\newlabel{note:sboxinv}{{1.41}{16}{}{thm.1.41}{}}
+\newlabel{note:sboxtable}{{1.42}{16}{}{thm.1.42}{}}
+\@writefile{toc}{\contentsline {subsubsection}{ShiftRows}{17}{section*.18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.3}{\ignorespaces $\texttt  {ShiftRows}$ operation on a state array.\relax }}{17}{figure.caption.19}}
+\newlabel{fig:shiftrows}{{1.3}{17}{$\ShiftRows $ operation on a state array.\relax }{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {subsubsection}{MixColumns}{17}{section*.20}}
+\newlabel{eq:mixcolpoly}{{1.8}{17}{MixColumns}{equation.1.3.8}{}}
+\newlabel{eq:mixcolmatr}{{1.9}{17}{MixColumns}{equation.1.3.9}{}}
 \citation{daemen2013rijndael}
-\@writefile{toc}{\contentsline {subsubsection}{AddRoundKey}{17}{section*.18}}
-\@writefile{toc}{\contentsline {subsubsection}{KeySchedule}{17}{section*.19}}
-\newlabel{note:expkey}{{1.42}{17}{}{thm.1.42}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.2}AES Algorithm Description}{17}{subsection.1.3.2}}
-\newlabel{alg:aes}{{1.1}{17}{}{alg.1.1}{}}
-\newlabel{line:stateplain}{{3}{17}{}{alg.1.1}{}}
-\newlabel{line:addrk}{{4}{17}{}{alg.1.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{AddRoundKey}{18}{section*.21}}
+\@writefile{toc}{\contentsline {subsubsection}{KeySchedule}{18}{section*.22}}
+\newlabel{note:expkey}{{1.43}{18}{}{thm.1.43}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.2}AES Algorithm Description}{18}{subsection.1.3.2}}
+\newlabel{alg:aes}{{1.1}{18}{}{alg.1.1}{}}
+\newlabel{line:stateplain}{{3}{18}{}{alg.1.1}{}}
+\newlabel{line:addrk}{{4}{18}{}{alg.1.1}{}}
 \citation{daemen2013rijndael}
 \citation{chow2003aes}
 \citation{muir2013tutorial}
@@ -134,35 +142,47 @@
 \citation{chow2003des}
 \citation{jacob2002attacking}
 \citation{chow2003aes}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{18}{subsection.1.3.3}}
-\newlabel{sec:aeslookup}{{1.3.3}{18}{AES Implementation Note}{subsection.1.3.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.4}White-Box AES}{18}{section.1.4}}
-\newlabel{sec:wbaes}{{1.4}{18}{White-Box AES}{section.1.4}{}}
-\newlabel{item:wrap}{{2}{18}{White-Box AES}{Item.12}{}}
-\newlabel{item:boundary}{{3}{18}{White-Box AES}{Item.13}{}}
-\newlabel{notion:table}{{1.44}{18}{}{thm.1.44}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.1}Encodings}{19}{subsection.1.4.1}}
-\newlabel{def:concat}{{1.46}{19}{Concatenated encoding}{thm.1.46}{}}
-\newlabel{def:netw}{{1.47}{19}{Networked Encoding}{thm.1.47}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.2}Reorded AES}{19}{subsection.1.4.2}}
-\newlabel{alg:reordaes}{{1.2}{19}{}{alg.1.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.3}Fully-Table Representation}{20}{subsection.1.4.3}}
-\@writefile{toc}{\contentsline {subsubsection}{T-Boxes}{20}{section*.20}}
-\@writefile{toc}{\contentsline {subsubsection}{MixColumns}{20}{section*.21}}
-\@writefile{toc}{\contentsline {subsubsection}{ShiftRows}{21}{section*.22}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.4}WBAES Construction}{21}{subsection.1.4.4}}
-\@writefile{toc}{\contentsline {subsubsection}{Mixing Bijection}{21}{section*.23}}
-\@writefile{toc}{\contentsline {subsubsection}{Input Mixing Bijection}{21}{section*.24}}
-\@writefile{toc}{\contentsline {subsubsection}{Table Composition}{21}{section*.25}}
-\@writefile{toc}{\contentsline {subsubsection}{Inserting Encodings}{21}{section*.26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{19}{subsection.1.3.3}}
+\newlabel{sec:aeslookup}{{1.3.3}{19}{AES Implementation Note}{subsection.1.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.4}White-Box AES}{19}{section.1.4}}
+\newlabel{sec:wbaes}{{1.4}{19}{White-Box AES}{section.1.4}{}}
+\newlabel{item:wrap}{{2}{19}{White-Box AES}{Item.15}{}}
+\newlabel{item:boundary}{{3}{19}{White-Box AES}{Item.16}{}}
+\newlabel{notion:table}{{1.45}{19}{}{thm.1.45}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.1}Encodings}{20}{subsection.1.4.1}}
+\newlabel{sec:encod}{{1.4.1}{20}{Encodings}{subsection.1.4.1}{}}
+\newlabel{def:concat}{{1.47}{20}{Concatenated encoding}{thm.1.47}{}}
+\newlabel{def:netw}{{1.48}{20}{Networked Encoding}{thm.1.48}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.2}Reorded AES}{20}{subsection.1.4.2}}
+\newlabel{alg:reordaes}{{1.2}{20}{}{alg.1.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.3}Fully-Table Representation}{21}{subsection.1.4.3}}
+\newlabel{note:tableinst}{{1.49}{21}{}{thm.1.49}{}}
+\@writefile{toc}{\contentsline {subsubsection}{T-Boxes}{21}{section*.23}}
+\newlabel{eq:lasttbox}{{1.11}{21}{T-Boxes}{equation.1.4.11}{}}
 \citation{chow2003aes}
+\@writefile{toc}{\contentsline {subsubsection}{MixColumns}{22}{section*.24}}
+\@writefile{toc}{\contentsline {subsubsection}{ShiftRows}{22}{section*.25}}
+\@writefile{toc}{\contentsline {subsubsection}{Table Composition}{22}{section*.26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.4}WBAES Construction}{22}{subsection.1.4.4}}
+\@writefile{toc}{\contentsline {subsubsection}{Inserting Encodings}{22}{section*.27}}
+\newlabel{eq:wbaesflow}{{1.12}{23}{Inserting Encodings}{equation.1.4.12}{}}
+\newlabel{rem:localsec}{{1.50}{23}{}{thm.1.50}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Mixing Bijection}{23}{section*.28}}
+\@writefile{toc}{\contentsline {subsubsection}{Input Mixing Bijection}{23}{section*.29}}
+\@writefile{toc}{\contentsline {subsubsection}{ShiftRows}{23}{section*.30}}
+\@writefile{toc}{\contentsline {subsubsection}{External Encodings}{23}{section*.31}}
 \citation{chow2003aes}
 \citation{billet2005cryptanalysis}
-\citation{chow2003des}
-\@writefile{toc}{\contentsline {subsubsection}{External Encodings}{22}{section*.27}}
-\@writefile{toc}{\contentsline {section}{\numberline {1.5}Known Attacks}{22}{section.1.5}}
-\newlabel{sec:known}{{1.5}{22}{Known Attacks}{section.1.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.5.1}BGE Attack}{22}{subsection.1.5.1}}
+\citation{michiels2007cryptographic}
+\citation{xiao2009secure}
+\citation{karroumi2011protecting}
+\citation{klinec2013white}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.5}Known Attacks \& Enhancements}{24}{subsection.1.4.5}}
+\newlabel{sec:known}{{1.4.5}{24}{Known Attacks \& Enhancements}{subsection.1.4.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{BGE Attack}{24}{section*.32}}
+\newlabel{note:reverse}{{1.51}{24}{}{thm.1.51}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Karroumi's Approach with Dual Ciphers}{25}{section*.33}}
+\@writefile{toc}{\contentsline {subsubsection}{Equality Result}{25}{section*.34}}
 \citation{bos2015differential}
 \citation{kocher1999differential}
 \citation{agrawal2002side}
@@ -174,148 +194,148 @@
 \citation{loughry2002information}
 \citation{kocher1996timing}
 \citation{koc2008cryptographic}
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Using Side-Channel Attack Tools}{23}{chapter.2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Using Side-Channel Attack Tools}{27}{chapter.2}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:attack}{{2}{23}{Using Side-Channel Attack Tools}{chapter.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Side-Channel Attack}{23}{section.2.1}}
-\newlabel{sec:side}{{2.1}{23}{Side-Channel Attack}{section.2.1}{}}
+\newlabel{chap:attack}{{2}{27}{Using Side-Channel Attack Tools}{chapter.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Side-Channel Attack}{27}{section.2.1}}
+\newlabel{sec:side}{{2.1}{27}{Side-Channel Attack}{section.2.1}{}}
 \citation{exampletraces}
 \citation{exampletraces}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Correlation Power Analysis Attack}{24}{subsection.2.1.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces SAKURA-G running AES, note its $10$ rounds. Data taken from \cite  {exampletraces}.\relax }}{24}{figure.caption.28}}
-\newlabel{fig:powertrace}{{2.1}{24}{SAKURA-G running AES, note its $10$ rounds. Data taken from \cite {exampletraces}.\relax }{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Vulnerable Byproduct}{24}{section*.29}}
-\newlabel{eq:byprod}{{2.1}{24}{Vulnerable Byproduct}{equation.2.1.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Utilizing Power Traces}{24}{section*.30}}
-\newlabel{note:brutevssca}{{2.1}{25}{}{thm.2.1}{}}
-\newlabel{alg:cpa}{{2.1}{25}{}{alg.2.1}{}}
-\newlabel{line:corr}{{5}{25}{}{alg.2.1}{}}
-\newlabel{rem:attacklookup}{{2.2}{25}{}{thm.2.2}{}}
-\newlabel{note:fulllist}{{2.3}{25}{}{thm.2.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Correlation Power Analysis Attack}{28}{subsection.2.1.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces SAKURA-G running AES, note its $10$ rounds. Data taken from \cite  {exampletraces}.\relax }}{28}{figure.caption.35}}
+\newlabel{fig:powertrace}{{2.1}{28}{SAKURA-G running AES, note its $10$ rounds. Data taken from \cite {exampletraces}.\relax }{figure.caption.35}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Vulnerable Byproduct}{28}{section*.36}}
+\newlabel{eq:byprod}{{2.1}{28}{Vulnerable Byproduct}{equation.2.1.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Utilizing Power Traces}{28}{section*.37}}
+\newlabel{note:brutevssca}{{2.1}{29}{}{thm.2.1}{}}
+\newlabel{alg:cpa}{{2.1}{29}{}{alg.2.1}{}}
+\newlabel{line:corr}{{5}{29}{}{alg.2.1}{}}
+\newlabel{rem:attacklookup}{{2.2}{29}{}{thm.2.2}{}}
+\newlabel{note:fulllist}{{2.3}{29}{}{thm.2.3}{}}
 \citation{chipwhisperer}
-\newlabel{note:leakpos}{{2.4}{26}{}{thm.2.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Bit-Wise Differential Power Analysis Attack}{26}{subsection.2.1.2}}
-\@writefile{toc}{\contentsline {subsubsection}{Attack}{26}{section*.31}}
-\newlabel{note:concattraces}{{2.5}{26}{}{thm.2.5}{}}
-\newlabel{alg:bitwisedpa}{{2.2}{26}{}{alg.2.2}{}}
+\newlabel{note:leakpos}{{2.4}{30}{}{thm.2.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Bit-Wise Differential Power Analysis Attack}{30}{subsection.2.1.2}}
+\@writefile{toc}{\contentsline {subsubsection}{Attack}{30}{section*.38}}
+\newlabel{note:concattraces}{{2.5}{30}{}{thm.2.5}{}}
+\newlabel{alg:bitwisedpa}{{2.2}{30}{}{alg.2.2}{}}
 \citation{teuwen2015movfuscator}
 \citation{bos2015differential}
 \citation{delerablee2013white}
 \citation{delerablee2013white}
-\newlabel{line:tbcycle}{{5}{27}{}{alg.2.2}{}}
-\newlabel{line:s0}{{6}{27}{}{alg.2.2}{}}
-\newlabel{line:s1}{{7}{27}{}{alg.2.2}{}}
-\newlabel{line:diffmean}{{8}{27}{}{alg.2.2}{}}
-\newlabel{note:eightlists}{{2.6}{27}{}{thm.2.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Using SCA Tools in White-Box Cryptography}{27}{section.2.2}}
-\newlabel{sec:scawbc}{{2.2}{27}{Using SCA Tools in White-Box Cryptography}{section.2.2}{}}
+\newlabel{line:tbcycle}{{5}{31}{}{alg.2.2}{}}
+\newlabel{line:s0}{{6}{31}{}{alg.2.2}{}}
+\newlabel{line:s1}{{7}{31}{}{alg.2.2}{}}
+\newlabel{line:diffmean}{{8}{31}{}{alg.2.2}{}}
+\newlabel{note:eightlists}{{2.6}{31}{}{thm.2.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Using SCA Tools in White-Box Cryptography}{31}{section.2.2}}
+\newlabel{sec:scawbc}{{2.2}{31}{Using SCA Tools in White-Box Cryptography}{section.2.2}{}}
 \citation{nethercote2007valgrind}
 \citation{luk2005pin}
 \citation{teuwen2015movfuscator}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{28}{subsection.2.2.1}}
-\newlabel{sec:tracq}{{2.2.1}{28}{Trace Acquisition}{subsection.2.2.1}{}}
-\newlabel{item:readaddr}{{1}{28}{Trace Acquisition}{Item.17}{}}
-\newlabel{item:writecnt}{{4}{28}{Trace Acquisition}{Item.20}{}}
-\newlabel{note:lsb}{{2.7}{28}{}{thm.2.7}{}}
-\newlabel{note:optim}{{2.8}{28}{}{thm.2.8}{}}
-\newlabel{note:aslr}{{2.9}{29}{}{thm.2.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{29}{subsection.2.2.2}}
-\newlabel{sec:filter}{{2.2.2}{29}{Trace Filtering}{subsection.2.2.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Constant Entries Filtering}{29}{section*.32}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces An example of a mask used for trace filtering.\relax }}{29}{figure.caption.33}}
-\newlabel{fig:constmask}{{2.2}{29}{An example of a mask used for trace filtering.\relax }{figure.caption.33}{}}
-\newlabel{note:filter}{{2.10}{29}{}{thm.2.10}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Address and Temporal Filtering}{30}{section*.34}}
-\newlabel{note:fullfilter}{{2.11}{30}{}{thm.2.11}{}}
-\@writefile{toc}{\contentsline {paragraph}{Trace Visualization}{30}{section*.35}}
-\@writefile{toc}{\contentsline {paragraph}{Trace Filtering}{30}{section*.37}}
-\newlabel{rem:rangemask}{{2.12}{30}{}{thm.2.12}{}}
-\newlabel{ex:rangemask}{{2.13}{30}{}{thm.2.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Illustrative memory trace of a run of an AES implementation with the first round emphasized by a red rectangle. Addresses of memory writes were acquired.\relax }}{31}{figure.caption.36}}
-\newlabel{fig:memtrace}{{2.3}{31}{Illustrative memory trace of a run of an AES implementation with the first round emphasized by a red rectangle. Addresses of memory writes were acquired.\relax }{figure.caption.36}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{32}{subsection.2.2.3}}
-\newlabel{sec:attack}{{2.2.3}{32}{Attacking Traces}{subsection.2.2.3}{}}
-\newlabel{rem:traceformat}{{2.14}{32}{}{thm.2.14}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Processing Results}{32}{section*.38}}
-\newlabel{ex:gap}{{2.15}{33}{}{thm.2.15}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Partial results of a real experiment. The true key byte is {\tt  15} and is emphasized with brackets.\relax }}{33}{table.caption.39}}
-\newlabel{tab:gap}{{2.1}{33}{Partial results of a real experiment. The true key byte is {\tt 15} and is emphasized with brackets.\relax }{table.caption.39}{}}
-\newlabel{rem:gap}{{2.16}{34}{}{thm.2.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{32}{subsection.2.2.1}}
+\newlabel{sec:tracq}{{2.2.1}{32}{Trace Acquisition}{subsection.2.2.1}{}}
+\newlabel{item:readaddr}{{1}{32}{Trace Acquisition}{Item.20}{}}
+\newlabel{item:writecnt}{{4}{32}{Trace Acquisition}{Item.23}{}}
+\newlabel{note:lsb}{{2.7}{32}{}{thm.2.7}{}}
+\newlabel{note:optim}{{2.8}{32}{}{thm.2.8}{}}
+\newlabel{note:aslr}{{2.9}{33}{}{thm.2.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{33}{subsection.2.2.2}}
+\newlabel{sec:filter}{{2.2.2}{33}{Trace Filtering}{subsection.2.2.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Constant Entries Filtering}{33}{section*.39}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces An example of a mask used for trace filtering.\relax }}{33}{figure.caption.40}}
+\newlabel{fig:constmask}{{2.2}{33}{An example of a mask used for trace filtering.\relax }{figure.caption.40}{}}
+\newlabel{note:filter}{{2.10}{33}{}{thm.2.10}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Address and Temporal Filtering}{34}{section*.41}}
+\newlabel{note:fullfilter}{{2.11}{34}{}{thm.2.11}{}}
+\@writefile{toc}{\contentsline {paragraph}{Trace Visualization}{34}{section*.42}}
+\@writefile{toc}{\contentsline {paragraph}{Trace Filtering}{34}{section*.44}}
+\newlabel{rem:rangemask}{{2.12}{34}{}{thm.2.12}{}}
+\newlabel{ex:rangemask}{{2.13}{34}{}{thm.2.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Illustrative memory trace of a run of an AES implementation with the first round emphasized by a red rectangle. Addresses of memory writes were acquired.\relax }}{35}{figure.caption.43}}
+\newlabel{fig:memtrace}{{2.3}{35}{Illustrative memory trace of a run of an AES implementation with the first round emphasized by a red rectangle. Addresses of memory writes were acquired.\relax }{figure.caption.43}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{36}{subsection.2.2.3}}
+\newlabel{sec:attack}{{2.2.3}{36}{Attacking Traces}{subsection.2.2.3}{}}
+\newlabel{rem:traceformat}{{2.14}{36}{}{thm.2.14}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Processing Results}{36}{section*.45}}
+\newlabel{ex:gap}{{2.15}{37}{}{thm.2.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Partial results of a real experiment. The true key byte is {\tt  15} and is emphasized with brackets.\relax }}{37}{table.caption.46}}
+\newlabel{tab:gap}{{2.1}{37}{Partial results of a real experiment. The true key byte is {\tt 15} and is emphasized with brackets.\relax }{table.caption.46}{}}
+\newlabel{rem:gap}{{2.16}{38}{}{thm.2.16}{}}
 \citation{teuwen2015movfuscator}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Results \& Improvements}{35}{chapter.3}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Results \& Improvements}{39}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:results}{{3}{35}{Results \& Improvements}{chapter.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Attack Tools}{35}{section.3.1}}
-\newlabel{sec:tools}{{3.1}{35}{Attack Tools}{section.3.1}{}}
+\newlabel{chap:results}{{3}{39}{Results \& Improvements}{chapter.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Attack Tools}{39}{section.3.1}}
+\newlabel{sec:tools}{{3.1}{39}{Attack Tools}{section.3.1}{}}
 \citation{bos2015differential}
 \citation{klinec2013implementation}
 \citation{chow2003aes}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Results}{36}{section.3.2}}
-\newlabel{sec:results}{{3.2}{36}{Results}{section.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}\tt  naiveAES}{36}{subsection.3.2.1}}
-\newlabel{sec:naiveaes}{{3.2.1}{36}{\tt naiveAES}{subsection.3.2.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{CPA Attack against {\tt  naiveAES}}{36}{section*.40}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces CPA attack against {\tt  naiveAES}\relax }}{36}{table.caption.41}}
-\newlabel{tab:naiveaescpa}{{3.1}{36}{CPA attack against {\tt naiveAES}\relax }{table.caption.41}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt  naiveAES}.}{36}{section*.42}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Bit-Wise DPA attack against {\tt  naiveAES}.\relax }}{36}{table.caption.43}}
-\newlabel{tab:naiveaesdca}{{3.2}{36}{Bit-Wise DPA attack against {\tt naiveAES}.\relax }{table.caption.43}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}\tt  KlinecWBAES}{36}{subsection.3.2.2}}
-\newlabel{sec:klinecwbaes}{{3.2.2}{36}{\tt KlinecWBAES}{subsection.3.2.2}{}}
-\newlabel{note:tailrank}{{3.1}{36}{}{thm.3.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ in order to be well emphasized.\relax }}{37}{table.caption.44}}
-\newlabel{tab:klinecsbox}{{3.3}{37}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ in order to be well emphasized.\relax }{table.caption.44}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Results}{40}{section.3.2}}
+\newlabel{sec:results}{{3.2}{40}{Results}{section.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}\tt  naiveAES}{40}{subsection.3.2.1}}
+\newlabel{sec:naiveaes}{{3.2.1}{40}{\tt naiveAES}{subsection.3.2.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{CPA Attack against {\tt  naiveAES}}{40}{section*.47}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces CPA attack against {\tt  naiveAES}\relax }}{40}{table.caption.48}}
+\newlabel{tab:naiveaescpa}{{3.1}{40}{CPA attack against {\tt naiveAES}\relax }{table.caption.48}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt  naiveAES}.}{40}{section*.49}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.2}{\ignorespaces Bit-Wise DPA attack against {\tt  naiveAES}.\relax }}{40}{table.caption.50}}
+\newlabel{tab:naiveaesdca}{{3.2}{40}{Bit-Wise DPA attack against {\tt naiveAES}.\relax }{table.caption.50}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}\tt  KlinecWBAES}{40}{subsection.3.2.2}}
+\newlabel{sec:klinecwbaes}{{3.2.2}{40}{\tt KlinecWBAES}{subsection.3.2.2}{}}
+\newlabel{note:tailrank}{{3.1}{40}{}{thm.3.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ in order to be well emphasized.\relax }}{41}{table.caption.51}}
+\newlabel{tab:klinecsbox}{{3.3}{41}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ in order to be well emphasized.\relax }{table.caption.51}{}}
 \citation{chow2003aes}
 \citation{klinec2013white}
 \citation{karroumi2011protecting}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{38}{section.3.3}}
-\newlabel{eq:spq}{{3.1}{38}{Enhancements of the Attack}{equation.3.3.1}{}}
-\newlabel{rem:coprime}{{3.2}{38}{}{thm.3.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Changing Attack Target}{38}{subsection.3.3.1}}
-\newlabel{rem:spq}{{3.3}{38}{}{thm.3.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.\relax }}{39}{table.caption.45}}
-\newlabel{tab:klinecrijinv}{{3.4}{39}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.\relax }{table.caption.45}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Considering Another Targets}{40}{subsection.3.3.2}}
-\newlabel{sec:16targets}{{3.3.2}{40}{Considering Another Targets}{subsection.3.3.2}{}}
-\newlabel{rem:pqeffect}{{3.4}{40}{}{thm.3.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces Representants of classes of $p$'s in hexadecimal form.\relax }}{41}{table.caption.46}}
-\newlabel{tab:classrepre}{{3.5}{41}{Representants of classes of $p$'s in hexadecimal form.\relax }{table.caption.46}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Attack Using All 16 Targets}{41}{subsection.3.3.3}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }}{42}{table.caption.47}}
-\newlabel{tab:lintargets}{{3.6}{42}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }{table.caption.47}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{43}{subsection.3.3.4}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }}{43}{table.caption.48}}
-\newlabel{tab:classreprenoninv}{{3.7}{43}{Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }{table.caption.48}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.8}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }}{44}{table.caption.49}}
-\newlabel{tab:noninvtargets}{{3.8}{44}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }{table.caption.49}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Considering Linear Mappings on $\mathrm  {GF}(2)^8$ Over $\mathrm  {GF}(2)$}{45}{subsection.3.3.5}}
-\newlabel{ex:shiftmatrix}{{3.5}{45}{}{thm.3.5}{}}
-\newlabel{eq:tba}{{3.2}{45}{Considering Linear Mappings on $\GF (2)^8$ Over $\GF (2)$}{equation.3.3.2}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Implementation Note}{46}{section*.50}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Blind Attack}{46}{section.3.4}}
-\newlabel{sec:blindattack}{{3.4}{46}{Blind Attack}{section.3.4}{}}
-\newlabel{rem:false}{{3.6}{46}{}{thm.3.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Remarks}{46}{subsection.3.4.1}}
-\newlabel{sec:remarks}{{3.4.1}{46}{Remarks}{subsection.3.4.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Leaking Bits}{47}{section*.51}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Number of leaks at each bit within trace modulo $8$.\relax }}{47}{figure.caption.52}}
-\newlabel{fig:leakbithist}{{3.1}{47}{Number of leaks at each bit within trace modulo $8$.\relax }{figure.caption.52}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Leaks per Target}{47}{section*.53}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Number of leaks with each target. The number was doubled at {\tt  11}, {\tt  33} and {\tt  77}, fourtupled at {\tt  55} and eighttupled at {\tt  ff} to fit the scale.\relax }}{47}{figure.caption.54}}
-\newlabel{fig:leaktargethist}{{3.2}{47}{Number of leaks with each target. The number was doubled at {\tt 11}, {\tt 33} and {\tt 77}, fourtupled at {\tt 55} and eighttupled at {\tt ff} to fit the scale.\relax }{figure.caption.54}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Using Less Traces}{47}{section*.55}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{42}{section.3.3}}
+\newlabel{eq:spq}{{3.1}{42}{Enhancements of the Attack}{equation.3.3.1}{}}
+\newlabel{rem:coprime}{{3.2}{42}{}{thm.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Changing Attack Target}{42}{subsection.3.3.1}}
+\newlabel{rem:spq}{{3.3}{42}{}{thm.3.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.\relax }}{43}{table.caption.52}}
+\newlabel{tab:klinecrijinv}{{3.4}{43}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.\relax }{table.caption.52}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Considering Another Targets}{44}{subsection.3.3.2}}
+\newlabel{sec:16targets}{{3.3.2}{44}{Considering Another Targets}{subsection.3.3.2}{}}
+\newlabel{rem:pqeffect}{{3.4}{44}{}{thm.3.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces Representants of classes of $p$'s in hexadecimal form.\relax }}{45}{table.caption.53}}
+\newlabel{tab:classrepre}{{3.5}{45}{Representants of classes of $p$'s in hexadecimal form.\relax }{table.caption.53}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Attack Using All 16 Targets}{45}{subsection.3.3.3}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }}{46}{table.caption.54}}
+\newlabel{tab:lintargets}{{3.6}{46}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }{table.caption.54}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{47}{subsection.3.3.4}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }}{47}{table.caption.55}}
+\newlabel{tab:classreprenoninv}{{3.7}{47}{Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }{table.caption.55}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.8}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }}{48}{table.caption.56}}
+\newlabel{tab:noninvtargets}{{3.8}{48}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }{table.caption.56}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Considering Linear Mappings on $\mathrm  {GF}(2)^8$ Over $\mathrm  {GF}(2)$}{49}{subsection.3.3.5}}
+\newlabel{ex:shiftmatrix}{{3.5}{49}{}{thm.3.5}{}}
+\newlabel{eq:tba}{{3.2}{49}{Considering Linear Mappings on $\GF (2)^8$ Over $\GF (2)$}{equation.3.3.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Implementation Note}{50}{section*.57}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Blind Attack}{50}{section.3.4}}
+\newlabel{sec:blindattack}{{3.4}{50}{Blind Attack}{section.3.4}{}}
+\newlabel{rem:false}{{3.6}{50}{}{thm.3.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Remarks}{50}{subsection.3.4.1}}
+\newlabel{sec:remarks}{{3.4.1}{50}{Remarks}{subsection.3.4.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Leaking Bits}{51}{section*.58}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Number of leaks at each bit within trace modulo $8$.\relax }}{51}{figure.caption.59}}
+\newlabel{fig:leakbithist}{{3.1}{51}{Number of leaks at each bit within trace modulo $8$.\relax }{figure.caption.59}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Leaks per Target}{51}{section*.60}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Number of leaks with each target. The number was doubled at {\tt  11}, {\tt  33} and {\tt  77}, fourtupled at {\tt  55} and eighttupled at {\tt  ff} to fit the scale.\relax }}{51}{figure.caption.61}}
+\newlabel{fig:leaktargethist}{{3.2}{51}{Number of leaks with each target. The number was doubled at {\tt 11}, {\tt 33} and {\tt 77}, fourtupled at {\tt 55} and eighttupled at {\tt ff} to fit the scale.\relax }{figure.caption.61}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Using Less Traces}{51}{section*.62}}
 \citation{pin214manual}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{48}{subsection.3.4.2}}
-\newlabel{sec:subblindattack}{{3.4.2}{48}{Blind Attack}{subsection.3.4.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{48}{section.3.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{49}{subsection.3.5.1}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Future Work}{51}{chapter.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{52}{subsection.3.4.2}}
+\newlabel{sec:subblindattack}{{3.4.2}{52}{Blind Attack}{subsection.3.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{52}{section.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{53}{subsection.3.5.1}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Future Work}{55}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:future}{{4}{51}{Future Work}{chapter.4}{}}
-\@writefile{toc}{\contentsline {chapter}{Conclusion}{53}{section*.56}}
+\newlabel{chap:future}{{4}{55}{Future Work}{chapter.4}{}}
+\@writefile{toc}{\contentsline {chapter}{Conclusion}{57}{section*.63}}
 \bibstyle{plain}
 \bibdata{biblio}
 \bibcite{pin214manual}{1}
@@ -323,38 +343,41 @@
 \bibcite{asonov2004keyboard}{3}
 \bibcite{americantripple}{4}
 \bibcite{auguste1883cryptographie}{5}
-\bibcite{billet2005cryptanalysis}{6}
-\bibcite{bos2015differential}{7}
-\bibcite{chow2003des}{8}
-\bibcite{chow2003aes}{9}
-\bibcite{curtin1998brute}{10}
-\bibcite{daemen1999aes}{11}
-\bibcite{daemen2013rijndael}{12}
-\@writefile{toc}{\contentsline {chapter}{References}{55}{section*.58}}
-\bibcite{delerablee2013white}{13}
-\bibcite{gandolfi2001electromagnetic}{14}
-\bibcite{chipwhisperer}{15}
-\bibcite{jacob2002attacking}{16}
-\bibcite{junod2001complexity}{17}
-\bibcite{karroumi2011protecting}{18}
-\bibcite{klinec2013implementation}{19}
-\bibcite{klinec2013white}{20}
-\bibcite{koc2008cryptographic}{21}
-\bibcite{kocher1999differential}{22}
-\bibcite{kocher1996timing}{23}
-\bibcite{kuhn2002optical}{24}
-\bibcite{loughry2002information}{25}
-\bibcite{luk2005pin}{26}
-\bibcite{matsui1994linear}{27}
-\bibcite{muir2013tutorial}{28}
-\bibcite{nethercote2007valgrind}{29}
-\bibcite{exampletraces}{30}
-\bibcite{petitcolas2016kerckhoffs}{31}
-\bibcite{fips1977des}{32}
-\bibcite{fips2001aes}{33}
-\bibcite{quisquater2001electromagnetic}{34}
-\bibcite{shannon1949mathematical}{35}
-\bibcite{teuwen2015movfuscator}{36}
+\bibcite{barak2001possibility}{6}
+\bibcite{billet2005cryptanalysis}{7}
+\bibcite{bos2015differential}{8}
+\bibcite{chow2003des}{9}
+\bibcite{chow2003aes}{10}
+\bibcite{curtin1998brute}{11}
+\@writefile{toc}{\contentsline {chapter}{References}{59}{section*.65}}
+\bibcite{daemen1999aes}{12}
+\bibcite{daemen2013rijndael}{13}
+\bibcite{delerablee2013white}{14}
+\bibcite{gandolfi2001electromagnetic}{15}
+\bibcite{chipwhisperer}{16}
+\bibcite{jacob2002attacking}{17}
+\bibcite{junod2001complexity}{18}
+\bibcite{karroumi2011protecting}{19}
+\bibcite{klinec2013implementation}{20}
+\bibcite{klinec2013white}{21}
+\bibcite{koc2008cryptographic}{22}
+\bibcite{kocher1999differential}{23}
+\bibcite{kocher1996timing}{24}
+\bibcite{kuhn2002optical}{25}
+\bibcite{loughry2002information}{26}
+\bibcite{luk2005pin}{27}
+\bibcite{matsui1994linear}{28}
+\bibcite{michiels2007cryptographic}{29}
+\bibcite{muir2013tutorial}{30}
+\bibcite{nethercote2007valgrind}{31}
+\bibcite{exampletraces}{32}
+\bibcite{petitcolas2016kerckhoffs}{33}
+\bibcite{fips1977des}{34}
+\bibcite{fips2001aes}{35}
+\bibcite{quisquater2001electromagnetic}{36}
+\bibcite{shannon1949mathematical}{37}
+\bibcite{teuwen2015movfuscator}{38}
+\bibcite{xiao2009secure}{39}
 \@writefile{toc}{\contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}

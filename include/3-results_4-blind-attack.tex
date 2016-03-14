@@ -6,8 +6,10 @@ In a real-world scenario, the key is typically unknown. Therefore we do not have
 \begin{remark}
 \label{rem:false}
 	Especially note the attack against the \nth{0} byte using {\tt 3d} as a target and its last but one entry in Table \ref{tab:lintargets} -- here the incorrect candidate has a gap of almost $26\%$! It is actually the largest gap of an incorrect candidate ever seen among all targets and all bytes.
+	%!% už neni, v jiných instancích tabulek viděno i víc (31.4)
 	
-	In our results, the target bits keep their original order, therefore we can deduce the row $B$ generating the target in terms of $T_B$. Here it is the last but one row of matrix of multiplication by $\texttt{3d}\pmod{x^8+1}$, see Example \ref{ex:shiftmatrix}. Hence the row is $B = 11110010$.
+	In our results, the target bits keep their original order (but reverse), therefore we can deduce the row $B$ generating the target in terms of $T_B$. Here it is the second row of matrix of multiplication by $\texttt{3d}\pmod{x^8+1}$, see Example \ref{ex:shiftmatrix}. Hence the row is $B = 01011110$.
+	%!% neni! opravit a hlavně vočekovat že to tak opravdu je !!!
 \end{remark}
 
 For this reason, we studied our results deeper. The following section gives some of our remarks, next we suggest the blind attack itself in Section \ref{sec:subblindattack}

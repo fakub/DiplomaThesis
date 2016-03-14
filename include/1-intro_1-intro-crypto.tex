@@ -41,7 +41,7 @@ As we could see in the previous example, shift cipher is not much secure cipher.
 
 
 % ==============================================================================
-% ===   S Y M M E T R I C   A N D   A S Y M M E T R I C   C I P H.           ===
+% ===   S Y M M E T R I C   A N D   A S Y M M E T R I C   C I P H E R        ===
 % ==============================================================================
 
 \subsection{Symmetric and Asymmetric Cipher}
@@ -166,11 +166,12 @@ Let us introduce some notion first.
 
 \begin{defn}[Oracle]
 \label{def:oracle}
-	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time.
+	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time, denoted by ${\cal O}_F$.
 \end{defn}
 
 \begin{defn}[Statistical Test]
-	Let $F:X\rarr Y$. {\em Statistical test} is a (possibly randomized) effective algorithm $A$ which only has an access to an oracle evaluating $F$ and which outputs $0$ or $1$, denoted by $A(F)$.
+\label{def:stattest}
+	Let $F:X\rarr Y$. {\em Statistical test} is a (possibly randomized) effective algorithm $A$ which only has an access to an oracle evaluating $F$ and which outputs $0$ or $1$, denoted by $A({\cal O}_F)$.
 \end{defn}
 
 \begin{note}
@@ -181,7 +182,7 @@ Let us introduce some notion first.
 \label{def:advant}
 	Let $\cal F$, $\cal G$ be two distinct subsets of the set of all functions from $X$ to $Y$ and $A$ an adversary. We define {\em advantage} of adversary $A$ as
 	\[
-		\Adv(A,{\cal F},{\cal G}) = \left| \Pr\limits_{F\unirand {\cal F}}\bigl(A(F)=1\bigr) - \Pr\limits_{G\unirand {\cal G}}\bigl(A(G)=1\bigr) \right| .
+		\Adv(A,{\cal F},{\cal G}) = \left| \Pr\limits_{F\unirand {\cal F}}\bigl(A({\cal O}_F)=1\bigr) - \Pr\limits_{G\unirand {\cal G}}\bigl(A({\cal O}_G)=1\bigr) \right| .
 	\]
 \end{defn}
 
@@ -263,7 +264,8 @@ PRP advantage tells us how likely adversary $A$ is able to distinguish a PRP wit
 
 In other words, given a random key, PRP is secure if it is computationaly indistinguishable from a truly random bijection. 
 
-%~ diffusion vs. confusion
+%!% diffusion vs. confusion
+% prej Shannon: Communication Theory of Secrecy Systems
 
 An example covering most introduced concepts follows.
 
@@ -278,7 +280,7 @@ An example covering most introduced concepts follows.
 	
 	Note that if the oracle computes PRP $E$ then these values are always equal. Otherwise, i.e. the oracle computes a truly random bijection, the values are distinct with overwhelming probability. Therefore the PRP advantage of such adversary is
 	\[
-		\AdvPRP(A,E) = \left| \Pr\limits_{k\unirand \{0,1\}^{128}}\Bigl(A\bigl(E(k,\cdot)\bigr)=1\Bigr) - \Pr\limits_{P\unirand {\cal B}}\Bigl(A(P)=1\Bigr) \right| = 1 - \epsilon
+		\AdvPRP(A,E) = \left| \Pr\limits_{k\unirand \{0,1\}^{128}}\Bigl(A\bigl({\cal O}_{E(k,\cdot)}\bigr)=1\Bigr) - \Pr\limits_{P\unirand {\cal B}}\Bigl(A({\cal O}_P)=1\Bigr) \right| = 1 - \epsilon
 	\]
 	where $\cal B$ stands for the set of all bijections on $\{0,1\}^{128}$ and $\epsilon$ is negligible.
 	
@@ -363,11 +365,11 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 	
 	Let us first denote $W_b$ the event when adversary $A$ answers $1$ while the true value of the PRP semantic security game is $b$ for $b=0,1$. In this notation it holds
 	\begin{equation}\label{eq:prpssae}
-		\AdvPRPSS(A,E) = \left| \Pr(W_1) - \Pr(W_0) \right| .
+		\AdvPRPSS(A,E) = \bigl| \Pr(W_1) - \Pr(W_0) \bigr| .
 	\end{equation}
 	Let us further denote $R_b$ the same event with only difference -- the PRP semantic security game uses a random bijection instead. It holds
 	\begin{equation}\label{eq:rr0}
-		\left| \Pr(R_1) - \Pr(R_0) \right| = 0
+		\bigl| \Pr(R_1) - \Pr(R_0) \bigr| = 0
 	\end{equation}
 	since $b\unirand\{0,1\}$ and both $R_b$ provide a truly random bijection independent from $b$.
 	
