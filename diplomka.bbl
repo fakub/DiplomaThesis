@@ -28,6 +28,12 @@ Kerckhoffs Auguste.
 \newblock La cryptographie militaire.
 \newblock {\em Journal des sciences militaires}, 9:538, 1883.
 
+\bibitem{barak2014protecting}
+Boaz Barak, Sanjam Garg, Yael~Tauman Kalai, Omer Paneth, and Amit Sahai.
+\newblock Protecting obfuscation against algebraic attacks.
+\newblock In {\em Advances in Cryptology--EUROCRYPT 2014}, pages 221--238.
+  Springer, 2014.
+
 \bibitem{barak2001possibility}
 Boaz Barak, Oded Goldreich, Rusell Impagliazzo, Steven Rudich, Amit Sahai,
   Salil Vadhan, and Ke~Yang.
@@ -35,11 +41,24 @@ Boaz Barak, Oded Goldreich, Rusell Impagliazzo, Steven Rudich, Amit Sahai,
 \newblock In {\em Advances in cryptology—CRYPTO 2001}, pages 1--18. Springer,
   2001.
 
+\bibitem{barkan2002many}
+Elad Barkan and Eli Biham.
+\newblock In how many ways can you write rijndael?
+\newblock In {\em Advances in Cryptology—ASIACRYPT 2002}, pages 160--175.
+  Springer, 2002.
+
 \bibitem{billet2005cryptanalysis}
 Olivier Billet, Henri Gilbert, and Charaf Ech-Chatbi.
 \newblock Cryptanalysis of a white box aes implementation.
 \newblock In {\em Selected Areas in Cryptography}, pages 227--240. Springer,
   2005.
+
+\bibitem{biryukov2003toolbox}
+Alex Biryukov, Christophe De~Canniere, An~Braeken, and Bart Preneel.
+\newblock A toolbox for cryptanalysis: Linear and affine equivalence
+  algorithms.
+\newblock In {\em Advances in Cryptology—EUROCRYPT 2003}, pages 33--50.
+  Springer, 2003.
 
 \bibitem{bos2015differential}
 Joppe~W Bos, Charles Hubain, Wil Michiels, and Philippe Teuwen.
@@ -47,6 +66,12 @@ Joppe~W Bos, Charles Hubain, Wil Michiels, and Philippe Teuwen.
   not enough.
 \newblock Technical report, Technical report, Cryptology ePrint Archive, Report
   2015/753. \url{http://eprint. iacr. org/2015/753}, 2015.
+
+\bibitem{brakerski2014virtual}
+Zvika Brakerski and Guy~N Rothblum.
+\newblock Virtual black-box obfuscation for all circuits via generic graded
+  encoding.
+\newblock In {\em Theory of Cryptography}, pages 1--25. Springer, 2014.
 
 \bibitem{chow2003des}
 Stanley Chow, Phil Eisen, Harold Johnson, and Paul~C Van~Oorschot.
@@ -163,6 +188,12 @@ Mitsuru Matsui.
 \newblock In {\em Advances in Cryptology—EUROCRYPT’93}, pages 386--397.
   Springer, 1994.
 
+\bibitem{michiels2008cryptanalysis}
+Wil Michiels, Paul Gorissen, and Henk~DL Hollmann.
+\newblock Cryptanalysis of a generic class of white-box implementations.
+\newblock In {\em Selected Areas in Cryptography}, pages 414--428. Springer,
+  2008.
+
 \bibitem{michiels2007cryptographic}
 Wilhelmus Petrus Adrianus~Johannus Michiels and Paulus Mathias Hubertus
   Mechtildis~Antonius Gorissen.
@@ -211,6 +242,12 @@ Jean-Jacques Quisquater and David Samyde.
   smart cards.
 \newblock In {\em Smart Card Programming and Security}, pages 200--210.
   Springer, 2001.
+
+\bibitem{raddum2004more}
+H{\aa}vard Raddum.
+\newblock More dual rijndaels.
+\newblock In {\em Advanced Encryption Standard--AES}, pages 142--147. Springer,
+  2004.
 
 \bibitem{shannon1949mathematical}
 Claude~E Shannon and Warren Weaver.

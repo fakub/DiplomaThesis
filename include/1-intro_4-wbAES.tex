@@ -215,20 +215,49 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 	
 	\begin{note}
 	\label{note:reverse}
-		In a real-world scenario, we first need to reverse-engineer provided binary code in order to access the tables. This can make any analysis really painful -- such programs are often further protected against reverse engineering effort with various techniques.
+		In a real-world scenario, we first need to reverse-engineer provided binary code in order to access the tables. This can make any analysis really painful -- such white-box crypto programs are often further protected against reverse engineering effort with various techniques.
 	\end{note}
 	
-	We will not cover BGE attack in detail here, it is out of the scope of this thesis, but it motivated further research. Among others (e.g.\ \cite{michiels2007cryptographic} or \cite{xiao2009secure}), we especially highlight Karroumi's contribution \cite{karroumi2011protecting} which has been shown by Klinec \cite{klinec2013white} to be equivalent to the original WBAES by Chow et al. This will later serve as a theoretical fundament of our contribution.
+	We will not cover BGE attack in detail here, it is out of the scope of this thesis, but it motivated further research. On the one hand, BGE attack has been adapted for a broader class of ciphers by Michiels et al.\ \cite{michiels2008cryptanalysis}, on the other hand, novel white-box approaches have been introduced. Among others (e.g.\ \cite{michiels2007cryptographic, xiao2009secure}), we focus on Karroumi's contribution \cite{karroumi2011protecting}. Even though it has been shown by Klinec \cite{klinec2013white} to be equivalent to the original WBAES by Chow et al.\ \cite{chow2003aes}, it will later serve as a theoretical fundament of our contribution.
 
 \subsubsection{Karroumi's Approach with Dual Ciphers}
 	
-	BGE attack 
+	Karroumi noticed that BGE attack exploits the knowledge of specific AES constants, for instance coefficients inside $\MixColumns$ (see Equation \ref{eq:mixcolmatr}) or, most importantly for this thesis, coefficients of affine transformation inside $\SubBytes$ (see Equation \ref{eq:sbox}). In 2002, Barkan et al.\ \cite{barkan2002many} came up with the idea of changing these coefficients in an appropriate way and Karroumi suggested to use such modified AES as a basis for an upgraded WBAES. In general, such modified cipher is referred to as {\em dual cipher}.
 	
-	%!% přidat minimálně zmínku o Karroumiho "vylepšení" včetně ekvivalence původnímu WBAES
+	Originally there were $240$ dual AES ciphers by Barkan et al., the list has been later extended by Raddum \cite{raddum2004more} to $9\,360$ and further by Biryukov et al.\ \cite{biryukov2003toolbox} to $61\,200$ dual AES ciphers.
+	%?% Among other constants, one may change the Rijndael field irreducible polynomial, too, which obviously leads to different field operations.
 	
-	Karroumi incorporated so called {\em dual ciphers}.
+	Note that there is a simple relation between AES and dual AES: for each dual cipher, there exists a linear mapping $\Delta$ which maps a state of AES on a state of dual AES and vice versa. Since both plaintext and ciphertext are an AES state at some point, it follows that $P_{dual} = \Delta P$ and $C_{dual} = \Delta C$, moreover the same holds nontrivially for the key, i.e.\ $K_{dual} = \Delta K$.
 	
+	Karroumi incorporates $4\cdot 10$ distinct dual AES'es into WBAES (for each column of each round) while appropriate linear mappings $\Delta$, transforming the state of one dual AES to another, are simply composed with mixing bijections in each round. Hence the overal structure of WBAES remains unchanged. Karroumi presumes that this modification raises the complexity of BGE attack from originally $2^{30}$ to $2^{91}$ since the attacker seems to need to loop through all fourtuples of dual AES'es and run standard BGE with constants of those dual AES'es.
+	
+	Intuitively, since the transfer to dual cipher is only done by a linear transformation and since each original WBAES round is wrapped around with a random linear transformation (mixing bijection), it seems that we can consider each original WBAES round as internally using a dual AES and vice versa. Klinec has shown in \cite[Proposition~2]{klinec2013white} that this is indeed true.
 
-\subsubsection{Equality Result}
+\subsubsection{Klinec's Equivalence Result}
 	
-	Klinec proved something important about Karroumi's enhancement.
+	Here we state Klinec's result, but note that, according to the original proof, it is rather a consequence of a much stronger property, see below.
+	
+	\begin{prop}[Klinec]
+	\label{thm:dualequiv}
+		Karroumi's WBAES scheme can be broken with BGE attack with the same time complexity as the original WBAES scheme.
+	\end{prop}
+	
+	\begin{proof}
+		We refer to Klinec \cite{klinec2013white} for the full proof, it is rather long and technical and requires a broader context, too.
+	\end{proof}
+	
+	\begin{remark}
+	\label{rem:dualequiv}
+		The core observation of Klinec's proof is that equations of Karroumi's WBAES can be rewritten to the form of the original Chow's WBAES i.e.\ without using dual ciphers at all. Concretely the transformations to dual cipher and operations in dual cipher are shown to be absorbed by surrounding random bijections (namely $\IMB^{-1}\circ\Enc$ and its inverse, in addition also by $\MB$ and its inverse), yielding the original Chow's WBAES.
+	\end{remark}
+	
+	As a consequence of the previous remark, it follows that BGE attack breaks Karroumi's WBAES with the same time complexity as the original WBAES scheme, simply because both is the same in the attack's perspective.
+	
+	\begin{note}
+	\label{note:dualsbox}
+		Later in this thesis, we will attack Klinec's implementation \cite{klinec2013implementation} of Chow's WBAES \cite{chow2003aes}. We will utilize Remark \ref{rem:dualequiv} in a slightly different way.
+		
+		Remind that, among others, dual AES allows us to alter coefficients of affine transformation inside the $\SubBytes$ step (see Equation \ref{eq:sbox}). Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one i.e.\ we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
+		%!% kurva to ale nedává vůbec smysl, dyť stejnak následuje MC a random MB, oboje lineární zobrazení (MC je ještě docela restricted, je totiž v GF(2^8), ale MB už je v GF(2) tže totál unrestricted)
+	\end{note}
+	

@@ -2,7 +2,7 @@
 
 \section{White-Box Cryptography}
 
-%~ detailně popsat kde se vzala vč. citací, vývoj
+%~ detailně popsat kde se vzala vč. citací, vývoj, smysl
 
 As we already mentioned, classical ciphers are designed with respect to black-box attack context and even under this assumption it has not been theoretically shown that there exists a secure one, see Section \ref{sec:provable}. We also introduced gray-box and white-box attack contexts in Section \ref{sec:bbtowb} with a short reasoning of the gray-box model.
 
@@ -12,13 +12,13 @@ Let us now justify why we are introducing so extreme case as white-box attack co
 
 
 % ==============================================================================
-% ===   I M P O S S I B I L I T Y   R E S U L T S                            ===
+% ===   P R O G R A M   O B F U S C A T I O N                                ===
 % ==============================================================================
 
-\subsection{Impossibility Results}
+\subsection{Program Obfuscation}
 \label{sec:impos}
 
-The field of white-box cryptography is strongly related to program obfuscation. Let us first define what a program obfuscator is, then we give some consequences and finally we present a very interesting theoretical result of Barak et al.\ \cite{barak2001possibility}.
+The field of white-box cryptography is related to program obfuscation which was pioneered by Barak et al.\ \cite{barak2001possibility}. Let us first define what a program obfuscator is, then we give some consequences and present a very interesting theoretical result of their paper.
 
 \subsubsection{Program Obfuscator}
 	
@@ -44,11 +44,15 @@ The field of white-box cryptography is strongly related to program obfuscation. 
 	
 	Besides several applications in software protection, a program obfuscator would allow several exotic cryptographic constructions as well. As an example, let us mention Fully Homomorphic Encryption (also called {\em the holy grail of cryptography}) or transformation of a private key encryption scheme into a public key one.
 
-\subsubsection{Main Result}
+\subsubsection{Main Result of Barak et al.}
 	
 	The main result of Barak et al.\ \cite{barak2001possibility} basically claims that there is no algorithm which would meet the criteria from Definition \ref{def:obfus} i.e.\ no generic program obfuscator exists. Although this result might sound disappointedly, it actually claims that there exists {\em certain class} of algorithms which are unobfuscable. Hence there is no evidence that {\em any specific} algorithm is unobfuscable. This gives us the hope that there is some algorithm implementing a block cipher which is not in this class.
+
+\subsubsection{Going beyond}
 	
-	But in general it is more important that the requirements on program obfuscator might be too strong (already suggested by Barak et al.). Indeed, in white-box cryptography context, we can weaken the virtual black box property since we probably do not care about any information which does not effectively lead to key recovery, even though we would not learn this information having an oracle access only.
+	However, in general it is more important that the requirements on program obfuscator might be too strong (already suggested by Barak et al.). Indeed, especially in white-box cryptography context, we can weaken the virtual black box property since we probably do not care about any information which does not effectively lead to key recovery, even though we would not learn this information having an oracle access only.
+	
+	Note that since then, there has been a lot of research using various assumptions, sometimes surprisingly with positive results, too. Most interesting results can be found in \cite{barak2014protecting, brakerski2014virtual}.
 
 
 % ==============================================================================
