@@ -195,11 +195,12 @@ As outlined in the previous Remark, since now we will consider Algorithm \ref{al
 	\begin{example}
 	\label{ex:gap}
 	See the following table for partial results of a real experiment, further comments below.
+	%!% spíš to pak vzít odněkud odspod ty data, třeba z 256 trací
 		\begin{table}[H]
 			\begin{center}
 			\begin{tabular}{| c | c | c | c | c | c | c | c | c |}
 				\hline
-				\multirow{2}{*}{Rank} & \multicolumn{2}{c|}{\nth{3} bit} & \multicolumn{2}{c|}{\nth{4} bit} & \multicolumn{2}{c|}{\nth{6} bit} & \multicolumn{2}{c|}{\nth{7} bit} \\
+				\multirow{2}{*}{Rank} & \multicolumn{2}{c|}{\nth{4} bit} & \multicolumn{2}{c|}{\nth{5} bit} & \multicolumn{2}{c|}{\nth{7} bit} & \multicolumn{2}{c|}{\nth{8} bit} \\
 				\cline{2-9}
 					~ & Value & Cand.   & Value & Cand.   & Value & Cand.   & Value & Cand.  \\
 				\hline
@@ -221,10 +222,10 @@ As outlined in the previous Remark, since now we will consider Algorithm \ref{al
 				\hline
 			\end{tabular}
 			\end{center}
-		\caption{Partial results of a real experiment. The true key byte is {\tt 15} and is emphasized with brackets.}
+		\caption{Partial results of a real experiment. The true key byte is {\tt 15} and is emphasized with angle brackets.}
 		\label{tab:gap}
 		\end{table}
-		According to the original criterion (i.e.\ picking the candidate with the highest value) we would get {\tt 09} in the \nth{4} bit column, but it is not the correct one -- in this experiment, the true candidate does not have the highest value.
+		According to the original criterion (i.e.\ picking the candidate with the highest value) we would get {\tt 09} in the \nth{5} bit column, but it is not the correct one -- in this experiment, the true candidate does not have the highest value.
 		
 		On the other hand, if we consider the gap and modify our criterion to take it into account, we can still get the correct candidate.
 	\end{example}
@@ -238,5 +239,5 @@ As outlined in the previous Remark, since now we will consider Algorithm \ref{al
 		Similarly to the idea of Note \ref{note:fulllist}, we can create a list of maximum $8$ candidates (one candidate from each of $8$ lists, see Note \ref{note:eightlists}) and loop through them if the key was not revealed.
 	\end{remark}
 	
-	Applying the rule from the previous remark to the previous example, we find the maximal gap for the \nth{3} target bit, its absolute value is $0.0330$ compared to $0.0086$, $0.0178$ and $0.0209$, its relative value is $9.5\%$ compared to $2.2\%$, $5.3\%$ and $5.6\%$. Hence the best candidate with this rule is {\tt 15} which is the correct one.   %!% implementovat
+	Applying the rule from the previous remark to the previous example, we find the maximal gap for the \nth{4} target bit, its absolute value is $0.0330$ compared to $0.0086$, $0.0178$ and $0.0209$, its relative value is $9.5\%$ compared to $2.2\%$, $5.3\%$ and $5.6\%$. Hence the best candidate with this rule is {\tt 15} which is the correct one.
 	

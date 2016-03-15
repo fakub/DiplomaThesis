@@ -51,7 +51,7 @@ We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijnd
 \end{table}
 \end{landscape}
 
-In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{8} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{6} bit and at \nth{7} bit the gap is much larger for an incorrect candidate; this happens much more often if less traces are used). The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another, cf. \nth{8} byte in both tables.
+In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit and at \nth{8} bit the gap is much larger for an incorrect candidate; this happens much more often if less traces are used). The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another, cf. \nth{9} byte in both tables.
 
 
 % ==============================================================================
@@ -105,7 +105,7 @@ This benefit led us to the idea of using yet another invertible affine mappings 
 
 \subsection{Attack Using All 16 Targets}
 
-We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ traces, see results of \nth{0} byte in Table \ref{tab:lintargets}. Note that the row of target {\tt 01} is equal to the row of \nth{0} byte in Table \ref{tab:klinecrijinv} and the row of target {\tt 1f} is equal to the row of \nth{0} byte in Table \ref{tab:klinecsbox}. This is not a coincidence since {\tt 01} is an identity, therefore the target is plain Rijndael inverse, and {\tt 1f} is the $p$ of the original SBox and $q$ does not have any result on effect, see Remark \ref{rem:pqeffect}. Also note that the target {\tt 25} does not unravel the \nth{0} key byte even with $1024$ traces -- here we can clearly see the benefit of having many targets.
+We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ traces, see results of \nth{1} byte in Table \ref{tab:lintargets}. Note that the row of target {\tt 01} is equal to the row of \nth{1} byte in Table \ref{tab:klinecrijinv} and the row of target {\tt 1f} is equal to the row of \nth{1} byte in Table \ref{tab:klinecsbox}. This is not a coincidence since {\tt 01} is an identity, therefore the target is plain Rijndael inverse, and {\tt 1f} is the $p$ of the original SBox and $q$ does not have any effect on results, see Remark \ref{rem:pqeffect}. Also note that the target {\tt 25} does not unravel the \nth{1} key byte even with $1024$ traces -- here we can clearly see the benefit of having many targets.
 
 \begin{landscape}
 \begin{table}[H]
@@ -123,6 +123,7 @@ We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ tr
 % ==============================================================================
 
 \subsection{Non-Invertible Linear Mappings}
+\label{sec:noninv}
 
 Another surprising results emerged with the idea of trying to use also non-invertible linear mappings in the attack targets. Remind that the mappings were originally required to be invertible, otherwise the resulting cipher would not be invertible. But there is no such limitation on attack target -- actually the attack is only required to work, no matter why.
 

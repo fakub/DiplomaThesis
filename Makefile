@@ -13,9 +13,12 @@ rule-fig:
 		mpost game_semsec.mp;\
 		epstopdf game_semsec-1.eps
 	cd figures/leak_bit;\
-		./plot.gnp;\
-		latex plot.tex;\
-		dvipdf plot.dvi
+		./all.gnp;\
+		latex all.tex;\
+		dvipdf all.dvi;\
+		./inv_vs_non-inv.gnp;\
+		latex inv_vs_non-inv.tex;\
+		dvipdf inv_vs_non-inv.dvi
 	cd figures/leak_target;\
 		./plot.gnp;\
 		latex plot.tex;\

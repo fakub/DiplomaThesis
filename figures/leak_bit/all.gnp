@@ -5,7 +5,7 @@ reset
 set xtics scale 0
 unset ytics
 set xrange [-0.5:7.5]
-set yrange [0:150]
+set yrange [0:240]
 unset border
 set border 1
 set tmargin 0
@@ -13,14 +13,15 @@ set rmargin 0
 set bmargin 1.5
 set lmargin 0
 
-
+unset key
 set style fill solid noborder
-set boxwidth 0.3
+set boxwidth 0.7
 
 set term epslatex size 9cm,3.5cm color colortext standalone
-set out 'plot.tex'
+set out 'all.tex'
 
-set style histogram
-set style data histogram
+# width of errorbars
+set bars 4
 
-plot 'data' u ($1-0.2):2 t 'Invertible targets' w boxes lc rgb 0x20C040, '' u ($1+0.2):3 t 'Non-invertible targets' w boxes lc rgb 0xFF7F50
+plot 'data' u 1:12    lc rgb 0x20C040 w boxes, \
+     ''     u 1:12:14 w yerrorbars pt -1 lt 1 lw 3 lc rgb 0xFF7F50
