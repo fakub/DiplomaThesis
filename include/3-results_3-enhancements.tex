@@ -1,6 +1,6 @@
 \section{Enhancements of the Attack}   %?% to/of ?
 
-WBAES by Chow et al.\ \cite{chow2003aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2011protecting}. Remind that Karroumi's WBAES uses internally dual AES'es and therefore we cannot recognize which affine mapping has been used inside SBoxes, see Note \ref{note:dualsbox}.
+WBAES by Chow et al.\ \cite{chow2002aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2011protecting}. Remind that Karroumi's WBAES uses internally dual AES'es and therefore we cannot recognize which affine mapping has been used inside SBoxes, see Note \ref{note:dualsbox}.
 
 Let us first remind definition of the original SBox (originally Equation \ref{eq:sbox}),
 \[
@@ -110,7 +110,7 @@ We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ tr
 \begin{landscape}
 \begin{table}[H]
 	\begin{center}
-	\input{./tables/3_3_2-invertible-targets.tex}
+	\input{./tables/3_3_2-invertible-targets.tex}   %!% předělat na odstíny šedi
 	\end{center}
 \caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.}
 \label{tab:lintargets}

@@ -47,11 +47,11 @@ Elad Barkan and Eli Biham.
 \newblock In {\em Advances in Cryptology—ASIACRYPT 2002}, pages 160--175.
   Springer, 2002.
 
-\bibitem{billet2005cryptanalysis}
+\bibitem{billet2004cryptanalysis}
 Olivier Billet, Henri Gilbert, and Charaf Ech-Chatbi.
 \newblock Cryptanalysis of a white box aes implementation.
 \newblock In {\em Selected Areas in Cryptography}, pages 227--240. Springer,
-  2005.
+  2004.
 
 \bibitem{biryukov2003toolbox}
 Alex Biryukov, Christophe De~Canniere, An~Braeken, and Bart Preneel.
@@ -78,11 +78,11 @@ Stanley Chow, Phil Eisen, Harold Johnson, and Paul~C Van~Oorschot.
 \newblock A white-box des implementation for drm applications.
 \newblock In {\em Digital Rights Management}, pages 1--15. Springer, 2003.
 
-\bibitem{chow2003aes}
+\bibitem{chow2002aes}
 Stanley Chow, Philip Eisen, Harold Johnson, and Paul~C Van~Oorschot.
 \newblock White-box cryptography and an aes implementation.
 \newblock In {\em Selected Areas in Cryptography}, pages 250--270. Springer,
-  2003.
+  2002.
 
 \bibitem{curtin1998brute}
 Matt Curtin and Justin Dolske.

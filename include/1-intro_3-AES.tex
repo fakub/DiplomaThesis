@@ -63,7 +63,7 @@ Now let us move on to definitions of the $4$ operations.
 	
 	\begin{note}
 	\label{note:rijinv}
-		Even though $A'$ is not a proper inverse, it is often referred to as inverse in Rijndael field or Rijndael inverse of $A$.
+		Even though $A'$ is not a proper field inverse, it is often referred to as inverse in Rijndael field or Rijndael inverse of $A$. Note that it is invertible.
 	\end{note}
 	
 	Before we define $\SubBytes$ we have to emphasize that the following multiplication is {\em not} performed in $F$ but in the ring $\GF(2)[x]$ instead. $\SubBytes$ is defined as follows:
@@ -225,11 +225,11 @@ As stated in Note \ref{note:sboxtable}, $\ShiftRows$ can be implemented as a loo
 	\end{pmatrix} ,
 \]
 we can rewrite the equation to the form
-\[
+\begin{align*}
 	\begin{pmatrix}
 			B_0 \\ B_1 \\ B_2 \\ B_3
 		\end{pmatrix}
-		=
+		&=
 		\C
 		\begin{pmatrix}
 			A_0 \\ 0 \\ 0 \\ 0
@@ -248,8 +248,19 @@ we can rewrite the equation to the form
 		\C
 		\begin{pmatrix}
 			0 \\ 0 \\ 0 \\ A_3
-		\end{pmatrix}.
-\]
-Note that each addend only depends on a single byte i.e.\ there are just $256$ possible input values for each. Therefore $\MixColumns$ can be implemented as a fourtuple of lookup tables, the result is then a simple bitwise XOR of their $4$-byte output values.
+		\end{pmatrix}
+		= \\
+		&=
+		\C_0 \cdot A_0   
+		 +
+		\C_1 \cdot A_1  
+		 +
+		\C_2 \cdot A_2 
+		 +
+		\C_3 \cdot A_3 ,
+\end{align*}
+where $\C_i$ denotes $i$-th column of $\C$.
+
+Note that each addend only depends on a single byte i.e.\ there are just $256$ possible input values for each. Therefore $\MixColumns$ can be implemented as a fourtuple of lookup tables, the result is then simply a bitwise XOR of their $4$-byte output values.
 
 This was just to give an idea about how AES operations can be turned into lookup tables. These can be further improved, see \cite[Chapter~4]{daemen2013rijndael} for detail.

@@ -1,7 +1,7 @@
 \section{White-Box AES}
 \label{sec:wbaes}
 
-In this section we describe White-Box AES (WBAES) as introduced by Chow et al.\ \cite{chow2003aes} and revisited by Muir \cite{muir2013tutorial} (which we highly recommend). Note that it has already been broken by Billet et al.\ \cite{billet2005cryptanalysis}, see Section \ref{sec:known}.
+In this section we describe White-Box AES (WBAES) as introduced by Chow et al.\ \cite{chow2002aes} and revisited by Muir \cite{muir2013tutorial} (which we highly recommend). Note that it has already been broken by Billet et al.\ \cite{billet2004cryptanalysis}, see Section \ref{sec:known}.
 %!% ref to subsection, def linear?
 
 The core idea of WBAES is based on usage of lookup tables as outlined in Section \ref{sec:aeslookup}, these are further improved in three ways:
@@ -25,7 +25,7 @@ Note that Chow et al. introduced also White-Box DES \cite{chow2003des} but it ha
 \subsection{Encodings}
 \label{sec:encod}
 
-Let us first introduce some notion for the feature \ref{item:wrap} from the previous list as defined by Chow et al.\ \cite{chow2003aes}.
+Let us first introduce some notion for the feature \ref{item:wrap} from the previous list as defined by Chow et al.\ \cite{chow2002aes}.
 
 \begin{defn}[Encoding]
 	Let $X$ be a transformation from $m$ bits to $n$ bits. Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. Call $X' = G \circ X \circ F^{-1}$ an {\em encoded} version of $X$. $F$ is an {\em input encoding} and $G$ is an {\em output encoding}.
@@ -140,7 +140,7 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 	Note that the (partial) $32$-bit outputs of linear operations are first split into $4$-bit words and then two independent $4$-bit words are XORed together yielding a new $4$-bit word. Thus we can only use $4$-bit internal encodings, here denoted by $\Enc$, on both sides of each XOR. %?% in a manner of concatenated encoding, see Definition \ref{def:concat}
 	This is also the reason why input mixing bijection has been introduced -- it diffuses two $4$-bit blocks together.
 	
-	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e. not the first nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al.\ \cite{chow2003aes}.
+	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e. not the first nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al.\ \cite{chow2002aes}.
 	\begin{align}
 	\label{eq:wbaesflow} %!% někde dát zmínku !!
 		\ldots&\rarr\underbracket{\Enc\rarr\IMB^{-1}\xrightarrow{\textnormal{plain}}\TBox\xrightarrow{\textnormal{plain}}\MB\circ\MC\rarr\Enc^{-1}}_{\textnormal{Type II}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\nonumber\\[.5em]
@@ -204,7 +204,7 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 \subsection{Known Attacks \& Enhancements}
 \label{sec:known}
 
-As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-box implementation of a cipher somebody usually comes up with an effective attack. This is the case of WBAES introduced by Chow et al.\ \cite{chow2003aes} in 2002 as well, it was broken by Billet et al.\ \cite{billet2005cryptanalysis} two years later. The attack is called {\em BGE attack} -- it is an abbreviation of authors' names.
+As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-box implementation of a cipher somebody usually comes up with an effective attack. This is the case of WBAES introduced by Chow et al.\ \cite{chow2002aes} in 2002 as well, it was broken by Billet et al.\ \cite{billet2004cryptanalysis} two years later. The attack is called {\em BGE attack} -- it is an abbreviation of authors' names.
 
 %~ Note that white-box version of DES by Chow et al.\ \cite{chow2003des} 
 %~ DES že Boneh et al. zlomil kvůli slabším okrajům, it did not take long time and wb-aes was broken as well. ... je v tomhle odolnej, ale existuje na něj BGE útok, Karroumi "vylepšil" nevylepšil
@@ -218,7 +218,7 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 		In a real-world scenario, we first need to reverse-engineer provided binary code in order to access the tables. This can make any analysis really painful -- such white-box crypto programs are often further protected against reverse engineering effort with various techniques.
 	\end{note}
 	
-	We will not cover BGE attack in detail here, it is out of the scope of this thesis, but it motivated further research. On the one hand, BGE attack has been adapted for a broader class of ciphers by Michiels et al.\ \cite{michiels2008cryptanalysis}, on the other hand, novel white-box approaches have been introduced. Among others (e.g.\ \cite{michiels2007cryptographic, xiao2009secure}), we focus on Karroumi's contribution \cite{karroumi2011protecting}. Even though it has been shown by Klinec \cite{klinec2013white} to be equivalent to the original WBAES by Chow et al.\ \cite{chow2003aes}, it will later serve as a theoretical fundament of our contribution.
+	We will not cover BGE attack in detail here, it is out of the scope of this thesis, but it motivated further research. On the one hand, BGE attack has been adapted for a broader class of ciphers by Michiels et al.\ \cite{michiels2008cryptanalysis}, on the other hand, novel white-box approaches have been introduced. Among others (e.g.\ \cite{michiels2007cryptographic, xiao2009secure}), we focus on Karroumi's contribution \cite{karroumi2011protecting}. Even though it has been shown by Klinec \cite{klinec2013white} to be equivalent to the original WBAES by Chow et al.\ \cite{chow2002aes}, it will later serve as a theoretical fundament of our contribution.
 
 \subsubsection{Karroumi's Approach with Dual Ciphers}
 	
@@ -255,7 +255,7 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 	
 	\begin{note}
 	\label{note:dualsbox}
-		Later in this thesis, we will attack Klinec's implementation \cite{klinec2013implementation} of Chow's WBAES \cite{chow2003aes}. We will utilize Remark \ref{rem:dualequiv} in a slightly different way.
+		Later in this thesis, we will attack Klinec's implementation \cite{klinec2013implementation} of Chow's WBAES \cite{chow2002aes}. We will utilize Remark \ref{rem:dualequiv} in a slightly different way.
 		
 		Remind that, among others, dual AES allows us to alter coefficients of affine transformation inside the $\SubBytes$ step (see Equation \ref{eq:sbox}). Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one i.e.\ we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
 		%!% kurva to ale nedává vůbec smysl, dyť stejnak následuje MC a random MB, oboje lineární zobrazení (MC je ještě docela restricted, je totiž v GF(2^8), ale MB už je v GF(2) tže totál unrestricted)

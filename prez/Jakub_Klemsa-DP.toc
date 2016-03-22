@@ -1,0 +1,15 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {czech}
+\beamer@sectionintoc {1}{Ingredience}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Advanced Encryption Standard (AES)}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Od black-box k white-box modelu}{5}{0}{1}
+\beamer@subsectionintoc {1}{3}{White-box AES (WBAES)}{9}{0}{1}
+\beamer@subsectionintoc {1}{4}{\IeC {\'U}tok postrann\IeC {\'\i }m kan\IeC {\'a}lem (SCA)}{11}{0}{1}
+\beamer@sectionintoc {2}{\IeC {\'U}tok na WBAES}{17}{0}{2}
+\beamer@subsectionintoc {2}{1}{Vyu\IeC {\v z}it\IeC {\'\i } n\IeC {\'a}stroj\IeC {\r u} SCA k \IeC {\'u}toku na WBAES}{17}{0}{2}
+\beamer@subsectionintoc {2}{2}{Nov\IeC {\'e} ter\IeC {\v c}e}{23}{0}{2}
+\beamer@sectionintoc {3}{V\IeC {\'y}sledky}{31}{0}{3}
+\beamer@subsectionintoc {3}{1}{Reprodukce v\IeC {\'y}sledk\IeC {\r u} Bos et al.}{31}{0}{3}
+\beamer@subsectionintoc {3}{2}{V\IeC {\'y}sledky pou\IeC {\v z}it\IeC {\'\i } v\IeC {\v s}ech $255$ ter\IeC {\v c}\IeC {\r u}}{34}{0}{3}
+\beamer@subsectionintoc {3}{3}{\IeC {\'U}tok \uv {naslepo}}{37}{0}{3}
+\beamer@sectionintoc {4}{Budouc\IeC {\'\i } pr\IeC {\'a}ce}{39}{0}{4}

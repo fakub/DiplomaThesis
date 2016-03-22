@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{billet2004cryptanalysis}
+Olivier Billet, Henri Gilbert, and Charaf Ech-Chatbi.
+\newblock Cryptanalysis of a white box aes implementation.
+\newblock In {\em Selected Areas in Cryptography}, pages 227--240. Springer,
+  2004.
+
+\bibitem{bos2015differential}
+Joppe~W Bos, Charles Hubain, Wil Michiels, and Philippe Teuwen.
+\newblock Differential computation analysis: Hiding your white-box designs is
+  not enough.
+\newblock Technical report, Technical report, Cryptology ePrint Archive, Report
+  2015/753. \url{http://eprint. iacr. org/2015/753}, 2015.
+
+\bibitem{chow2002aes}
+Stanley Chow, Philip Eisen, Harold Johnson, and Paul~C Van~Oorschot.
+\newblock White-box cryptography and an aes implementation.
+\newblock In {\em Selected Areas in Cryptography}, pages 250--270. Springer,
+  2002.
+
+\bibitem{klinec2013implementation}
+D.~Klinec.
+\newblock {Whitebox-crypto-AES}.
+\newblock Git repository. \url{https://github.com/ph4r05/Whitebox-crypto-AES}.
+
+\bibitem{klinec2013white}
+Du{\v{s}}an Klinec.
+\newblock White-box attack resistant cryptography.
+\newblock 2013.
+
+\bibitem{fips2001aes}
+NIST~FIPS PUB.
+\newblock 197: Advanced encryption standard (aes).
+\newblock {\em Federal Information Processing Standards Publication},
+  197:441--0311, 2001.
+
+\end{thebibliography}
