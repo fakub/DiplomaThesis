@@ -20,18 +20,18 @@ For this reason, we studied our results deeper. The following section gives some
 \subsection{Remarks}
 \label{sec:remarks}
 
-Obviously we cannot make conclusions based on single {\tt KlinecWBAES} table instantiation only. In order to avoid specific behavior of single instance, we created another $7$ instances, acquired $1024$ traces and ran attack against each key byte using all $255$ targets, for each instance. We processed the results and displayed several statistics. Here we present some of them. Note that we filtered correct candidates with a gap smaller than $5\%$ for this purpose.
+Obviously we cannot make conclusions based on single {\tt KlinecWBAES} table instantiation only. In order to avoid specific behavior of single instance, we created another $7$ instances, acquired $1024$ traces and ran attack against each key byte using all $255$ targets, for each instance. We processed the results and displayed several statistics. Here we present some of them. Note that we filtered correct candidates with a gap smaller than $10\%$ for this purpose.
 
 \subsubsection{Leaking Bits}
 	
 	Remind that our trace is a bit-wise serialization of least significant bytes of memory addresses, hence we can identify which bit within that byte leaked -- simply by taking the leaking position within trace modulo $8$. This moduled position will be referred to as {\em leaking bit} (note the difference from target bit).
 	
-	We noticed soon that leaking bits are not very well balanced, therefore we put this data into a histogram, see Figure \ref{fig:leakbitall}. The histogram shows the amount of correct candidates with a gap larger than $5\%$ averaged over $8$ WBAES instances, for each leaking bit, together with standard deviation which is surprisingly very low. Note that the histogram does not provide absolute values since these could be misleading, only distribution is relevant at the moment.
+	We noticed soon that leaking bits are not very well balanced, therefore we put this data into a histogram, see Figure \ref{fig:leakbitall}. The histogram shows the amount of correct candidates with a gap larger than $10\%$ averaged over $8$ WBAES instances, for each leaking bit, together with standard deviation which is surprisingly very low. Note that the histogram does not provide absolute values since these could be misleading, only distribution is relevant at the moment.
 	
 	\begin{figure}[h]
 	\begin{center}
-		\includegraphics{figures/leak_bit/all.pdf}
-		\caption{Average number of leaks and its standard deviation at each leaking bit.}
+		\includegraphics{figures/leak_bit/leak_bit.pdf}
+		\caption{Average number of leaks and its standard deviation at each bit within trace.}
 		\label{fig:leakbitall}
 	\end{center}
 	\end{figure}
@@ -39,15 +39,6 @@ Obviously we cannot make conclusions based on single {\tt KlinecWBAES} table ins
 	The \nth{0} and \nth{1} bits leaked slightly more, the \nth{2} bit slightly less and the \nth{3} bit actually leaked only twice while the overal average of the remaining bits was almost $160$! On the other hand, all of the remaining bits leaked fairly similarly. We do not have any explanation for this behavior.
 	
 	We further studied whether there is some influence of target invertibility (non-invertible targets were introduced in Section \ref{sec:noninv}).
-	
-	\begin{figure}[h]
-	\begin{center}
-		%!% viz poznámku v datech !!! nepočítalo to vícenásobný leaky non-invertibilních, proto nesedí součty
-		\includegraphics{figures/leak_bit/inv_vs_non-inv.pdf}
-		\caption{Number of leaks at each bit within trace modulo $8$.}
-		\label{fig:leakbitinv}
-	\end{center}
-	\end{figure}
 	
 	%!% že tam je furt kotel false positives, referovat, už jsem to zminoval v tom remarku myslim
 
@@ -77,8 +68,8 @@ Obviously we cannot make conclusions based on single {\tt KlinecWBAES} table ins
 	
 	\begin{figure}[h]
 	\begin{center}
-		\includegraphics{figures/leak_target/plot.pdf}
-		\caption{Number of leaks with each target. The number was doubled at {\tt 11}, {\tt 33} and {\tt 77}, fourtupled at {\tt 55} and eighttupled at {\tt ff} to fit the scale.}
+		\includegraphics{figures/leak_target/leak_target.pdf}
+		\caption{Success rate of each origin of target (previously denoted as $p$).}
 		\label{fig:leaktargethist}
 	\end{center}
 	\end{figure}

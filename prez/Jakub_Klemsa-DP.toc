@@ -8,8 +8,8 @@
 \beamer@sectionintoc {2}{\IeC {\'U}tok na WBAES}{17}{0}{2}
 \beamer@subsectionintoc {2}{1}{Vyu\IeC {\v z}it\IeC {\'\i } n\IeC {\'a}stroj\IeC {\r u} SCA k \IeC {\'u}toku na WBAES}{17}{0}{2}
 \beamer@subsectionintoc {2}{2}{Nov\IeC {\'e} ter\IeC {\v c}e}{23}{0}{2}
-\beamer@sectionintoc {3}{V\IeC {\'y}sledky}{31}{0}{3}
-\beamer@subsectionintoc {3}{1}{Reprodukce v\IeC {\'y}sledk\IeC {\r u} Bos et al.}{31}{0}{3}
-\beamer@subsectionintoc {3}{2}{V\IeC {\'y}sledky pou\IeC {\v z}it\IeC {\'\i } v\IeC {\v s}ech $255$ ter\IeC {\v c}\IeC {\r u}}{34}{0}{3}
-\beamer@subsectionintoc {3}{3}{\IeC {\'U}tok \uv {naslepo}}{37}{0}{3}
-\beamer@sectionintoc {4}{Budouc\IeC {\'\i } pr\IeC {\'a}ce}{39}{0}{4}
+\beamer@sectionintoc {3}{V\IeC {\'y}sledky}{24}{0}{3}
+\beamer@subsectionintoc {3}{1}{Reprodukce v\IeC {\'y}sledk\IeC {\r u} Bos et al.}{24}{0}{3}
+\beamer@subsectionintoc {3}{2}{V\IeC {\'y}sledky pou\IeC {\v z}it\IeC {\'\i } v\IeC {\v s}ech $255$ ter\IeC {\v c}\IeC {\r u}}{27}{0}{3}
+\beamer@subsectionintoc {3}{3}{\IeC {\'U}tok \uv {naslepo}}{30}{0}{3}
+\beamer@sectionintoc {4}{Budouc\IeC {\'\i } pr\IeC {\'a}ce}{32}{0}{4}

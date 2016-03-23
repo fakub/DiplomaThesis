@@ -305,7 +305,7 @@
 		\pause
 		\item jen jedno tabulkové AES (Klinec \cite{klinec2013implementation})
 		\begin{itemize}
-			\item není jasné, kudy informace uniká
+			\item není zřejmé, kudy informace uniká
 		\end{itemize}
 		\pause
 		\item paměťové stopy
@@ -355,21 +355,29 @@
 
 \subsection{Nové terče}
 \frame{
-\frametitle{Nové terče I}
-	WBAES nerozliší, které tzv.\ {\em duální AES} je použito (Klinec \cite[2013]{klinec2013white})
-	\pause
+%~ \frametitle{Nové terče I}
+\frametitle{Nové terče}
+	WBAES obklopuje mezivýsledky mj.\ náhodným lineárním zobrazením
 	\begin{itemize}
-		\item SBox -- afinní zobrazení \uv{inverze} v $\GF(2^8)$
-		\pause
-		\item v duálním AES libovolné invertibilní afinní
-		\pause
-		\item $S_{dual}(A) = p\cdot A' + q \mod{x^8+1}$
-		\begin{itemize}
-			\item $p$ nesoudělný s $x^8+1$
-		\end{itemize}
+		\item původní terče $\sim$ násobení mezivýsledku e.g.\ $(0,0,1,0,\;0,0,0,0)$
+		\item nové terče $\sim$ násobení lib.\ nenulovým vektorem
 	\end{itemize}
-	\pause
-	$\then$ první nové terče ($128$ různých)
+	$\then$ $255$ nových terčů
+	%~ WBAES nerozliší, které tzv.\ {\em duální AES} je použito (Klinec \cite[2013]{klinec2013white})
+	%~ \pause
+	%~ \begin{itemize}
+		%~ \item SBox -- afinní zobrazení \uv{inverze} v $\GF(2^8)$
+		%~ \pause
+		%~ \item v duálním AES libovolné invertibilní afinní
+		%~ \pause
+		%~ \item $S_{dual}(A) = p\cdot A' + q \mod{x^8+1}$
+		%~ \begin{itemize}
+			%~ \item $p$ nesoudělný s $x^8+1$
+		%~ \end{itemize}
+	%~ \end{itemize}
+	%~ \pause
+	%~ $\then$ první nové terče ($128$ různých)
+	% vocaď
 	%~ $\then$ první nové terče ({\em kolik různých?})
 	%~ \pause
 	%~ \begin{itemize}
@@ -381,30 +389,31 @@
 	%~ Celkem $128$ inv.\ $p$, $8$ ve třídě, $8$ terčů na každé $p$ $\then$ $128$ terčů
 }
 
-\frame{
-\frametitle{Nové terče II}
-	Maticový zápis násobení$\mod{x^8+1}$
-	\begin{itemize}
-		\item cyklicky rotované řádky
-		\item lichý počet jedniček (invertibilita)
-		\item terč $\sim$ skalární součin řádku matice a $A'$
-	\end{itemize}
-	\pause
-	SBox následován náhodným lin.\ zobrazením
-	\begin{itemize}
-		\item použiju i řádky se sudým počtem jedniček
-	\end{itemize}
-	\pause
-	$\then$ další nové terče ($127$, bez $[0,\ldots,0]$), celkem $255$ terčů
-}
+%~ \frame{
+%~ \frametitle{Nové terče II}
+	%~ Maticový zápis násobení$\mod{x^8+1}$
+	%~ \begin{itemize}
+		%~ \item cyklicky rotované řádky
+		%~ \item lichý počet jedniček (invertibilita)
+		%~ \item terč $\sim$ skalární součin řádku matice a $A'$
+	%~ \end{itemize}
+	%~ \pause
+	%~ SBox následován náhodným lin.\ zobrazením
+	%~ \begin{itemize}
+		%~ \item použiju i řádky se sudým počtem jedniček
+	%~ \end{itemize}
+	%~ \pause
+	%~ $\then$ další nové terče ($127$, bez $[0,\ldots,0]$), celkem $255$ terčů
+%~ }
 
 \section{Výsledky}
 \subsection{Reprodukce výsledků Bos et al.}
 \frame{
 \frametitle{Reprodukce výsledků Bos et al.}
-	Bos et al.\ -- jen originální SBox a duální SBox pro $p=1$
+	Bos et al.\ -- útok na WBAES
 	\begin{itemize}
-		\item $16$ terčů
+		\item $8$ původních $+$ $8$ dalších terčů (jiný přístup)
+		\item všech $16$ funguje
 		\item reprodukujeme k porovnání s novými terči
 	\end{itemize}
 }
@@ -414,7 +423,7 @@
 		\begin{center}
 		\input{./results-sbox.tex}
 		\end{center}
-	\caption{Pořadí správného kandidáta, $\blacksquare\sim 0$. Útok na WBAES s~použitím $1024$ stop. Průměrně $2.9$ terčů z $8$ uspěje ($36\%$).}
+	\caption{Pořadí správného kandidáta, $\blacksquare\sim 0$. Útok s~použitím $1024$ stop. Průměrně $2.9$ terčů z $8$ uspěje ($36\%$).}
 	\end{table}
 }
 
@@ -423,7 +432,7 @@
 		\begin{center}
 		\input{./results-rijinv.tex}
 		\end{center}
-	\caption{Pořadí správného kandidáta, $\blacksquare\sim 0$. Útok na WBAES s~použitím $1024$ stop. Průměrně $2.4$ terčů z $8$ uspěje ($30\%$).}
+	\caption{Pořadí správného kandidáta, $\blacksquare\sim 0$. Útok s~použitím $1024$ stop. Průměrně $2.4$ terčů z $8$ uspěje ($30\%$).}
 	\end{table}
 }
 
@@ -435,28 +444,38 @@
 		\item $255$ terčů pro každý ze $16$ bytů klíče a každou z $8$ instancí
 		\begin{itemize}
 			\item $32\,640$ útoků
+			\item doba běhu desítky hodin
 		\end{itemize}
 		\item průměrná úspěšnost $29\%$
-		\item doba běhu desítky hodin
 	\end{itemize}
 }
 
 \frame{
-\frametitle{Úspěšnost dle invertibility $p$}
+\frametitle{Rozložení úspěšnosti terčů}
+	Mnoho terčů, málo měření
+	\begin{itemize}
+		\item shlukování terčů -- cyklické rotace vektoru
+		\item zelená $\sim$ invertibilní, cihlová $\sim$ neinvertibilní prvek
+		\begin{itemize}
+			\item vychází z kontrukce, jen ilustrační
+		\end{itemize}
+	\end{itemize}
 	\begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=\textwidth]{../figures/leak_target/plot.pdf}
-	\caption{Úspěšnost terčů podle invertibility původního $p$: zeleně invertibilní, cihlově neinvertibilní. Pro méně než $8$ terčů na $p$ jsou výsledky přeškálovány.}
+		\includegraphics[width=\textwidth]{../figures/leak_target/leak_target.pdf}
+	%~ \caption{Úspěšnost terčů podle invertibility původního $p$: zeleně invertibilní, cihlově neinvertibilní. Pro méně než $8$ terčů na $p$ jsou výsledky přeškálovány.}
+	\caption{Úspěšnost shluků terčů, hexadecimální zápis reprezentanta.}
 	\end{center}
 	\end{figure}
 }
 
 \frame{
-\frametitle{Úspěšnost podle pozice bitu ve stopě}
+\frametitle{Úspěšnost podle pozice ve stopě}
+	Místo úniku -- max.\ rozdíl středních hodnot stop
 	\begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=\textwidth]{../figures/leak_bit/all.pdf}
-	\caption{Průměrná úpěšnost a její směrodatná odchylka napříč instancemi podle pozice ve stopě$\mod{8}$ (tj.\ bit v rámci bytu).}
+		\includegraphics[width=\textwidth]{../figures/leak_bit/leak_bit.pdf}
+	\caption{Průměrná úpěšnost a její směrodatná odchylka napříč instancemi podle pozice bitu v rámci bytu ve stopě.}
 	\end{center}
 	\end{figure}
 }
@@ -489,10 +508,18 @@
 \frametitle{Budoucí práce}
 	Nedořešené otázky
 	\begin{itemize}
-		\item ze které tabulky dochází k úniku,
+		\item ze které tabulky WBAES dochází k úniku,
+		\begin{itemize}
+			\item $3$ nefungující způsoby
+			\begin{itemize}
+				\item $2$ způsoby s debuggerem
+				\item útok na indexy tabulek
+			\end{itemize}
+		\end{itemize}
 		\item jak útok teoreticky podložit,
-		\item jak provést útok rovnou z tabulek,
-		\item proč se správný kandidát propadá na poslední místa,
+		\begin{itemize}
+			\item proč se správný kandidát propadá na poslední místa,
+		\end{itemize}
 		\item proč z pozice $3$ ve stopě neuniká informace,
 		\item \ldots
 	\end{itemize}

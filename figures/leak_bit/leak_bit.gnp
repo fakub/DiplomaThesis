@@ -5,7 +5,7 @@ reset
 set xtics scale 0
 unset ytics
 set xrange [-0.5:7.5]
-set yrange [0:240]
+set yrange [0:230]
 unset border
 set border 1
 set tmargin 0
@@ -18,10 +18,10 @@ set style fill solid noborder
 set boxwidth 0.7
 
 set term epslatex size 9cm,3.5cm color colortext standalone
-set out 'all.tex'
+set out 'leak_bit.tex'
 
 # width of errorbars
-set bars 4
+set bars 3
 
-plot 'data' u 1:12    lc rgb 0x20C040 w boxes, \
-     ''     u 1:12:14 w yerrorbars pt -1 lt 1 lw 3 lc rgb 0xFF7F50
+plot 'data' u 1:2   lc rgb 0x20C040 w boxes, \
+     ''     u 1:2:4 w yerrorbars pt -1 lt 1 lw 2 lc rgb 0x000000
