@@ -24,7 +24,7 @@ We modified a tool for PIN by Teuwen \cite{teuwen2015movfuscator} for $4$ use ca
 	\item contents of memory reads, and   %!% neni
 	\item contents of memory writes, \label{item:writecnt}
 \end{enumerate}
-respectively. Tool nr.\ \ref{item:writecnt} is obviously most useful for unprotected implementations since it can directly observe byproducts, tool nr.\ \ref{item:readaddr} will be surprisingly used as well. The other tools will not be used.
+respectively. Tool nr.\ \ref{item:writecnt} is obviously most useful for unprotected implementations since it can directly observe intermediate results, tool nr.\ \ref{item:readaddr} will be surprisingly used as well. The other tools will not be used.
 
 \begin{note}
 \label{note:lsb}
@@ -171,7 +171,7 @@ Once the traces are acquired, possibly filtered and, most importantly, properly 
 \label{rem:traceformat}
 	Remind that each of our two SCA algorithms was originally designed for a different kind of traces.
 	
-	In Algorithm \ref{alg:cpa} the traces were supposed to carry information about Hamming weight of byproducts therefore the original attack must be modified to compute Hamming weights of traces' entries. It might not make much sense to compute Hamming weight of both byproduct and trace entries and then their correlation, but this algorithm serves rather as a proof-of-concept. On the other hand it could possibly bring some surprising results so we employed it as well.
+	In Algorithm \ref{alg:cpa} the traces were supposed to carry information about Hamming weight of intermediate results therefore the original attack must be modified to compute Hamming weights of traces' entries. It might not make much sense to compute Hamming weight of both intermediate result and trace entries and then their correlation, but this algorithm serves rather as a proof-of-concept. On the other hand it could possibly bring some surprising results so we employed it as well.
 	
 	In Algorithm \ref{alg:bitwisedpa} the traces were supposed to be a serialization of eight separate traces which should carry only bits of information, see Note \ref{note:concattraces}. Therefore it is crucial in this attack to consider entries of traces as separate bits, not bytes, i.e.\ {\tt [1,0,0,0,0,1,0,0, 0,1,1,0,1,1,0,0]} rather than {\tt [84, 6c]}.
 \end{remark}

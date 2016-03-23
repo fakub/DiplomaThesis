@@ -294,7 +294,7 @@
 		%~ \item širší škála stop, hlavně adresy a obsah paměti
 	%~ \end{itemize}
 	%~ \pause
-	\begin{pzr}
+	\begin{pzr}[opakování]
 		Odolnost k white-box $\then$ odolnost ke gray-box (tj.\ SCA).
 	\end{pzr}
 	\pause
@@ -457,7 +457,7 @@
 
 \frame{
 \frametitle{Rozložení úspěšnosti terčů I}
-	Mnoho terčů, málo měření
+	Mnoho terčů, málo měření (každý alespoň jednou úspěšný)
 	\begin{itemize}
 		\item shlukování terčů -- cyklické rotace vektoru
 		\item hlubší význam v konstrukci
@@ -492,7 +492,7 @@
 	Místo úniku -- max.\ rozdíl středních hodnot stop
 	\begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=\textwidth]{../figures/leak_bit/leak_bit.pdf}
+		\includegraphics[width=.65\textwidth]{../figures/leak_bit/leak_bit.pdf}
 	\caption{Průměrná úpěšnost a její směrodatná odchylka napříč instancemi podle pozice bitu v rámci bytu ve stopě.}
 	\end{center}
 	\end{figure}
@@ -506,19 +506,24 @@
 		\item falešní kandidáti
 		\begin{itemize}
 			\item rekordní rozdíl na druhého téměř $35\%$
+			\item ten samý se málokdy opakuje
 		\end{itemize}
 		\item průměrný rozdíl správných $34\%$
+		\begin{itemize}
+			\item klesá s počtem stop
+		\end{itemize}
 	\end{itemize}
 	\pause
 	Návrh
 	\begin{itemize}
-		\item použití menšího počtu stop a více terčů
+		\item menší počet stop a více terčů
 		\item sčítání relativních rozdílů na druhého
 		\begin{itemize}
 			\item hranice pro započítání ($10\%$)
 			\item hranice pro skončení ($75\%$)
 		\end{itemize}
 	\end{itemize}
+	$\then$ zlomilo všechny instance (snad zlomí) %!% ověřit
 }
 
 \section{Budoucí práce}

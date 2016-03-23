@@ -45,6 +45,8 @@ Obviously we cannot make conclusions based on single {\tt KlinecWBAES} table ins
 \subsubsection{Leaks per Target}
 	
 	And now leaks per target. %!% remake: udělat všech nezávislejch 255 a počítat procentuelně (možností má 16, tak asi ne uplně histogram, ale spíš průměrnej počet leaků na target a nák otestovat uniformitu)
+	% uniformitu shlukováním: podle $p$, fixováním 4-bitů
+	% důležitý: každej z 255 aspoň jednou leak!
 	% asi taky udělat víc útoků s různejma tabulkama ...
 	%~ We repeated this attack against all key bytes using $1024$ traces and observed following:
 	%~ \begin{itemize}
@@ -69,7 +71,15 @@ Obviously we cannot make conclusions based on single {\tt KlinecWBAES} table ins
 	\begin{figure}[h]
 	\begin{center}
 		\includegraphics{figures/leak_target/leak_target.pdf}
-		\caption{Success rate of each origin of target (previously denoted as $p$).}
+		\caption{Success rate of each origin of target, previously denoted as $p$. Green represents invertible $p$'s, orange noninvertible ones.}
+		\label{fig:leaktargethist}
+	\end{center}
+	\end{figure}
+	
+	\begin{figure}[h]
+	\begin{center}
+		\includegraphics{figures/leak_target_other/leak_0x0f_0xf0.pdf}
+		\caption{Success rate of groups of targets with fixed $4$ bits of their respective vector, previously denoted as $B$. Green represents fixed first $4$ bits, orange represents last $4$ bits ().}
 		\label{fig:leaktargethist}
 	\end{center}
 	\end{figure}
@@ -100,6 +110,8 @@ We suggest to use less traces and repeat the attack with several targets. Even t
 	%~ \item pick a target, %!% Chi-square test of uniformity, pick random
 	%~ \item attack using $256$ traces
 %~ \end{enumerate}
+% 10\% pro započtení, 75\% kumulativní mez? moc často se totiž neopakujou
+% vyzkoušet jestli tak zlomim všechny instance
 
 %~ Therefore, in case of blind attack (i.e.\ no knowledge of actual key), we suggest to use less traces, but keep changing the target until the maximal gap exceeds $27\%$, then we accept that candidate. This is likely to happen soon since $10.6$ out of $16$ targets succeed on average.
 
