@@ -1,0 +1,25 @@
+#!/usr/bin/gnuplot
+
+reset
+
+set xtics scale 0
+unset ytics
+set xrange [-0.5:15.5]
+set yrange [0:40]
+unset border
+set border 1
+set tmargin 0
+set rmargin 0
+set bmargin 2.5
+set lmargin 0
+
+set style fill solid noborder
+
+set term epslatex size 14cm,5cm color colortext standalone
+set out 'leak_0x0f_0xf0.tex'
+
+plot 'data_0xf0' u (column(0)):(0.0):(0.0):xtic("\\texttt{".strcol(1)."}") w boxes notitle, \
+     ''          u (column(0)-0.2):2:(0.3) lc rgb 0x20C040 w boxes t "\\texttt{0xf0}", \
+     ''          u (column(0)-0.2):2:3 w yerrorbars pt -1 lt 1 lw 2 lc rgb 0x000000 notitle, \
+     'data_0x0f' u (column(0)+0.2):2:(0.3) lc rgb 0xFF7F50 w boxes t "\\texttt{0x0f}", \
+     ''          u (column(0)+0.2):2:3 w yerrorbars pt -1 lt 1 lw 2 lc rgb 0x000000 notitle

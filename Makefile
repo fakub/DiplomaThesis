@@ -19,7 +19,14 @@ rule-fig:
 	cd figures/leak_target;\
 		./leak_target.gnp;\
 		latex leak_target.tex;\
-		dvipdf leak_target.dvi
+		dvipdf leak_target.dvi;\
+		./leak_target_unicolor.gnp;\
+		latex leak_target_unicolor.tex;\
+		dvipdf leak_target_unicolor.dvi
+	cd figures/leak_target_other;\
+		./leak_0x0f_0xf0.gnp;\
+		latex leak_0x0f_0xf0.tex;\
+		dvipdf leak_0x0f_0xf0.dvi
 
 # ----------------------------------------------------------------------
 

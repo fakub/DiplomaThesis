@@ -17,7 +17,7 @@ unset key
 set style fill solid noborder
 
 set term epslatex size 14cm,4cm color colortext standalone
-set out 'leak_target.tex'
+set out 'leak_target_unicolor.tex'
 
-plot 'data' u (column(0)):2:(0.5):($7==0?0xFF7F50:0x20C040):xtic($6==0 ? "\\texttt{".strcol(1)."}" : "\\vspace{-2em}\\texttt{".strcol(1)."}") lc rgb var w boxes, \
+plot 'data' u (column(0)):2:(0.5):xtic($6==0 ? "\\texttt{".strcol(1)."}" : "\\vspace{-2em}\\texttt{".strcol(1)."}") lc rgb 0x20C040 w boxes, \
      ''     u (column(0)):2:3 w yerrorbars pt -1 lt 1 lw 2 lc rgb 0x000000

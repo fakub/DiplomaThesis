@@ -161,8 +161,8 @@
 \frametitle{Black-box model}
 	Útočník má černou skříňku, která
 	\begin{itemize}
-		\item uchovává náhodný AES klíč,
-		\item zašifruje vloženou zprávu,
+		\item uchovává náhodný AES klíč
+		\item zašifruje vloženou zprávu
 		\item neunikne {\bf žádná} další informace
 		\begin{itemize}
 			\item mezivýsledky, doba šifrování, \ldots
@@ -192,7 +192,7 @@
 \frametitle{White-box model}
 	Útočník vykonává šifrování
 	\begin{itemize}
-		\item vidí mezivýsledky,
+		\item vidí mezivýsledky
 		\item může měnit hodnoty, instrukce, \ldots
 		\item klíč musí zůstat utajen
 	\end{itemize}
@@ -251,7 +251,7 @@
 			\pause
 			\begin{itemize}
 				\item nazveme {\em terč} (máme jich $8$)
-				\item liší se podle zprávy, $0$ nebo $1$
+				\item liší se podle zprávy
 			\end{itemize}
 		\end{itemize}
 		\pause
@@ -446,25 +446,43 @@
 			\item $32\,640$ útoků
 			\item doba běhu desítky hodin
 		\end{itemize}
+		\pause
 		\item průměrná úspěšnost $29\%$
+		\begin{itemize}
+			\item silní kandidáti -- rozdíl na druhého $>10\%$
+			\item úsp.\ $25\%$   % [1019, 1000, 978, 1008, 986, 1006, 1019, 999].print_stats([:mean,:dev,:median,:sum])
+		\end{itemize}
 	\end{itemize}
 }
 
 \frame{
-\frametitle{Rozložení úspěšnosti terčů}
+\frametitle{Rozložení úspěšnosti terčů I}
 	Mnoho terčů, málo měření
 	\begin{itemize}
 		\item shlukování terčů -- cyklické rotace vektoru
-		\item zelená $\sim$ invertibilní, cihlová $\sim$ neinvertibilní prvek
-		\begin{itemize}
-			\item vychází z kontrukce, jen ilustrační
-		\end{itemize}
+		\item hlubší význam v konstrukci
 	\end{itemize}
 	\begin{figure}[h]
 	\begin{center}
-		\includegraphics[width=\textwidth]{../figures/leak_target/leak_target.pdf}
+		\includegraphics[width=\textwidth]{../figures/leak_target/leak_target_unicolor.pdf}
 	%~ \caption{Úspěšnost terčů podle invertibility původního $p$: zeleně invertibilní, cihlově neinvertibilní. Pro méně než $8$ terčů na $p$ jsou výsledky přeškálovány.}
 	\caption{Úspěšnost shluků terčů, hexadecimální zápis reprezentanta.}
+	\end{center}
+	\end{figure}
+}
+
+\frame{
+\frametitle{Rozložení úspěšnosti terčů II}
+	Fixované $4$ bity vektoru (maskami {\tt 0xf0}, {\tt 0x0f})
+	%~ \begin{itemize}
+		%~ \item shlukování terčů -- cyklické rotace vektoru
+		%~ \item barvy -- vychází z kontrukce, jen ilustrační
+	%~ \end{itemize}
+	\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=\textwidth]{../figures/leak_target_other/leak_0x0f_0xf0.pdf}
+	%~ \caption{Úspěšnost terčů podle invertibility původního $p$: zeleně invertibilní, cihlově neinvertibilní. Pro méně než $8$ terčů na $p$ jsou výsledky přeškálovány.}
+	\caption{Úspěšnost shluků terčů, hexadecimální zápis fixovaných bitů.}
 	\end{center}
 	\end{figure}
 }
@@ -489,7 +507,7 @@
 		\begin{itemize}
 			\item rekordní rozdíl na druhého téměř $35\%$
 		\end{itemize}
-		\item průměr správných $34\%$
+		\item průměrný rozdíl správných $34\%$
 	\end{itemize}
 	\pause
 	Návrh
@@ -508,7 +526,7 @@
 \frametitle{Budoucí práce}
 	Nedořešené otázky
 	\begin{itemize}
-		\item ze které tabulky WBAES dochází k úniku,
+		\item ze které tabulky WBAES dochází k úniku
 		\begin{itemize}
 			\item $3$ nefungující způsoby
 			\begin{itemize}
@@ -516,11 +534,11 @@
 				\item útok na indexy tabulek
 			\end{itemize}
 		\end{itemize}
-		\item jak útok teoreticky podložit,
+		\item jak útok teoreticky podložit
 		\begin{itemize}
-			\item proč se správný kandidát propadá na poslední místa,
+			\item proč se správný kandidát propadá na poslední místa
 		\end{itemize}
-		\item proč z pozice $3$ ve stopě neuniká informace,
+		\item proč z pozice $3$ ve stopě neuniká informace
 		\item \ldots
 	\end{itemize}
 }
