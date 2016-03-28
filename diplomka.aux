@@ -278,6 +278,7 @@
 \@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Partial results of a real experiment. The true key byte is {\tt  15} and is emphasized with angle brackets.\relax }}{37}{table.caption.47}}
 \newlabel{tab:gap}{{2.1}{37}{Partial results of a real experiment. The true key byte is {\tt 15} and is emphasized with angle brackets.\relax }{table.caption.47}{}}
 \newlabel{rem:gap}{{2.16}{38}{}{thm.2.16}{}}
+\newlabel{note:strong}{{2.17}{38}{}{thm.2.17}{}}
 \citation{bos2016tools}
 \citation{bos2015differential}
 \citation{teuwen2015movfuscator}
@@ -314,8 +315,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{41}{subsection.3.3.1}}
 \newlabel{eq:spq}{{3.1}{41}{Exploiting WBAES Structure}{equation.3.3.1}{}}
 \newlabel{rem:coprime}{{3.2}{41}{}{thm.3.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ in order to be well emphasized.\relax }}{42}{table.caption.53}}
-\newlabel{tab:klinecsbox}{{3.3}{42}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ in order to be well emphasized.\relax }{table.caption.53}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.3}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ or {\color  [rgb]{0.76,0.76,0.76}$\blacksquare $} in order to be well emphasized, for strong or weak candidate, respectively.\relax }}{42}{table.caption.53}}
+\newlabel{tab:klinecsbox}{{3.3}{42}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare $ or {\weak $\blacksquare $} in order to be well emphasized, for strong or weak candidate, respectively.\relax }{table.caption.53}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{43}{subsection.3.3.2}}
 \newlabel{sec:rijinv}{{3.3.2}{43}{Changing Attack Target}{subsection.3.3.2}{}}
 \newlabel{rem:spq}{{3.3}{43}{}{thm.3.3}{}}
@@ -326,46 +327,50 @@
 \newlabel{sec:16targets}{{3.3.3}{43}{Considering Another Targets}{subsection.3.3.3}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {3.4}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.\relax }}{44}{table.caption.55}}
 \newlabel{tab:klinecrijinv}{{3.4}{44}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.\relax }{table.caption.55}{}}
-\newlabel{rem:pqeffect}{{3.5}{45}{}{thm.3.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces Representants of classes of $p$'s in hexadecimal form. Remind that $p$ of the original SBox is {\tt  1f}.\relax }}{45}{table.caption.56}}
-\newlabel{tab:classrepre}{{3.5}{45}{Representants of classes of $p$'s in hexadecimal form. Remind that $p$ of the original SBox is {\tt 1f}.\relax }{table.caption.56}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Attack Using All 16 Targets}{45}{subsection.3.3.4}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }}{46}{table.caption.57}}
-\newlabel{tab:lintargets}{{3.6}{46}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }{table.caption.57}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Non-Invertible Linear Mappings}{47}{subsection.3.3.5}}
-\newlabel{sec:noninv}{{3.3.5}{47}{Non-Invertible Linear Mappings}{subsection.3.3.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }}{47}{table.caption.58}}
-\newlabel{tab:classreprenoninv}{{3.7}{47}{Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }{table.caption.58}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.6}Unifying Approach Considering $\mathrm  {GF}(2)^8$ over $\mathrm  {GF}(2)$}{47}{subsection.3.3.6}}
-\@writefile{lot}{\contentsline {table}{\numberline {3.8}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }}{48}{table.caption.59}}
-\newlabel{tab:noninvtargets}{{3.8}{48}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }{table.caption.59}{}}
-\newlabel{ex:shiftmatrix}{{3.6}{49}{Multiplication by $\texttt {3d}\pmod {x^8+1}$}{thm.3.6}{}}
-\newlabel{eq:tbkp}{{3.3}{49}{Unifying Approach Considering $\GF (2)^8$ over $\GF (2)$}{equation.3.3.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Implementation Note}{50}{section*.60}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Blind Attack}{50}{section.3.4}}
-\newlabel{sec:blindattack}{{3.4}{50}{Blind Attack}{section.3.4}{}}
-\newlabel{rem:false}{{3.7}{50}{}{thm.3.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Remarks}{50}{subsection.3.4.1}}
-\newlabel{sec:remarks}{{3.4.1}{50}{Remarks}{subsection.3.4.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Leaking Bits}{51}{section*.61}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Average number of leaks and its standard deviation at each bit within trace.\relax }}{51}{figure.caption.62}}
-\newlabel{fig:leakbitall}{{3.1}{51}{Average number of leaks and its standard deviation at each bit within trace.\relax }{figure.caption.62}{}}
-\@writefile{toc}{\contentsline {subsubsection}{Leaks per Target}{51}{section*.63}}
-\@writefile{toc}{\contentsline {subsubsection}{Using Less Traces}{51}{section*.66}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Success rate of each origin of target, previously denoted as $p$. Green represents invertible $p$'s, orange noninvertible ones.\relax }}{52}{figure.caption.64}}
-\newlabel{fig:leaktargethist}{{3.2}{52}{Success rate of each origin of target, previously denoted as $p$. Green represents invertible $p$'s, orange noninvertible ones.\relax }{figure.caption.64}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Success rate of groups of targets with fixed $4$ bits of their respective vector, previously denoted as $B$. Green represents fixed first $4$ bits, orange represents last $4$ bits ().\relax }}{52}{figure.caption.65}}
-\newlabel{fig:leaktargethist}{{3.3}{52}{Success rate of groups of targets with fixed $4$ bits of their respective vector, previously denoted as $B$. Green represents fixed first $4$ bits, orange represents last $4$ bits ().\relax }{figure.caption.65}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{52}{subsection.3.4.2}}
-\newlabel{sec:subblindattack}{{3.4.2}{52}{Blind Attack}{subsection.3.4.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{52}{section.3.5}}
+\newlabel{rem:pqeffect}{{3.5}{46}{}{thm.3.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.5}{\ignorespaces Representants of classes of $p$'s in hexadecimal form. Remind that $p$ of the original SBox is {\tt  1f}.\relax }}{46}{table.caption.56}}
+\newlabel{tab:classrepre}{{3.5}{46}{Representants of classes of $p$'s in hexadecimal form. Remind that $p$ of the original SBox is {\tt 1f}.\relax }{table.caption.56}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Attack Using All 16 Targets}{46}{subsection.3.3.4}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.6}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }}{47}{table.caption.57}}
+\newlabel{tab:lintargets}{{3.6}{47}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.\relax }{table.caption.57}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.5}Non-Invertible Linear Mappings}{48}{subsection.3.3.5}}
+\newlabel{sec:noninv}{{3.3.5}{48}{Non-Invertible Linear Mappings}{subsection.3.3.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.7}{\ignorespaces Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }}{48}{table.caption.58}}
+\newlabel{tab:classreprenoninv}{{3.7}{48}{Representants of classes of non-invertible $p$'s in hexadecimal form.\relax }{table.caption.58}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.6}Unifying Approach Considering $\mathrm  {GF}(2)^8$ over $\mathrm  {GF}(2)$}{48}{subsection.3.3.6}}
+\newlabel{sec:unify}{{3.3.6}{48}{Unifying Approach Considering $\GF (2)^8$ over $\GF (2)$}{subsection.3.3.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3.8}{\ignorespaces Bit-Wise DPA attack against {\tt  KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }}{49}{table.caption.59}}
+\newlabel{tab:noninvtargets}{{3.8}{49}{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.\relax }{table.caption.59}{}}
+\newlabel{ex:shiftmatrix}{{3.6}{50}{Multiplication by $\texttt {3d}\pmod {x^8+1}$}{thm.3.6}{}}
+\newlabel{eq:tba}{{3.3}{50}{Unifying Approach Considering $\GF (2)^8$ over $\GF (2)$}{equation.3.3.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Implementation Note}{51}{section*.60}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Blind Attack}{51}{section.3.4}}
+\newlabel{sec:blindattack}{{3.4}{51}{Blind Attack}{section.3.4}{}}
+\newlabel{rem:false}{{3.7}{51}{}{thm.3.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Remarks}{51}{subsection.3.4.1}}
+\newlabel{sec:remarks}{{3.4.1}{51}{Remarks}{subsection.3.4.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Success Rate of Individual Targets}{52}{section*.61}}
+\@writefile{toc}{\contentsline {paragraph}{Group by corresponding $p$.}{52}{section*.62}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Success rate by targets' corresponding $p$'s and their standard deviation. Green represents invertible $p$'s, orange noninvertible ones.\relax }}{52}{figure.caption.63}}
+\newlabel{fig:leaktargethist}{{3.1}{52}{Success rate by targets' corresponding $p$'s and their standard deviation. Green represents invertible $p$'s, orange noninvertible ones.\relax }{figure.caption.63}{}}
+\@writefile{toc}{\contentsline {paragraph}{Group with fixed $4$ bits in $B$.}{52}{section*.64}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Success rate by fixed $4$ bits of targets' corresponding vector $B$. Green represents fixed first $4$ bits, orange represents last $4$ bits.\relax }}{53}{figure.caption.65}}
+\newlabel{fig:leaktargetotherhist}{{3.2}{53}{Success rate by fixed $4$ bits of targets' corresponding vector $B$. Green represents fixed first $4$ bits, orange represents last $4$ bits.\relax }{figure.caption.65}{}}
+\@writefile{toc}{\contentsline {subsubsection}{False Positives}{53}{section*.66}}
+\@writefile{toc}{\contentsline {subsubsection}{Using Less Traces}{53}{section*.67}}
+\@writefile{toc}{\contentsline {subsubsection}{Leaking Bits}{53}{section*.68}}
 \citation{pin214manual}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{53}{subsection.3.5.1}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Future Work}{55}{chapter.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Average number of leaks and its standard deviation at each bit within trace.\relax }}{54}{figure.caption.69}}
+\newlabel{fig:leakbitall}{{3.3}{54}{Average number of leaks and its standard deviation at each bit within trace.\relax }{figure.caption.69}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{54}{subsection.3.4.2}}
+\newlabel{sec:subblindattack}{{3.4.2}{54}{Blind Attack}{subsection.3.4.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{54}{section.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{55}{subsection.3.5.1}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Future Work}{57}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\newlabel{chap:future}{{4}{55}{Future Work}{chapter.4}{}}
-\@writefile{toc}{\contentsline {chapter}{Conclusion}{57}{section*.67}}
+\newlabel{chap:future}{{4}{57}{Future Work}{chapter.4}{}}
+\@writefile{toc}{\contentsline {chapter}{Conclusion}{59}{section*.70}}
 \bibstyle{plain}
 \bibdata{biblio}
 \bibcite{pin214manual}{1}
@@ -380,7 +385,7 @@
 \bibcite{billet2004cryptanalysis}{10}
 \bibcite{biryukov2003toolbox}{11}
 \bibcite{bos2015differential}{12}
-\@writefile{toc}{\contentsline {chapter}{References}{59}{section*.69}}
+\@writefile{toc}{\contentsline {chapter}{References}{61}{section*.72}}
 \bibcite{brakerski2014virtual}{13}
 \bibcite{chow2003des}{14}
 \bibcite{chow2002aes}{15}

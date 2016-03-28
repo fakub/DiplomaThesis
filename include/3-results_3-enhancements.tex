@@ -58,7 +58,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 
 \begin{note}
 \label{note:target}
-	The term {\em target of the attack} or simply {\em target} will be used heavily in the following text, let us describe it a bit closer.   %?% zmatek: Do not be confused with {\em target bit}, it keeps the original meaning.
+	The term {\em target of the attack} or simply {\em target} will be used heavily in the following text, let us describe it a bit closer.
 	
 	Target is a function $T$ which inputs a key byte $K$ together with a respective plaintext byte $P$ and outputs a byte (for now) or a single bit (later), e.g.\ $T(K,P) = S_{1,0}(K\xor P)$ (cf.\ Equations \ref{eq:target}). Target bit is just a specific bit of target's output. According to the target bit, traces are split into the sets $S_0$ and $S_1$ in Algorithm \ref{alg:bitwisedpa}, respectively.
 \end{note}
@@ -79,6 +79,8 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 		\end{table}
 		\end{landscape}
 	}
+	
+	On average, there are about $27\%$ of successful strong candidates and about $30\%$ of both weak and strong ones.
 	
 	In both cases (i.e.\ Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
 	
@@ -148,7 +150,7 @@ We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ tr
 	\begin{landscape}
 	\begin{table}[H]
 		\begin{center}
-		\input{./tables/3_3_2-invertible-targets.tex}   %?% předělat na odstíny šedi
+		\input{./tables/3_3_2-invertible-targets.tex}   % zašedit pod 10%
 		\end{center}
 	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.}
 	\label{tab:lintargets}
@@ -204,6 +206,7 @@ We can immediately discard {\tt 00}, because it only gives $0$ (everything would
 
 %~ \subsection{Considering Linear Mappings on $\GF(2)^8$ Over $\GF(2)$}
 \subsection{Unifying Approach Considering $\GF(2)^8$ over $\GF(2)$}
+\label{sec:unify}
 
 Let us have a closer look at our previously considered targets, in particular at matrix representation of their internal linear mappings -- multiplication by $p\mod{x^8+1}$ (quick reminder: $T(K,P) = S_{p,0}(K\xor P) = p \cdot (K\xor P)' \mod{x^8+1}$). For now we will consider the linear mapping in the vector space $\GF(2)^8$ over $\GF(2)$, denoted by $\cal B$.
 
@@ -248,7 +251,7 @@ It follows that we are actually only interested in non-zero vectors, there are $
 
 The output of this kind of target is a scalar product of the non-zero vector and Rijndael inverse of input (cf.\ SBox construction in Equation \ref{eq:spq}), hence not a byte anymore, but a single bit (as already outlined in Note \ref{note:target}). Let us denote this mapping by
 \begin{equation}
-\label{eq:tbkp}
+\label{eq:tba}
 	T_B(A) = [B]^T\cdot [A'] ,
 \end{equation}
 where $B$ stands for the non-zero vector, $A'$ for Rijndael inverse of $A$, $[\cdot]$ for column vector representation and $[\cdot]^T$ for vector transposition, hence both vectors are scalar-multiplied. According to the notation of Note \ref{note:target}, it could be expressed as $T(K,P) = [B]^T\cdot [(K\xor P)']$.
@@ -264,5 +267,5 @@ We only wondered whether we should split our remarks in the following Section \r
 		S_0 &\gets \Bigl\{ Traces[n] \Bigm| T_B\bigl(KGuess\xor PTs[n][i]\bigr) = 0 \Bigr\} , \\
 		S_1 &\gets \Bigl\{ Traces[n] \Bigm| T_B\bigl(KGuess\xor PTs[n][i]\bigr) = 1 \Bigr\} ,
 	\end{align*}
-	where $T_B$ is the mapping introduced in Equation \ref{eq:tbkp}. For this purpose we precompute all $255$ lookup tables for $T_B$'s, of course.
+	where $T_B$ is the mapping introduced in Equation \ref{eq:tba}. For this purpose we precompute all $255$ lookup tables for $T_B$'s, of course.
 	

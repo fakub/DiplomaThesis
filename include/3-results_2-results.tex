@@ -65,13 +65,6 @@ First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not 
 	
 	We used $1024$ traces for the attack, see results in Table \ref{tab:klinecsbox}. In this table we give percentual gap of the best candidate to the second candidate together with rank of the true key byte, for each key byte and target bit.
 	
-	Compared to the results of Bos et al.\ \cite{bos2015differential}, we successfuly reproduced one half of their attack. The second half is given in Section \ref{sec:rijinv} because it requires some improvements to be introduced.
-	
-	\begin{note}
-	\label{note:tailrank}
-		As already noted by the original authors, we can see remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table \ref{tab:klinecsbox}.
-	\end{note}
-	
 	\afterpage{
 		\clearpage   % To flush out all floats, might not be what you want
 		\begin{landscape}
@@ -79,11 +72,20 @@ First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not 
 			\begin{center}
 			\input{./tables/3_2_3-klinec-sbox.tex}   %!% obrátit pořadí sloupečků !!!
 			\end{center}
-		\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare$ in order to be well emphasized.}
+		\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare$ or {\weak$\blacksquare$} in order to be well emphasized, for strong or weak candidate, respectively.}
 		\label{tab:klinecsbox}
 		\end{table}
 		\end{landscape}
 	}
+	
+	On average, there are about $31\%$ of successful strong candidates and about $36\%$ of both weak and strong ones (see Note \ref{note:strong} for strong vs.\ weak candidates).
+	
+	Compared to the results of Bos et al.\ \cite{bos2015differential}, we successfuly reproduced one half of their attack. The second half is given in Section \ref{sec:rijinv} because it requires some improvements to be introduced.
+	
+	\begin{note}
+	\label{note:tailrank}
+		As already noted by the original authors, we can see remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table \ref{tab:klinecsbox}.
+	\end{note}
 
 % jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
 
