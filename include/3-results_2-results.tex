@@ -1,9 +1,9 @@
 \section{Results}
 \label{sec:results}
 
-First of all, we used our toolkit to attack our straightforward C++ implementation of AES, here named {\tt naiveAES}, which served just as a proof-of-concept. Then we performed the most interesting attack which Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here named {\tt KlinecWBAES}.
+First of all, we used our toolkit to attack our straightforward C++ implementation of AES, here named {\tt naiveAES}, which served just as a proof-of-concept, see results in Section \ref{sec:naiveaes}. Note that the section does not fully cover many details, these are given separately later.
 
-Note that the following section giving results of attack against {\tt naiveAES} does not fully cover many details, these are given separately in the subsequent section with results of the attack against {\tt KlinecWBAES}.
+Then we performed the most interesting attack which Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here named {\tt KlinecWBAES}. See results and comments in Section \ref{sec:klinecwbaes}.
 
 
 % ==============================================================================
@@ -13,7 +13,7 @@ Note that the following section giving results of attack against {\tt naiveAES} 
 \subsection{\tt naiveAES}
 \label{sec:naiveaes}
 
-In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them.
+In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them. Both attacks are expected to work since {\tt naiveAES} stores all intermediate results needed for each attack.
 
 \subsubsection{CPA Attack against {\tt naiveAES}}
 	
@@ -34,7 +34,7 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	\end{table}
 	
 
-\subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}.}
+\subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}}
 	
 	Algorithm \ref{alg:bitwisedpa} \ldots
 	
@@ -58,31 +58,40 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 
 \subsection{\tt KlinecWBAES}
 \label{sec:klinecwbaes}
+
+First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not break any key byte at all. Therefore the rest of our results focuses exclusively on bit-wise DPA attack.
+
+\subsubsection{Bit-Wise DPA Attack against {\tt KlinecWBAES}}
 	
-	CPA attack did not work for {\tt KlinecWBAES} \ldots
-	% still attacking very the same traces!
+	We used $1024$ traces for the attack, see results in Table \ref{tab:klinecsbox}. In this table we give percentual gap of the best candidate to the second candidate together with rank of the true key byte, for each key byte and target bit.
 	
-	We attacked {\tt KlinecWBAES} with bit-wise DPA attack using $1024$ traces, see results in Table \ref{tab:klinecsbox}.
-	In this table we give percentual gap of the best candidate and rank of the true key byte, for each key byte and target bit.
-	%!% popsat že 0. bit ~ 0b00000001, 7. bit ~ 0b10000000
+	Compared to the results of Bos et al.\ \cite{bos2015differential}, we successfuly reproduced one half of their attack. The second half is given in Section \ref{sec:rijinv} because it requires some improvements to be introduced.
 	
 	\begin{note}
 	\label{note:tailrank}
 		As already noted by the original authors, we can see remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table \ref{tab:klinecsbox}.
 	\end{note}
 	
-	\begin{landscape}
-	\begin{table}[H]   % přidat počty úspěšnejch?
-		\begin{center}
-		\input{./tables/3_2_3-klinec-sbox.tex}
-		\end{center}
-	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare$ in order to be well emphasized.}
-	\label{tab:klinecsbox}
-	\end{table}
-	\end{landscape}
-	
-%~ jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
-% provést útok s několikrát nagenerovanejma tabulkama (v manuálu pak popsat co je pro to potřeba udělat)
+	\afterpage{
+		\clearpage   % To flush out all floats, might not be what you want
+		\begin{landscape}
+		\begin{table}[H]
+			\begin{center}
+			\input{./tables/3_2_3-klinec-sbox.tex}   %!% obrátit pořadí sloupečků !!!
+			\end{center}
+		\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare$ in order to be well emphasized.}
+		\label{tab:klinecsbox}
+		\end{table}
+		\end{landscape}
+	}
 
-%!% další implementace??
-%~ proč to s tou javou nešlo ... (ale vyzkoušet)
+% jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
+
+
+% ==============================================================================
+% ===   B a c i n s k a   W B A E S +                                        ===
+% ==============================================================================
+
+% proč to s tou javou nešlo:
+% neimplementuje AES ale "zlepšenou" verzi
+% key-dependent SBoxy => útok tak jak je ani fungovat nemůže

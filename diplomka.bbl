@@ -6,6 +6,10 @@ Pin 2.14 user guide.
   \url{https://software.intel.com/sites/landingpage/pintool/docs/71313/Pin/html/index.html#APPDEBUG_LINUX}.
 \newblock Accessed: 2016-01-22.
 
+\bibitem{bos2016tools}
+{Side-Channel Marvels}.
+\newblock Git repositories. \url{https://github.com/SideChannelMarvels}.
+
 \bibitem{agrawal2002side}
 D~Agrawal, B~Archambeault, J~Rao, and P~Rohatgi.
 \newblock The em side-channel (s): Attacks and assessment methodologies.

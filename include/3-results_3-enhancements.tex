@@ -1,23 +1,36 @@
 \section{Enhancements of the Attack}   %?% to/of ?
+\label{sec:enhancements}
+
+%~ Before we introduce our improvements, we present one of Bos et al.\ \cite{bos2015differential} and reproduce their results in order to have some comparison of our method with previous results.
+In this section we propose our novel improvement of the attack and present its practical results. But before we do so, we introduce an enhancement by Bos et al.\ \cite{bos2015differential} and reproduce their results in order to have some comparison with previous results for our method.
+%~ We will later use these reproduced results for comparison with our novel approach.
+%~ We will later use these reproduced results as a reference for our novel approach.
+
+
+% ==============================================================================
+% ===   E X P L O I T I N G   W B A E S   S T R U C T U R E                  ===
+% ==============================================================================
+
+\subsection{Exploiting WBAES Structure}
 
 WBAES by Chow et al.\ \cite{chow2002aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2011protecting}. Remind that Karroumi's WBAES uses internally dual AES'es and therefore we cannot recognize which affine mapping has been used inside SBoxes, see Note \ref{note:dualsbox}.
 
-Let us first remind definition of the original SBox (originally Equation \ref{eq:sbox}),
+Let us first remind definition of the original SBox (Equation \ref{eq:sbox}) and also remind that the multiplication is not performed in $F$, but in the ring of binary polynomials instead:
 \[
 	\defsbox .
 \]
-Note that the original SBox is a specific affine mapping of Rijndael inverse of its input while in Karroumi's approach, this affine mapping is not fixed. Such a new SBox could be written as
+Note that the original SBox is a specific affine mapping of Rijndael inverse of its input while in Karroumi's approach, this affine mapping is not fixed. Such a new SBox could be written as   %?% neni už to dopsaný tam dřív?
 \begin{equation}
 \label{eq:spq}
 	S_{p,q}(A) = p\cdot A' + q \pmod{x^8+1}
 \end{equation}
-for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously for $p=1$ and $q=0$ which yields $S_{1,0}(A) = A'$ i.e.\ only a Rijndael inverse.
+for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously achieved for $p=1$ and $q=0$ which yields $S_{1,0}(A) = A'$ i.e.\ only a Rijndael inverse.
 
 \begin{remark}
 \label{rem:coprime}
 	The reason why $p$ must be coprime with $x^8+1$ was already given in the definition of the original SBox in Note \ref{note:sboxinv} -- it was due to its invertibility. Hence we would like to test whether $p$ is coprime with $x^8+1$.
 	
-	Note that $x^8+1 = (x+1)^8$, therefore if $p$ is not coprime with $x^8+1$, then $1$ must be its root, and vice versa. This can be easily tested, indeed $p(1) = 0$ if the number of its terms is even. It follows that $p$ is coprime with $x^8+1$ if and only if the number of terms of $p$ is odd.
+	Note that $x^8+1 = (x+1)^8$, therefore if $p$ is {\em not} coprime with $x^8+1$, then $1$ must be its root, and vice versa. This can be easily tested, indeed $p(1) = 0$ if the number of its terms is even. It follows that $p$ is coprime with $x^8+1$ if and only if the number of terms of $p$ is odd.
 \end{remark}
 
 
@@ -26,32 +39,50 @@ for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obvi
 % ==============================================================================
 
 \subsection{Changing Attack Target}
+\label{sec:rijinv}
 
-Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with the idea of changing the target\footnote{The word {\em target} will be heavily used in this context. Do not be confused with {\em target bit}, it keeps the original meaning.} of the attack from the original SBox to its simplest variant -- Rijndael inverse.
+Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with the idea of changing the target of the attack from the original SBox to its simplest variant -- Rijndael inverse.
 
 \begin{remark}
 \label{rem:spq}
 	Technically we only substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} of Algorithm \ref{alg:bitwisedpa} with their desired variant, hence yielding
-	\begin{align*}
-		S_0 &\gets \Bigl\{ Traces[n] \Bigm| S_{p,q}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\} , \\
-		S_1 &\gets \Bigl\{ Traces[n] \Bigm| S_{p,q}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\} .
-	\end{align*}
+	\begin{align}
+	\begin{split}
+	\label{eq:target}
+		S_0 &\gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\} , \\
+		S_1 &\gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\} .
+	\end{split}
+	\end{align}
 	Remind that we always use precomputed SBox tables as already stated in Remark \ref{rem:attacklookup}.
 \end{remark}
 
-We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijndael inverse as the target, see results in Table \ref{tab:klinecrijinv}.
+\begin{note}
+\label{note:target}
+	The term {\em target of the attack} or simply {\em target} will be used heavily in the following text, let us describe it a bit closer.   %?% zmatek: Do not be confused with {\em target bit}, it keeps the original meaning.
+	
+	Target is a function $T$ which inputs a key byte $K$ together with a respective plaintext byte $P$ and outputs a byte (for now) or a single bit (later), e.g.\ $T(K,P) = S_{1,0}(K\xor P)$ (cf.\ Equations \ref{eq:target}). Target bit is just a specific bit of target's output. According to the target bit, traces are split into the sets $S_0$ and $S_1$ in Algorithm \ref{alg:bitwisedpa}, respectively.
+\end{note}
 
-\begin{landscape}
-\begin{table}[H]
-	\begin{center}
-	\input{./tables/3_3_1-klinec-rijinv.tex}
-	\end{center}
-\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.}
-\label{tab:klinecrijinv}
-\end{table}
-\end{landscape}
-
-In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit and at \nth{8} bit the gap is much larger for an incorrect candidate; this happens much more often if less traces are used). The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another, cf. \nth{9} byte in both tables.
+\subsubsection{Results using Rijndael Inverse}
+	
+	We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijndael inverse as the target (i.e.\ the simplest SBox variant), see results in Table \ref{tab:klinecrijinv}. Note that this is the second part of successfuly reproduced results of Bos et al.
+	
+	\afterpage{
+		\clearpage   % To flush out all floats, might not be what you want
+		\begin{landscape}
+		\begin{table}[H]
+			\begin{center}
+			\input{./tables/3_3_1-klinec-rijinv.tex}   %!% obrátit pořadí sloupečků !!!
+			\end{center}
+		\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.}
+		\label{tab:klinecrijinv}
+		\end{table}
+		\end{landscape}
+	}
+	
+	In both cases (i.e.\ Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
+	
+	The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another, cf. \nth{9} byte in both tables.
 
 
 % ==============================================================================
@@ -61,26 +92,29 @@ In both cases (see results in Table \ref{tab:klinecsbox} and \ref{tab:klinecriji
 \subsection{Considering Another Targets}
 \label{sec:16targets}
 
-This benefit led us to the idea of using yet another invertible affine mappings besides the one of the original SBox and identity. There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$, there are $128$ of them (follows from Remark \ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings.
+The benefit of having higher chance of breaking the key led us to the idea of using yet another invertible affine mappings inside SBoxes (see Equation \ref{eq:spq}) besides the one of the original SBox and identity (i.e.\ those used by Bos et al.).
+
+There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$, there are $128$ of them (follows from Remark \ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings which could be used inside SBoxes to create another targets.
+
+\newpage   %!% zmrd bez toho píčuje
 
 \begin{remark}
 \label{rem:pqeffect}
-	We realized that there are certain classes of mappings which give similar or even same results.
+	We realized that there are certain classes of mappings which give very the same results.
 	\begin{description}
 		\item[Effect of $q$'s.]
-			First let us see what happens if we change one bit of $q$ (here considered as a byte). It obviously only changes the output of our SBox at the same bit, finally yielding a swap of $S_0$ and $S_1$ in the attack algorithm (only at this target bit, of course). Note that this swap has no effect on results, since we are only interested in absolute difference of means of values inside $S_0$ and $S_1$. We will consider $q = 0$, hence our SBoxes will be linear mappings of Rijndael inverse.
+			First let us see what happens if we change one bit of $q$ (here considered as a byte). It obviously only changes the output of our SBox at the same bit, finally yielding a swap of $S_0$ and $S_1$ in the attack algorithm (only at this target bit, of course). Note that this swap has no effect on results, since we are only interested in absolute difference of means of values inside $S_0$ and $S_1$. Hence we will consider $q = 0$, our SBoxes will then be linear mappings of Rijndael inverse.
 		
 		\item[Effect of $p$'s.]
-			Second let us study the effect of different $p$'s. Note that $x$ is coprime with $x^8+1$ and $p$ is supposed to, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
+			Second let us study the effect of different $p$'s. Note that $x$ is coprime with $x^8+1$ and $p$ is supposed to be coprime, too, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
 			
 			Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g.\ $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g.\ $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end so the shift is actually a cyclical shift.
 			
-			Remind that polynomials coprime with $x^8+1$ have even number of terms (see Remark \ref{rem:coprime}), hence repeating this we obtain $8$ distinct polynomials which we put in single equivalence class i.e.\ we get $128/8=16$ such classes, see Table \ref{tab:classrepre} for representants of each class. Note that the effect is the same on bits representing polynomials.
+			Remind that polynomials, which are coprime with $x^8+1$, have odd number of terms (see Remark \ref{rem:coprime}), hence repeating multiplication by $x$ yields $8$ distinct polynomials which we put in single equivalence class. Since there are $128$ coprime polynomials, we get $128/8=16$ such classes, see Table \ref{tab:classrepre} for representants of each class. Note that the effect is the same on bits representing polynomials.
 			
-			Since we assumed $q = 0$, the actual output of two sboxes using $p$'s from single class is thus also only a cyclical shift of each other. It follows that the effect on results is that it only cyclically shifts the results among target bits. Hence also the information which target bit leaks is totally irrelevant.
+			Since we assumed $q = 0$, the actual output of two SBoxes using $p$'s from single class is thus also only a cyclical shift of each other. It follows that the effect on results is only a cyclical shift of the results among target bits. Hence also the information which target bit leaks is totally irrelevant.
 	%?% neni zas tak irelevant ptž z pozice v trace zjistim která varianta to je, ze všech mi to pak může něco prozradit
 	% => je irrelevant ptž ikdyž leaknou dva tak rozhodně nejsou od sebe jak by měly
-	% original SBox is {\tt 1f}
 	\end{description}
 \end{remark}
 
@@ -94,9 +128,11 @@ This benefit led us to the idea of using yet another invertible affine mappings 
 		\hline
 	\end{tabular}
 	\end{center}
-\caption{Representants of classes of $p$'s in hexadecimal form.}
+\caption{Representants of classes of $p$'s in hexadecimal form. Remind that $p$ of the original SBox is {\tt 1f}.}
 \label{tab:classrepre}
 \end{table}
+
+It follows that we can narrow down our attention to $16$ targets only. Indeed, our targets will be of the form $T(K,P) = S_{p,0}(K\xor P)$ for all representants $p$, see Table \ref{tab:classrepre}. Remind that Bos et al.\ only used the original SBox (i.e.\ $p = \texttt{1f}$) and Rijndael inverse (i.e.\ $p = \texttt{01}$).
 
 
 % ==============================================================================
@@ -105,17 +141,20 @@ This benefit led us to the idea of using yet another invertible affine mappings 
 
 \subsection{Attack Using All 16 Targets}
 
-We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ traces, see results of \nth{1} byte in Table \ref{tab:lintargets}. Note that the row of target {\tt 01} is equal to the row of \nth{1} byte in Table \ref{tab:klinecrijinv} and the row of target {\tt 1f} is equal to the row of \nth{1} byte in Table \ref{tab:klinecsbox}. This is not a coincidence since {\tt 01} is an identity, therefore the target is plain Rijndael inverse, and {\tt 1f} is the $p$ of the original SBox and $q$ does not have any effect on results, see Remark \ref{rem:pqeffect}. Also note that the target {\tt 25} does not unravel the \nth{1} key byte even with $1024$ traces -- here we can clearly see the benefit of having many targets.
+We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ traces, see results of the \nth{1} byte in Table \ref{tab:lintargets}. Note that the row of target {\tt 01} is indeed equal to the row of the \nth{1} byte in Table \ref{tab:klinecrijinv} and the row of target {\tt 1f} is indeed equal to the row of the \nth{1} byte in Table \ref{tab:klinecsbox}. Also note that the target {\tt 25} does not unravel the \nth{1} key byte even with $1024$ traces -- here we can clearly see the benefit of having many targets.
 
-\begin{landscape}
-\begin{table}[H]
-	\begin{center}
-	\input{./tables/3_3_2-invertible-targets.tex}   %!% předělat na odstíny šedi
-	\end{center}
-\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.}
-\label{tab:lintargets}
-\end{table}
-\end{landscape}
+\afterpage{
+	\clearpage   % To flush out all floats, might not be what you want
+	\begin{landscape}
+	\begin{table}[H]
+		\begin{center}
+		\input{./tables/3_3_2-invertible-targets.tex}   %?% předělat na odstíny šedi
+		\end{center}
+	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and all $16$ targets.}
+	\label{tab:lintargets}
+	\end{table}
+	\end{landscape}
+}
 
 
 % ==============================================================================
@@ -125,7 +164,7 @@ We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ tr
 \subsection{Non-Invertible Linear Mappings}
 \label{sec:noninv}
 
-Another surprising results emerged with the idea of trying to use also non-invertible linear mappings in the attack targets. Remind that the mappings were originally required to be invertible, otherwise the resulting cipher would not be invertible. But there is no such limitation on attack target -- actually the attack is only required to work, no matter why.
+Another surprising results emerged with the idea of trying to use also non-invertible linear mappings in the attack targets. Remind that the mappings were originally required to be invertible, otherwise the resulting cipher would not be invertible. But there is no such limitation on attack target -- the attack is actually only required to work, no matter why.
 
 As before, we only kept one representant of each class where elements are a multiple of $x^i\pmod{x^8+1}$ of each other, for some $i$. See these representants in Table~\ref{tab:classreprenoninv}.
 
@@ -143,34 +182,39 @@ As before, we only kept one representant of each class where elements are a mult
 \label{tab:classreprenoninv}
 \end{table}
 
-We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Let us further see what the other extreme value {\tt ff} gives. It actually gives a sum of all eigth cyclical shifts, therefore it gives {\tt ff} if Hamming weight of Rijndael inverse is odd, {\tt 00} otherwise. One might want to discard {\tt ff} as well, but it has surprisingly shown to be a competitive target. See results in Table~\ref{tab:noninvtargets}.
+We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Also note that some classes include less than $8$ polynomials, e.g.\ $\texttt{11} = x^4+1$. This is because $(x^4+1)\cdot x^4 \pmod{x^8+1} = x^4+1$. For this reason, some target bits are not shown in results since their values would be repeating. You can find results of attack against {\tt KlinecWBAES} using $1024$ traces in Table~\ref{tab:noninvtargets}.
 
-Note that some targets only have partial results, e.g.\ $\texttt{11} = x^4+1$. This is because $\texttt{11}\cdot x^4 \pmod{x^8+1} = \texttt{11}$, hence the results would be the same in the second half. Remind that multiplication by $x\pmod{x^8+1}$ causes cyclical shift of results.
-
-\begin{landscape}
-\begin{table}[H]
-	\begin{center}
-	\input{./tables/3_3_3-noninvertible-targets.tex}
-	\end{center}
-\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.}
-\label{tab:noninvtargets}
-\end{table}
-\end{landscape}
+\afterpage{
+	\clearpage   % To flush out all floats, might not be what you want
+	\begin{landscape}
+	\begin{table}[H]
+		\begin{center}
+		\input{./tables/3_3_3-noninvertible-targets.tex}
+		\end{center}
+	\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces and non-invertible targets.}
+	\label{tab:noninvtargets}
+	\end{table}
+	\end{landscape}
+}
 
 
 % ==============================================================================
 % ===   L I N E A R   M A P P I N G S   O V E R   G F ( 2 )                  ===
 % ==============================================================================
 
-\subsection{Considering Linear Mappings on $\GF(2)^8$ Over $\GF(2)$}
+%~ \subsection{Considering Linear Mappings on $\GF(2)^8$ Over $\GF(2)$}
+\subsection{Unifying Approach Considering $\GF(2)^8$ over $\GF(2)$}
 
-Let us consider bytes as elements of the vector space $\GF(2)^8$ over $\GF(2)$, denoted by $\cal B$. Note that previously we only used an equivalent of a specific subset of linear mappings on $\cal B$. These were generated by polynomial multiplication$\pmod{x^8+1}$, see Equation \ref{eq:spq} where $q$ was later set equal to zero. In such case we only had $256$ linear mappings (one for each element of $\GF(2)^8$ and nothing else).
+Let us have a closer look at our previously considered targets, in particular at matrix representation of their internal linear mappings -- multiplication by $p\mod{x^8+1}$ (quick reminder: $T(K,P) = S_{p,0}(K\xor P) = p \cdot (K\xor P)' \mod{x^8+1}$). For now we will consider the linear mapping in the vector space $\GF(2)^8$ over $\GF(2)$, denoted by $\cal B$.
 
-But there are obviously many more linear mappings on $\cal B$. Let us see how our previously considered mappings can be expressed here -- they correspond with matrices with cyclically shifted rows as outlined in the following example.
+Note that equivalents of previously used linear mappings form a specific subset of all linear mappings on $\cal B$ since there are only $256$ of $p$'s. But there are obviously many more linear mappings on $\cal B$. Let us see how our previously considered mappings can be expressed -- they correspond with matrices with cyclically shifted rows as outlined in the following example.
 
-\begin{example}
+\newpage   %!%
+
+\begin{example}[Multiplication by $\texttt{3d}\pmod{x^8+1}$]
 \label{ex:shiftmatrix}
-	Let us consider multiplication by $\texttt{3d}\pmod{x^8+1}$; $\texttt{3d} = x^5+x^4+x^3+x^2+1 \sim 00111101$.
+	~ \\
+	{\tt 3d} can be rewritten as $\texttt{3d} = x^5+x^4+x^3+x^2+1 \sim 00111101$, let further $A = a_7x^7+\ldots+a_1x+a_0$. Then we have
 	\begin{align*}
 		\texttt{3d} \cdot A \mod{x^8+1} &= (x^5+x^4+x^3+x^2+1) \cdot (a_7x^7+\ldots+a_1x+a_0) \mod{x^8+1} = \\
 		&= (a_7+a_5+a_4+a_3+a_2)\cdot x^7 + ~\\
@@ -179,7 +223,7 @@ But there are obviously many more linear mappings on $\cal B$. Let us see how ou
 		&\quad + (a_6+a_5+a_4+a_3+a_0)\cdot 1 \sim \\
 		&\sim
 		\begin{pmatrix}
-			10111100 \\
+			\boxed{10111100} \\
 			01011110 \\
 			00101111 \\
 			10010111 \\
@@ -191,23 +235,27 @@ But there are obviously many more linear mappings on $\cal B$. Let us see how ou
 		\cdot
 		\begin{pmatrix}
 			a_7 \\ \vdots \\ a_1 \\ a_0
-		\end{pmatrix}.
+		\end{pmatrix} ,
 	\end{align*}
+	where {\tt 3d} can be found in reverse order in the first row of the corresponding matrix.
 \end{example}
 
-One may wonder whether we have yet another set of targets, but actually we do not. Indeed, let us take a matrix $\mathbb{A}$ of an arbitrary linear mapping and observe $j$-th bit of output, let us suppose that $j$-th row of $\mathbb{A}$ is non-zero. Then $j$-th bit of output is a scalar product of this row with the input.
+One may wonder whether we could get yet another set of targets when using another linear mappings, but actually we do not. Indeed, let us take a matrix $\mathbb{A}$ of an arbitrary linear mapping and observe the $j$-th bit of output (suppose that the $j$-th row of $\mathbb{A}$ is non-zero). Then this output bit is a scalar product of this row and the input.
 
-Since the attack performs bit-wise, the result does not depend on any other bit of output, we only consider $j$-th target bit in the attack for now. But note that there exists very the same row in some of our previously used linear mappings considered as a matrix over $\GF(2)$, let say on $i$-th row of matrix $\mathbb{B}$. Indeed, we used all possible bytes and their equivalence classes were just inner cyclical shifts. So if we attack $i$-th target bit using $\mathbb{B}$, we obtain exactly the same results as with $j$-th target bit using $\mathbb{A}$. Hence we can only consider the row for a new attack target.
-%!% trochu bordel v tom co je target -- jestli výsledek p \cdot A' nebo jenom p
+Since the attack performs bit-wise, we would only care about the $j$-th row of $\mathbb{A}$. But note that there exists very the same row in some of our previously used linear mappings (now considered as a matrix over $\GF(2)$), let say on the $i$-th row of matrix $\mathbb{B}$. Indeed, we used all possible non-zero bytes and their equivalence classes were just inner cyclical shifts. So if we attack $i$-th target bit using $\mathbb{B}$, we obtain exactly the same results as with $j$-th target bit using $\mathbb{A}$.
 
-Note that we have $255$ of such non-zero rows and the output of this kind of target is a scalar product of this row with Rijndael inverse of input, hence not a byte anymore, but a single bit. Let us denote this mapping by
+It follows that we are actually only interested in non-zero vectors, there are $255$ of them. Note that there are indeed $255$ entries altogether in Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}, for each byte.
+
+The output of this kind of target is a scalar product of the non-zero vector and Rijndael inverse of input (cf.\ SBox construction in Equation \ref{eq:spq}), hence not a byte anymore, but a single bit (as already outlined in Note \ref{note:target}). Let us denote this mapping by
 \begin{equation}
-\label{eq:tba}
+\label{eq:tbkp}
 	T_B(A) = [B]^T\cdot [A'] ,
 \end{equation}
-where $B$ stands for the row, $A'$ for Rijndael inverse of $A$ and $[\cdot]$ for column vector representation, hence both are scalar-multiplied. Also note that there are indeed $255$ entries altogether in Table \ref{tab:lintargets} and \ref{tab:noninvtargets}, for each byte.
+where $B$ stands for the non-zero vector, $A'$ for Rijndael inverse of $A$, $[\cdot]$ for column vector representation and $[\cdot]^T$ for vector transposition, hence both vectors are scalar-multiplied. According to the notation of Note \ref{note:target}, it could be expressed as $T(K,P) = [B]^T\cdot [(K\xor P)']$.
 
-This observation therefore does not bring anything new, but a unifying and simplifying approach. Hence we do not give any results since these are already given in Table \ref{tab:lintargets} and \ref{tab:noninvtargets}. We only wondered whether we should split our remarks in the following Section \ref{sec:remarks} by the origin of the linear mapping (i.e.\ either invertible, or non-invertible) and finally decided to do so, because there could possibly emerge some surprising results.
+This observation therefore does not bring any new targets, but a unifying and simplifying approach. Hence we do not give any results since these are already given in Table \ref{tab:lintargets} and \ref{tab:noninvtargets}.
+
+We only wondered whether we should split our remarks in the following Section \ref{sec:remarks} by the origin of the linear mapping (i.e.\ either invertible, or non-invertible) and finally decided to do so, because there could possibly emerge some surprising results.
 
 \subsubsection{Implementation Note}
 	
@@ -216,27 +264,5 @@ This observation therefore does not bring anything new, but a unifying and simpl
 		S_0 &\gets \Bigl\{ Traces[n] \Bigm| T_B\bigl(KGuess\xor PTs[n][i]\bigr) = 0 \Bigr\} , \\
 		S_1 &\gets \Bigl\{ Traces[n] \Bigm| T_B\bigl(KGuess\xor PTs[n][i]\bigr) = 1 \Bigr\} ,
 	\end{align*}
-	where $T_B$ is the mapping from Equation \ref{eq:tba}. For this reason we precompute all $255$ lookup tables for $T_B$'s, of course.
+	where $T_B$ is the mapping introduced in Equation \ref{eq:tbkp}. For this purpose we precompute all $255$ lookup tables for $T_B$'s, of course.
 	
-
-% jak jednoduše nagenerovat vše: ...
-
-% a že já tám mam všechny možný řádky všelijak možně posunutý, tak asi nic jinýho nevymyslim, což?
-% a vůbec, všechny targety dostanu tim, že přenásobim vstup maticí
-%~ 1 0 0 0 0 0 0 0
-%~ 0 1 0 0 0 0 0 0
-%~ ...
-%~ 0 0 0 0 0 0 0 1
-%~ 1 1 0 0 0 0 0 0
-%~ 1 0 1 0 0 0 0 0
-%~ ...
-%~ 0 1 1 0 0 0 0 0
-%~ ...
-%~ 0 0 0 0 0 0 1 1
-%~ 1 1 1 0 0 0 0 0
-%~ ...
-%~ 1 1 1 1 1 1 1 1
-% ta už obsahuje bezpečně všechno a dost snadno se generuje
-
-%!% nápad: podle toho co vidim v memtrace, neni lepší útočit na 0x........??..; na 0x.........??. nebo dokonce na 0x........???? místo 0x..........??
-% to je ale asi uplná sračka

@@ -434,10 +434,10 @@ Classical ciphers are designed under the assumption of black-box attack context 
 
 \subsubsection{Gray-Box}
 
-Gray-box attack context is closer to the reality since we do not encrypt using oracles but rather using some physical devices which run a specific implementation of given cipher. In the gray box model, cipher is thus supposed to be implemented and run while the attacker can observe some information related to cipher's byproducts as well.
+Gray-box attack context is closer to the reality since we do not encrypt using oracles but rather using some physical devices which run a specific implementation of given cipher. In the gray box model, cipher is thus supposed to be implemented and run while the attacker can observe some information related to cipher's intermediate results as well.
 
-Such information leaks can be modelled as a set of distributions conditioned by byproducts and are referred to as {\em leakage model}. There is an area of theoretical cryptography studying leakages -- {\em Leakage Resilient Cryptography}. A practical attack exploiting such leaks will be described in Chapter \ref{chap:attack} in Section \ref{sec:side}.   %?% LRC introduced by?
+Such information leaks can be modelled as a set of distributions conditioned by intermediate results and are referred to as {\em leakage model}. There is an area of theoretical cryptography studying leakages -- {\em Leakage Resilient Cryptography}. A practical attack exploiting such leaks will be described in Chapter \ref{chap:attack} in Section \ref{sec:side}.   %?% LRC introduced by?
 
 \subsubsection{White-Box}
 
-Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter byproducts in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden but still usable for encryption.
+Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter intermediate results in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden but still usable for encryption.

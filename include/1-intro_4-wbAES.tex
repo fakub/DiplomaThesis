@@ -1,8 +1,8 @@
 \section{White-Box AES}
 \label{sec:wbaes}
 
-In this section we describe White-Box AES (WBAES) as introduced by Chow et al.\ \cite{chow2002aes} and revisited by Muir \cite{muir2013tutorial} (which we highly recommend). Note that it has already been broken by Billet et al.\ \cite{billet2004cryptanalysis}, see Section \ref{sec:known}.
-%!% ref to subsection, def linear?
+In this section we describe White-Box AES (WBAES) as introduced by Chow et al.\ \cite{chow2002aes} and revisited by Muir \cite{muir2013tutorial} (which we highly recommend). Note that it has already been broken by an interesting algebraic attack by Billet et al.\ \cite{billet2004cryptanalysis}, will be covered further in Section \ref{sec:known}.
+%!% def linear? cože? nechápu co ...
 
 The core idea of WBAES is based on usage of lookup tables as outlined in Section \ref{sec:aeslookup}, these are further improved in three ways:
 \begin{enumerate}
@@ -140,15 +140,16 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 	Note that the (partial) $32$-bit outputs of linear operations are first split into $4$-bit words and then two independent $4$-bit words are XORed together yielding a new $4$-bit word. Thus we can only use $4$-bit internal encodings, here denoted by $\Enc$, on both sides of each XOR. %?% in a manner of concatenated encoding, see Definition \ref{def:concat}
 	This is also the reason why input mixing bijection has been introduced -- it diffuses two $4$-bit blocks together.
 	
-	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e. not the first nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al.\ \cite{chow2002aes}.
+	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e.\ not the first round nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al.\ \cite{chow2002aes}.
 	\begin{align}
 	\label{eq:wbaesflow} %!% někde dát zmínku !!
 		\ldots&\rarr\underbracket{\Enc\rarr\IMB^{-1}\xrightarrow{\textnormal{plain}}\TBox\xrightarrow{\textnormal{plain}}\MB\circ\MC\rarr\Enc^{-1}}_{\textnormal{Type II}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\nonumber\\[.5em]
 		&\rarr\underbracket{\Enc\rarr\IMB\circ\MB^{-1}\rarr\Enc^{-1}}_{\textnormal{Type III}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\ldots
 	\end{align}
+	Interested reader is referred to Miur's tutorial \cite{muir2013tutorial} where they give large synoptic figures depicting the flow in detail, including I/O bitsize or depicting incorporation of $\ShiftRows$ operation.
 	
-	\ldots append Muir's figure depicting all operations together with their I/O sizes.
-	%!% připojit Muirovo obrázek
+	%?% synoptic? opravdu?
+	%?% připojit Muirovo obrázek
 	
 	\begin{remark}
 	\label{rem:localsec}

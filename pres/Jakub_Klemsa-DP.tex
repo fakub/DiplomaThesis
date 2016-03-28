@@ -135,16 +135,18 @@
 	\begin{itemize}
 		\item standard vydaný NIST \cite[2001]{fips2001aes}
 		\item dodnes považována za bezpečnou
-	\end{itemize}
-	\pause
+	%~ \end{itemize}
+	%~ \pause
 %~ }
 %~ 
 %~ \frame{
 %~ \frametitle{Konstrukce AES}
 	%~ Varianta se $128$-bitovým klíčem
-	$128$-bitová varianta
-	\begin{itemize}
-		\item $10$ rund, $4$ elementární operace
+	%~ $128$-bitová varianta
+		\pause
+		\item $128$-bitová varianta
+	%~ \begin{itemize}
+		%~ \item $10$ rund, $4$ elementární operace
 		%~ \item první mezivýsledky tvaru $S(m_i \oplus k_i)$, kde
 		%~ \begin{description}
 			%~ \item[$m_i$, $k_i$] \ldots\, $i$-tý byte zprávy $m$ resp.\ klíče $k$
@@ -180,7 +182,7 @@
 	%~ Black-box příliš idealizovaný
 	Blíže realitě
 	\begin{itemize}
-		\item z reálného hardwaru informace uniká
+		\item z hardwaru informace uniká
 		\begin{itemize}
 			\item spotřeba energie, EM záření, \ldots
 		\end{itemize}
@@ -196,6 +198,7 @@
 		\item může měnit hodnoty, instrukce, \ldots
 		\item klíč musí zůstat utajen
 	\end{itemize}
+	\pause
 	\begin{pzr}
 		Odolnost k white-box $\then$ odolnost ke gray-box.
 	\end{pzr}
@@ -204,7 +207,7 @@
 \subsection{White-box AES (WBAES)}
 \frame{
 \frametitle{White-box AES (WBAES)}
-	Poprvé představeno Chow et al.\ \cite[2002]{chow2002aes}
+	Představeno Chow et al.\ \cite[2002]{chow2002aes}
 	\begin{itemize}
 		\item algebraický útok (Billet et al.\ \cite[2004]{billet2004cryptanalysis})
 	\end{itemize}
@@ -233,10 +236,10 @@
 	Celá řada SCA
 	\begin{itemize}
 		\item přímé pozorování klíče (RSA)
-		\item hádání klíče {\bf po částech} a hledání náznaků mezivýsledků ve stopách
-		%~ \begin{itemize}
-			%~ \item ohodnocení kandidátů
-		%~ \end{itemize}
+		\item hádání klíče {\bf nezávisle po částech}
+		\begin{itemize}
+			\item hledání náznaků očekávaných mezivýsledků ve stopách
+		\end{itemize}
 	\end{itemize}
 }
 
@@ -248,10 +251,9 @@
 		\pause
 		\begin{itemize}
 			\item dělí stopy podle $j$-tého bitu očekávaného mezivýsledku
-			\pause
 			\begin{itemize}
 				\item nazveme {\em terč} (máme jich $8$)
-				\item liší se podle zprávy
+				\item závisí na zprávě a klíči
 			\end{itemize}
 		\end{itemize}
 		\pause
@@ -331,16 +333,16 @@
 		%~ \end{itemize}
 	%~ \end{itemize}
 %~ }
-
-\frame[plain]{
-	\begin{figure}[h]
-	\begin{center}
-		\includegraphics[height=\textheight]{../figures/memtrace/memtrace_emph.png}
-	\caption{Paměťová stopa běhu AES (část). První runda vyznačena červeně.}
-	\end{center}
-	\end{figure}
-}
-
+%~ 
+%~ \frame[plain]{
+	%~ \begin{figure}[h]
+	%~ \begin{center}
+		%~ \includegraphics[height=\textheight]{../figures/memtrace/memtrace_emph.png}
+	%~ \caption{Paměťová stopa běhu AES (část). První runda vyznačena červeně.}
+	%~ \end{center}
+	%~ \end{figure}
+%~ }
+%~ 
 %~ \frame{
 %~ \frametitle{Postup útoku II}
 	%~ \begin{itemize}
@@ -447,7 +449,7 @@
 			\item doba běhu desítky hodin
 		\end{itemize}
 		\pause
-		\item průměrná úspěšnost $29\%$
+		\item globální úspěšnost $29\%$
 		\begin{itemize}
 			\item silní kandidáti -- rozdíl na druhého $>10\%$
 			\item úsp.\ $25\%$   % [1019, 1000, 978, 1008, 986, 1006, 1019, 999].print_stats([:mean,:dev,:median,:sum])
@@ -455,12 +457,16 @@
 	\end{itemize}
 }
 
+\subsection{Rozložení úspěšnosti terčů}
 \frame{
 \frametitle{Rozložení úspěšnosti terčů I}
 	Mnoho terčů, málo měření (každý alespoň jednou úspěšný)
 	\begin{itemize}
-		\item shlukování terčů -- cyklické rotace vektoru
-		\item hlubší význam v konstrukci
+		\item shlukování terčů -- může jen vyvrátit uniformitu
+		\begin{itemize}
+			\item cyklické rotace vektoru
+			\item hlubší význam v konstrukci
+		\end{itemize}
 	\end{itemize}
 	\begin{figure}[h]
 	\begin{center}
@@ -483,17 +489,6 @@
 		\includegraphics[width=\textwidth]{../figures/leak_target_other/leak_0x0f_0xf0.pdf}
 	%~ \caption{Úspěšnost terčů podle invertibility původního $p$: zeleně invertibilní, cihlově neinvertibilní. Pro méně než $8$ terčů na $p$ jsou výsledky přeškálovány.}
 	\caption{Úspěšnost shluků terčů, hexadecimální zápis fixovaných bitů.}
-	\end{center}
-	\end{figure}
-}
-
-\frame{
-\frametitle{Úspěšnost podle pozice ve stopě}
-	Místo úniku -- max.\ rozdíl středních hodnot stop
-	\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=.65\textwidth]{../figures/leak_bit/leak_bit.pdf}
-	\caption{Průměrná úpěšnost a její směrodatná odchylka napříč instancemi podle pozice bitu v rámci bytu ve stopě.}
 	\end{center}
 	\end{figure}
 }
@@ -528,7 +523,7 @@
 
 \section{Budoucí práce}
 \frame{
-\frametitle{Budoucí práce}
+\frametitle{Budoucí práce I}
 	Nedořešené otázky
 	\begin{itemize}
 		\item ze které tabulky WBAES dochází k úniku
@@ -543,9 +538,23 @@
 		\begin{itemize}
 			\item proč se správný kandidát propadá na poslední místa
 		\end{itemize}
-		\item proč z pozice $3$ ve stopě neuniká informace
-		\item \ldots
+		%~ \item proč z pozice $3$ ve stopě neuniká informace
+		%~ \item \ldots
 	\end{itemize}
+}
+
+\frame{
+\frametitle{Budoucí práce II}
+	Úspěšnost podle pozice ve stopě
+	\begin{itemize}
+		\item místo úniku -- max.\ rozdíl středních hodnot stop
+	\end{itemize}
+	\begin{figure}[h]
+	\begin{center}
+		\includegraphics[width=.65\textwidth]{../figures/leak_bit/leak_bit.pdf}
+	\caption{Průměrná úpěšnost a její směrodatná odchylka napříč instancemi podle pozice bitu v rámci bytu ve stopě.}
+	\end{center}
+	\end{figure}
 }
 
 \section*{Literatura}

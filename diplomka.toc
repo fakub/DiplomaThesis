@@ -17,7 +17,7 @@
 \contentsline {subsubsection}{Program Obfuscator}{14}{section*.13}
 \contentsline {subsubsection}{Consequences in Cryptography}{14}{section*.14}
 \contentsline {subsubsection}{Main Result of Barak et al.}{14}{section*.15}
-\contentsline {subsubsection}{Going beyond}{15}{section*.16}
+\contentsline {subsubsection}{Going Beyond}{15}{section*.16}
 \contentsline {subsection}{\numberline {1.2.2}Cat and Mouse Game}{15}{subsection.1.2.2}
 \contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{15}{section.1.3}
 \contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{15}{subsection.1.3.1}
@@ -43,7 +43,7 @@
 \contentsline {subsubsection}{ShiftRows}{23}{section*.31}
 \contentsline {subsubsection}{External Encodings}{24}{section*.32}
 \contentsline {subsection}{\numberline {1.4.5}Known Attacks \& Enhancements}{24}{subsection.1.4.5}
-\contentsline {subsubsection}{BGE Attack}{24}{section*.33}
+\contentsline {subsubsection}{BGE Attack}{25}{section*.33}
 \contentsline {subsubsection}{Karroumi's Approach with Dual Ciphers}{25}{section*.34}
 \contentsline {subsubsection}{Klinec's Equivalence Result}{26}{section*.35}
 \contentsline {chapter}{\numberline {2}Using Side-Channel Attack Tools}{27}{chapter.2}
@@ -67,25 +67,28 @@
 \contentsline {section}{\numberline {3.2}Results}{40}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}\tt naiveAES}{40}{subsection.3.2.1}
 \contentsline {subsubsection}{CPA Attack against {\tt naiveAES}}{40}{section*.48}
-\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}.}{40}{section*.50}
+\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{40}{section*.50}
 \contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{40}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{42}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Changing Attack Target}{42}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Considering Another Targets}{44}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Attack Using All 16 Targets}{45}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{47}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Considering Linear Mappings on $\mathrm {GF}(2)^8$ Over $\mathrm {GF}(2)$}{49}{subsection.3.3.5}
-\contentsline {subsubsection}{Implementation Note}{50}{section*.58}
+\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt KlinecWBAES}}{41}{section*.52}
+\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{41}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{41}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{43}{subsection.3.3.2}
+\contentsline {subsubsection}{Results using Rijndael Inverse}{43}{section*.54}
+\contentsline {subsection}{\numberline {3.3.3}Considering Another Targets}{43}{subsection.3.3.3}
+\contentsline {subsection}{\numberline {3.3.4}Attack Using All 16 Targets}{45}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Non-Invertible Linear Mappings}{47}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Unifying Approach Considering $\mathrm {GF}(2)^8$ over $\mathrm {GF}(2)$}{47}{subsection.3.3.6}
+\contentsline {subsubsection}{Implementation Note}{50}{section*.60}
 \contentsline {section}{\numberline {3.4}Blind Attack}{50}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Remarks}{50}{subsection.3.4.1}
-\contentsline {subsubsection}{Leaking Bits}{51}{section*.59}
-\contentsline {subsubsection}{Leaks per Target}{51}{section*.61}
-\contentsline {subsubsection}{Using Less Traces}{51}{section*.64}
+\contentsline {subsubsection}{Leaking Bits}{51}{section*.61}
+\contentsline {subsubsection}{Leaks per Target}{51}{section*.63}
+\contentsline {subsubsection}{Using Less Traces}{51}{section*.66}
 \contentsline {subsection}{\numberline {3.4.2}Blind Attack}{52}{subsection.3.4.2}
 \contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{52}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{53}{subsection.3.5.1}
 \contentsline {chapter}{\numberline {4}Future Work}{55}{chapter.4}
-\contentsline {chapter}{Conclusion}{57}{section*.65}
-\contentsline {chapter}{References}{59}{section*.67}
+\contentsline {chapter}{Conclusion}{57}{section*.67}
+\contentsline {chapter}{References}{59}{section*.69}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}
