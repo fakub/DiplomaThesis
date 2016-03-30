@@ -13,9 +13,12 @@ Then we performed the most interesting attack which Bos et al.\ \cite{bos2015dif
 \subsection{\tt naiveAES}
 \label{sec:naiveaes}
 
-In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them. Both attacks are expected to work since {\tt naiveAES} stores all intermediate results needed for each attack.
+In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them. Both attacks are expected to work since {\tt naiveAES} stores all intermediate results needed for each attack. For this reason, we captured contents of $1$ byte memory writes in our memory traces and used the original SBox as our target. In both cases we considered strong candidates separately.
+%?% remind strong candidates?
 
 \subsubsection{CPA Attack against {\tt naiveAES}}
+	
+	First we attacked {\tt naiveAES} with CPA attack using 
 	
 	What experiment we made \ldots
 	% We repeated CPA attack (i.e. Algorithm \ref{alg:cpa}) with $10$ different keys and for different amounts of plaintexts. See results in Table \ref{tab:naiveaes}.
@@ -23,11 +26,7 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	
 	\begin{table}[H]
 		\begin{center}
-		\begin{tabular}{| c | c | c | c |}
-			\hline
-			Results & of attack & against {\tt naiveAES} & . \\
-			\hline
-		\end{tabular}
+		\input{./tables/3_2_1-naiveAES-CPA.tex}
 		\end{center}
 	\caption{CPA attack against {\tt naiveAES}}
 	\label{tab:naiveaescpa}
@@ -36,19 +35,18 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 
 \subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}}
 	
-	Algorithm \ref{alg:bitwisedpa} \ldots
+	Second we performed bit-wise DPA attack (i.e.\ Algorithm \ref{alg:bitwisedpa}) against {\tt naiveAES} using $24$ and $32$ memory traces, respectively. See results in Table \ref{tab:naiveaesdca} which shows amount of target bits having a strong candidate. Note that the maximum value of difference of means of the correct candidate is {\em always} equal to $1.0$ since there is a position where given intermediate product -- here output of the first SBox -- appears. It follows that each strong candidate is correct.
 	
+	%!% asi uplně zahodit tabulku a jenom říct, že to poznam hned ptž správnej má dycky 1.0 a jde jenom o to kdy se odlepí poslední špatnej ... zbude jedinej
 	\begin{table}[H]
 		\begin{center}
-		\begin{tabular}{| c | c | c | c |}
-			\hline
-			Results & of attack & against {\tt naiveAES} & . \\
-			\hline
-		\end{tabular}
+		\input{./tables/3_2_2-naiveAES-DCA.tex}
 		\end{center}
-	\caption{Bit-Wise DPA attack against {\tt naiveAES}.}
+	\caption{Number of target bits which provided a strong candidate/both strong and weak candidates using bit-wise DPA attack against {\tt naiveAES}.}
 	\label{tab:naiveaesdca}
 	\end{table}
+	
+	
 	%?% vyzkoušet rijinv na naiveAES, nemělo by jít, a taky nejde
 
 

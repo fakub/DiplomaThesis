@@ -62,19 +62,19 @@
 \contentsline {paragraph}{Trace Filtering}{34}{section*.45}
 \contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{36}{subsection.2.2.3}
 \contentsline {subsubsection}{Processing Results}{36}{section*.46}
-\contentsline {chapter}{\numberline {3}Results \& Improvements}{39}{chapter.3}
+\contentsline {chapter}{\numberline {3}Results, Improvements \& Discussion}{39}{chapter.3}
 \contentsline {section}{\numberline {3.1}Attack Tools}{39}{section.3.1}
 \contentsline {section}{\numberline {3.2}Results}{40}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}\tt naiveAES}{40}{subsection.3.2.1}
 \contentsline {subsubsection}{CPA Attack against {\tt naiveAES}}{40}{section*.48}
-\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{40}{section*.50}
-\contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{40}{subsection.3.2.2}
+\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{41}{section*.50}
+\contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{41}{subsection.3.2.2}
 \contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt KlinecWBAES}}{41}{section*.52}
 \contentsline {section}{\numberline {3.3}Enhancements of the Attack}{41}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{41}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{43}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{43}{subsection.3.3.2}
-\contentsline {subsubsection}{Results using Rijndael Inverse}{43}{section*.54}
-\contentsline {subsection}{\numberline {3.3.3}Considering Another Targets}{43}{subsection.3.3.3}
+\contentsline {subsubsection}{Results using Rijndael Inverse}{44}{section*.54}
+\contentsline {subsection}{\numberline {3.3.3}Considering Another Targets}{44}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Attack Using All 16 Targets}{46}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}Non-Invertible Linear Mappings}{48}{subsection.3.3.5}
 \contentsline {subsection}{\numberline {3.3.6}Unifying Approach Considering $\mathrm {GF}(2)^8$ over $\mathrm {GF}(2)$}{48}{subsection.3.3.6}
