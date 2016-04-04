@@ -7,14 +7,16 @@
 \BOOKMARK [0][-]{chapter.2}{Using Side-Channel Attack Tools}{}% 7
 \BOOKMARK [1][-]{section.2.1}{Side-Channel Attack}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.2}{Using SCA Tools in White-Box Cryptography}{chapter.2}% 9
-\BOOKMARK [0][-]{chapter.3}{Results, Improvements \046 Discussion}{}% 10
+\BOOKMARK [0][-]{chapter.3}{Results \046 Improvements}{}% 10
 \BOOKMARK [1][-]{section.3.1}{Attack Tools}{chapter.3}% 11
 \BOOKMARK [1][-]{section.3.2}{Results}{chapter.3}% 12
 \BOOKMARK [1][-]{section.3.3}{Enhancements of the Attack}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.4}{Blind Attack}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.5}{Use in White-Box Crypto Design}{chapter.3}% 15
-\BOOKMARK [0][-]{chapter.4}{Future Work}{}% 16
-\BOOKMARK [0][-]{section*.70}{Conclusion}{}% 17
-\BOOKMARK [0][-]{section*.72}{References}{}% 18
-\BOOKMARK [0][-]{Appendix.a.A}{Appendix Contents of Attached CD}{}% 19
-\BOOKMARK [0][-]{Appendix.a.B}{Appendix User Guide}{}% 20
+\BOOKMARK [0][-]{chapter.4}{Analysis of the Attack against WBAES}{}% 14
+\BOOKMARK [1][-]{section.4.1}{Blind Attack}{chapter.4}% 15
+\BOOKMARK [1][-]{section.4.2}{Use in White-Box Crypto Design}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.3}{Explanation Attempt}{chapter.4}% 17
+\BOOKMARK [0][-]{chapter.5}{Future Work}{}% 18
+\BOOKMARK [0][-]{section*.73}{Conclusion}{}% 19
+\BOOKMARK [0][-]{section*.75}{References}{}% 20
+\BOOKMARK [0][-]{Appendix.a.A}{Appendix Contents of Attached CD}{}% 21
+\BOOKMARK [0][-]{Appendix.a.B}{Appendix User Guide}{}% 22

@@ -62,36 +62,40 @@
 \contentsline {paragraph}{Trace Filtering}{34}{section*.45}
 \contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{36}{subsection.2.2.3}
 \contentsline {subsubsection}{Processing Results}{36}{section*.46}
-\contentsline {chapter}{\numberline {3}Results, Improvements \& Discussion}{39}{chapter.3}
+\contentsline {chapter}{\numberline {3}Results \& Improvements}{39}{chapter.3}
 \contentsline {section}{\numberline {3.1}Attack Tools}{39}{section.3.1}
 \contentsline {section}{\numberline {3.2}Results}{40}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}\tt naiveAES}{40}{subsection.3.2.1}
 \contentsline {subsubsection}{CPA Attack against {\tt naiveAES}}{40}{section*.48}
-\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{41}{section*.50}
+\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{40}{section*.50}
 \contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{41}{subsection.3.2.2}
 \contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt KlinecWBAES}}{41}{section*.52}
-\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{41}{section.3.3}
+\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{43}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{43}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{43}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{44}{subsection.3.3.2}
 \contentsline {subsubsection}{Results using Rijndael Inverse}{44}{section*.54}
 \contentsline {subsection}{\numberline {3.3.3}Considering Another Targets}{44}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Attack Using All 16 Targets}{46}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Non-Invertible Linear Mappings}{48}{subsection.3.3.5}
-\contentsline {subsection}{\numberline {3.3.6}Unifying Approach Considering $\mathrm {GF}(2)^8$ over $\mathrm {GF}(2)$}{48}{subsection.3.3.6}
+\contentsline {subsection}{\numberline {3.3.4}Attack Using All 16 Targets}{47}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Non-Invertible Linear Mappings}{47}{subsection.3.3.5}
+\contentsline {subsection}{\numberline {3.3.6}Unifying Approach Considering $\mathrm {GF}(2)^8$ over $\mathrm {GF}(2)$}{47}{subsection.3.3.6}
 \contentsline {subsubsection}{Implementation Note}{51}{section*.60}
-\contentsline {section}{\numberline {3.4}Blind Attack}{51}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Remarks}{51}{subsection.3.4.1}
-\contentsline {subsubsection}{Success Rate of Individual Targets}{52}{section*.61}
-\contentsline {paragraph}{Group by corresponding $p$.}{52}{section*.62}
-\contentsline {paragraph}{Group with fixed $4$ bits in $B$.}{52}{section*.64}
-\contentsline {subsubsection}{False Positives}{53}{section*.66}
-\contentsline {subsubsection}{Using Less Traces}{53}{section*.67}
-\contentsline {subsubsection}{Leaking Bits}{53}{section*.68}
-\contentsline {subsection}{\numberline {3.4.2}Blind Attack}{54}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}Use in White-Box Crypto Design}{54}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Countermeasures against DCA}{55}{subsection.3.5.1}
-\contentsline {chapter}{\numberline {4}Future Work}{57}{chapter.4}
-\contentsline {chapter}{Conclusion}{59}{section*.70}
-\contentsline {chapter}{References}{61}{section*.72}
+\contentsline {chapter}{\numberline {4}Analysis of the Attack against WBAES}{53}{chapter.4}
+\contentsline {section}{\numberline {4.1}Blind Attack}{53}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Remarks}{53}{subsection.4.1.1}
+\contentsline {subsubsection}{Success Rate of Individual Targets}{54}{section*.61}
+\contentsline {paragraph}{Group by corresponding $p$.}{54}{section*.62}
+\contentsline {paragraph}{Group with fixed $4$ bits in $B$.}{54}{section*.64}
+\contentsline {subsubsection}{False Positives}{55}{section*.66}
+\contentsline {paragraph}{Gaps of incorrect candidates.}{55}{section*.67}
+\contentsline {paragraph}{Number of repetitions of strong incorrect candidates.}{55}{section*.68}
+\contentsline {subsubsection}{Using Less Traces}{56}{section*.69}
+\contentsline {subsubsection}{Leaking Bits}{56}{section*.71}
+\contentsline {subsection}{\numberline {4.1.2}Blind Attack Suggestion}{57}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Use in White-Box Crypto Design}{57}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Countermeasures against DCA}{58}{subsection.4.2.1}
+\contentsline {section}{\numberline {4.3}Explanation Attempt}{58}{section.4.3}
+\contentsline {chapter}{\numberline {5}Future Work}{59}{chapter.5}
+\contentsline {chapter}{Conclusion}{61}{section*.73}
+\contentsline {chapter}{References}{63}{section*.75}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}

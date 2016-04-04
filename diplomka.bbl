@@ -77,6 +77,12 @@ Zvika Brakerski and Guy~N Rothblum.
   encoding.
 \newblock In {\em Theory of Cryptography}, pages 1--25. Springer, 2014.
 
+\bibitem{chari1999towards}
+Suresh Chari, Charanjit~S Jutla, Josyula~R Rao, and Pankaj Rohatgi.
+\newblock Towards sound approaches to counteract power-analysis attacks.
+\newblock In {\em Advances in Cryptology—CRYPTO’99}, pages 398--412.
+  Springer, 1999.
+
 \bibitem{chow2003des}
 Stanley Chow, Phil Eisen, Harold Johnson, and Paul~C Van~Oorschot.
 \newblock A white-box des implementation for drm applications.
@@ -115,6 +121,12 @@ Karine Gandolfi, Christophe Mourtel, and Francis Olivier.
 \newblock Electromagnetic analysis: Concrete results.
 \newblock In {\em Cryptographic Hardware and Embedded Systems—CHES 2001},
   pages 251--261. Springer, 2001.
+
+\bibitem{goubin1999des}
+Louis Goubin and Jacques Patarin.
+\newblock Des and differential power analysis the “duplication” method.
+\newblock In {\em Cryptographic Hardware and Embedded Systems}, pages 158--172.
+  Springer, 1999.
 
 \bibitem{chipwhisperer}
 NewAE~Technology Inc.
@@ -214,6 +226,12 @@ James~A Muir.
 Nicholas Nethercote and Julian Seward.
 \newblock Valgrind: a framework for heavyweight dynamic binary instrumentation.
 \newblock In {\em ACM Sigplan notices}, volume~42, pages 89--100. ACM, 2007.
+
+\bibitem{nikova2006threshold}
+Svetla Nikova, Christian Rechberger, and Vincent Rijmen.
+\newblock Threshold implementations against side-channel attacks and glitches.
+\newblock In {\em Information and Communications Security}, pages 529--545.
+  Springer, 2006.
 
 \bibitem{exampletraces}
 Colin O'Flynn.

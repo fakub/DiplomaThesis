@@ -140,6 +140,7 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 	Note that the (partial) $32$-bit outputs of linear operations are first split into $4$-bit words and then two independent $4$-bit words are XORed together yielding a new $4$-bit word. Thus we can only use $4$-bit internal encodings, here denoted by $\Enc$, on both sides of each XOR. %?% in a manner of concatenated encoding, see Definition \ref{def:concat}
 	This is also the reason why input mixing bijection has been introduced -- it diffuses two $4$-bit blocks together.
 	
+	%!% ctj. plain?
 	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e.\ not the first round nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al.\ \cite{chow2002aes}.
 	\begin{align}
 	\label{eq:wbaesflow} %!% někde dát zmínku !!

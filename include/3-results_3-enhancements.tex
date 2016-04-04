@@ -68,9 +68,9 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 	We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijndael inverse as the target (i.e.\ the simplest SBox variant), see results in Table \ref{tab:klinecrijinv}. Note that this is the second part of successfuly reproduced results of Bos et al.
 	
 	\afterpage{
-		\clearpage   % To flush out all floats, might not be what you want
+		%~ \clearpage   % To flush out all floats, might not be what you want
 		\begin{landscape}
-		\begin{table}[H]
+		\begin{table}[h]
 			\begin{center}
 			\input{./tables/3_3_1-klinec-rijinv.tex}   %!% obrátit pořadí sloupečků !!!
 			\end{center}
@@ -96,9 +96,9 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 
 The benefit of having higher chance of breaking the key led us to the idea of using yet another invertible affine mappings inside SBoxes (see Equation \ref{eq:spq}) besides the one of the original SBox and identity (i.e.\ those used by Bos et al.).
 
-There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$, there are $128$ of them (follows from Remark \ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings which could be used inside SBoxes to create another targets.
-
 \newpage   %!% zmrd bez toho píčuje
+
+There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$, there are $128$ of them (follows from Remark \ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings which could be used inside SBoxes to create another targets.
 
 \begin{remark}
 \label{rem:pqeffect}
@@ -146,9 +146,9 @@ It follows that we can narrow down our attention to $16$ targets only. Indeed, o
 We attacked {\tt KlinecWBAES} using all of the $16$ attack targets and $1024$ traces, see results of the \nth{1} byte in Table \ref{tab:lintargets}. Note that the row of target {\tt 01} is indeed equal to the row of the \nth{1} byte in Table \ref{tab:klinecrijinv} and the row of target {\tt 1f} is indeed equal to the row of the \nth{1} byte in Table \ref{tab:klinecsbox}. Also note that the target {\tt 25} does not unravel the \nth{1} key byte even with $1024$ traces -- here we can clearly see the benefit of having many targets.
 
 \afterpage{
-	\clearpage   % To flush out all floats, might not be what you want
+	%~ \clearpage   % To flush out all floats, might not be what you want
 	\begin{landscape}
-	\begin{table}[H]
+	\begin{table}[h]
 		\begin{center}
 		\input{./tables/3_3_2-invertible-targets.tex}   % zašedit pod 10%
 		\end{center}
@@ -187,9 +187,9 @@ As before, we only kept one representant of each class where elements are a mult
 We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Also note that some classes include less than $8$ polynomials, e.g.\ $\texttt{11} = x^4+1$. This is because $(x^4+1)\cdot x^4 \pmod{x^8+1} = x^4+1$. For this reason, some target bits are not shown in results since their values would be repeating. You can find results of attack against {\tt KlinecWBAES} using $1024$ traces in Table~\ref{tab:noninvtargets}.
 
 \afterpage{
-	\clearpage   % To flush out all floats, might not be what you want
+	%~ \clearpage   % To flush out all floats, might not be what you want
 	\begin{landscape}
-	\begin{table}[H]
+	\begin{table}[h]
 		\begin{center}
 		\input{./tables/3_3_3-noninvertible-targets.tex}
 		\end{center}
@@ -211,8 +211,6 @@ We can immediately discard {\tt 00}, because it only gives $0$ (everything would
 Let us have a closer look at our previously considered targets, in particular at matrix representation of their internal linear mappings -- multiplication by $p\mod{x^8+1}$ (quick reminder: $T(K,P) = S_{p,0}(K\xor P) = p \cdot (K\xor P)' \mod{x^8+1}$). For now we will consider the linear mapping in the vector space $\GF(2)^8$ over $\GF(2)$, denoted by $\cal B$.
 
 Note that equivalents of previously used linear mappings form a specific subset of all linear mappings on $\cal B$ since there are only $256$ of $p$'s. But there are obviously many more linear mappings on $\cal B$. Let us see how our previously considered mappings can be expressed -- they correspond with matrices with cyclically shifted rows as outlined in the following example.
-
-\newpage   %!%
 
 \begin{example}[Multiplication by $\texttt{3d}\pmod{x^8+1}$]
 \label{ex:shiftmatrix}

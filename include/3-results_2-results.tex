@@ -18,13 +18,9 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 
 \subsubsection{CPA Attack against {\tt naiveAES}}
 	
-	First we attacked {\tt naiveAES} with CPA attack using 
+	First we attacked {\tt naiveAES} with CPA attack using $64$, $96$ and $128$ traces, respectively. Our results are given in Table \ref{tab:naiveaescpa}. For each key byte and different number of traces, two values are given in the table: percentual gap of the best candidate to the second candidate and rank of the correct candidate. If we look at the \nth{5} bit back in Table \ref{tab:gap} in Example \ref{ex:gap}, these two values would be $\frac{0.3970-0.3884}{0.3970}\cdot100\%\approx2.2\%$ and $45$, respectively.
 	
-	What experiment we made \ldots
-	% We repeated CPA attack (i.e. Algorithm \ref{alg:cpa}) with $10$ different keys and for different amounts of plaintexts. See results in Table \ref{tab:naiveaes}.
-	%~ CPA attack required $x$ traces, bitwise DPA attack required $y$ traces.
-	
-	\begin{table}[H]
+	\begin{table}[h]
 		\begin{center}
 		\input{./tables/3_2_1-naiveAES-CPA.tex}
 		\end{center}
@@ -32,21 +28,24 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	\label{tab:naiveaescpa}
 	\end{table}
 	
+	It appears that we need order of hundreds of traces in order to attack even an unprotected implementation successfuly. Remind that in CPA attack we only have single attack target (for each key byte) which is Hamming weight of output of the first SBox. However, this attack served just as a proof of concept.
 
 \subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}}
 	
-	Second we performed bit-wise DPA attack (i.e.\ Algorithm \ref{alg:bitwisedpa}) against {\tt naiveAES} using $24$ and $32$ memory traces, respectively. See results in Table \ref{tab:naiveaesdca} which shows amount of target bits having a strong candidate. Note that the maximum value of difference of means of the correct candidate is {\em always} equal to $1.0$ since there is a position where given intermediate product -- here output of the first SBox -- appears. It follows that each strong candidate is correct.
+	Second we performed bit-wise DPA attack (i.e.\ Algorithm \ref{alg:bitwisedpa}) against {\tt naiveAES} using $24$ and $32$ memory traces, respectively. See results in Table \ref{tab:naiveaesdca} which shows amount of leaking target bits. Note that the maximum value of difference of means of the correct candidate is {\em always} equal to $1.0$ since there is a position where given intermediate product -- here a bit output of the first SBox -- appears. Therefore once there appears a gap for the first time, we know the correct candidate for sure and do not need to care about its strongness.
 	
 	%!% asi uplně zahodit tabulku a jenom říct, že to poznam hned ptž správnej má dycky 1.0 a jde jenom o to kdy se odlepí poslední špatnej ... zbude jedinej
-	\begin{table}[H]
+	\begin{table}[h]
 		\begin{center}
 		\input{./tables/3_2_2-naiveAES-DCA.tex}
 		\end{center}
-	\caption{Number of target bits which provided a strong candidate/both strong and weak candidates using bit-wise DPA attack against {\tt naiveAES}.}
+	\caption{Number of target bits which gave single candidate with difference of means equal to $1.0$ using bit-wise DPA attack against {\tt naiveAES}.}
 	\label{tab:naiveaesdca}
 	\end{table}
 	
+	Using $24$ traces has mostly shown to be sufficient and with $32$ traces, our attack was always successful. Note that these numbers are only illustrative, it could possibly happen that many more traces would keep two candidates on the top, both with difference of means equal to $1.0$.
 	
+	%~ CPA attack required $x$ traces, bitwise DPA attack required $y$ traces.
 	%?% vyzkoušet rijinv na naiveAES, nemělo by jít, a taky nejde
 
 
@@ -57,6 +56,8 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 \subsection{\tt KlinecWBAES}
 \label{sec:klinecwbaes}
 
+The most interesting results came with attacking Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}.
+
 First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not break any key byte at all. Therefore the rest of our results focuses exclusively on bit-wise DPA attack.
 
 \subsubsection{Bit-Wise DPA Attack against {\tt KlinecWBAES}}
@@ -66,7 +67,7 @@ First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not 
 	\afterpage{
 		\clearpage   % To flush out all floats, might not be what you want
 		\begin{landscape}
-		\begin{table}[H]
+		\begin{table}[h]
 			\begin{center}
 			\input{./tables/3_2_3-klinec-sbox.tex}   %!% obrátit pořadí sloupečků !!!
 			\end{center}
