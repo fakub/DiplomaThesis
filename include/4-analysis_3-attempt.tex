@@ -1,0 +1,22 @@
+\section{Explanation Attempt}
+\label{sec:attempt}
+
+First of all, let us remind the flow of information through WBAES tables (originally in Equation \ref{eq:wbaesflow}), especially its first part.
+\begin{equation}
+\label{eq:wbaesfirst}
+	\ldots \rarr \underbracket{\Enc \rarr \IMB^{-1} \xrightarrow{\textnormal{plain}} \TBox \xrightarrow{\textnormal{plain}} \MB \circ \MC \rarr \Enc^{-1}}_{\textnormal{in table}} \rarr \ldots
+\end{equation}
+Note that the last plain AES state (denoted with ``plain'' in the previous equation) is actually an $8$-bit output of the first SBox i.e.\ the very original target. Let us see what happens next: a composed linear mapping $\MB\circ\MC$ is applied, resulting in a $32$-bit output, and then each $4$-bit nibble is passed through a $4$-bit random bijection $\Enc^{-1}$. 
+
+Note that $\Enc$ is only a $4$-bit bijection 
+
+%!% attempt to explain: výstup SBoxu je problitej náhodnym lin. zobrazenim tj. prvky výstupu jsou zase jenom skal. součinem s nějakým náhodnym nenulovym vektorem ... po čtveřicích jsou takový bity problitý náhodnou bijekcí (právě že jenom po 4!)
+% nikdo přece netestuje nelinearitu/nekorelovanost techdle bijekcí ... neni to třeba tak že každá 3. koreluje na nákym výstupnim bitu s nákym vstupnim bitem? nebo klíďo jejich lin. kombinací?
+% ale mam pocit že to jde ověřit právě výpisem mezivýsledků a útokem na ně, co si pomatuju tak to nešlo ...
+
+% ze dřívějška:
+% neni třeba problém v tom že to jsou concatenated encodings? i.e. ze 2x4 bitů postavený 8 bitový bijekce
+% jesli takovejch už třeba neni moc málo nebo jestli náhodou nedávaj docela často nákou korelaci
+% třeba zkusit dokázat, že random bijection ani náhodou nezanechá korelaci v nákym bitu, mělo by tam bejt negligible
+% asi se trochu rozepsat a odůvodnit ...
+% třeba to, jak jsou ty bijekce generovaný, že to je z nákýho pejpru, kterej něco ukazuje
