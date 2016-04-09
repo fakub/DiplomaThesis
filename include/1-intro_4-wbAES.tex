@@ -224,7 +224,8 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 
 \subsubsection{Karroumi's Approach with Dual Ciphers}
 	
-	Karroumi noticed that BGE attack exploits the knowledge of specific AES constants, for instance coefficients inside $\MixColumns$ (see Equation \ref{eq:mixcolmatr}) or, most importantly for this thesis, coefficients of affine transformation inside $\SubBytes$ (see Equation \ref{eq:sbox}). In 2002, Barkan et al.\ \cite{barkan2002many} came up with the idea of changing these coefficients in an appropriate way and Karroumi suggested to use such modified AES as a basis for an upgraded WBAES. In general, such modified cipher is referred to as {\em dual cipher}.
+	Karroumi noticed that BGE attack exploits the knowledge of specific AES constants, for instance coefficients inside $\MixColumns$ (see Equation \ref{eq:mixcolmatr}) or, most importantly for this thesis, coefficients of affine transformation\footnote{Binary polynomial multiplication modulo $x^8+1$ is indeed a linear mapping in the vector space $\GF(2^8)$ over $\GF(2)$, will be outlined later in Section \ref{sec:unify}.} inside $\SubBytes$ (see Equation \ref{eq:sbox}). In 2002, Barkan et al.\ \cite{barkan2002many} came up with the idea of changing these coefficients in an appropriate way and Karroumi suggested to use such modified AES as a basis for an upgraded WBAES. In general, such modified cipher is referred to as {\em dual cipher}.
+	%!% rozepsat proč to je affine ... dělam to nad GF(2) tak stačí součet že ... a ten nák triviálně platí
 	
 	Originally there were $240$ dual AES ciphers by Barkan et al., the list has been later extended by Raddum \cite{raddum2004more} to $9\,360$ and further by Biryukov et al.\ \cite{biryukov2003toolbox} to $61\,200$ dual AES ciphers.
 	%?% Among other constants, one may change the Rijndael field irreducible polynomial, too, which obviously leads to different field operations.
@@ -257,9 +258,9 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 	
 	\begin{note}
 	\label{note:dualsbox}
-		Later in this thesis, we will attack Klinec's implementation \cite{klinec2013implementation} of Chow's WBAES \cite{chow2002aes}. We will utilize Remark \ref{rem:dualequiv} in a slightly different way.
+		Later in this thesis, we will attack Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}. We will utilize Remark \ref{rem:dualequiv} in a slightly different way.
 		
-		Remind that, among others, dual AES allows us to alter coefficients of affine transformation inside the $\SubBytes$ step (see Equation \ref{eq:sbox}). Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one i.e.\ we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
+		Remind that, among others, dual AES allows us to alter coefficients of the affine transformation inside $\SubBytes$ step (see Equation \ref{eq:sbox}). Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one i.e.\ we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
 		%!% kurva to ale nedává vůbec smysl, dyť stejnak následuje MC a random MB, oboje lineární zobrazení (MC je ještě docela restricted, je totiž v GF(2^8), ale MB už je v GF(2) tže totál unrestricted)
 	\end{note}
 	

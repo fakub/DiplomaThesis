@@ -95,14 +95,14 @@ The good news is that the overal success rate was $25\%$ (compare to $27\%$ and 
 		\begin{center}
 		\begin{tabular}{| c | c | c | c | c | c | c | c |}
 			\hline
-			Traces       &    $128$ &    $256$ &    $384$ &   $512$ &   $1024$ \\
+			Traces       &    $128$ &    $256$ &    $384$ &    $512$ &    $1024$ \\
 			\hline
-			Success rate &  $9.8\%$ &   $17\%$ &  ?       & ?       &   $25\%$ \\
+			Success rate &  $9.8\%$ &   $17\%$ &   $20\%$ &   $21\%$ &    $25\%$ \\
 			\hline
-			Average gap  &   $24\%$ &   $32\%$ &  ?       & ?       &   $40\%$ \\
+			Average gap  &   $24\%$ &   $32\%$ &   $35\%$ &   $37\%$ &    $40\%$ \\
 			\hline
 			Reduced cost\footnote{Will be introduced later.}
-			             & $5\,400$ & $4\,700$ & $.$ & $.$ & $10\,500$ \\
+			             & $5\,400$ & $4\,700$ & $5\,500$ & $6\,400$ & $10\,500$ \\
 			\hline
 		\end{tabular}
 		\end{center}
@@ -128,19 +128,19 @@ The good news is that the overal success rate was $25\%$ (compare to $27\%$ and 
 	
 	% 384:
 	% strong & correct:
-	% 	[814,791,784,825,790,819,812,]
-	% 	[35.84,35.59,35.14,35.26,36.19,35.26,35.77,]
+	% 	[814, 791, 784, 825, 790, 819, 812, 818] => 806.625 ... 19.8%
+	% 	[35.84, 35.59, 35.14, 35.26, 36.19, 35.26, 35.77, 34.61] => 35.4575
 	% strong & incorrect:
-	% 	[491,488,484,504,487,464,509,]
-	% 	[14.17,14.37,13.97,14.17,14.14,14.07,14.23,]
+	% 	[491,488,484,504,487,464,509,530]
+	% 	[14.17,14.37,13.97,14.17,14.14,14.07,14.23,14.30]
 	
 	% 512:
 	% strong & correct:
-	% 	[879,851,855,887,848,]
-	% 	[37.25,37.47,36.58,37.66,38.04,]
+	% 	[879, 851, 855, 887, 848, 879, 881, 870] => 868.75 ... 21.3%
+	% 	[37.25, 37.47, 36.58, 37.66, 38.04, 37.03, 37.42, 36.93] => 37.2975
 	% strong & incorrect:
-	% 	[471,480,473,478,472,]
-	% 	[14.02,14.09,13.96,13.97,14.23,]
+	% 	[471,480,473,478,472,517,432,474]
+	% 	[14.02,14.09,13.96,13.97,14.23,13.71,14.29,13.97]
 
 \subsubsection{Leaking Bits}
 	
@@ -172,25 +172,21 @@ The good news is that the overal success rate was $25\%$ (compare to $27\%$ and 
 
 In general, we suggest to use rather less traces and repeat the attack with several targets until the sum of strong gaps of any candidate exceeds given bound.
 
-According to results in Table \ref{tab:ntraces}, we attempt to estimate convenient number of traces. For this reason, we introduce {\em reduced cost of gap}, defined as
+In order to figure out a reasonable number of traces from results in Table \ref{tab:ntraces}, we introduce {\em reduced cost of gap}, defined as
 \begin{equation}
 \label{eq:redcost}
 	C(n, s, g) = \frac{n}{s\cdot g} ,
 \end{equation}
-where $n$ stands for the number of traces, $s$ for average success rate and $g$ for average gap of a strong candidate. Note that this quantity corresponds with average time of the attack: the more traces, the longer time; the better success rate or the bigger gap, the shorter time. Thus we can use this measure to compare expected time of the attack using different number of traces.
+where $n$ stands for the number of traces, $s$ for average success rate and $g$ for average gap of a strong candidate.
 
+%?% omitting strong candidates' bound leads to ~1.5\% enhancement
+Note that this quantity corresponds with average time of the attack: the more traces, the longer time; the better success rate or the bigger gap, the shorter time. Thus we can use this measure to compare expected time of the attack using different number of traces. According to results in Table \ref{tab:ntraces}, the best value of the reduced cost of gap was achieved for $256$ traces, therefore we suggest to use this amount of traces.
 
-% omitting strong candidates' bound leads to ~1.5\% enhancement
+As stated before, %!% where?
+false candidates do not appear to repeat very much, the same situation was with $256$ traces. Therefore we suggest to keep using $75\%$ as a cummulative bound.
 
-% We rather suggest the following:
-%~ \begin{enumerate}
-	%~ \item pick a target, %?% Chi-square test of uniformity, pick random
-	%~ \item attack using $256$ traces
-%~ \end{enumerate}
-% 10\% pro započtení, 75\% kumulativní mez? moc často se totiž neopakujou
+Note that we could perform an adaptive attack: start with lower cummulative bound, get some key candidate, verify it, and unless correct, keep increasing the cummulative bound while keeping the previous results. However, we did not implement this enhanced variant.
 % vyzkoušet jestli tak zlomim všechny instance
-
-%~ Therefore, in case of blind attack (i.e.\ no knowledge of actual key), we suggest to use less traces, but keep changing the target until the maximal gap exceeds $27\%$, then we accept that candidate. This is likely to happen soon since $10.6$ out of $16$ targets succeed on average.
 
 % psal já / Teuwen:
 %~ > I only wonder about the reasoning why Karroumi is more than Chow since

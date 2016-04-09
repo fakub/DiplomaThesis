@@ -1,22 +1,54 @@
 \BOOKMARK [0][-]{section*.3}{Preface}{}% 1
 \BOOKMARK [0][-]{chapter.1}{Introduction to Whitebox Cryptography}{}% 2
 \BOOKMARK [1][-]{section.1.1}{Introduction to Cryptography}{chapter.1}% 3
-\BOOKMARK [1][-]{section.1.2}{White-Box Cryptography}{chapter.1}% 4
-\BOOKMARK [1][-]{section.1.3}{Advanced Encryption Standard}{chapter.1}% 5
-\BOOKMARK [1][-]{section.1.4}{White-Box AES}{chapter.1}% 6
-\BOOKMARK [0][-]{chapter.2}{Using Side-Channel Attack Tools}{}% 7
-\BOOKMARK [1][-]{section.2.1}{Side-Channel Attack}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.2}{Using SCA Tools in White-Box Cryptography}{chapter.2}% 9
-\BOOKMARK [0][-]{chapter.3}{Results \046 Improvements}{}% 10
-\BOOKMARK [1][-]{section.3.1}{Attack Tools}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.2}{Results}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.3}{Enhancements of the Attack}{chapter.3}% 13
-\BOOKMARK [0][-]{chapter.4}{Analysis of the Attack against WBAES}{}% 14
-\BOOKMARK [1][-]{section.4.1}{Blind Attack}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.2}{Use in White-Box Crypto Design}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.3}{Explanation Attempt}{chapter.4}% 17
-\BOOKMARK [0][-]{chapter.5}{Future Work}{}% 18
-\BOOKMARK [0][-]{section*.73}{Conclusion}{}% 19
-\BOOKMARK [0][-]{section*.75}{References}{}% 20
-\BOOKMARK [0][-]{Appendix.a.A}{Appendix Contents of Attached CD}{}% 21
-\BOOKMARK [0][-]{Appendix.a.B}{Appendix User Guide}{}% 22
+\BOOKMARK [2][-]{subsection.1.1.1}{Symmetric and Asymmetric Cipher}{section.1.1}% 4
+\BOOKMARK [2][-]{subsection.1.1.2}{Information-Theoretic Approach}{section.1.1}% 5
+\BOOKMARK [2][-]{subsection.1.1.3}{Complexity-Theoretic Approach}{section.1.1}% 6
+\BOOKMARK [2][-]{subsection.1.1.4}{Block cipher}{section.1.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.5}{Provable Security Proofs}{section.1.1}% 8
+\BOOKMARK [2][-]{subsection.1.1.6}{Provable vs. Real-World Security}{section.1.1}% 9
+\BOOKMARK [2][-]{subsection.1.1.7}{From Black-Box to White-Box Attack Context}{section.1.1}% 10
+\BOOKMARK [1][-]{section.1.2}{White-Box Cryptography}{chapter.1}% 11
+\BOOKMARK [2][-]{subsection.1.2.1}{Program Obfuscation}{section.1.2}% 12
+\BOOKMARK [2][-]{subsection.1.2.2}{Cat and Mouse Game}{section.1.2}% 13
+\BOOKMARK [1][-]{section.1.3}{Advanced Encryption Standard}{chapter.1}% 14
+\BOOKMARK [2][-]{subsection.1.3.1}{AES Algorithm Prerequisities}{section.1.3}% 15
+\BOOKMARK [2][-]{subsection.1.3.2}{AES Algorithm Description}{section.1.3}% 16
+\BOOKMARK [2][-]{subsection.1.3.3}{AES Implementation Note}{section.1.3}% 17
+\BOOKMARK [1][-]{section.1.4}{White-Box AES}{chapter.1}% 18
+\BOOKMARK [2][-]{subsection.1.4.1}{Encodings}{section.1.4}% 19
+\BOOKMARK [2][-]{subsection.1.4.2}{Reorded AES}{section.1.4}% 20
+\BOOKMARK [2][-]{subsection.1.4.3}{Fully-Table Representation}{section.1.4}% 21
+\BOOKMARK [2][-]{subsection.1.4.4}{WBAES Construction}{section.1.4}% 22
+\BOOKMARK [2][-]{subsection.1.4.5}{Known Attacks \046 Enhancements}{section.1.4}% 23
+\BOOKMARK [0][-]{chapter.2}{Using Side-Channel Attack Tools}{}% 24
+\BOOKMARK [1][-]{section.2.1}{Side-Channel Attack}{chapter.2}% 25
+\BOOKMARK [2][-]{subsection.2.1.1}{Correlation Power Analysis Attack}{section.2.1}% 26
+\BOOKMARK [2][-]{subsection.2.1.2}{Bit-Wise Differential Power Analysis Attack}{section.2.1}% 27
+\BOOKMARK [1][-]{section.2.2}{Using SCA Tools in White-Box Cryptography}{chapter.2}% 28
+\BOOKMARK [2][-]{subsection.2.2.1}{Trace Acquisition}{section.2.2}% 29
+\BOOKMARK [2][-]{subsection.2.2.2}{Trace Filtering}{section.2.2}% 30
+\BOOKMARK [2][-]{subsection.2.2.3}{Attacking Traces}{section.2.2}% 31
+\BOOKMARK [0][-]{chapter.3}{Results \046 Improvements}{}% 32
+\BOOKMARK [1][-]{section.3.1}{Attack Tools}{chapter.3}% 33
+\BOOKMARK [1][-]{section.3.2}{Results}{chapter.3}% 34
+\BOOKMARK [2][-]{subsection.3.2.1}{naiveAES}{section.3.2}% 35
+\BOOKMARK [2][-]{subsection.3.2.2}{KlinecWBAES}{section.3.2}% 36
+\BOOKMARK [1][-]{section.3.3}{Enhancements of the Attack}{chapter.3}% 37
+\BOOKMARK [2][-]{subsection.3.3.1}{Exploiting WBAES Structure}{section.3.3}% 38
+\BOOKMARK [2][-]{subsection.3.3.2}{Changing Attack Target}{section.3.3}% 39
+\BOOKMARK [2][-]{subsection.3.3.3}{Considering Another Targets}{section.3.3}% 40
+\BOOKMARK [2][-]{subsection.3.3.4}{Non-Invertible Linear Mappings}{section.3.3}% 41
+\BOOKMARK [2][-]{subsection.3.3.5}{Unifying Approach with GF\(2\)8}{section.3.3}% 42
+\BOOKMARK [0][-]{chapter.4}{Analysis of the Attack against WBAES}{}% 43
+\BOOKMARK [1][-]{section.4.1}{Blind Attack}{chapter.4}% 44
+\BOOKMARK [2][-]{subsection.4.1.1}{Remarks}{section.4.1}% 45
+\BOOKMARK [2][-]{subsection.4.1.2}{Blind Attack Suggestion}{section.4.1}% 46
+\BOOKMARK [1][-]{section.4.2}{Use in White-Box Crypto Design}{chapter.4}% 47
+\BOOKMARK [2][-]{subsection.4.2.1}{Countermeasures against DCA}{section.4.2}% 48
+\BOOKMARK [1][-]{section.4.3}{Explanation Attempt}{chapter.4}% 49
+\BOOKMARK [0][-]{chapter.5}{Future Work}{}% 50
+\BOOKMARK [0][-]{section*.74}{Conclusion}{}% 51
+\BOOKMARK [0][-]{section*.76}{References}{}% 52
+\BOOKMARK [0][-]{Appendix.a.A}{Appendix Contents of Attached CD}{}% 53
+\BOOKMARK [0][-]{Appendix.a.B}{Appendix User Guide}{}% 54

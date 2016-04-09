@@ -1,9 +1,9 @@
 \section{Results}
 \label{sec:results}
 
-First of all, we used our toolkit to attack our straightforward C++ implementation of AES, here named {\tt naiveAES}, which served just as a proof-of-concept, see results in Section \ref{sec:naiveaes}. Note that the section does not fully cover many details, these are given separately later.
+First of all, we used our toolkit to attack our straightforward C++ implementation of AES, here referred to as {\tt naiveAES}, which was supposed to serve just as a proof-of-concept; see results in Section \ref{sec:naiveaes}. Note that this section does not fully cover many details, these are given later in consequent sections.
 
-Then we performed the most interesting attack which Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here named {\tt KlinecWBAES}. See results and comments in Section \ref{sec:klinecwbaes}.
+Then we performed the most interesting attack which Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here referred to as {\tt KlinecWBAES}; see results and comments in Section \ref{sec:klinecwbaes}.
 
 
 % ==============================================================================
@@ -13,26 +13,33 @@ Then we performed the most interesting attack which Bos et al.\ \cite{bos2015dif
 \subsection{\tt naiveAES}
 \label{sec:naiveaes}
 
-In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them. Both attacks are expected to work since {\tt naiveAES} stores all intermediate results needed for each attack. For this reason, we captured contents of $1$ byte memory writes in our memory traces and used the original SBox as our target. In both cases we considered strong candidates separately.
+In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them. Both attacks are expected to work since {\tt naiveAES} stores all intermediate results which are required for each attack. For this reason, we captured contents of all $1$-byte memory writes into our memory traces and used output of the first SBox as our target. In both cases we treated strong candidates differently (see Note \ref{note:strong} for what strong candidate is).
 %?% remind strong candidates?
 
 \subsubsection{CPA Attack against {\tt naiveAES}}
 	
-	First we attacked {\tt naiveAES} with CPA attack using $64$, $96$ and $128$ traces, respectively. Our results are given in Table \ref{tab:naiveaescpa}. For each key byte and different number of traces, two values are given in the table: percentual gap of the best candidate to the second candidate and rank of the correct candidate. If we look at the \nth{5} bit back in Table \ref{tab:gap} in Example \ref{ex:gap}, these two values would be $\frac{0.3970-0.3884}{0.3970}\cdot100\%\approx2.2\%$ and $45$, respectively.
+	First we attacked {\tt naiveAES} with CPA attack (i.e.\ Algorithm \ref{alg:cpa}) using $64$, $96$ and $128$ traces, respectively; see results in Table \ref{tab:naiveaescpa}. For each key byte and different number of traces, two values are given in the table: percentual gap of the best candidate to the second best one together with rank of the correct candidate. Remind that rank ranges from $0$ to $255$ while $0$ was replaced with $\blacksquare$ or {\weak$\blacksquare$} for strong or weak candidate, respectively, in order to emphasize successful attack.
+	
+	\begin{example}
+	\label{ex:gaprank}
+		If we looked at the \nth{5} bit back in Table \ref{tab:gap} in Example \ref{ex:gap}, these two values would be $\frac{0.3970-0.3884}{0.3970}\cdot100\%\approx2.2\%$ and $45$, respectively.
+	\end{example}
 	
 	\begin{table}[h]
 		\begin{center}
 		\input{./tables/3_2_1-naiveAES-CPA.tex}
 		\end{center}
-	\caption{CPA attack against {\tt naiveAES}}
+	\caption{CPA attack against {\tt naiveAES}. Percentual gap of the best candidate and rank of the correct candidate is given for each key byte and different number of traces.}
 	\label{tab:naiveaescpa}
 	\end{table}
 	
-	It appears that we need order of hundreds of traces in order to attack even an unprotected implementation successfuly. Remind that in CPA attack we only have single attack target (for each key byte) which is Hamming weight of output of the first SBox. However, this attack served just as a proof of concept.
+	It appears that we need order of hundreds of traces in order to attack even an unprotected implementation successfuly. Remind that in CPA attack we only have single attack target (for each key byte) which is Hamming weight of output of the first SBox (cf.\ $8$ target bits in bit-wise DPA). However, this attack served just as a proof of concept.
 
 \subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}}
 	
-	Second we performed bit-wise DPA attack (i.e.\ Algorithm \ref{alg:bitwisedpa}) against {\tt naiveAES} using $24$ and $32$ memory traces, respectively. See results in Table \ref{tab:naiveaesdca} which shows amount of leaking target bits. Note that the maximum value of difference of means of the correct candidate is {\em always} equal to $1.0$ since there is a position where given intermediate product -- here a bit output of the first SBox -- appears. Therefore once there appears a gap for the first time, we know the correct candidate for sure and do not need to care about its strongness.
+	Second we performed bit-wise DPA attack (i.e.\ Algorithm \ref{alg:bitwisedpa}) against {\tt naiveAES} using $24$ and $32$ memory traces, respectively; see results in Table \ref{tab:naiveaesdca}. The table shows amount of leaking target bits out of $8$ of them.
+	
+	Note that in case of the correct candidate, the maximum value of difference of means (which is what bit-wise DPA looks for) is {\em always} equal to $1.0$ since there is always a position in the traces where given intermediate product -- here a bit of output of the first SBox -- appears. Therefore once there appears a non-zero gap for the first time, we certainly get the correct candidate and do not need to care about its strength. Obviously, the attack can be aborted at such moment.
 	
 	%!% asi uplně zahodit tabulku a jenom říct, že to poznam hned ptž správnej má dycky 1.0 a jde jenom o to kdy se odlepí poslední špatnej ... zbude jedinej
 	\begin{table}[h]
@@ -43,10 +50,10 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	\label{tab:naiveaesdca}
 	\end{table}
 	
-	Using $24$ traces has mostly shown to be sufficient and with $32$ traces, our attack was always successful. Note that these numbers are only illustrative, it could possibly happen that many more traces would keep two candidates on the top, both with difference of means equal to $1.0$.
+	Using $24$ traces has mostly shown to be sufficient and with $32$ traces, our attack was successful for every target bit. Note that these numbers are only illustrative, it could possibly happen that many more traces would keep two candidates on the top, both with difference of means equal to $1.0$.
 	
-	%~ CPA attack required $x$ traces, bitwise DPA attack required $y$ traces.
-	%?% vyzkoušet rijinv na naiveAES, nemělo by jít, a taky nejde
+	%!% zmrd to prostě nepřeloží ...
+	%~ We presented these results just to give a comparison to CPA attack and to bit-wise DPA attack against a white-box protected implementation.
 
 
 % ==============================================================================
@@ -56,13 +63,14 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 \subsection{\tt KlinecWBAES}
 \label{sec:klinecwbaes}
 
-The most interesting results came with attacking Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}.
+\newpage   %!% už mě fakt mrdá!
+The most interesting results came with attacking Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here denoted {\tt KlinecWBAES}. Note that we will only consider this particular implementation in the rest of this thesis, unless stated otherwise.
 
 First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not break any key byte at all. Therefore the rest of our results focuses exclusively on bit-wise DPA attack.
 
 \subsubsection{Bit-Wise DPA Attack against {\tt KlinecWBAES}}
 	
-	We used $1024$ traces for the attack, see results in Table \ref{tab:klinecsbox}. In this table we give percentual gap of the best candidate to the second candidate together with rank of the true key byte, for each key byte and target bit.
+	We used $1024$ traces for the attack, see results in Table \ref{tab:klinecsbox}. In this table we give percentual gap of the best candidate to the second candidate together with rank of the true key byte, for each key byte and target bit (the same as in Table \ref{tab:naiveaescpa}, see Example \ref{ex:gaprank} for a hint).
 	
 	\afterpage{
 		\clearpage   % To flush out all floats, might not be what you want
@@ -71,19 +79,20 @@ First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not 
 			\begin{center}
 			\input{./tables/3_2_3-klinec-sbox.tex}   %!% obrátit pořadí sloupečků !!!
 			\end{center}
+		%!% upravit popisek
 		\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces. Percentual gap of the best candidate and rank of the true key byte is given for each key byte and target bit. Rank of the true candidate goes from $0$ while $0$ (i.e.\ the top position) is replaced with $\blacksquare$ or {\weak$\blacksquare$} in order to be well emphasized, for strong or weak candidate, respectively.}
 		\label{tab:klinecsbox}
 		\end{table}
 		\end{landscape}
 	}
 	
-	On average, there are about $31\%$ of successful strong candidates and about $36\%$ of both weak and strong ones (see Note \ref{note:strong} for strong vs.\ weak candidates).
+	On average, there are about $31\%$ of successful strong candidates and about $36\%$ of both weak and strong ones.
 	
-	Compared to the results of Bos et al.\ \cite{bos2015differential}, we successfuly reproduced one half of their attack. The second half is given in Section \ref{sec:rijinv} because it requires some improvements to be introduced.
+	Compared to the results of Bos et al.\ \cite{bos2015differential}, we have so far successfuly reproduced one half of their attack. The second half is given in Section \ref{sec:rijinv} because it requires some improvements to be introduced.
 	
 	\begin{note}
 	\label{note:tailrank}
-		As already noted by the original authors, we can see remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table \ref{tab:klinecsbox}.
+		As already noted by Bos et al., we can see remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table \ref{tab:klinecsbox}.
 	\end{note}
 
 % jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
