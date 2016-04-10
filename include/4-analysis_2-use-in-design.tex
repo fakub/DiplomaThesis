@@ -1,33 +1,47 @@
 \section{Use in White-Box Crypto Design}
 \label{sec:useindesign}
 
-Note that the attack allows us to reveal concrete physical addresses which contributed to the key recovery. Our intention was to find the corresponding piece of source code and later possibly also the value which is transformed into physical address -- it would most likely be an index in an array. We tried several approaches how to find that place in source code, see the following list.
+So far we were only interested in results of the attack. In this section, we will study deeper the attack itself. First we describe our effort trying to identify which intermediate product causes the leakage, then we outline some countermeasures against this attack. Both might be useful in white-box crypto design.
+
+
+% ==============================================================================
+% ===   L E A K I N G   I N T E R M E D I A T E   P R O D U C T              ===
+% ==============================================================================
+
+\subsection{Leaking Intermediate Product}
+
+Note that the attack allows us to reveal concrete addresses which contributed to the key recovery. Our intention was to find the corresponding piece of source code and later possibly also the intermediate product which is later transformed into memory address -- it would most likely be an array index. We tried several approaches how to find that place in source code, however, none of them worked; see the following list.
 
 \begin{description}
 	\item[Watchpoint in GDB.]
-		We set up a watchpoint in GDB running in the same terminal session while watching an address previously caught by PIN. Probably since PIN uses different environment, GDB did not catch the address at all.
+		We acquired one full trace (as described in Section \ref{sec:filter} under the caption ``\AddrTempFilter'') for some plaintext used during the acquisition phase. We checked that this trace perfectly matches the corresponding trace from the acquisition phase.
+		
+		We identified the leaking address and set up a watchpoint in GDB running in the same terminal session. However, GDB did not catch the address, probably because PIN uses different virtual environment.
 		%!% zkusit valgrind a pak GDB?
-	\item[GDB connected to PIN debugging interface.]
+	\item[GDB connected to PIN's debugging interface.]
 		We set up a connection between PIN application debugging interface and GDB as described in PIN manual \cite{pin214manual}, but could not catch {\em any} address. GDB was complaining that it cannot insert hardware breakpoint, on the other hand, software breakpoints did not work either.
 		%!% vyzkoušet ten příklad z manuálu, jestli to jenom blbě nekompiluju ...
 	\item[Outputting all array indexes.]
-		Note that array indexes are very likely the values which are transformed to leaking physical addresses. Hence it should be possible to output and attack all indexes used within the encryption procedure. But, surprisingly, we did not succeed breaking the key from such ``traces''.
+		Note that array indexes are very likely the values which are later transformed into leaking memory addresses. Hence it should be possible to output and attack all indexes used within the encryption procedure. But, surprisingly, we did not succeed breaking the key from such ``traces''.
 	%!% vyzkoušet debugger CLionu !!!
 \end{description}
 
-Each of these approaches appeared to bring valuable information about where the key leaks. The leakage position could be later used to identify a specific table access which leaks, hence it could possibly help us to clarify what is the actual reason why this attack works.
-
-Note that, to the best of our knowledge, there is no explanation why this attack is actually possible. It seems impossible since all of the AES intermediate results we attack are hidden by internal encodings, in fact random bijections. Note that a random bijection is extremely unlikely to provide any correlation between any input and output bit.
+Each of these approaches seemed promising to bring valuable information about where the key leaks. The leakage position could be later used to identify a specific table access which causes the leakage. Hence it could possibly help us to clarify what is the actual intermediate product which enables this attack. Note that, to the best of our knowledge, there is so far no explanation why this attack is actually possible.
 
 Even though it is not fully understood, the benefit of this attack is obvious -- it introduces a principially different approach to break white-box crypto implementations. This attack may help to address weaknesses of a future white-box crypto implementation and possibly increase its resistancy to this kind of attack.
 
+
+% ==============================================================================
+% ===   C O U N T E R M E A S U R E S   A G A I N S T   D C A                ===
+% ==============================================================================
+
 \subsection{Countermeasures against DCA}
 
-Since DCA is based on an algorithm which was originally developed for physical measurements of certain hardware emissions, we can look for some inspiration back in hardware model. There are several countermeasures, see the following list for some of them (basic ones are introduced in \cite{chari1999towards,goubin1999des}).
+Since DCA is based on an algorithm which was originally developed for physical measurements of certain hardware emissions, we can look for some inspiration back into hardware model. There are several countermeasures, see the following list for some of them (basic ones are introduced in \cite{chari1999towards,goubin1999des}).
 \begin{description}
-	\item[Masking with random values.] Cryptographic hardware can run some unpretendable source of random data and thus mess up values in traces (i.e.\ providing a stronger noise). However, there is no noise in white-box context.
-	\item[Reordering instructions.] Remind that our algorithms required aligned traces, therefore it would be fatal if the leaking position was at several different places. However, this could be possibly overcome in white-box context since we have a full control over the execution. We can achieve this either by reverse engineering, or, much easier, by aligning traces with respect to instruction address trace.
-	\item[Adding random delays.] Note that random delays have very similar effect as the previous countermeasure. Moreover we could possibly control the random source and simply keep it constant.
+	\item[Masking with random values.] Cryptographic hardware can run some unpretendable source of random data and thus mess up values in traces (i.e.\ adding a strong noise). However, there is no equivalent of noise in white-box context since everything is is fully controlled by the attacker.
+	\item[Reordering instructions.] Remind that our algorithms required aligned traces, therefore it would be fatal if the leaking position were at several different places. However, this could be possibly overcome in white-box context -- we could achieve this by reverse engineering or, much easier, by aligning the traces with respect to instruction address trace (as outlined by Bos et al.).
+	\item[Adding random delays.] Note that random delays have very similar effect as the previous countermeasures.
 \end{description}
 In general, we cannot rely on any source of {\em dynamic} random data (generated during program execution). All we need to rely on is {\em static} random data (generated during instantiation). On the other hand, dynamic randomness can be used in a white-box implementation -- just as another level of ``obfuscation''.
 

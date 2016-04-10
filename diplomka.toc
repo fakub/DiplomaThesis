@@ -92,7 +92,8 @@
 \contentsline {subsubsection}{Within-Trace Position of Leaks}{56}{section*.72}
 \contentsline {subsection}{\numberline {4.1.2}Blind Attack Suggestion}{57}{subsection.4.1.2}
 \contentsline {section}{\numberline {4.2}Use in White-Box Crypto Design}{58}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Countermeasures against DCA}{58}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.1}Leaking Intermediate Product}{58}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Countermeasures against DCA}{59}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Explanation Attempt}{59}{section.4.3}
 \contentsline {chapter}{\numberline {5}Future Work}{61}{chapter.5}
 \contentsline {chapter}{Conclusion}{63}{section*.74}
