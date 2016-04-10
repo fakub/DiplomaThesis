@@ -95,8 +95,6 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 
 The benefit of having higher chance of breaking the key led us to the idea of using yet another invertible affine mappings inside SBoxes (see Equation \ref{eq:spq}) besides the one of the original SBox and identity (i.e.\ those used by Bos et al.).
 
-\newpage   %!% zmrd bez toho píčuje
-
 There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ which are coprime with $x^8+1$; there are $128$ of them (follows from Remark \ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings which could be used inside SBoxes to create another targets.
 
 \begin{remark}
