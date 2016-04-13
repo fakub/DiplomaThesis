@@ -1,7 +1,7 @@
 \begin{thebibliography}{10}
 
 \bibitem{pin214manual}
-Pin 2.14 user guide.
+{Pin 2.14 User Guide}.
 \newblock
   \url{https://software.intel.com/sites/landingpage/pintool/docs/71313/Pin/html/index.html#APPDEBUG_LINUX}.
 \newblock Accessed: 2016-01-22.
@@ -12,121 +12,122 @@ Pin 2.14 user guide.
 
 \bibitem{agrawal2002side}
 D~Agrawal, B~Archambeault, J~Rao, and P~Rohatgi.
-\newblock The em side-channel (s): Attacks and assessment methodologies.
+\newblock {The EM Side-Channel (s): Attacks and Assessment Methodologies}.
 \newblock {\em Internet Security Group, IBM Watson Research Center. ps}, 2(3),
   2002.
 
 \bibitem{asonov2004keyboard}
 Dmitri Asonov and Rakesh Agrawal.
-\newblock Keyboard acoustic emanations.
-\newblock In {\em Proceeding of the IEEE Symposium on Security and Privacy
-  2004}, pages 3--11. IEEE, 2004.
+\newblock {Keyboard acoustic emanations}.
+\newblock In {\em {Proceeding of the IEEE Symposium on Security and Privacy
+  2004}}, pages 3--11. IEEE, 2004.
 
 \bibitem{americantripple}
 American~Bankers Association et~al.
-\newblock Tripple data encryption algorithm modes of operation.
+\newblock {Tripple Data Encryption Algorithm Modes of Operation}.
 \newblock {\em ANSI X9}, pages 52--1998, 1998.
 
 \bibitem{auguste1883cryptographie}
 Kerckhoffs Auguste.
-\newblock La cryptographie militaire.
+\newblock {La Cryptographie Militaire}.
 \newblock {\em Journal des sciences militaires}, 9:538, 1883.
 
 \bibitem{barak2014protecting}
 Boaz Barak, Sanjam Garg, Yael~Tauman Kalai, Omer Paneth, and Amit Sahai.
-\newblock Protecting obfuscation against algebraic attacks.
-\newblock In {\em Advances in Cryptology--EUROCRYPT 2014}, pages 221--238.
+\newblock {Protecting obfuscation against algebraic attacks}.
+\newblock In {\em {Advances in Cryptology--EUROCRYPT 2014}}, pages 221--238.
   Springer, 2014.
 
 \bibitem{barak2001possibility}
 Boaz Barak, Oded Goldreich, Rusell Impagliazzo, Steven Rudich, Amit Sahai,
   Salil Vadhan, and Ke~Yang.
-\newblock On the (im) possibility of obfuscating programs.
-\newblock In {\em Advances in cryptology—CRYPTO 2001}, pages 1--18. Springer,
-  2001.
+\newblock {On the (im) possibility of obfuscating programs}.
+\newblock In {\em {Advances in cryptology—CRYPTO 2001}}, pages 1--18.
+  Springer, 2001.
 
 \bibitem{barkan2002many}
 Elad Barkan and Eli Biham.
-\newblock In how many ways can you write rijndael?
-\newblock In {\em Advances in Cryptology—ASIACRYPT 2002}, pages 160--175.
+\newblock {In how many ways can you write Rijndael?}
+\newblock In {\em {Advances in Cryptology--ASIACRYPT 2002}}, pages 160--175.
   Springer, 2002.
 
 \bibitem{billet2004cryptanalysis}
 Olivier Billet, Henri Gilbert, and Charaf Ech-Chatbi.
-\newblock Cryptanalysis of a white box aes implementation.
-\newblock In {\em Selected Areas in Cryptography}, pages 227--240. Springer,
+\newblock {Cryptanalysis of a white box AES implementation}.
+\newblock In {\em {Selected Areas in Cryptography}}, pages 227--240. Springer,
   2004.
 
 \bibitem{biryukov2003toolbox}
 Alex Biryukov, Christophe De~Canniere, An~Braeken, and Bart Preneel.
-\newblock A toolbox for cryptanalysis: Linear and affine equivalence
-  algorithms.
-\newblock In {\em Advances in Cryptology—EUROCRYPT 2003}, pages 33--50.
+\newblock {A toolbox for cryptanalysis: Linear and affine equivalence
+  algorithms}.
+\newblock In {\em {Advances in Cryptology—EUROCRYPT 2003}}, pages 33--50.
   Springer, 2003.
 
 \bibitem{bos2015differential}
 Joppe~W Bos, Charles Hubain, Wil Michiels, and Philippe Teuwen.
-\newblock Differential computation analysis: Hiding your white-box designs is
-  not enough.
-\newblock Technical report, Technical report, Cryptology ePrint Archive, Report
-  2015/753. \url{http://eprint. iacr. org/2015/753}, 2015.
+\newblock {Differential Computation Analysis: Hiding your White-Box Designs is
+  Not Enough}.
+\newblock Technical report, Cryptology ePrint Archive, Report 2015/753.
+  \url{http://eprint. iacr. org/2015/753}, 2015.
 
 \bibitem{brakerski2014virtual}
 Zvika Brakerski and Guy~N Rothblum.
-\newblock Virtual black-box obfuscation for all circuits via generic graded
-  encoding.
-\newblock In {\em Theory of Cryptography}, pages 1--25. Springer, 2014.
+\newblock {Virtual black-box obfuscation for all circuits via generic graded
+  encoding}.
+\newblock In {\em {Theory of Cryptography}}, pages 1--25. Springer, 2014.
 
 \bibitem{chari1999towards}
 Suresh Chari, Charanjit~S Jutla, Josyula~R Rao, and Pankaj Rohatgi.
-\newblock Towards sound approaches to counteract power-analysis attacks.
-\newblock In {\em Advances in Cryptology—CRYPTO’99}, pages 398--412.
+\newblock {Towards sound approaches to counteract power-analysis attacks}.
+\newblock In {\em {Advances in Cryptology—CRYPTO’99}}, pages 398--412.
   Springer, 1999.
 
-\bibitem{chow2003des}
+\bibitem{chow2002des}
 Stanley Chow, Phil Eisen, Harold Johnson, and Paul~C Van~Oorschot.
 \newblock A white-box des implementation for drm applications.
-\newblock In {\em Digital Rights Management}, pages 1--15. Springer, 2003.
+\newblock In {\em Digital Rights Management}, pages 1--15. Springer, 2002.
 
 \bibitem{chow2002aes}
 Stanley Chow, Philip Eisen, Harold Johnson, and Paul~C Van~Oorschot.
-\newblock White-box cryptography and an aes implementation.
-\newblock In {\em Selected Areas in Cryptography}, pages 250--270. Springer,
+\newblock {White-box cryptography and an AES implementation}.
+\newblock In {\em {Selected Areas in Cryptography}}, pages 250--270. Springer,
   2002.
 
 \bibitem{curtin1998brute}
 Matt Curtin and Justin Dolske.
-\newblock A brute force search of des keyspace.
-\newblock In {\em 8th Usenix Symposium, January}, pages 26--29. Citeseer, 1998.
+\newblock {A brute force search of des keyspace}.
+\newblock In {\em {8th Usenix Symposium, January}}, pages 26--29. Citeseer,
+  1998.
 
 \bibitem{daemen1999aes}
 Joan Daemen and Vincent Rijmen.
-\newblock Aes proposal: Rijndael.
+\newblock {AES proposal: Rijndael}.
 \newblock 1999.
 
 \bibitem{daemen2013rijndael}
 Joan Daemen and Vincent Rijmen.
-\newblock {\em The design of Rijndael: AES-the advanced encryption standard}.
+\newblock {\em {The design of Rijndael: AES-the advanced encryption standard}}.
 \newblock Springer Science \& Business Media, 2013.
 
 \bibitem{delerablee2013white}
 C{\'e}cile Delerabl{\'e}e, Tancr{\`e}de Lepoint, Pascal Paillier, and Matthieu
   Rivain.
-\newblock White-box security notions for symmetric encryption schemes.
-\newblock In {\em Selected Areas in Cryptography--SAC 2013}, pages 247--264.
+\newblock {White-box security notions for symmetric encryption schemes}.
+\newblock In {\em {Selected Areas in Cryptography--SAC 2013}}, pages 247--264.
   Springer, 2013.
 
 \bibitem{gandolfi2001electromagnetic}
 Karine Gandolfi, Christophe Mourtel, and Francis Olivier.
-\newblock Electromagnetic analysis: Concrete results.
-\newblock In {\em Cryptographic Hardware and Embedded Systems—CHES 2001},
+\newblock {Electromagnetic analysis: Concrete results}.
+\newblock In {\em {Cryptographic Hardware and Embedded Systems—CHES 2001}},
   pages 251--261. Springer, 2001.
 
 \bibitem{goubin1999des}
 Louis Goubin and Jacques Patarin.
-\newblock Des and differential power analysis the “duplication” method.
-\newblock In {\em Cryptographic Hardware and Embedded Systems}, pages 158--172.
-  Springer, 1999.
+\newblock {DES and differential power analysis the “duplication” method}.
+\newblock In {\em {Cryptographic Hardware and Embedded Systems}}, pages
+  158--172. Springer, 1999.
 
 \bibitem{chipwhisperer}
 NewAE~Technology Inc.
@@ -136,20 +137,20 @@ NewAE~Technology Inc.
 
 \bibitem{jacob2002attacking}
 Matthias Jacob, Dan Boneh, and Edward Felten.
-\newblock Attacking an obfuscated cipher by injecting faults.
-\newblock In {\em Digital Rights Management}, pages 16--31. Springer, 2002.
+\newblock {Attacking an obfuscated cipher by injecting faults}.
+\newblock In {\em {Digital Rights Management}}, pages 16--31. Springer, 2002.
 
 \bibitem{junod2001complexity}
 Pascal Junod.
-\newblock On the complexity of matsui’s attack.
-\newblock In {\em Selected Areas in Cryptography}, pages 199--211. Springer,
+\newblock {On the complexity of Matsui’s attack}.
+\newblock In {\em {Selected Areas in Cryptography}}, pages 199--211. Springer,
   2001.
 
-\bibitem{karroumi2011protecting}
+\bibitem{karroumi2010protecting}
 Mohamed Karroumi.
 \newblock Protecting white-box aes with dual ciphers.
 \newblock In {\em Information Security and Cryptology-ICISC 2010}, pages
-  278--291. Springer, 2011.
+  278--291. Springer, 2010.
 
 \bibitem{klinec2013implementation}
 D.~Klinec.
@@ -158,79 +159,82 @@ D.~Klinec.
 
 \bibitem{klinec2013white}
 Du{\v{s}}an Klinec.
-\newblock White-box attack resistant cryptography.
+\newblock {White-box attack resistant cryptography}.
 \newblock 2013.
 
 \bibitem{koc2008cryptographic}
 {\c{C}}.K. Ko{\c{c}}.
-\newblock {\em Cryptographic Engineering}.
+\newblock {\em {Cryptographic Engineering}}.
 \newblock Springer US, 2008.
 
 \bibitem{kocher1999differential}
 Paul Kocher, Joshua Jaffe, and Benjamin Jun.
-\newblock Differential power analysis.
-\newblock In {\em Advances in Cryptology—CRYPTO’99}, pages 388--397.
+\newblock {Differential power analysis}.
+\newblock In {\em {Advances in Cryptology—CRYPTO’99}}, pages 388--397.
   Springer, 1999.
 
 \bibitem{kocher1996timing}
 Paul~C Kocher.
-\newblock Timing attacks on implementations of diffie-hellman, rsa, dss, and
-  other systems.
-\newblock In {\em Advances in Cryptology—CRYPTO’96}, pages 104--113.
+\newblock {Timing attacks on implementations of Diffie-Hellman, RSA, DSS, and
+  other systems}.
+\newblock In {\em {Advances in Cryptology—CRYPTO’96}}, pages 104--113.
   Springer, 1996.
 
 \bibitem{kuhn2002optical}
 Markus~G Kuhn.
-\newblock Optical time-domain eavesdropping risks of crt displays.
-\newblock In {\em Security and Privacy, 2002. Proceedings. 2002 IEEE Symposium
-  on}, pages 3--18. IEEE, 2002.
+\newblock {Optical time-domain eavesdropping risks of CRT displays}.
+\newblock In {\em {Security and Privacy, 2002. Proceedings. 2002 IEEE Symposium
+  on}}, pages 3--18. IEEE, 2002.
 
 \bibitem{loughry2002information}
 Joe Loughry and David~A Umphress.
-\newblock Information leakage from optical emanations.
+\newblock {Information leakage from optical emanations}.
 \newblock {\em ACM Transactions on Information and System Security (TISSEC)},
   5(3):262--289, 2002.
 
 \bibitem{luk2005pin}
 Chi-Keung Luk, Robert Cohn, Robert Muth, Harish Patil, Artur Klauser, Geoff
   Lowney, Steven Wallace, Vijay~Janapa Reddi, and Kim Hazelwood.
-\newblock Pin: building customized program analysis tools with dynamic
-  instrumentation.
-\newblock In {\em ACM Sigplan Notices}, volume~40, pages 190--200. ACM, 2005.
+\newblock {Pin: building customized program analysis tools with dynamic
+  instrumentation}.
+\newblock In {\em {ACM Sigplan Notices}}, volume~40, pages 190--200. ACM, 2005.
 
 \bibitem{matsui1993linear}
 Mitsuru Matsui.
-\newblock Linear cryptanalysis method for des cipher.
-\newblock In {\em Advances in Cryptology—EUROCRYPT’93}, pages 386--397.
+\newblock {Linear cryptanalysis method for DES cipher}.
+\newblock In {\em {Advances in Cryptology—EUROCRYPT’93}}, pages 386--397.
   Springer, 1993.
 
 \bibitem{michiels2008cryptanalysis}
 Wil Michiels, Paul Gorissen, and Henk~DL Hollmann.
-\newblock Cryptanalysis of a generic class of white-box implementations.
-\newblock In {\em Selected Areas in Cryptography}, pages 414--428. Springer,
+\newblock {Cryptanalysis of a generic class of white-box implementations}.
+\newblock In {\em {Selected Areas in Cryptography}}, pages 414--428. Springer,
   2008.
 
 \bibitem{michiels2007cryptographic}
 Wilhelmus Petrus Adrianus~Johannus Michiels and Paulus Mathias Hubertus
   Mechtildis~Antonius Gorissen.
-\newblock Cryptographic method for a white-box implementation, November~9 2007.
+\newblock {Cryptographic method for a white-box implementation}, November~9
+  2007.
 \newblock US Patent App. 12/514,922.
 
 \bibitem{muir2013tutorial}
 James~A Muir.
-\newblock A tutorial on white-box aes.
-\newblock Technical report, Technical report, Cryptology ePrint Archive, Report
-  2013/104. \url{http://eprint. iacr. org/2013/104}, 2013.
+\newblock {A Tutorial on White-box AES}.
+\newblock Technical report, Cryptology ePrint Archive, Report 2013/104.
+  \url{http://eprint. iacr. org/2013/104}, 2013.
 
 \bibitem{nethercote2007valgrind}
 Nicholas Nethercote and Julian Seward.
-\newblock Valgrind: a framework for heavyweight dynamic binary instrumentation.
-\newblock In {\em ACM Sigplan notices}, volume~42, pages 89--100. ACM, 2007.
+\newblock {Valgrind: A framework for heavyweight dynamic binary
+  instrumentation}.
+\newblock In {\em {ACM Sigplan notices}}, volume~42, pages 89--100. ACM, 2007.
 
 \bibitem{nikova2006threshold}
 Svetla Nikova, Christian Rechberger, and Vincent Rijmen.
-\newblock Threshold implementations against side-channel attacks and glitches.
-\newblock In {\em Information and Communications Security}, pages 529--545.
+\newblock {Threshold implementations against side-channel attacks and
+  glitches}.
+\newblock In {\em {Information and Communications Security}}, pages 529--545.
   Springer, 2006.
 
 \bibitem{exampletraces}
@@ -242,51 +246,51 @@ Colin O'Flynn.
 
 \bibitem{petitcolas2016kerckhoffs}
 Fabien Petitcolas.
-\newblock Kerckhoffs -- cryptographie militaire.
+\newblock {Kerckhoffs -- Cryptographie militaire}.
 \newblock \url{http://www.petitcolas.net/kerckhoffs/#english}.
 \newblock Accessed: 2016-02-03.
 
 \bibitem{fips1977des}
 NIST~FIPS PUB.
-\newblock 46-3: Data encryption standard.
+\newblock {46-3: Data Encryption Standard}.
 \newblock {\em Federal Information Processing Standards, National Bureau of
   Standards, US Department of Commerce}, 1977.
 
 \bibitem{fips2001aes}
 NIST~FIPS PUB.
-\newblock 197: Advanced encryption standard (aes).
+\newblock {197: Advanced Encryption Standard (AES)}.
 \newblock {\em Federal Information Processing Standards Publication},
   197:441--0311, 2001.
 
 \bibitem{quisquater2001electromagnetic}
 Jean-Jacques Quisquater and David Samyde.
-\newblock Electromagnetic analysis (ema): Measures and counter-measures for
-  smart cards.
-\newblock In {\em Smart Card Programming and Security}, pages 200--210.
+\newblock {Electromagnetic analysis (ema): Measures and counter-measures for
+  smart cards}.
+\newblock In {\em {Smart Card Programming and Security}}, pages 200--210.
   Springer, 2001.
 
 \bibitem{raddum2004more}
 H{\aa}vard Raddum.
-\newblock More dual rijndaels.
-\newblock In {\em Advanced Encryption Standard--AES}, pages 142--147. Springer,
-  2004.
+\newblock {More dual rijndaels}.
+\newblock In {\em {Advanced Encryption Standard--AES}}, pages 142--147.
+  Springer, 2004.
 
 \bibitem{shannon1949mathematical}
 Claude~E Shannon and Warren Weaver.
-\newblock The mathematical theory of communication.
+\newblock {The mathematical theory of communication}.
 \newblock {\em University of Illinois Press}, 1949.
 
 \bibitem{teuwen2015movfuscator}
 Philippe Teuwen.
-\newblock Movfuscator writeup.
+\newblock {MoVfuscator Writeup}.
 \newblock
   \url{http://wiki.yobi.be/index.php?title=MoVfuscator_Writeup&oldid=9714}.
 \newblock Accessed: 2015-11-03.
 
 \bibitem{xiao2009secure}
 Yaying Xiao and Xuejia Lai.
-\newblock A secure implementation of white-box aes.
-\newblock In {\em Computer Science and its Applications, 2009. CSA'09. 2nd
-  International Conference on}, pages 1--6. IEEE, 2009.
+\newblock {A secure implementation of white-box AES}.
+\newblock In {\em {Computer Science and its Applications, 2009. CSA'09. 2nd
+  International Conference on}}, pages 1--6. IEEE, 2009.
 
 \end{thebibliography}

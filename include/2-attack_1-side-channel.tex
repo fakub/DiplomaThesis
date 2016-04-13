@@ -34,7 +34,7 @@ In this section we describe CPA attack (an advanced form of DPA attack) mounted 
 
 \subsubsection{Vulnerable Intermediate Result}
 	
-	In AES, the very first plaintext-dependent operation is $\AddRoundKey$ on line \ref{line:addrk} which XORs current state with the first block of expanded key. Here the state is equal to input plaintext, see line \ref{line:stateplain}, and the first block of expanded key is equal to the original AES key, see Note \ref{note:expkey}. $\AddRoundKey$ is then usually composed with $\SubBytes$ (the following step), hence yielding
+	In AES (Algorithm \ref{alg:aes}), the very first plaintext-dependent operation is $\AddRoundKey$ on Line \ref{line:addrk} which XORs current state with the first block of expanded key. Here the state is equal to input plaintext, see Line \ref{line:stateplain}, and the first block of expanded key is equal to the original AES key, see Note \ref{note:expkey}. $\AddRoundKey$ is then usually composed with $\SubBytes$ (the following step), hence yielding
 	\begin{equation}
 		b = \SubBytes(k\xor m) \label{eq:byprod}
 	\end{equation}
@@ -54,7 +54,7 @@ In this section we describe CPA attack (an advanced form of DPA attack) mounted 
 	
 	\begin{note}
 	\label{note:brutevssca}
-		In CPA you loop through $256$ key guesses for each of $16$ bytes i.e. overall $256\cdot 16 = 2^{12} = 4096$ possibilities, compare with $256^{16} = 2^{128} = \ldots$ possibilities of a brute force attack.
+		In CPA we loop through $256$ key guesses for each of $16$ bytes i.e. overall $256\cdot 16 = 2^{12} = 4096$ possibilities, compare with $256^{16} = 2^{128} = \ldots$ possibilities of a brute force attack.
 	\end{note}
 	
 	The attack will perform as follows: given a byte index $i=\atob{0}{15}$, we find the maximal correlation\footnote{We can use an empirical meter as well since correlation is quite expensive and we only need the result, no matter how we reach it.} (among all keyguesses $k_i$ of $i$-th byte of the key and all positions in the traces) of $HW\bigl(S(k_i\xor m_i)\bigr)$ with respective power values. $k_i$ reaching the maximum is then our top candidate. This idea is summarized in the following algorithm.

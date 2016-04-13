@@ -4,7 +4,7 @@
 
 %~ detailně popsat kde se vzala vč. citací, vývoj, smysl
 
-As we already mentioned, classical ciphers are designed with respect to black-box attack context and even under this assumption it has not been theoretically shown that there exists a secure one, see Section \ref{sec:provable}. We also introduced gray-box and white-box attack contexts in Section \ref{sec:bbtowb} with a short reasoning of the gray-box model.
+As we already mentioned, classical ciphers are designed with respect to black-box attack context and even under this assumption it has not been theoretically shown that there exists a secure one, see Section \ref{sec:provable}. We also presented gray-box and white-box attack contexts in Section \ref{sec:bbtowb} with a short reasoning of the gray-box model.
 
 Let us now justify why we are introducing so extreme case as white-box attack context (WBAC). \ldots
 %!% až jednou pochopim k čemu že to je dobrý ..?
@@ -30,7 +30,7 @@ The field of white-box cryptography is related to program obfuscation which was 
 		\begin{enumerate}
 			\item {\em functionality:} for every encoding $C$ of an algorithm $A_C$, $O(C)$ encodes an algorithm which outputs the same as $A_C$ on each input,
 			\item {\em polynomial slowdown:} for every encoding $C$ of an algorithm $A_C$, the length and the running time of $O(C)$ is at most polynomially larger than that of $C$,
-			\item {\em virtual black box property:} for every effective algorithm $B$, there exists an effective adversary $A$ such that for every encoding $C$ of an algorithm $A_C$ it holds that
+			\item {\em virtual black-box property:} for every effective algorithm $B$, there exists an effective adversary $A$ such that for every encoding $C$ of an algorithm $A_C$ it holds that
 			\[
 				\biggl| \Pr\Bigl(B\bigl(O(C)\bigr)=1\Bigr) - \Pr\bigl(A({\cal O}_{A_C})=1\bigr) \biggr| \
 			\]
@@ -38,7 +38,7 @@ The field of white-box cryptography is related to program obfuscation which was 
 		\end{enumerate}
 	\end{defn}
 	
-	In other words, the virtual black box property states that there is no effective algorithm which would be able to gain more information from an obfuscated code than any adversary with an oracle access only, hence black box.
+	In other words, the virtual black-box property states that there is no effective algorithm which would be able to gain more information from an obfuscated code than any adversary with an oracle access only, hence black-box.
 
 \subsubsection{Consequences in Cryptography}
 	
@@ -50,7 +50,7 @@ The field of white-box cryptography is related to program obfuscation which was 
 
 \subsubsection{Going Beyond}
 	
-	However, in general it is more important that the requirements on program obfuscator might be too strong (already suggested by Barak et al.). Indeed, especially in white-box cryptography context, we can weaken the virtual black box property since we probably do not care about any information which does not effectively lead to key recovery, even though we would not learn this information having an oracle access only.
+	However, in general it is more important that the requirements on program obfuscator might be too strong (already suggested by Barak et al.). Indeed, especially in white-box cryptography context, we can weaken the virtual black-box property since we probably do not care about any information which does not effectively lead to key recovery, even though we would not learn this information having an oracle access only.
 	
 	Note that since then, there has been a lot of research using various assumptions, sometimes surprisingly with positive results, too. Most interesting results can be found in \cite{barak2014protecting, brakerski2014virtual}.
 

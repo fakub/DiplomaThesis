@@ -10,7 +10,7 @@ In this section we present an improvement by Bos et al.\ and reproduce their res
 
 \subsection{Exploiting WBAES Structure}
 
-WBAES by Chow et al.\ \cite{chow2002aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2011protecting}. Remind that Karroumi's WBAES internally uses dual AES'es and therefore we cannot recognize which affine mapping has been used inside SBoxes, see Note \ref{note:dualsbox}.
+WBAES by Chow et al.\ \cite{chow2002aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2010protecting}. Remind that Karroumi's WBAES internally uses dual AES'es and therefore we cannot recognize which affine mapping has been used inside SBoxes, see Note \ref{note:dualsbox}.
 
 Let us first remind definition of the original SBox (Equation \ref{eq:sbox}) and also remind that the multiplication is not performed in $F$, but in the ring of binary polynomials instead:
 \[
@@ -62,7 +62,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 	Target is a function $T$ which inputs a key byte $K$ together with respective plaintext byte $P$ and outputs a byte (for now) or a single bit (later), e.g.\ $T(K,P) = S_{1,0}(K\xor P)$ (cf.\ Equations \ref{eq:target}). Target bit is just a specific bit of target's output. According to the value of target bit, traces are split into the sets $S_0$ and $S_1$ in Algorithm \ref{alg:bitwisedpa}, respectively.
 \end{note}
 
-\subsubsection{Results using Rijndael Inverse}
+\subsubsection{Results Using Rijndael Inverse}
 	
 	We conducted the same attack as in Section \ref{sec:klinecwbaes}, now with Rijndael inverse as the target (i.e.\ the simplest SBox variant), see results in Table \ref{tab:klinecrijinv}. Note that this is the second part of successfuly reproduced results of Bos et al.
 	

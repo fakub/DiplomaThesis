@@ -1,10 +1,10 @@
 \BOOKMARK [0][-]{section*.3}{Preface}{}% 1
-\BOOKMARK [0][-]{chapter.1}{Introduction to Whitebox Cryptography}{}% 2
+\BOOKMARK [0][-]{chapter.1}{Introduction to White-Box Cryptography}{}% 2
 \BOOKMARK [1][-]{section.1.1}{Introduction to Cryptography}{chapter.1}% 3
 \BOOKMARK [2][-]{subsection.1.1.1}{Symmetric and Asymmetric Cipher}{section.1.1}% 4
 \BOOKMARK [2][-]{subsection.1.1.2}{Information-Theoretic Approach}{section.1.1}% 5
 \BOOKMARK [2][-]{subsection.1.1.3}{Complexity-Theoretic Approach}{section.1.1}% 6
-\BOOKMARK [2][-]{subsection.1.1.4}{Block cipher}{section.1.1}% 7
+\BOOKMARK [2][-]{subsection.1.1.4}{Block Cipher}{section.1.1}% 7
 \BOOKMARK [2][-]{subsection.1.1.5}{Provable Security Proofs}{section.1.1}% 8
 \BOOKMARK [2][-]{subsection.1.1.6}{Provable vs. Real-World Security}{section.1.1}% 9
 \BOOKMARK [2][-]{subsection.1.1.7}{From Black-Box to White-Box Attack Context}{section.1.1}% 10
@@ -44,12 +44,12 @@
 \BOOKMARK [1][-]{section.4.1}{Blind Attack}{chapter.4}% 44
 \BOOKMARK [2][-]{subsection.4.1.1}{Remarks}{section.4.1}% 45
 \BOOKMARK [2][-]{subsection.4.1.2}{Blind Attack Suggestion}{section.4.1}% 46
-\BOOKMARK [1][-]{section.4.2}{Use in White-Box Crypto Design}{chapter.4}% 47
+\BOOKMARK [1][-]{section.4.2}{Use in White-Box Cryptography Design}{chapter.4}% 47
 \BOOKMARK [2][-]{subsection.4.2.1}{Leaking Intermediate Product}{section.4.2}% 48
 \BOOKMARK [2][-]{subsection.4.2.2}{Countermeasures against DCA}{section.4.2}% 49
 \BOOKMARK [1][-]{section.4.3}{Explanation Attempt}{chapter.4}% 50
 \BOOKMARK [0][-]{chapter.5}{Future Work}{}% 51
-\BOOKMARK [0][-]{section*.74}{Conclusion}{}% 52
-\BOOKMARK [0][-]{section*.76}{References}{}% 53
+\BOOKMARK [0][-]{section*.72}{Conclusion}{}% 52
+\BOOKMARK [0][-]{section*.74}{References}{}% 53
 \BOOKMARK [0][-]{Appendix.a.A}{Appendix Contents of Attached CD}{}% 54
 \BOOKMARK [0][-]{Appendix.a.B}{Appendix User Guide}{}% 55

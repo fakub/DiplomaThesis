@@ -1,7 +1,7 @@
-\section{Use in White-Box Crypto Design}
+\section{Use in White-Box Cryptography Design}
 \label{sec:useindesign}
 
-So far we were only interested in results of the attack. In this section, we will study deeper the attack itself. First we describe our effort trying to identify which intermediate product causes the leakage, then we outline some countermeasures against this attack. Both might be useful in white-box crypto design.
+So far we were only interested in results of the attack. In this section, we will study deeper the attack itself. First we describe our effort trying to identify which intermediate product causes the leakage, then we outline some countermeasures against this attack. Both might be useful in white-box cryptography design.
 
 
 % ==============================================================================
@@ -10,25 +10,23 @@ So far we were only interested in results of the attack. In this section, we wil
 
 \subsection{Leaking Intermediate Product}
 
-Note that the attack allows us to reveal concrete addresses which contributed to the key recovery. Our intention was to find the corresponding piece of source code and later possibly also the intermediate product which is later transformed into memory address -- it would most likely be an array index. We tried several approaches how to find that place in source code, however, none of them worked; see the following list.
+Note that the attack allows us to reveal concrete addresses which contributed to the key recovery. Our intention was to find the corresponding piece of source code and later possibly also the intermediate product which is later transformed into memory address -- it would most likely be an array index. We tried several approaches how to find that place in source code, however, none of the debugging approaches worked.
 
 \begin{description}
 	\item[Watchpoint in GDB.]
 		We acquired one full trace (as described in Section \ref{sec:filter} under the caption ``\AddrTempFilter'') for some plaintext used during the acquisition phase. We checked that this trace perfectly matches the corresponding trace from the acquisition phase.
 		
 		We identified the leaking address and set up a watchpoint in GDB running in the same terminal session. However, GDB did not catch the address, probably because PIN uses different virtual environment.
-		%!% zkusit valgrind a pak GDB?
 	\item[GDB connected to PIN's debugging interface.]
 		We set up a connection between PIN application debugging interface and GDB as described in PIN manual \cite{pin214manual}, but could not catch {\em any} address. GDB was complaining that it cannot insert hardware breakpoint, on the other hand, software breakpoints did not work either.
-		%!% vyzkoušet ten příklad z manuálu, jestli to jenom blbě nekompiluju ...
 	\item[Outputting all array indexes.]
-		Note that array indexes are very likely the values which are later transformed into leaking memory addresses. Hence it should be possible to output and attack all indexes used within the encryption procedure. But, surprisingly, we did not succeed breaking the key from such ``traces''.
-	%!% vyzkoušet debugger CLionu !!!
+		Note that array indexes are very likely the values which are later transformed into leaking memory addresses. Hence it should be possible to output and attack all indexes used within the encryption procedure. However we did not succeed with the first attempt -- it required certain reasoning and finding the specific intermediate result to output; both will be given in Section \ref{sec:attempt}.
 \end{description}
 
-Each of these approaches seemed promising to bring valuable information about where the key leaks. The leakage position could be later used to identify a specific table access which causes the leakage. Hence it could possibly help us to clarify what is the actual intermediate product which enables this attack. Note that, to the best of our knowledge, there is so far no explanation why this attack is actually possible.
+Each of the debugging approaches seemed promising to bring valuable information about where the key leaks. The leakage position could be later used to identify a specific table access which causes the leakage, hence it could possibly help us to clarify what is the actual intermediate product which enables the attack. However, we succeeded even without this information.
 
-Even though it is not fully understood, the benefit of this attack is obvious -- it introduces a principially different approach to break white-box crypto implementations. This attack may help to address weaknesses of a future white-box crypto implementation and possibly increase its resistancy to this kind of attack.
+%!% překopat
+Even though it is not fully understood, the benefit of this attack is obvious -- it introduces a principially different approach to break white-box cryptography implementations. This attack may help to address weaknesses of a future white-box cryptography implementation and possibly increase its resistancy to this kind of attack.
 
 
 % ==============================================================================

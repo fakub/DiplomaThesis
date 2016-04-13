@@ -15,16 +15,16 @@ The obvious question is what kind of traces we should use instead of power trace
 \subsection{Trace Acquisition}
 \label{sec:tracq}
 
-In order to acquire a memory trace we use Dynamic Binary Instrumentation (DBI) tools. These tools insert additional instructions to the original code of the program at run-time enabling one to debug or detect memory leaks. The most advanced DBI tools like Valgrind \cite{nethercote2007valgrind} or PIN \cite{luk2005pin} include a programmable interface where you can write tools of your will. Both tools are open-source.
+In order to acquire a memory trace we use Dynamic Binary Instrumentation (DBI) tools. These tools insert additional instructions to the original code of the program at run-time enabling one to debug or detect memory leaks. The most advanced DBI tools like Valgrind \cite{nethercote2007valgrind} or PIN \cite{luk2005pin} include a programmable interface where one can write tools of own will. Both tools are open-source.
 
 We modified a tool for PIN by Teuwen \cite{teuwen2015movfuscator} for $4$ use cases. These acquire
 \begin{enumerate}
 	\item addresses of memory reads, \label{item:readaddr}
-	\item addresses of memory writes,   %!% neni
-	\item contents of memory reads, and   %!% neni
+	\item addresses of memory writes,
+	\item contents of memory reads, and
 	\item contents of memory writes, \label{item:writecnt}
 \end{enumerate}
-respectively. Tool nr.\ \ref{item:writecnt} is obviously most useful for unprotected implementations since it can directly observe intermediate results, tool nr.\ \ref{item:readaddr} will be surprisingly used as well. The other tools will not be used.
+respectively. Tool nr.\ \ref{item:writecnt} is obviously most useful for unprotected implementations since it can directly observe intermediate results, tool nr.\ \ref{item:readaddr} will be surprisingly used as well. The other tools will not be used within this thesis.
 
 \begin{note}
 \label{note:lsb}
@@ -93,7 +93,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 	
 	\begin{note}
 	\label{note:filter}
-		Filtering of constant entries typically decreases the size of the traces by tens of percent. If you do not observe any or extremely small decrease, it might have happened that the traces are not properly aligned. In such case it might be very difficult to align them. Luckily we did not experience this problem and give some advices how to avoid it in Note \ref{note:aslr}.
+		Filtering of constant entries typically decreases the size of the traces by tens of percent. If we do not observe any or extremely small decrease, it might have happened that the traces are not properly aligned. In such case it might be very difficult to align them. Luckily we did not experience this problem and give some advices how to avoid it in Note \ref{note:aslr}.
 	\end{note}
 
 \newcommand{\AddrTempFilter}{Address and Temporal Filtering}

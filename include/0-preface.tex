@@ -4,13 +4,15 @@
 \addcontentsline{toc}{chapter}{Preface}
 \chapter*{Preface}
 
-Blah.
+Cryptography emerged long long time ago with the need for confidential communication in the presence of enemies -- Caesar cipher can serve as a well-known example of a primitive cipher. Cryptography also had considerable consequences in the past -- for instance Mary, Queen of Scots, was executed back in \nth{16} century, because she was planning to assasinate Queen Elizabeth I of England and her cipher got broken. However, the most substantial success of cryptography was definitely the breach of Nazi Germany's Enigma code, which they fortunately beleived is unbreakable.
+
+Since its revival few decades ago, cryptography became a proper discipline of modern mathematics and now it covers much more than ``hiding secrets''. There is an interesting family of cryptographic problems -- we would like to perform cryptographic tasks in an untrusted environment. This is not only a 
 
 % PŘEDMLUVA !!! se tomu řiká u nás ...
 %~ význam WBC, kde se to vzalo, co za útok že tam chci použít, musí to bejt poutavý!
 % o čem ta práce vlastně bude ve smyslu uvedení do problému, jak/proč ta práce vznikla?
 
-%~ Motivation for whitebox crypto, whitebox crypto history, milestones   % Bos et al. to hezky shrnul
+%~ Motivation for white-box crypto, white-box crypto history, milestones   % Bos et al. to hezky shrnul
 	%~ from black-box ... gray-box ... white-box
 	%~ malicious software on your device
 	%~ cryptographic keys of third-parties
@@ -33,51 +35,6 @@ Blah.
 \section*{Work overview}
 	
 	\begin{description}
-		\item[Chapter \ref{chap:intro}.] In this chapter we describe basic whitebox crypto techniques\ldots
+		\item[Chapter \ref{chap:intro}.] In this chapter we describe basic techniques of white-box cryptography\ldots
 		%~ \item[Chapter \ref{chap:results}.] This chapter presents our practical results together with\ldots
 	\end{description}
-
-% ====================================================================
-% ====================================================================
-% ====================================================================
-
-A table for fun follows:
-\begin{center}
-\begin{tabular}{|| c || c | c | c ||}
-	\hline\hline
-	~ & \multicolumn{2}{c|}{\bf $n\times n$ squares} & {\bf Computational} \\
-	~ & \multicolumn{1}{c}{Lower bound} & \multicolumn{1}{c|}{Upper bound} & {\bf Power}\\
-	\hline
-	2D & \multicolumn{2}{c|}{See see} & Universal \\
-	\hline
-	2D & see & see & Unknown \\
-	\hline\hline
-\end{tabular}
-\end{center}
-
-Just for fun:
-\begin{figure}[H]
-\begin{center}
-	\includegraphics[width=0.2\textwidth]{./figures/fig.pdf} % {šířka v mm}/370 je to původně
-	\caption{Remove me, please.}
-	\label{fig:3color}
-\end{center}
-\end{figure}
-
-Or a multifigure:
-\begin{figure}[H]
-\begin{center}
-	\begin{subfigure}[b]{0.2\textwidth}
-		\includegraphics[width=\textwidth]{./figures/fig.pdf}
-		\caption{One.}
-		\label{fig:one}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.2\textwidth}
-		\includegraphics[width=\textwidth]{./figures/fig.pdf}
-		\caption{Two.}
-		\label{fig:two}
-	\end{subfigure}
-	\caption{One and Two.}
-	\label{fig:onetwo}
-\end{center}
-\end{figure}

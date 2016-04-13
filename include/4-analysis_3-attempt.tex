@@ -19,6 +19,7 @@ Note that the last plain AES state (denoted with ``plain'' in the previous equat
 		&= [\bar R]^T \cdot \bigl([K]+[P]\bigr)' + \bar r ,
 	\end{align*}
 	where $\bar R$ is just a different random-like vector, which plays the role of $B$ in Equation \ref{eq:tba}, and $\bar r$ is a constant bit. Remind that additive constant does not need to be considered inside target (see Remark \ref{rem:pqeffect}). It follows that each of these $32$ bits perfectly matches some of our $255$ targets introduced in Section \ref{sec:unify}.
+	%!% no diffusion at the moment! depends on single byte
 	
 	If we could observe these intermediate results, we would get the difference of means equal to $1.0$ (cf.\ attack against unprotected implementation in Section \ref{sec:naiveaes}).
 \end{description}
@@ -36,8 +37,8 @@ Note that the last plain AES state (denoted with ``plain'' in the previous equat
 	But we do not necessarily need a fully affine mapping at some bit, it would be sufficient if the mapping were affine for most inputs. Clearly, there are much more such mappings. For this reason, this intermediate result of WBAES seems to be most likely that which leaks in the attack.
 \end{description}
 
-We tried to attack these intermediate values directly (i.e.\ we modified the source code of {\tt KlinecWBAES} to output them directly, no memory traces), but, for some reason, did not succeed.   %!% fakt ne???
-This remains as another open question for further research.
-% mam pocit že to jde ověřit výpisem mezivýsledků a útokem na ně, co si pomatuju tak to nešlo ...
+To support our hypothesis, we modified the source code of {\tt KlinecWBAES} to output these intermediate products (i.e.\ outputs of the first Type II tables, see Equation \ref{eq:wbaesflow}) and ran the attack with these values instead of memory traces. And the attack succeeded which fully supports our explanation.
+
+%!% v čistých mezivýsledcích se nevyskytuje neuniformní rozložení leak bitů
 
 % perla (jakože fakt nebrat vážně): Note that a random bijection is extremely unlikely to provide any correlation between any input and output bit.
