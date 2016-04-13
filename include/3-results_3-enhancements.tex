@@ -47,7 +47,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 	Technically we only substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} of Algorithm \ref{alg:bitwisedpa} with their desired variant -- here $S_{1,0}$ --, hence yielding
 	\begin{align}
 	\begin{split}
-	\label{eq:target}
+	\label{eq:target}   %!% předělat do algpseudocode ? (i další?)
 		S_0 &\gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\} , \\
 		S_1 &\gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\} .
 	\end{split}
@@ -207,6 +207,7 @@ We attacked {\tt KlinecWBAES} using all of the new targets and $1024$ traces; se
 Let us have a closer look at our previously considered targets, in particular at matrix representation of their internal linear mappings -- multiplication by $p\mod{x^8+1}$ (quick reminder: $T(K,P) = S_{p,0}(K\xor P) = p \cdot (K\xor P)' \mod{x^8+1}$). For this purpose, let us denote the vector space $\GF(2)^8$ over $\GF(2)$ by $\cal B$.
 
 Note that equivalents of multiplication by $p\mod{x^8+1}$ form a specific subset of all linear mappings on $\cal B$ -- simply since there are only $256$ of $p$'s, but there are obviously many more linear mappings on $\cal B$. Let us see how multiplication by $p\mod{x^8+1}$ can be expressed in $\cal B$ -- its matrix has cyclically shifted rows as outlined in the following example.
+%!% přidat analogii k MC, ta taky modulí x^k+1 a taky je cyklicky shiftlá
 
 \begin{example}[Multiplication by $\texttt{3d}\pmod{x^8+1}$]
 \label{ex:shiftmatrix}
@@ -248,6 +249,8 @@ The output of this kind of target is a scalar product of two vectors, hence not 
 \label{eq:tba}
 	T_B(K,P) = [B]^T\cdot [(K\xor P)'] ,
 \end{equation}
+%!% sesynchronizovat závorky, podle mě to je blbost ... co co znamená?
+%!% použití \xor vs. +
 %~ Let us denote this mapping by
 %~ \begin{equation}
 %~ \label{eq:tba}

@@ -40,7 +40,7 @@
 \contentsline {subsubsection}{Inserting Encodings}{23}{section*.28}
 \contentsline {subsubsection}{Mixing Bijection}{23}{section*.29}
 \contentsline {subsubsection}{Input Mixing Bijection}{23}{section*.30}
-\contentsline {subsubsection}{ShiftRows}{23}{section*.31}
+\contentsline {subsubsection}{ShiftRows}{24}{section*.31}
 \contentsline {subsubsection}{External Encodings}{24}{section*.32}
 \contentsline {subsection}{\numberline {1.4.5}Known Attacks \& Enhancements}{24}{subsection.1.4.5}
 \contentsline {subsubsection}{BGE Attack}{25}{section*.33}
@@ -95,8 +95,8 @@
 \contentsline {subsection}{\numberline {4.2.1}Leaking Intermediate Product}{58}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Countermeasures against DCA}{59}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Explanation Attempt}{59}{section.4.3}
-\contentsline {chapter}{\numberline {5}Future Work}{61}{chapter.5}
-\contentsline {chapter}{Conclusion}{63}{section*.74}
-\contentsline {chapter}{References}{65}{section*.76}
+\contentsline {chapter}{\numberline {5}Future Work}{63}{chapter.5}
+\contentsline {chapter}{Conclusion}{65}{section*.74}
+\contentsline {chapter}{References}{67}{section*.76}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}

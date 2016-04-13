@@ -1,24 +1,43 @@
 \section{Explanation Attempt}
 \label{sec:attempt}
 
-First of all, let us remind the flow of information through WBAES tables (originally in Equation \ref{eq:wbaesflow}), especially its first part.
+First of all, let us remind the information flow through WBAES tables (originally in Equation \ref{eq:wbaesflow}), especially its first table.
 \begin{equation}
 \label{eq:wbaesfirst}
 	\ldots \rarr \underbracket{\Enc \rarr \IMB^{-1} \xrightarrow{\textnormal{plain}} \TBox \xrightarrow{\textnormal{plain}} \MB \circ \MC \rarr \Enc^{-1}}_{\textnormal{in table}} \rarr \ldots
 \end{equation}
-Note that the last plain AES state (denoted with ``plain'' in the previous equation) is actually an $8$-bit output of the first SBox i.e.\ the very original target. Let us see what happens next: a composed linear mapping $\MB\circ\MC$ is applied, resulting in a $32$-bit output, and then each $4$-bit nibble is passed through a $4$-bit random bijection $\Enc^{-1}$. 
+Note that the last plain AES state (denoted with ``plain'' in the previous equation) is actually an $8$-bit output of the first SBox i.e.\ the very original target. Let us see what happens next: a composed linear mapping $\MB\circ\MC$ is applied resulting in a $32$-bit output (using an idea outlined in Section \ref{sec:aeslookup}), then each $4$-bit nibble is passed through a $4$-bit random bijection $\Enc^{-1}$ (further simply $\Enc$).
 
-Note that $\Enc$ is only a $4$-bit bijection 
+\begin{description}
+	\item[$\MB\circ\MC$.] We can view each bit $t$ of the $32$-bit output of $\MB\circ\MC$ as a scalar product of a row $[R]^T$ of matrix representing $\MB\circ\MC$ (i.e.\ a random-like\footnote{Cannot be zero (follows from Note \ref{note:fullrank}).} $8$-bit vector) with its $8$-bit input $[S]$ which is actually an output of the first SBox. We get
+	\begin{equation}
+		t = [R]^T\cdot [S] = [R]^T\cdot\Bigl( \{\texttt{1f}\}\cdot\bigl([K]+[P]\bigr)' + [\texttt{63}] \Bigr) ,
+	\end{equation}
+	where $\{\cdot\}$ stands for respective binary matrix of multiplication$\mod{x^8+1}$ and $(\cdot)'$ for Rijndael inverse (i.e.\ there is the output of the first SBox in the big parantheses, cf.\ Equation \ref{eq:sbox}). This equation can be easily turned into the form of previously used target (Equation \ref{eq:tba}), indeed
+	\begin{align*}
+		[R]^T\cdot\Bigl( \{\texttt{1f}\}\cdot\bigl([K]+[P]\bigr)' + [\texttt{63}] \Bigr) &= \bigl([R]^T\cdot \{\texttt{1f}\}\bigr)\cdot\bigl([K]+[P]\bigr)' + \bigl([R]^T\cdot [\texttt{63}]\bigr) = \\
+		&= [\bar R]^T \cdot \bigl([K]+[P]\bigr)' + \bar r ,
+	\end{align*}
+	where $\bar R$ is just a different random-like vector, which plays the role of $B$ in Equation \ref{eq:tba}, and $\bar r$ is a constant bit. Remind that additive constant does not need to be considered inside target (see Remark \ref{rem:pqeffect}). It follows that each of these $32$ bits perfectly matches some of our $255$ targets introduced in Section \ref{sec:unify}.
+	
+	If we could observe these intermediate results, we would get the difference of means equal to $1.0$ (cf.\ attack against unprotected implementation in Section \ref{sec:naiveaes}).
+\end{description}
+\begin{remark}
+\label{rem:enc}
+	It follows that the protection against our $255$ targets is fully and solely accomplished by $\Enc$.
+\end{remark}
+\begin{description}
+	\item[$\Enc$.] Remind that $\Enc$ is a (only) $4$-bit random bijection. Note that, unlike confusion elements in regular ciphers (e.g.\ SBox in AES), there is no non-linearity check\footnote{Linearity in ciphers is studied by {\em linear cryptanalysis}, see e.g.\ \cite{matsui1993linear} for detail.} in WBAES by Chow et al.\ \cite{chow2002aes}.
+	
+	The choice of $\Enc$ actually only relies on the fact that the ratio of affine mappings among all random bijections is extremely low (less than $0.000\,002\%$ for $4$-bit bijections). This justification is very poor since it does not even address the case where only one output bit of $\Enc$ is an affine mapping of the input!
+	
+	There are actually quite many bijections which are affine in single output bit. Indeed, there are $2\cdot4\cdot(2^4-1)\cdot8!\cdot8! \approx 2\cdot10^{11}$ of them among $16! \approx 2\cdot10^{13}$ bijections altogether which already makes some $1\%$ ratio! Also note that in such case, the maximum difference of means would be still $1.0$ since this affine mapping could be composed with the previous affine mappings yielding an affine mapping again.
+	
+	But we do not necessarily need a fully affine mapping at some bit, it would be sufficient if the mapping were affine for most inputs. Clearly, there are much more such mappings. For this reason, this intermediate result of WBAES seems to be most likely that which leaks in the attack.
+\end{description}
 
-% perla: Note that a random bijection is extremely unlikely to provide any correlation between any input and output bit.
+We tried to attack these intermediate values directly (i.e.\ we modified the source code of {\tt KlinecWBAES} to output them directly, no memory traces), but, for some reason, did not succeed.   %!% fakt ne???
+This remains as another open question for further research.
+% mam pocit že to jde ověřit výpisem mezivýsledků a útokem na ně, co si pomatuju tak to nešlo ...
 
-%!% attempt to explain: výstup SBoxu je problitej náhodnym lin. zobrazenim tj. prvky výstupu jsou zase jenom skal. součinem s nějakým náhodnym nenulovym vektorem ... po čtveřicích jsou takový bity problitý náhodnou bijekcí (právě že jenom po 4!)
-% nikdo přece netestuje nelinearitu/nekorelovanost techdle bijekcí ... neni to třeba tak že každá 3. koreluje na nákym výstupnim bitu s nákym vstupnim bitem? nebo klíďo jejich lin. kombinací?
-% ale mam pocit že to jde ověřit právě výpisem mezivýsledků a útokem na ně, co si pomatuju tak to nešlo ...
-
-% ze dřívějška:
-% neni třeba problém v tom že to jsou concatenated encodings? i.e. ze 2x4 bitů postavený 8 bitový bijekce
-% jesli takovejch už třeba neni moc málo nebo jestli náhodou nedávaj docela často nákou korelaci
-% třeba zkusit dokázat, že random bijection ani náhodou nezanechá korelaci v nákym bitu, mělo by tam bejt negligible
-% asi se trochu rozepsat a odůvodnit ...
-% třeba to, jak jsou ty bijekce generovaný, že to je z nákýho pejpru, kterej něco ukazuje
+% perla (jakože fakt nebrat vážně): Note that a random bijection is extremely unlikely to provide any correlation between any input and output bit.

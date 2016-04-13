@@ -3,6 +3,7 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: diplomka.aux
 The style file: plain.bst
 Database file #1: biblio.bib
+Warning--I didn't find a database entry for "matsui1994linear"
 Warning--to sort, need author or key in bos2016tools
 Warning--to sort, need author or key in pin214manual
 Warning--empty journal in daemen1999aes
@@ -11,7 +12,7 @@ Warning--can't use both volume and number fields in luk2005pin
 Warning--can't use both volume and number fields in nethercote2007valgrind
 You've used 49 entries,
             2118 wiz_defined-function locations,
-            753 strings with 11584 characters,
+            754 strings with 11600 characters,
 and the built_in function-call counts, 18350 in all, are:
 = -- 1923
 > -- 686
@@ -50,4 +51,4 @@ warning$ -- 6
 while$ -- 186
 width$ -- 51
 write$ -- 554
-(There were 6 warnings)
+(There were 7 warnings)

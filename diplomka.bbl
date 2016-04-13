@@ -198,11 +198,11 @@ Chi-Keung Luk, Robert Cohn, Robert Muth, Harish Patil, Artur Klauser, Geoff
   instrumentation.
 \newblock In {\em ACM Sigplan Notices}, volume~40, pages 190--200. ACM, 2005.
 
-\bibitem{matsui1994linear}
+\bibitem{matsui1993linear}
 Mitsuru Matsui.
 \newblock Linear cryptanalysis method for des cipher.
 \newblock In {\em Advances in Cryptology—EUROCRYPT’93}, pages 386--397.
-  Springer, 1994.
+  Springer, 1993.
 
 \bibitem{michiels2008cryptanalysis}
 Wil Michiels, Paul Gorissen, and Henk~DL Hollmann.

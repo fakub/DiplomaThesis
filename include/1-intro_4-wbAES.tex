@@ -113,7 +113,7 @@ As outlined earlier, WBAES construction turns AES operations into table lookups 
 	
 	$\MixColumns$ (here also denoted by $\MC$) acting on a single column can be turned into four $8\times 32$ lookup tables followed by three XOR operations as outlined in Section \ref{sec:aeslookup}. Since there are $9$ uses of $\MixColumns$, each acts on $4$ columns and each such requires $4$ tables, $\MixColumns$ requires altogether $144$ tables.
 	
-	The difference from the classical implementation is that the following XOR operations must be turned into lookup tables as well. Since the input size of such XOR operation would be $2\cdot 32$ bits, we first need to split inputs into smaller $4$-bit segments which can be treated separately. In the end we simply concatenate them obtaining the final result in the sense of Definition \ref{def:concat}. Such single XOR table is then $2\cdot 4\times 4$ and you need to perform $32/4\cdot 3=24$ such lookups per one column and per one $\MixColumns$. It follows that altogether you need $24\cdot 4\cdot 9 = 864$ tables (according to Note \ref{note:tableinst}).
+	The difference from the classical implementation is that the following XOR operations must be turned into lookup tables as well. Since the input size of such XOR operation would be $2\cdot 32$ bits, we first need to split inputs into smaller $4$-bit segments which can be treated separately. In the end we simply concatenate them obtaining the final result in the sense of Definition \ref{def:concat}. Such single XOR table is then $2\cdot 4\times 4$ and you need to perform $32/4\cdot 3=24$ such lookups per one column and per one $\MixColumns$. It follows that you need altogether $24\cdot 4\cdot 9 = 864$ tables (according to Note \ref{note:tableinst}).
 
 \subsubsection{ShiftRows}
 	
@@ -167,7 +167,12 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 	
 	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e. $32$-bit) linear bijection which is to be inserted after $\MC$ and inverted in a separate step (this is to be done before applying encodings). Since it inputs the output of $\MC$, it can be composed together yielding $\MB\circ\MC$. Note that the table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as for $\MC$ itself.
 	
+	\begin{note}
+	\label{note:fullrank}
 	%!% 4x4 submatrices of full rank !!!
+		All $4\times4$ submatrices of $\MB$ must have full rank.
+	\end{note}
+	
 
 \subsubsection{Input Mixing Bijection}
 	
