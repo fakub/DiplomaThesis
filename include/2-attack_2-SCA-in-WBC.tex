@@ -3,7 +3,7 @@
 
 In the previous section we presented some algorithms seemingly unrelated to what we have done so far. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a novel approach introduced recently by Bos et al.\ \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
 
-The idea was inspired by Delerabl{\'e}e et al.\ \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al.\ to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
+The idea was inspired by Delerabl{\'e}e et al.\ \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key, but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al.\ to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
 
 The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context differential power analysis might sound wierd since there is no {\em power}, it is rather referred to as {\em Differential Computation Analysis} (DCA).
 
@@ -177,7 +177,7 @@ Once the traces are acquired, possibly filtered and, most importantly, properly 
 	In Algorithm \ref{alg:bitwisedpa} the traces were supposed to be a serialization of eight separate traces which should carry only bits of information, see Note \ref{note:concattraces}. Therefore it is crucial in this attack to consider entries of traces as separate bits, not bytes, i.e.\ {\tt [1,0,0,0,0,1,0,0, 0,1,1,0,1,1,0,0]} rather than {\tt [84, 6c]}.
 \end{remark}
 
-As outlined in the previous Remark, since now we will consider Algorithm \ref{alg:bitwisedpa} by default unless stated otherwise.
+As outlined in the previous remark, we will consider Algorithm \ref{alg:bitwisedpa} by default since now unless stated otherwise.
 
 \subsubsection{Processing Results}
 	

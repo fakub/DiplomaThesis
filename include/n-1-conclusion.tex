@@ -1,6 +1,9 @@
-\cleardoublepage\phantomsection   % cleardoublepage a phantomsection udělají že odkaz z obsahu vede NAD nadpis, jinak vede POD
+% cleardoublepage and phantomsection force that link jumps ABOVE heading, normally it would jump UNDER heading
+\cleardoublepage\phantomsection
+
 \addcontentsline{toc}{chapter}{Conclusion}
 \chapter*{Conclusion}
+\markboth{\MakeUppercase{Conclusion}}{}
 
 %~ After an introduction to white-box cryptography, side-channel attack scenario and \ldots in Chapter \ref{chap:intro} we blah blah.
 %~ 

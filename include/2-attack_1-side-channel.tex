@@ -3,7 +3,7 @@
 
 Let us assume gray-box attack context. In practice, there are several means of information leakage, for instance power consumption \cite{kocher1999differential}, electro-magnetic radiation \cite{agrawal2002side,gandolfi2001electromagnetic,quisquater2001electromagnetic}, timing \cite{kocher1996timing}, or even acoustic \cite{asonov2004keyboard} and optical \cite{kuhn2002optical,loughry2002information} emissions may carry some information related to ciphering algorithm's intermediate results or execution. The goal of SCA will be to exploit these information leaks and infer some secrets.
 
-SCA makes use of statistical methods, in cryptography context pioneered by Kocher \cite{kocher1996timing} back in 1996. His paper was originally concentrating on public key cryptography but the idea can be ported to symmetric cryptography as well.
+SCA makes use of statistical methods, in cryptography context pioneered by Kocher \cite{kocher1996timing} back in 1996. His paper was originally concentrating on public key cryptography, but the idea can be ported to symmetric cryptography as well.
 
 Since then there have been developed several techniques including Simple Power/EM Analysis (SPA/SEMA), Differential Power/EM Analysis (DPA/DEMA), High-Order DPA/DEMA, Correlation Power Analysis (CPA), Inferential Power Analysis (IPA), partitioning attacks, collision attacks, hidden Markov model etc. See \cite[Chapters~13-14]{koc2008cryptographic} for reference.
 
@@ -110,7 +110,7 @@ In this section we describe CPA attack (an advanced form of DPA attack) mounted 
 
 Let us continue with another attack on an unprotected AES implementation. For now, let us suppose a more powerful attacker who can probe individual wires of a vulnerable bus and measure its voltage. Let us further suppose that transfers of intermediate result $b = \SubBytes(k\xor m)$ are transferred over this bus.
 
-Therefore such attacker is not limited to observing values related to Hamming weight of $b$ but she can rather measure values related to individual bits of $b$! The advantage of such attacker is that there suffice much less measurements to successfuly recover the key.
+Therefore such attacker is not limited to observing values related to Hamming weight of $b$, but she can rather measure values related to individual bits of $b$! The advantage of such attacker is that there suffice much less measurements to successfuly recover the key.
 
 \subsubsection{Attack}
 	

@@ -1,8 +1,25 @@
-% previously: Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter intermediate results in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden but still usable for encryption.
+% previously: Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter intermediate results in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden, but still usable for encryption.
 
 \section{White-Box Cryptography}
 
 %~ detailně popsat kde se vzala vč. citací, vývoj, smysl
+
+%~ Motivation for white-box crypto, white-box crypto history, milestones   % Bos et al. to hezky shrnul
+	%~ malicious software on your device
+	%~ cryptographic keys of third-parties
+	%~ use cases: DRM
+	%~ modeled as if adversary had full control over execution environment of the device running the implementation
+	%~ everything allowed: perform static analysis, read/alter memory (fault injection)
+	%~ Chow et al.\ \cite{chow2002aes}
+	%~ program obfuscation impossibility results
+	%~ goal of wbc = embed the secret key to the implementation s.t. it is difficult to extract it even when the source code is available
+	%~ note the difference from obfuscation, in practice could be utilized as well
+	%~ conjecture by Chow: wb implementations provide no long-term defense against attacks
+	%~ symmetric crypto only, no published results on pubkey crypto
+	%~ all published approaches have been broken
+	%~ software vendors then disobey Kerckhoff's principle (cite) i.e. use secret design
+	%~ Bos et al. exploit leaked information instead, no need for exact knowledge of design nor reverse engineering
+	%~ The goal of this thesis is to reproduce the attack and make it easy for future researchers and analysis.
 
 As we already mentioned, classical ciphers are designed with respect to black-box attack context and even under this assumption it has not been theoretically shown that there exists a secure one, see Section \ref{sec:provable}. We also presented gray-box and white-box attack contexts in Section \ref{sec:bbtowb} with a short reasoning of the gray-box model.
 

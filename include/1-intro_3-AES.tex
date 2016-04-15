@@ -66,7 +66,7 @@ Now let us move on to definitions of the $4$ operations.
 		Even though $A'$ is not a proper field inverse, it is often referred to as inverse in Rijndael field or Rijndael inverse of $A$. Note that it is invertible.
 	\end{note}
 	
-	Before we define $\SubBytes$ we have to emphasize that the following multiplication is {\em not} performed in $F$ but in the ring of binary polynomials $\GF(2)[x]$ instead. $\SubBytes$ is defined as follows:
+	Before we define $\SubBytes$, we have to emphasize that the following multiplication is {\em not} performed in $F$, but in the ring of binary polynomials $\GF(2)[x]$ instead. $\SubBytes$ is defined as follows:
 	\newcommand{\defsbox}{S(A) = (x^4 + x^3 + x^2 + x + 1) \cdot A' + x^6 + x^5 + x + 1 \pmod{x^8+1}}
 	\begin{equation}
 	\label{eq:sbox}

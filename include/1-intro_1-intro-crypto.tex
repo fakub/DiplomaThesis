@@ -45,7 +45,7 @@ As we could see in the previous example, shift cipher is not much secure cipher.
 
 \subsection{Symmetric and Asymmetric Cipher}
 
-There are two large families of ciphers -- symmetric and asymmetric. Shift cipher from Example \ref{ex:shift} belongs to the symmetric family which follows from the fact that it uses the same key for both encryption and decryption while asymmetric ciphers use distinct keys for encryption and decryption. Asymmetric ciphers are also referred to as public key ciphers but we will only consider symmetric ciphers in this thesis, a definition follows.
+There are two large families of ciphers -- symmetric and asymmetric. Shift cipher from Example \ref{ex:shift} belongs to the symmetric family, which follows from the fact that it uses the same key for both encryption and decryption, while asymmetric ciphers use distinct keys for encryption and decryption. Asymmetric ciphers are also referred to as public key ciphers, but we will only consider symmetric ciphers in this thesis; a definition follows.
 
 \begin{defn}[Symmetric Cipher]
 \label{def:symcipher}
@@ -94,7 +94,7 @@ There is a cipher which is perfectly secure, see the following example.
 	Vernam cipher is also referred to as {\em One Time Pad} (OTP). Note that it is crucial that each key is only used once otherwise we can attack the cipher easily: given two ciphertexts using the same key $c_0=m_0\xor k$ and $c_1=m_1\xor k$, one can compute $c_0\xor c_1 = m_0\xor m_1$. This can be practically attacked using some apriori knowledge about plaintexts (e.g.\ encoding (ASCII), format and language of plaintext (XML and english) and so on) which reduces the amount of possibilities and typically leads to complete plaintext recovery.
 \end{note}
 
-Perfect security seems to be exactly what we want from a secure cipher but the following theorem shows that it implies certain inconveniences.
+Perfect security seems to be exactly what we want from a secure cipher, but the following theorem shows that it implies certain inconveniences.
 
 \begin{thm}
 \label{thm:kgeqm}
@@ -113,7 +113,7 @@ Perfect security seems to be exactly what we want from a secure cipher but the f
 
 \subsection{Complexity-Theoretic Approach}
 
-We would like to utilize the fact that the attacker typically does not possess unlimited computing power but she can rather only solve probabilistic polynomial problems.
+We would like to utilize the fact that the attacker typically does not possess unlimited computing power, but she can rather only solve probabilistic polynomial problems.
 
 \begin{note}
 \label{note:polyinterms}
@@ -283,14 +283,14 @@ An example covering most introduced concepts follows.
 	\]
 	where $\cal B$ stands for the set of all bijections on $\{0,1\}^{128}$ and $\epsilon$ is negligible.
 	
-	It follows that such PRP is totally insecure since there exists an attacker with overwhelming advantage but only a negligible advantage is allowed so that PRP is secure.
+	It follows that such PRP is totally insecure since there exists an attacker with overwhelming advantage, but only a negligible advantage is allowed so that PRP is secure.
 \end{example}
 
 \begin{note}
 \label{note:secbyobsc}
-	In the previous example, the adversary exploits the knowledge of the cipher's internal structure -- she knows everything but the key. One could have an idea to hide the structure from the attacker but this is actually a {\em very} bad idea. Once our construction leaks, we need to deploy a new ciphering algorithm confidentially, but we have no way how to do so.
+	In the previous example, the adversary exploits the knowledge of the cipher's internal structure -- she knows everything but the key. One could have an idea to hide the structure from the attacker, but this is actually a {\em very} bad idea. Once our construction leaks, we need to deploy a new ciphering algorithm confidentially, but we have no way how to do so.
 	
-	We shall rather use a secure publicly known cipher and only rely on the key. Once our key is compromised, we simply establish a new key. Also note that our key is only to be protected within our device but the ciphering algorithm would have to be protected globally.
+	We shall rather use a secure publicly known cipher and only rely on the key. Once our key is compromised, we simply establish a new key. Also note that our key is only to be protected within our device, but the ciphering algorithm would have to be protected globally.
 	
 	Such approach hiding the design of a cipher is referred to as {\em security by obscurity} and shall be strictly avoided.
 \end{note}
@@ -339,7 +339,7 @@ Let us modify Game \ref{game:semsec} in a manner described within Note \ref{note
 
 \begin{game}
 \label{game:semsecprp}
-	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random bit $b\unirand\{0,1\}$ and before each round also a random key $k\unirand K$. In each round the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger then computes $c = E(k,m_b)$ and sends it back to the adversary. Note that the adversary is allowed to perform multiple queries again but, unlike the previous games, the key changes over and over again.
+	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random bit $b\unirand\{0,1\}$ and before each round also a random key $k\unirand K$. In each round the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger then computes $c = E(k,m_b)$ and sends it back to the adversary. Note that the adversary is allowed to perform multiple queries again, but, unlike the previous games, the key changes over and over again.
 	
 	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
@@ -405,7 +405,7 @@ The previous theorem is especially important for the idea behind its proof which
 
 Provable security is one aspect, the other is practical construction of a cipher. Note that there is no provably secure block cipher known.
 
-If there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $E$ were a PRP, then the adversary could, given certain (polynomial) amount of plaintext-ciphertext pairs $(m_i,c_i)$, look for a key $k$ such that $c_i = E(k,m_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ was found, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
+If there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $E$ were a PRP, then the adversary could, given certain (polynomial) amount of plaintext-ciphertext pairs $(m_i,c_i)$, look for a key $k$ such that $c_i = E(k,m_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ was found, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture, but has sufficiently large probability.
 \nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e.\ the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
 \nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e.\ the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
 
@@ -426,17 +426,17 @@ The other central topic of this thesis is {\em white-box attack context}. In ord
 First of all, as stated in Note \ref{note:threat}, we need to address attacker's abilities -- the threat model. In the black-box model, the attacker is given an access to an oracle (see Definition \ref{def:oracle}) evaluating given encryption algorithm $E$ with a random secret key $k$ while the (primary) goal of the attacker is to recover the key. The attacker has absolutely no information but inputs and respective outputs, she cannot observe any internal routines of encryption, hence black-box.
 
 \begin{note}
-	There could be many other goals than just key recovery, e.g.\ guessing the ciphertext in advance or be able to decrypt certain/given ciphertext with non-negligible probability and so on. Actually whatever one can imagine which could be in principle possible with a PRP but could not be possible with a truly random bijection.
+	There could be many other goals than just key recovery, e.g.\ guessing the ciphertext in advance or be able to decrypt certain/given ciphertext with non-negligible probability and so on. Actually whatever one can imagine which could be in principle possible with a PRP, but could not be possible with a truly random bijection.
 \end{note}
 
 Classical ciphers are designed under the assumption of black-box attack context thus their implementation must be extremely careful. The attacker could for example measure the time of encryption and exploit this information which was not considered during the design of the cipher.
 
 \subsubsection{Gray-Box}
 
-Gray-box attack context is closer to the reality since we do not encrypt using oracles but rather using some physical devices which run a specific implementation of given cipher. In the gray-box model, cipher is thus supposed to be implemented and run while the attacker can observe some information related to cipher's intermediate results as well.
+Gray-box attack context is closer to the reality since we do not encrypt using oracles, but rather using some physical devices which run a specific implementation of given cipher. In the gray-box model, cipher is thus supposed to be implemented and run while the attacker can observe some information related to cipher's intermediate results as well.
 
 Such information leaks can be modelled as a set of distributions conditioned by intermediate results and are referred to as {\em leakage model}. There is an area of theoretical cryptography studying leakages -- {\em Leakage Resilient Cryptography}. A practical attack exploiting such leaks will be described in Chapter \ref{chap:attack} in Section \ref{sec:side}.   %?% LRC introduced by?
 
 \subsubsection{White-Box}
 
-Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter intermediate results in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden but still usable for encryption.
+Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter intermediate results in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden, but still usable for encryption.

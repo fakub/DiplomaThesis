@@ -81,7 +81,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 	
 	On average, there are about $27\%$ of successful strong candidates and about $30\%$ of both weak and strong ones.
 	
-	In both cases (i.e.\ Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
+	In both cases (i.e.\ Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking since the gap is very small at \nth{7} bit, and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
 	
 	The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another, cf.\ \nth{9} byte in both tables.
 
@@ -104,7 +104,7 @@ There seems to be plenty of them: number of $p$'s is equal to the number of bina
 		\item[Effect of $q$'s.]
 			First let us see what happens if we change one bit of $q$ considered as a byte. It obviously only changes the output of our SBox at the same bit, finally yielding a swap of $S_0$ and $S_1$ in the attack algorithm at this target bit only.
 			
-			Note that this swap has no effect on results, since we are only interested in absolute difference of means of values inside $S_0$ and $S_1$. Hence we will set $q = 0$, our SBoxes will be just linear mappings of Rijndael inverse.
+			Note that this swap has no effect on results since we are only interested in absolute difference of means of values inside $S_0$ and $S_1$. Hence we will set $q = 0$, and our SBoxes will be just linear mappings of Rijndael inverse.
 		
 		\item[Effect of $p$'s.]
 			Second let us study the effect of different $p$'s. Note that $x$ is coprime with $x^8+1$ and $p$ is supposed to be coprime, too, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
