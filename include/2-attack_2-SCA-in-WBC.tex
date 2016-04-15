@@ -1,9 +1,9 @@
 \section{Using SCA Tools in White-Box Cryptography}
 \label{sec:scawbc}
 
-In the previous section we presented some algorithms seemingly unrelated to what we have done so far. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a groundbreaking approach introduced recently by Bos et al.\ \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
+In the previous section we presented some algorithms seemingly unrelated to what we have done so far. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a novel approach introduced recently by Bos et al.\ \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
 
-The idea was inspired by Delerabl{\'e}e et al.\ \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al. to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
+The idea was inspired by Delerabl{\'e}e et al.\ \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al.\ to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
 
 The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context differential power analysis might sound wierd since there is no {\em power}, it is rather referred to as {\em Differential Computation Analysis} (DCA).
 
@@ -234,7 +234,7 @@ As outlined in the previous Remark, since now we will consider Algorithm \ref{al
 	
 	\begin{remark}
 	\label{rem:gap}
-		According to the observation in the previous example, we can modify our criterion as follows: we choose the candidate which is on the top of any list and has the biggest gap to the second candidate. Note that we can use various methods how to evaluate this gap, e.g. absolute or relative differences of values, and we may obtain different results.
+		According to the observation in the previous example, we can modify our criterion as follows: we choose the candidate which is on the top of any list and has the biggest gap to the second candidate. Note that we can use various methods how to evaluate this gap, e.g.\ absolute or relative differences of values, and we may obtain different results.
 		
 		We can further improve this rule by combining (e.g.\ summing) gaps of the same candidate when it is on the top. On the other hand, note that if the correct candidate is not on the top of any list, improving this rule does not help either.
 		

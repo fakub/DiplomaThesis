@@ -87,11 +87,11 @@ Shannon's groundbreaking work \cite{shannon1949mathematical} on the mathematics 
 There is a cipher which is perfectly secure, see the following example.
 
 \begin{example}[Vernam cipher]
-	Let $K = M = C = \{0,1\}^n$ and $k\unirand K$. Given a plaintext $m$, {\em Vernam cipher} applies bitwise XOR of the key $k$ yielding ciphertext $c$ i.e. $c = m\xor k$.
+	Let $K = M = C = \{0,1\}^n$ and $k\unirand K$. Given a plaintext $m$, {\em Vernam cipher} applies bitwise XOR of the key $k$ yielding ciphertext $c$ i.e.\ $c = m\xor k$.
 \end{example}
 
 \begin{note}
-	Vernam cipher is also referred to as {\em One Time Pad} (OTP). Note that it is crucial that each key is only used once otherwise we can attack the cipher easily: given two ciphertexts using the same key $c_0=m_0\xor k$ and $c_1=m_1\xor k$, one can compute $c_0\xor c_1 = m_0\xor m_1$. This can be practically attacked using some apriori knowledge about plaintexts (e.g. encoding (ASCII), format and language of plaintext (XML and english) and so on) which reduces the amount of possibilities and typically leads to complete plaintext recovery.
+	Vernam cipher is also referred to as {\em One Time Pad} (OTP). Note that it is crucial that each key is only used once otherwise we can attack the cipher easily: given two ciphertexts using the same key $c_0=m_0\xor k$ and $c_1=m_1\xor k$, one can compute $c_0\xor c_1 = m_0\xor m_1$. This can be practically attacked using some apriori knowledge about plaintexts (e.g.\ encoding (ASCII), format and language of plaintext (XML and english) and so on) which reduces the amount of possibilities and typically leads to complete plaintext recovery.
 \end{note}
 
 Perfect security seems to be exactly what we want from a secure cipher but the following theorem shows that it implies certain inconveniences.
@@ -103,7 +103,7 @@ Perfect security seems to be exactly what we want from a secure cipher but the f
 
 \begin{note}
 \label{note:intent}
-	This consequence of perfect secrecy seems to go against our intention -- we would like to establish a shared secret key of a limited length and then, using the key, be able to encrypt as much information as we want. For this reason we need to weaken our security assumption. Note that previously there was no assumption on attacker's computing power -- the requirement was actually to hide the  plaintext from {\em any} attacker i.e. including an attacker with unlimited computing power.
+	This consequence of perfect secrecy seems to go against our intention -- we would like to establish a shared secret key of a limited length and then, using the key, be able to encrypt as much information as we want. For this reason we need to weaken our security assumption. Note that previously there was no assumption on attacker's computing power -- the requirement was actually to hide the  plaintext from {\em any} attacker i.e.\ including an attacker with unlimited computing power.
 \end{note}
 
 
@@ -160,7 +160,7 @@ Let us introduce some notion first.
 
 \begin{note}
 \label{note:neglconst}
-	In practice, {\em negligible} is often used with concrete constants as well. $\epsilon<\frac{1}{2^{80}}$ is considered negligible i.e. events with such probability are not considered to occur during our lives, on the other hand $\epsilon>\frac{1}{2^{30}}$ is considered non-negligible i.e. it is likely to observe an event with such probability.
+	In practice, {\em negligible} is often used with concrete constants as well. $\epsilon<\frac{1}{2^{80}}$ is considered negligible i.e.\ events with such probability are not considered to occur during our lives, on the other hand $\epsilon>\frac{1}{2^{30}}$ is considered non-negligible i.e.\ it is likely to observe an event with such probability.
 \end{note}
 
 \begin{defn}[Oracle]
@@ -185,7 +185,7 @@ Let us introduce some notion first.
 	\]
 \end{defn}
 
-In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set based on its input/output behavior only. According to these sets, advantage can be ``customized'' for a specific purpose. Let us define such advantage for an adversary tempting to distinguish which of her plaintexts has been encrypted i.e. tells us how likely she is to win the Game \ref{game:semsec}.
+In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set based on its input/output behavior only. According to these sets, advantage can be ``customized'' for a specific purpose. Let us define such advantage for an adversary tempting to distinguish which of her plaintexts has been encrypted i.e.\ tells us how likely she is to win the Game \ref{game:semsec}.
 
 \begin{defn}[Semantic Security Advantage]
 \label{def:ssadvant}
@@ -231,7 +231,7 @@ respectively. Stream ciphers then achieve semantic security by proper initializa
 \end{defn}
 
 \begin{note}
-	%~ For $X$ and $Y$ being a set of fixed-length strings, e.g. $X = Y = \{0,1\}^n$   %?%
+	%~ For $X$ and $Y$ being a set of fixed-length strings, e.g.\ $X = Y = \{0,1\}^n$   %?%
 	Pseudorandom permutation is usually referred to as {\em block cipher}. Note that the previous definition is in some sense very similar to Definition \ref{def:symcipher} -- it does not introduce any security requirements either.
 \end{note}
 
@@ -271,13 +271,13 @@ An example covering most introduced concepts follows.
 \begin{example}
 	Let $E:\{0,1\}^{128}\times\{0,1\}^{128}\rarr\{0,1\}^{128}$ be a PRP defined as
 	\[
-		E(k,x) = \bin\bigl((k)_2 + (x)_2 \mod{2^{128}}\bigr)
+		E(k,x) = \bin\bigl((k)_2 + (x)_2\mod{2^{128}}\bigr)
 	\]
 	where $\bin(\cdot)$ stands for number's $128$-bit binary representation and $(\cdot)_2$ stands for a number represented by given binary string.
 	
 	Now let us construct an adversary $A$ as follows: it generates two arbitrary but distinct $x_0,x_1\in\{0,1\}^{128}$ and feeds them to an oracle computing either PRP $E$ or a truly random bijection. The oracle returns $y_0$ and $y_1$, respectively, and the adversary compares values $(y_i)_2 - (x_i)_2 \mod{2^{128}}$ for $i=0,1$ with each other. If these values are equal, $A$ returns $1$, $0$ otherwise.
 	
-	Note that if the oracle computes PRP $E$ then these values are always equal. Otherwise, i.e. the oracle computes a truly random bijection, the values are distinct with overwhelming probability. Therefore the PRP advantage of such adversary is
+	Note that if the oracle computes PRP $E$ then these values are always equal. Otherwise, i.e.\ the oracle computes a truly random bijection, the values are distinct with overwhelming probability. Therefore the PRP advantage of such adversary is
 	\[
 		\AdvPRP(A,E) = \left| \Pr\limits_{k\unirand \{0,1\}^{128}}\Bigl(A\bigl({\cal O}_{E(k,\cdot)}\bigr)=1\Bigr) - \Pr\limits_{P\unirand {\cal B}}\Bigl(A({\cal O}_P)=1\Bigr) \right| = 1 - \epsilon
 	\]
@@ -349,7 +349,7 @@ Let us modify Game \ref{game:semsec} in a manner described within Note \ref{note
 	Based on the previous game, we could define {\em PRP semantic security advantage} ($\AdvPRPSS$) and {\em semantically secure PRP} (cf. Game \ref{game:semsec}, Definitions \ref{def:ssadvant} and \ref{def:semsec}). The difference would be that the oracle access should be redefined -- it would either need to be limited to one or the oracle would need to change the function it evaluates. Due to these technical obstacles we do not provide exact definitions.
 \end{note}
 
-The following theorem gives a connection between Game \ref{game:prp} and \ref{game:semsecprp}. It claims that given a PRP $E$ winning Game \ref{game:prp} i.e. $E$ is indistinguishable from a truly random bijection, $E$ wins Game \ref{game:semsecprp} as well i.e. no adversary can distinguish encryption of $m_0$ from encryption of $m_1$.
+The following theorem gives a connection between Game \ref{game:prp} and \ref{game:semsecprp}. It claims that given a PRP $E$ winning Game \ref{game:prp} i.e.\ $E$ is indistinguishable from a truly random bijection, $E$ wins Game \ref{game:semsecprp} as well i.e.\ no adversary can distinguish encryption of $m_0$ from encryption of $m_1$.
 
 \begin{thm}
 \label{thm:semsecprp}
@@ -360,7 +360,7 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 	\begin{equation}\label{eq:aleqbb}
 		\AdvPRPSS(A,E) \leq \AdvPRP(B_0,E) + \AdvPRP(B_1,E) .
 	\end{equation}
-	The claim then follows -- if $E$ is a secure PRP i.e. $\AdvPRP(B_0,E) + \AdvPRP(B_1,E)$ is negligible then also $\AdvPRPSS(A,E)$ is negligible, therefore $E$ is a semantically secure PRP.
+	The claim then follows -- if $E$ is a secure PRP i.e.\ $\AdvPRP(B_0,E) + \AdvPRP(B_1,E)$ is negligible then also $\AdvPRPSS(A,E)$ is negligible, therefore $E$ is a semantically secure PRP.
 	
 	Let us first denote $W_b$ the event when adversary $A$ answers $1$ while the true value of the PRP semantic security game is $b$ for $b=0,1$. In this notation it holds
 	\begin{equation}\label{eq:prpssae}
@@ -406,8 +406,8 @@ The previous theorem is especially important for the idea behind its proof which
 Provable security is one aspect, the other is practical construction of a cipher. Note that there is no provably secure block cipher known.
 
 If there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $E$ were a PRP, then the adversary could, given certain (polynomial) amount of plaintext-ciphertext pairs $(m_i,c_i)$, look for a key $k$ such that $c_i = E(k,m_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ was found, otherwise she says ``pseudorandom''. Here the ``truly random'' answer is sure while the ``pseudorandom'' answer is just a conjecture but with sufficiently large probability.
-\nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
-\nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
+\nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e.\ the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
+\nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e.\ the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
 
 Instead, real-world block ciphers are {\em beleived} to be secure based on a simple fact: no known attack is far better than exhaustive search. One such block cipher is called {\em Advanced Encryption Standard} (AES) and will be of top interest in this thesis. AES will be described in detail in Section \ref{sec:aes}.
 
@@ -426,7 +426,7 @@ The other central topic of this thesis is {\em white-box attack context}. In ord
 First of all, as stated in Note \ref{note:threat}, we need to address attacker's abilities -- the threat model. In the black-box model, the attacker is given an access to an oracle (see Definition \ref{def:oracle}) evaluating given encryption algorithm $E$ with a random secret key $k$ while the (primary) goal of the attacker is to recover the key. The attacker has absolutely no information but inputs and respective outputs, she cannot observe any internal routines of encryption, hence black-box.
 
 \begin{note}
-	There could be many other goals than just key recovery, e.g. guessing the ciphertext in advance or be able to decrypt certain/given ciphertext with non-negligible probability and so on. Actually whatever one can imagine which could be in principle possible with a PRP but could not be possible with a truly random bijection.
+	There could be many other goals than just key recovery, e.g.\ guessing the ciphertext in advance or be able to decrypt certain/given ciphertext with non-negligible probability and so on. Actually whatever one can imagine which could be in principle possible with a PRP but could not be possible with a truly random bijection.
 \end{note}
 
 Classical ciphers are designed under the assumption of black-box attack context thus their implementation must be extremely careful. The attacker could for example measure the time of encryption and exploit this information which was not considered during the design of the cipher.

@@ -6,15 +6,15 @@ In this section we describe White-Box AES (WBAES) as introduced by Chow et al.\ 
 
 The core idea of WBAES is based on usage of lookup tables as outlined in Section \ref{sec:aeslookup}, these are further improved in three ways:
 \begin{enumerate}
-	\item the implementation is turned into fully table representation i.e. the key is incorporated into tables as well,
+	\item the implementation is turned into fully table representation i.e.\ the key is incorporated into tables as well,
 	\item tables are wrapped around by appropriately self-vanishing random bijections, \label{item:wrap}
 	\item the boundary is extended into the containing application. \label{item:boundary}
 \end{enumerate}
-Note that Chow et al. introduced also White-Box DES \cite{chow2002des} but it has been broken by Jacob et al.\ \cite{jacob2002attacking} much earlier than WBAES because it was lacking feature \ref{item:boundary} from the previous list.
+Note that Chow et al.\ introduced also White-Box DES \cite{chow2002des} but it has been broken by Jacob et al.\ \cite{jacob2002attacking} much earlier than WBAES because it was lacking feature \ref{item:boundary} from the previous list.
 
 \begin{notion}
 \label{notion:table}
-	Since WBAES will heavily use lookup tables, let us introduce a simplifying notion: a table will be told to have dimensions $m\times n$ if it has $m$-bit input values and $n$-bit output values. Note that the real size (i.e. memory consumption) of such table is $2^m\cdot n$ bits since we need $2^m$ entries of size $n$ to treat all possible $m$-bit input values.
+	Since WBAES will heavily use lookup tables, let us introduce a simplifying notion: a table will be told to have dimensions $m\times n$ if it has $m$-bit input values and $n$-bit output values. Note that the real size (i.e.\ memory consumption) of such table is $2^m\cdot n$ bits since we need $2^m$ entries of size $n$ to treat all possible $m$-bit input values.
 \end{notion}
 
 
@@ -42,7 +42,7 @@ The following definition introduces the self-vanishing property of the bijection
 
 \begin{defn}[Networked Encoding]
 \label{def:netw}
-	A {\em networked encoding} for computing $Y\circ X$ (i.e. transformation $X$ followed by transformation $Y$) is an encoding of the form
+	A {\em networked encoding} for computing $Y\circ X$ (i.e.\ transformation $X$ followed by transformation $Y$) is an encoding of the form
 	\[
 		Y'\circ X' = (H\circ Y\circ G^{-1})\circ(G\circ X\circ F^{-1}) = H\circ(Y\circ X)\circ F^{-1}
 	\]
@@ -132,6 +132,7 @@ As outlined earlier, WBAES construction turns AES operations into table lookups 
 % ==============================================================================
 
 \subsection{WBAES Construction}
+\label{sec:constrwbaes}
 
 So far we have trated all AES operations by lookup tables only. Now we will incorporate encodings as described in Section \ref{sec:encod} -- these will play the role of a confusion feature --, introduce a diffusion feature called {\em Mixing Bijection} and finally compose certain tables together.
 
@@ -165,7 +166,7 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 
 \subsubsection{Mixing Bijection}
 	
-	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e. $32$-bit) linear bijection which is to be inserted after $\MC$ and inverted in a separate step (this is to be done before applying encodings). Since it inputs the output of $\MC$, it can be composed together yielding $\MB\circ\MC$. Note that the table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as for $\MC$ itself.
+	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e.\ $32$-bit) linear bijection which is to be inserted after $\MC$ and inverted in a separate step (this is to be done before applying encodings). Since it inputs the output of $\MC$, it can be composed together yielding $\MB\circ\MC$. Note that the table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as for $\MC$ itself.
 	
 	\begin{note}
 	\label{note:fullrank}
@@ -188,6 +189,7 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 	
 	Let $E_k$ stand for AES encryption using key $k$, then encryption using external encodings can be seen as
 	\begin{equation}
+	\label{eq:extenc}
 		E_k' = G \circ E_k \circ F^{-1} ,
 	\end{equation}
 	where $G$, $F$ stand for input or output external encoding, respectively. These are basically $128$-bit bijections. Clearly, the input plaintext must first be encoded with $F$, then encrypted with $E_k'$ and finally decoded with $G^{-1}$ in order to get an equivalent of AES encryption.

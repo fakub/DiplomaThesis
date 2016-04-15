@@ -13,7 +13,7 @@ Note that the last plain AES state (denoted with ``plain'' in the previous equat
 	\begin{equation}
 		t = [R]^T\cdot [S] = [R]^T\cdot\Bigl( \{\texttt{1f}\}\cdot\bigl([K]+[P]\bigr)' + [\texttt{63}] \Bigr) ,
 	\end{equation}
-	where $\{\cdot\}$ stands for respective binary matrix of multiplication$\mod{x^8+1}$ and $(\cdot)'$ for Rijndael inverse (i.e.\ there is the output of the first SBox in the big parantheses, cf.\ Equation \ref{eq:sbox}). This equation can be easily turned into the form of previously used target (Equation \ref{eq:tba}), indeed
+	where $\{\cdot\}$ stands for respective binary matrix of multiplication modulo $x^8+1$ and $(\cdot)'$ for Rijndael inverse (i.e.\ there is the output of the first SBox in the big parantheses, cf.\ Equation \ref{eq:sbox}). This equation can be easily turned into the form of previously used target (Equation \ref{eq:tba}), indeed
 	\begin{align*}
 		[R]^T\cdot\Bigl( \{\texttt{1f}\}\cdot\bigl([K]+[P]\bigr)' + [\texttt{63}] \Bigr) &= \bigl([R]^T\cdot \{\texttt{1f}\}\bigr)\cdot\bigl([K]+[P]\bigr)' + \bigl([R]^T\cdot [\texttt{63}]\bigr) = \\
 		&= [\bar R]^T \cdot \bigl([K]+[P]\bigr)' + \bar r ,
@@ -32,12 +32,12 @@ Note that the last plain AES state (denoted with ``plain'' in the previous equat
 	
 	The choice of $\Enc$ actually only relies on the fact that the ratio of affine mappings among all random bijections is extremely low (less than $0.000\,002\%$ for $4$-bit bijections). This justification is very poor since it does not even address the case where only one output bit of $\Enc$ is an affine mapping of the input!
 	
-	There are actually quite many bijections which are affine in single output bit. Indeed, there are $2\cdot4\cdot(2^4-1)\cdot8!\cdot8! \approx 2\cdot10^{11}$ of them among $16! \approx 2\cdot10^{13}$ bijections altogether which already makes some $1\%$ ratio! Also note that in such case, the maximum difference of means would be still $1.0$ since this affine mapping could be composed with the previous affine mappings yielding an affine mapping again.
+	There are actually quite many bijections which are affine in single output bit. Indeed, there are $2\cdot4\cdot(2^4-1)\cdot8!\cdot8! \approx 2\cdot10^{11}$ of them among $16! \approx 2\cdot10^{13}$ bijections on $4$-bits altogether which already makes some $1\%$ ratio! Also note that in such case, the maximum difference of means would be still $1.0$ since this affine mapping could be composed with the previous affine mappings yielding an affine mapping again.
 	
-	But we do not necessarily need a fully affine mapping at some bit, it would be sufficient if the mapping were affine for most inputs. Clearly, there are much more such mappings. For this reason, this intermediate result of WBAES seems to be most likely that which leaks in the attack.
+	But we do not necessarily need a fully affine mapping at some bit, it would be sufficient if the mapping were affine for most inputs. Clearly, there are much more such mappings. For this reason, this intermediate result of WBAES seems to be most likely that which causes the leakage.
 \end{description}
 
-To support our hypothesis, we modified the source code of {\tt KlinecWBAES} to output these intermediate products (i.e.\ outputs of the first Type II tables, see Equation \ref{eq:wbaesflow}) and ran the attack with these values instead of memory traces. And the attack succeeded which fully supports our explanation.
+To support our hypothesis, we modified the source code of {\tt KlinecWBAES} to output these intermediate products (i.e.\ outputs of the first Type II tables, see Equation \ref{eq:wbaesflow}) and ran the attack with these values instead of memory traces. The attack indeed succeeded, which fully supports our explanation.
 
 %!% v čistých mezivýsledcích se nevyskytuje neuniformní rozložení leak bitů
 

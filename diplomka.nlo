@@ -3,7 +3,7 @@
 \nomenclatureentry{a$k\unirand K$@[{$k\unirand K$}]\begingroup $k$ is taken uniformly random from $K$\nomeqref {1.1}|nompageref}{5}
 \nomenclatureentry{a$\N$@[{$\N$}]\begingroup Positive integers\nomeqref {1.1}|nompageref}{6}
 \nomenclatureentry{a$\R$@[{$\R$}]\begingroup Real numbers\nomeqref {1.1}|nompageref}{6}
-\nomenclatureentry{a$\Pclass$@[{$\Pclass$}]\begingroup Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time\nomeqref {1.6}|nompageref}{12}
-\nomenclatureentry{a$\NPclass$@[{$\NPclass$}]\begingroup Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time\nomeqref {1.6}|nompageref}{12}
+\nomenclatureentry{a$\Pclass$@[{$\Pclass$}]\begingroup Deterministic polynomial complexity class i.e.\ the set of decision problems which can be solved by a deterministic Turing machine in polynomial time\nomeqref {1.6}|nompageref}{12}
+\nomenclatureentry{a$\NPclass$@[{$\NPclass$}]\begingroup Non-deterministic polynomial complexity class i.e.\ the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time\nomeqref {1.6}|nompageref}{12}
 \nomenclatureentry{a$\GF(p^n)$@[{$\GF(p^n)$}]\begingroup Galois Field with $p^n$ elements, $p$ prime\nomeqref {1.6}|nompageref}{16}
 \nomenclatureentry{a$F[x]$@[{$F[x]$}]\begingroup Ring of polynomials over $F$\nomeqref {1.6}|nompageref}{16}

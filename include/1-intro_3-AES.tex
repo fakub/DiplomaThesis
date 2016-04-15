@@ -23,7 +23,7 @@ First we split its $128$ bits into $16$ bytes denoted by $A_{0,0}$, $A_{1,0}$, $
 	Note that the order of bytes in the state fills the array in a column-first manner assuming standard row/column order of indexes.
 \end{remark}
 
-Let us further denote $F = \GF(2)[x]/x^8+x^4+x^3+x+1$ which is a field of polynomials with integral coefficients reduced$\mod 2$ i.e. $0$, $1$, these polynomials are further reduced$\mod(x^8+x^4+x^3+x+1)$. This field has $2^8$ elements and is usually referred to as {\em Rijndael's field}. In AES context it might be denoted also by $\GF(2^8)$.
+Let us further denote $F = \GF(2)[x]/x^8+x^4+x^3+x+1$ which is a field of polynomials with integral coefficients reduced modulo $2$ (i.e.\ $0$, $1$), these polynomials are further reduced modulo $x^8+x^4+x^3+x+1$. This field has $2^8$ elements and is usually referred to as {\em Rijndael's field}. In AES context it might be denoted also by $\GF(2^8)$.
 
 \nomenclature{$\GF(p^n)$}{Galois Field with $p^n$ elements, $p$ prime}
 \nomenclature{$F[x]$}{Ring of polynomials over $F$}
@@ -55,7 +55,7 @@ Now let us move on to definitions of the $4$ operations.
 
 \subsubsection{SubBytes}
 	
-	$\SubBytes$ operation is often referred to as {\em SBox} and denoted by $S$. It is defined byte-wise, i.e. $S: F \rightarrow F$. For $A\in F$, let $A'$ stand for
+	$\SubBytes$ operation is often referred to as {\em SBox} and denoted by $S$. It is defined byte-wise, i.e.\ $S: F \rightarrow F$. For $A\in F$, let $A'$ stand for
 	\begin{itemize}
 		\item $A^{-1}$, if $A \neq 0$,
 		\item $0$, if $A = 0$.
@@ -75,7 +75,7 @@ Now let us move on to definitions of the $4$ operations.
 	
 	\begin{note}
 	\label{note:sboxinv}
-		Although $x^8+1$ is not irreducible (it holds $x^8+1 = (x+1)^8$), $x^4 + x^3 + x^2 + x + 1$ is coprime with $x^8+1$, therefore it has an inverse$\mod(x^8+1)$. It follows that $\SubBytes$ is an invertible bijection.
+		Although $x^8+1$ is not irreducible (it holds $x^8+1 = (x+1)^8$), $x^4 + x^3 + x^2 + x + 1$ is coprime with $x^8+1$, therefore it has an inverse modulo $x^8+1$. It follows that $\SubBytes$ is an invertible bijection.
 	\end{note}
 	
 	$\SubBytes$ is the only source of nonlinearity in AES thus it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui in 1993 \cite{matsui1993linear} and analyzed in detail and successfuly performed by Junod in 2001 \cite{junod2001complexity}.
@@ -133,8 +133,7 @@ Now let us move on to definitions of the $4$ operations.
 	\end{equation}
 	where $c(z) = \texttt{03}\cdot z^3 + \texttt{01}\cdot z^2 + \texttt{01}\cdot z^2 + \texttt{02}$. Note that here we used hexadecimal notation for elements of $F$ which could also be viewed as polynomials. To avoid confusion, we used $z$ instead of $x$.
 	
-	Note that $c(z)$ is coprime with $z^4+1$ therefore invertible$\mod{z^4+1}$, it follows that $\MixColumns$ is invertible. 
-	The goal of $\MixColumns$ is to introduce inter-byte diffusion within a column.
+	Note that $c(z)$ is coprime with $z^4+1$ therefore invertible modulo $z^4+1$, it follows that $\MixColumns$ is invertible. The goal of $\MixColumns$ is to introduce inter-byte diffusion within a column.
 	
 	Later we will make use of its different, linear algebra representation. Let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly}, which is performed in $F[z]$, can be rewritten into matrix multiplication back in $F$, indeed
 	\begin{equation}

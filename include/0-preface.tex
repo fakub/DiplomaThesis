@@ -4,16 +4,19 @@
 \addcontentsline{toc}{chapter}{Preface}
 \chapter*{Preface}
 
-Cryptography emerged long long time ago with the need for confidential communication in the presence of enemies -- Caesar cipher can serve as a well-known example of a primitive cipher. Cryptography also had considerable consequences in the past -- for instance Mary, Queen of Scots, was executed back in \nth{16} century, because she was planning to assasinate Queen Elizabeth I of England and her cipher got broken. However, the most substantial success of cryptography was definitely the breach of Nazi Germany's Enigma code, which they fortunately beleived is unbreakable.
+Cryptography emerged long long time ago with the need for confidential communication in the presence of enemies -- Caesar cipher can serve as a well-known example of a primitive cipher. Cryptography also had considerable consequences in the past -- for instance Mary, Queen of Scots, was executed back in \nth{16} century, because she was planning to assasinate Queen Elizabeth I of England and her cipher got broken. However, the most appreciable success of cryptography was definitely the breach of Nazi Germany's Enigma code, which Nazi's fortunately beleived is unbreakable.
 
-Since its revival few decades ago, cryptography became a proper discipline of modern mathematics and now it covers much more than ``hiding secrets''. There is an interesting family of cryptographic problems -- we would like to perform cryptographic tasks in an untrusted environment. This is not only a 
+Since its revival few decades ago, cryptography became a proper discipline of modern mathematics and now it covers much more than ``hiding secrets''. For instance, there are cryptographic primitives which allow us to construct digital signatures, message authentication codes or even more complicated structures like digital currencies.
+
+In this thesis, we will focus on another interesting problem: let us imagine that we would like to work with confidential data in an untrusted environment. For example we would like to let an untrusted party process our confidential data without learning anything about it, or -- which we will study in this thesis -- we would like to let anybody use a cryptographic key without being able to recover it. Such a property of an implementation of a cipher will be referred to as {\em white-box attack resistency}. However, white-box attack resistancy appears to be quite hard to achieve.
+
+The primary goal of this thesis is to reproduce, improve and analyze a novel attack technique against white-box attack protected implementations.
 
 % PŘEDMLUVA !!! se tomu řiká u nás ...
 %~ význam WBC, kde se to vzalo, co za útok že tam chci použít, musí to bejt poutavý!
 % o čem ta práce vlastně bude ve smyslu uvedení do problému, jak/proč ta práce vznikla?
 
 %~ Motivation for white-box crypto, white-box crypto history, milestones   % Bos et al. to hezky shrnul
-	%~ from black-box ... gray-box ... white-box
 	%~ malicious software on your device
 	%~ cryptographic keys of third-parties
 	%~ use cases: DRM
@@ -28,13 +31,20 @@ Since its revival few decades ago, cryptography became a proper discipline of mo
 	%~ all published approaches have been broken
 	%~ software vendors then disobey Kerckhoff's principle (cite) i.e. use secret design
 	%~ Bos et al. exploit leaked information instead, no need for exact knowledge of design nor reverse engineering
-	%~ perfect wb implementation should resist all existing and future side-channel attacks (C. Delerablee, T. Lepoint, P. Paillier, and M. Rivain. White-box security notions for symmetric encryption schemes. In T. Lange, K. Lauter, and P. Lisonek, editors, SAC 2013, volume 8282 of LNCS, pages 247–264, Burnaby, BC, Canada, Aug. 14–16, 2014. Springer, Berlin, Germany.)
-	%~ ... Bos et al. utilize software traces for this purpose
 	%~ The goal of this thesis is to reproduce the attack and make it easy for future researchers and analysis.
 
+
+% In this thesis, we present one such variant \cite{chow2002aes} of a standard cipher \cite{fips2001aes} together with its C++ implementation \cite{klinec2013implementation}. Then we introduce a recently introduced powerful attack \cite{bos2015differential}, which we further improve and make even more powerful. Finally we give a very likely explanation why the attack is actually possible.
+
+
 \section*{Work overview}
-	
 	\begin{description}
-		\item[Chapter \ref{chap:intro}.] In this chapter we describe basic techniques of white-box cryptography\ldots
-		%~ \item[Chapter \ref{chap:results}.] This chapter presents our practical results together with\ldots
+		\item[Chapter \ref{chap:intro}.] ~ \\
+			In this chapter we introduce.
+		\item[Chapter \ref{chap:attack}.] ~ \\
+			We present the attack technique.
+		\item[Chapter \ref{chap:results}.] ~ \\
+			First we reproduce results of Bos et al., then we suggest and run an extended variant of the attack.
+		\item[Chapter \ref{chap:analysis}.] B.
+		\item[Chapter \ref{chap:future}.] C.
 	\end{description}

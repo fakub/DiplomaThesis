@@ -96,6 +96,7 @@
 \contentsline {subsection}{\numberline {4.2.2}Countermeasures against DCA}{59}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Explanation Attempt}{59}{section.4.3}
 \contentsline {chapter}{\numberline {5}Future Work}{63}{chapter.5}
+\contentsline {section}{\numberline {5.1}Another Interesting AES White-Box Implementation}{63}{section.5.1}
 \contentsline {chapter}{Conclusion}{65}{section*.72}
 \contentsline {chapter}{References}{67}{section*.74}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}

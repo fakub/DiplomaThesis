@@ -9,7 +9,7 @@ Since then there have been developed several techniques including Simple Power/E
 
 The success of SCA is based on the following assumptions:
 \begin{enumerate}
-	\item the cipher is insecure once certain execution-related information leaks (e.g. intermediate results or runtime),
+	\item the cipher is insecure once certain execution-related information leaks (e.g.\ intermediate results or runtime),
 	\item the attacker can control, knows or just can predict certain amount of plaintext inputs, and
 	\item the attacker has the ability to gain some information related to execution of the cipher.
 \end{enumerate}
@@ -46,15 +46,15 @@ In this section we describe CPA attack (an advanced form of DPA attack) mounted 
 	
 	But in this attack scenario we do not observe intermediate results $b$ directly, we only have power traces. Now let us describe a reasonable model how certain portion of information about $b$'s leaks into the power trace and how we can exploit it.
 	
-	Before entering next stages, the intermediate result $b$ is temporarily stored. It is handled byte-wise, hence its byte-wise Hamming weights (i.e. numbers of ones in binary representation, further denoted by $HW$) are reflected into the power trace\footnote{Here we assume so called {\em Hamming Weight Leakage Model}.}. It means that for each byte of $b$ denoted by $b_i$ there is a position in the power trace which reflects $HW(b_i)$.
+	Before entering next stages, the intermediate result $b$ is temporarily stored. It is handled byte-wise, hence its byte-wise Hamming weights (i.e.\ numbers of ones in binary representation, further denoted by $HW$) are reflected into the power trace\footnote{Here we assume so called {\em Hamming Weight Leakage Model}.}. It means that for each byte of $b$ denoted by $b_i$ there is a position in the power trace which reflects $HW(b_i)$.
 	
-	Let us suppose that we have a plenty of such traces which are properly aligned i.e. a position in the traces corresponds with a fixed position in the AES implementation. Therefore, for each byte of $b$'s, there is a position in the traces where the power values are correlated with Hamming weights of respective bytes of respective $b$'s.
+	Let us suppose that we have a plenty of such traces which are properly aligned i.e.\ a position in the traces corresponds with a fixed position in the AES implementation. Therefore, for each byte of $b$'s, there is a position in the traces where the power values are correlated with Hamming weights of respective bytes of respective $b$'s.
 	
-	Since we do not know actual $b$'s, we will assume that the correlation of true values of $b$'s is the highest among others and among all positions in the traces. Note that $b_i = S(k_i\xor m_i)$ i.e. $b$'s only depend on respective known plaintexts $m$ and the key $k$ which is constant, therefore we will loop through key guesses and search for globally maximal correlation. And more importantly, note that we can guess the key byte-wise!
+	Since we do not know actual $b$'s, we will assume that the correlation of true values of $b$'s is the highest among others and among all positions in the traces. Note that $b_i = S(k_i\xor m_i)$ i.e.\ $b$'s only depend on respective known plaintexts $m$ and the key $k$ which is constant, therefore we will loop through key guesses and search for globally maximal correlation. And more importantly, note that we can guess the key byte-wise!
 	
 	\begin{note}
 	\label{note:brutevssca}
-		In CPA we loop through $256$ key guesses for each of $16$ bytes i.e. overall $256\cdot 16 = 2^{12} = 4096$ possibilities, compare with $256^{16} = 2^{128} = \ldots$ possibilities of a brute force attack.
+		In CPA we loop through $256$ key guesses for each of $16$ bytes i.e.\ overall $256\cdot 16 = 2^{12} = 4096$ possibilities, compare with $256^{16} = 2^{128} = \ldots$ possibilities of a brute force attack.
 	\end{note}
 	
 	The attack will perform as follows: given a byte index $i=\atob{0}{15}$, we find the maximal correlation\footnote{We can use an empirical meter as well since correlation is quite expensive and we only need the result, no matter how we reach it.} (among all keyguesses $k_i$ of $i$-th byte of the key and all positions in the traces) of $HW\bigl(S(k_i\xor m_i)\bigr)$ with respective power values. $k_i$ reaching the maximum is then our top candidate. This idea is summarized in the following algorithm.
@@ -114,7 +114,7 @@ Therefore such attacker is not limited to observing values related to Hamming we
 
 \subsubsection{Attack}
 	
-	In this attack, we proceed similarly as in the previous one i.e. we loop through key guesses for each key byte and compute the respective intermediate results $b_i$, see Algirothm \ref{alg:cpa}. But instead of applying Hamming weight and computing correlation, we perform this attack for each bit individually.
+	In this attack, we proceed similarly as in the previous one i.e.\ we loop through key guesses for each key byte and compute the respective intermediate results $b_i$, see Algirothm \ref{alg:cpa}. But instead of applying Hamming weight and computing correlation, we perform this attack for each bit individually.
 	
 	Let say we are interested in $j$-th bit of $i$-th byte. Based on actual key guess $k_i$, we compute $j$-th bit of $b_i = S(k_i\xor m_i)$ for each trace/plaintext pair and partition the traces based on this bit into two sets, let us denote them $S_0$ and $S_1$.
 	
