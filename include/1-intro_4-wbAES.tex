@@ -10,7 +10,7 @@ The core idea of WBAES is based on usage of lookup tables as outlined in Section
 	\item tables are wrapped around by appropriately self-vanishing random bijections, \label{item:wrap}
 	\item the boundary is extended into the containing application. \label{item:boundary}
 \end{enumerate}
-Note that Chow et al.\ introduced also White-Box DES \cite{chow2002des} but it has been broken by Jacob et al.\ \cite{jacob2002attacking} much earlier than WBAES because it was lacking feature \ref{item:boundary} from the previous list.
+Note that Chow et al.\ introduced also White-Box DES \cite{chow2002des} but it has been broken by Jacob et al.\ \cite{jacob2002attacking} much earlier than WBAES, because it was lacking feature \ref{item:boundary} from the previous list.
 
 \begin{notion}
 \label{notion:table}
@@ -31,7 +31,7 @@ Let us first introduce some notion for the feature \ref{item:wrap} from the prev
 	Let $X$ be a transformation from $m$ bits to $n$ bits. Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. Call $X' = G \circ X \circ F^{-1}$ an {\em encoded} version of $X$. $F$ is an {\em input encoding} and $G$ is an {\em output encoding}.
 \end{defn}
 
-Note that, given a fixed key, AES itself is a $128$-bit bijection which can obviously never be implemented as a lookup table because its size would be $2^{128}\times 128$ bits. (On the other hand, this would be black-box equivalent -- we only know the input/output behavior.) Hence we will rather consider only a special kind of bijections -- we will use a series of smaller bijections and concatenate their outputs, a definition follows.
+Note that, given a fixed key, AES itself is a $128$-bit bijection which can obviously never be implemented as a lookup table, because its size would be $2^{128}\times 128$ bits. (On the other hand, this would be black-box equivalent -- we only know the input/output behavior.) Hence we will rather consider only a special kind of bijections -- we will use a series of smaller bijections and concatenate their outputs, a definition follows.
 
 \begin{defn}[Concatenated encoding]
 \label{def:concat}
@@ -58,7 +58,7 @@ Note that, given only tables for $Y'$ and $X'$, $G$ can be totally forgotten and
 
 \subsection{Reorded AES}
 
-In order to begin with fully-table representation, we need to reorder AES operations so that the resulting tables can be easily composed; let us first have a brief look at AES, see Algorithm \ref{alg:aes}. Note that we can ``move'' the forcycle one row upwards with appropriate shift of indexes in $\ExpandedKey$. Then we switch $\ShiftRows$ and $\SubBytes$ without any side-effect since $\SubBytes$ operates byte-wise. Finally we switch $\ShiftRows$ and $\AddRoundKey$ while we moreover have to apply $\ShiftRows$ on $\ExpandedKey$ so that we get equivalent algorithm. The modified version looks as follows:
+In order to begin with fully-table representation, we need to reorder AES operations, so that the resulting tables can be easily composed. Let us first have a brief look at AES, see Algorithm \ref{alg:aes}. Note that we can ``move'' the forcycle one row upwards with appropriate shift of indexes in $\ExpandedKey$. Then we switch $\ShiftRows$ and $\SubBytes$ without any side-effect since $\SubBytes$ operates byte-wise. Finally we switch $\ShiftRows$ and $\AddRoundKey$ while we moreover have to apply $\ShiftRows$ on $\ExpandedKey$ so that we get equivalent algorithm. The modified version looks as follows:
 \begin{alg}
 \label{alg:reordaes}
 	~
@@ -261,7 +261,7 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 		The core observation of Klinec's proof is that equations of Karroumi's WBAES can be rewritten to the form of the original Chow's WBAES i.e.\ without using dual ciphers at all. Concretely the transformations to dual cipher and operations in dual cipher are shown to be absorbed by surrounding random bijections (namely $\IMB^{-1}\circ\Enc$ and its inverse, in addition also by $\MB$ and its inverse), yielding the original Chow's WBAES.
 	\end{remark}
 	
-	As a consequence of the previous remark, it follows that BGE attack breaks Karroumi's WBAES with the same time complexity as the original WBAES scheme, simply because both is the same in the attack's perspective.
+	As a consequence of the previous remark, it follows that BGE attack breaks Karroumi's WBAES with the same time complexity as the original WBAES scheme -- simply because both is the same from the attack's perspective.
 	
 	\begin{note}
 	\label{note:dualsbox}

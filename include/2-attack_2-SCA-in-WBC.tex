@@ -42,7 +42,7 @@ Using chosen tool we acquire certain amount of memory traces with different, pos
 	Therefore we recommend to compile C/C++ programs with different levels of optimization and acquire just a few traces for each level. We check traces' lengths and apply the highest optimization level where the traces were equally long and use this optimization level for trace acquisition.
 \end{note}
 
-One may wonder whether traces can ever be properly aligned at all because then it would require additional effort to align them. According to our experience, traces are well aligned hence there should be no need for this.
+One may wonder whether traces can ever be properly aligned, because then it would require additional effort to align them. According to our experience, traces are well aligned, hence there should be no need for this.
 
 \begin{note}
 \label{note:aslr}
@@ -69,9 +69,9 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 
 \subsubsection{Constant Entries Filtering}
 	
-	In the first stage we filter out such entries which are constant across all acquired traces because they do not carry any information. Indeed, both presented SCA algorithms exploit changes across traces.
+	In the first stage, we filter out such entries which are constant across all acquired traces, because they do not carry any information. Indeed, both presented SCA algorithms exploit changes across traces.
 	
-	Practically we first create a filter mask based on a small set of traces, $10$ shows to be sufficient. Such mask carries $0$ if all corresponding addresses in the small set of traces are equal, $1$ otherwise, see Figure \ref{fig:constmask}. This mask is then simply applied to filter all the remaining traces, possibly hundreds or thousands of them. Note that we keep the mask, we will use it for the following filtering method as well.
+	Practically we first create a filter mask based on a small set of traces, $10$ shows to be sufficient. Such mask carries $0$ if all corresponding addresses in the small set of traces are equal, $1$ otherwise; see Figure \ref{fig:constmask}. This mask is then simply applied to filter all the remaining traces, possibly hundreds or thousands of them. Note that we keep the mask, we will use it for the following filtering method as well.
 	
 	\begin{figure}[H]
 	\[
@@ -172,9 +172,9 @@ Once the traces are acquired, possibly filtered and, most importantly, properly 
 \label{rem:traceformat}
 	Remind that each of our two SCA algorithms was originally designed for a different kind of traces.
 	
-	In Algorithm \ref{alg:cpa} the traces were supposed to carry information about Hamming weight of intermediate results therefore the original attack must be modified to compute Hamming weights of traces' entries. It might not make much sense to compute Hamming weight of both intermediate result and trace entries and then their correlation, but this algorithm serves rather as a proof-of-concept. On the other hand it could possibly bring some surprising results so we employed it as well.
+	In Algorithm \ref{alg:cpa}, the traces were supposed to carry information about Hamming weight of intermediate results, therefore the original attack must be modified to compute Hamming weights of entries of traces. It might not make much sense to compute Hamming weight of both intermediate result and trace entries and then their correlation, but this algorithm serves rather as a proof-of-concept. On the other hand it could possibly bring some surprising results so we employed it as well.
 	
-	In Algorithm \ref{alg:bitwisedpa} the traces were supposed to be a serialization of eight separate traces which should carry only bits of information, see Note \ref{note:concattraces}. Therefore it is crucial in this attack to consider entries of traces as separate bits, not bytes, i.e.\ {\tt [1,0,0,0,0,1,0,0, 0,1,1,0,1,1,0,0]} rather than {\tt [84, 6c]}.
+	In Algorithm \ref{alg:bitwisedpa}, the traces were supposed to be a serialization of eight separate traces which should carry only bits of information; see Note \ref{note:concattraces}. Therefore it is crucial in this attack to consider entries of traces as separate bits, not bytes, i.e.\ {\tt [1,0,0,0,0,1,0,0, 0,1,1,0,1,1,0,0]} rather than {\tt [84, 6c]}.
 \end{remark}
 
 As outlined in the previous remark, we will consider Algorithm \ref{alg:bitwisedpa} by default since now unless stated otherwise.

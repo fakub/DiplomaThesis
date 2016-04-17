@@ -49,10 +49,10 @@ There are two large families of ciphers -- symmetric and asymmetric. Shift ciphe
 
 \begin{defn}[Symmetric Cipher]
 \label{def:symcipher}
-	Let $K$ denote the key space, $M$ the message space and $C$ the ciphertext space. {\em Symmetric cipher} is a pair of efficiently computable (possibly randomized) functions $(E,D)$, $E:K\times M\rarr C$, $D:K\times C\rarr M$, such that $\forall m\in M$ and $\forall k\in K$ it holds
-	%~ \Pr\left(D(E(l,k),k)=l\right) = 1 . \label{eq:correct}
+	Let $K$ denote the key space, $M$ the message space and $C$ the ciphertext space. {\em Symmetric cipher} is a pair of efficiently computable (possibly randomized) functions $(E,D)$, $E:K\times M\rarr C$, $D:K\times C\rarr M$, such that $\forall m\in M$ and $\forall k\in K$ it holds   % \Pr\left(D(E(l,k),k)=l\right) = 1 .
 	\begin{equation}
-		\Pr\Bigl(D\bigl(k,E(k,m)\bigr)=m\Bigr) = 1 . \label{eq:correct}
+	\label{eq:correct}
+		\Pr\Bigl(D\bigl(k,E(k,m)\bigr)=m\Bigr) = 1 .
 	\end{equation}
 	%?% \footnote{In some use cases it might be useful to require only so called {\em overwhelming} probability; not needed in this thesis.}
 \end{defn}
@@ -202,14 +202,34 @@ Semantic security advantage gives us a reasonable meter for formalization of Gam
 	Let $(E,D)$ be a symmetric cipher. Then it is called {\em semantically secure} if for {\em any} adversary $A$ the semantic security advantage $\AdvSS(A,E)$ is negligible.
 \end{defn}
 
-%!% přidat někam útok využívající zkrácení plaintextu po komprimaci
-% it makes sense to compress -> encrypt but it might be insecure!
-
-Semantically secure cipher therefore cannot be broken by any probabilistic-polynomial attack with overwhelming probability. On the other hand, it might be broken by an attacker with unlimited computing power unlike perfectly secure cipher which cannot be broken anyways, see Note \ref{note:indist}.
+Semantically secure cipher therefore cannot be broken by any probabilistic-polynomial attack with overwhelming probability. On the other hand, it might be broken by an attacker with unlimited computing power unlike perfectly secure cipher which cannot be broken anyways; see Note \ref{note:indist}.
 
 The benefit of semantic security over perfect security is that semantic security does not imply any inconvenient consequence analogous to Theorem \ref{thm:kgeqm} (i.e.\ addresses our intention as stated in Note \ref{note:intent}) and practically provides similar security.
 
-Semantic security is usually achieved using smaller building blocks which are required to have certain properties. The following section describes a building block of one such possible approach.
+Let us now give a nice example, how things can go wrong if semantic security is not complied, even though following common sense.
+
+\begin{example}
+\label{ex:crime}
+	In 2012, a combination of settings in TLS\footnote{Transport Layer Security, a cryptographic protocol.} allowed researchers to hijack a web session by cracking encrypted cookies \cite{goodin2012crime}. The problem arised when compression was followed by encryption, let us have a look from theoretical point of view.
+	
+	Remind the condition of Game \ref{game:semsec} -- it required two {\em equally long} plaintexts. With this assumption, the respective ciphertexts were indistinguishable. However, if the plaintext is compressed first, it can result in differently-sized inputs to the subsequent (semantically secure) cipher! This obviously harms the assumption of equally-sized inputs and may allow the attacker to distinguish the ciphertexts. Note that only very little queries (around six) were needed to attack one byte in the practical attack!
+	
+	This vulnerability was given a CVE\footnote{Common Vulnerabilities and Exposures, a standard for information security vulnerability names, see \link{http://cve.mitre.org/}.} code CVE-2012-4929 and a human-readable name ``CRIME'' (Compression Ratio Info-leak Made Easy).
+\end{example}
+
+\subsubsection{Shannon's Principles}
+	
+	Before we present how semantic security is practically achieved, let us introduce a principle which is widely followed in cipher design.
+	
+	\begin{princ}[Shannon]
+		As outlined in another Shannon's work \cite{shannon1949communication}, secure ciphers are suggested to employ two basic principles, {\em confusion} and {\em diffusion}.
+		\begin{description}
+			\item[Confusion.] The relation between information in plaintext or key and information in respective ciphertext is very complex, e.g.\ does not belong to a specific subset of mappings, especially linear ones.
+			\item[Diffusion.] Small piece of information in plaintext or key is spread in a long piece of respective ciphertext, e.g.\ one bit of plaintext or key changes a large portion of respective ciphertext.
+		\end{description}
+	\end{princ}
+	
+	Semantic security is usually achieved using smaller building blocks which are required to have certain properties -- they especially make use of confusion and diffusion. The following section describes a building block of one of possible approaches.
 
 
 % ==============================================================================
@@ -262,9 +282,6 @@ PRP advantage tells us how likely adversary $A$ is able to distinguish a PRP wit
 \end{defn}
 
 In other words, given a random key, PRP is secure if it is computationaly indistinguishable from a truly random bijection. 
-
-%!% diffusion vs. confusion
-% prej Shannon: Communication Theory of Secrecy Systems
 
 An example covering most introduced concepts follows.
 
@@ -357,27 +374,32 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 \end{thm}
 \begin{proof}
 	We show that for every PRP semantic security adversary $A$ there exist PRP security adversaries $B_0$, $B_1$ such that
-	\begin{equation}\label{eq:aleqbb}
+	\begin{equation}
+	\label{eq:aleqbb}
 		\AdvPRPSS(A,E) \leq \AdvPRP(B_0,E) + \AdvPRP(B_1,E) .
 	\end{equation}
 	The claim then follows -- if $E$ is a secure PRP i.e.\ $\AdvPRP(B_0,E) + \AdvPRP(B_1,E)$ is negligible then also $\AdvPRPSS(A,E)$ is negligible, therefore $E$ is a semantically secure PRP.
 	
 	Let us first denote $W_b$ the event when adversary $A$ answers $1$ while the true value of the PRP semantic security game is $b$ for $b=0,1$. In this notation it holds
-	\begin{equation}\label{eq:prpssae}
+	\begin{equation}
+	\label{eq:prpssae}
 		\AdvPRPSS(A,E) = \bigl| \Pr(W_1) - \Pr(W_0) \bigr| .
 	\end{equation}
 	Let us further denote $R_b$ the same event with only difference -- the PRP semantic security game uses a random bijection instead. It holds
-	\begin{equation}\label{eq:rr0}
+	\begin{equation}
+	\label{eq:rr0}
 		\bigl| \Pr(R_1) - \Pr(R_0) \bigr| = 0
 	\end{equation}
 	since $b\unirand\{0,1\}$ and both $R_b$ provide a truly random bijection independent from $b$.
 	
 	Now we construct adversaries $B_0$, $B_1$ distinguishing PRPs from truly random ones while we make use of adversary $A$. Let us construct $B_0$ first. We ask $A$ to provide $m_0$ and $m_1$, then we feed the oracle with $m_0$ obtaining $c$ as a result. Note that either $c=E(k,m_0)$ or $c=F(m_0)$ according to $b$ where $F$ is a truly random bijection. We provide this $c$ to adversary $A$ and output what $A$ outputs. The advantage of adversary $B_0$ is
-	\begin{equation}\label{eq:prpb0}
+	\begin{equation}
+	\label{eq:prpb0}
 		\AdvPRP(B_0,E) = \left| \Pr(W_0) - \Pr(R_0) \right| .
 	\end{equation}
 	We construct $B_1$ in a similar manner (i.e.\ choosing $m_1$ instead) and get
-	\begin{equation}\label{eq:prpb1}
+	\begin{equation}
+	\label{eq:prpb1}
 		\AdvPRP(B_1,E) = \left| \Pr(W_1) - \Pr(R_1) \right| .
 	\end{equation}
 	Combining Equations \ref{eq:prpssae}, \ref{eq:rr0}, \ref{eq:prpb0} and \ref{eq:prpb1} we get

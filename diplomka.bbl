@@ -123,6 +123,14 @@ Karine Gandolfi, Christophe Mourtel, and Francis Olivier.
 \newblock In {\em {Cryptographic Hardware and Embedded Systems—CHES 2001}},
   pages 251--261. Springer, 2001.
 
+\bibitem{goodin2012crime}
+Dan Goodin.
+\newblock {Crack in Internet's foundation of trust allows HTTPS session
+  hijacking}.
+\newblock
+  \url{http://arstechnica.com/security/2012/09/crime-hijacks-https-sessions/}.
+\newblock Accessed: 06-03-2015.
+
 \bibitem{goubin1999des}
 Louis Goubin and Jacques Patarin.
 \newblock {DES and differential power analysis the “duplication” method}.
@@ -274,6 +282,11 @@ H{\aa}vard Raddum.
 \newblock {More dual rijndaels}.
 \newblock In {\em {Advanced Encryption Standard--AES}}, pages 142--147.
   Springer, 2004.
+
+\bibitem{shannon1949communication}
+Claude~E Shannon.
+\newblock {Communication theory of secrecy systems}.
+\newblock {\em Bell system technical journal}, 28(4):656--715, 1949.
 
 \bibitem{shannon1949mathematical}
 Claude~E Shannon and Warren Weaver.

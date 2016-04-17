@@ -10,7 +10,7 @@ In this section we present an improvement by Bos et al.\ and reproduce their res
 
 \subsection{Exploiting WBAES Structure}
 
-WBAES by Chow et al.\ \cite{chow2002aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2010protecting}. Remind that Karroumi's WBAES internally uses dual AES'es and therefore we cannot recognize which affine mapping has been used inside SBoxes, see Note \ref{note:dualsbox}.
+WBAES by Chow et al.\ \cite{chow2002aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2010protecting}. Remind that Karroumi's WBAES internally uses dual AES'es, and therefore we cannot recognize which affine mapping has been used inside SBoxes; see Note \ref{note:dualsbox}.
 
 Let us first remind definition of the original SBox (Equation \ref{eq:sbox}) and also remind that the multiplication is not performed in $F$, but in the ring of binary polynomials instead:
 \[

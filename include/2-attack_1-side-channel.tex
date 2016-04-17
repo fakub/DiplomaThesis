@@ -36,7 +36,8 @@ In this section we describe CPA attack (an advanced form of DPA attack) mounted 
 	
 	In AES (Algorithm \ref{alg:aes}), the very first plaintext-dependent operation is $\AddRoundKey$ on Line \ref{line:addrk} which XORs current state with the first block of expanded key. Here the state is equal to input plaintext, see Line \ref{line:stateplain}, and the first block of expanded key is equal to the original AES key, see Note \ref{note:expkey}. $\AddRoundKey$ is then usually composed with $\SubBytes$ (the following step), hence yielding
 	\begin{equation}
-		b = \SubBytes(k\xor m) \label{eq:byprod}
+	\label{eq:byprod}
+		b = \SubBytes(k\xor m)
 	\end{equation}
 	as the first intermediate result where $k$ stands for the AES key and $m$ for the plaintext. $b$ is then used in the following AES step which is $\ShiftRows$, usually composed with $\MixColumns$.
 		
@@ -114,7 +115,7 @@ Therefore such attacker is not limited to observing values related to Hamming we
 
 \subsubsection{Attack}
 	
-	In this attack, we proceed similarly as in the previous one i.e.\ we loop through key guesses for each key byte and compute the respective intermediate results $b_i$, see Algirothm \ref{alg:cpa}. But instead of applying Hamming weight and computing correlation, we perform this attack for each bit individually.
+	In this attack, we proceed similarly as in the previous one, i.e.\ we loop through key guesses for each key byte and compute the respective intermediate results $b_i$; see Algirothm \ref{alg:cpa}. But instead of applying Hamming weight and computing correlation, we perform this attack for each bit individually.
 	
 	Let say we are interested in $j$-th bit of $i$-th byte. Based on actual key guess $k_i$, we compute $j$-th bit of $b_i = S(k_i\xor m_i)$ for each trace/plaintext pair and partition the traces based on this bit into two sets, let us denote them $S_0$ and $S_1$.
 	
@@ -133,7 +134,7 @@ Therefore such attacker is not limited to observing values related to Hamming we
 				\For{$i = 0 \to 15$}
 					\State $max \gets 0$
 					\For{$KGuess = \texttt{00} \to \texttt{ff}$}
-						\For{$j = 0 \to 7$}\label{line:tbcycle}
+						\For{$j = 0 \to 7$} \label{line:tbcycle}
 							\State $S_0 \gets \Bigl\{ Traces[n] \Bigm| S\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\}$ \label{line:s0}
 							\State $S_1 \gets \Bigl\{ Traces[n] \Bigm| S\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\}$ \label{line:s1}
 							\State $tmpmax \gets \max\limits_{t\in T} \Bigl| \Mean\limits_{Trace\in S_1}\bigl(Trace[t]\bigr) - \Mean\limits_{Trace\in S_0}\bigl(Trace[t]\bigr) \Bigr|$

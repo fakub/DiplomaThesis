@@ -133,7 +133,7 @@ Now let us move on to definitions of the $4$ operations.
 	\end{equation}
 	where $c(z) = \texttt{03}\cdot z^3 + \texttt{01}\cdot z^2 + \texttt{01}\cdot z^2 + \texttt{02}$. Note that here we used hexadecimal notation for elements of $F$ which could also be viewed as polynomials. To avoid confusion, we used $z$ instead of $x$.
 	
-	Note that $c(z)$ is coprime with $z^4+1$ therefore invertible modulo $z^4+1$, it follows that $\MixColumns$ is invertible. The goal of $\MixColumns$ is to introduce inter-byte diffusion within a column.
+	Note that $c(z)$ is coprime with $z^4+1$, therefore invertible modulo $z^4+1$. It follows that $\MixColumns$ is invertible. The goal of $\MixColumns$ is to introduce inter-byte diffusion within a column.
 	
 	Later we will make use of its different, linear algebra representation. Let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly}, which is performed in $F[z]$, can be rewritten into matrix multiplication back in $F$, indeed
 	\begin{equation}
@@ -168,7 +168,7 @@ Now let us move on to definitions of the $4$ operations.
 		The most important consequence for us is that $\ExpandedKey$ begins with plain encryption key.
 	\end{note}
 	
-	We omit further details here because $\KeySchedule$ is specified rather in algorithmic than algebraic manner, see \cite[pp.43-45]{daemen2013rijndael} for detail.
+	We omit further details here, because $\KeySchedule$ is specified rather in algorithmic than algebraic manner; see \cite[pp.43-45]{daemen2013rijndael} for detail.
 
 
 % ==============================================================================
@@ -177,7 +177,7 @@ Now let us move on to definitions of the $4$ operations.
 
 \subsection{AES Algorithm Description}
 
-AES, as already stated, consists of $10$ rounds of $4$ operations except for the last one where $\MixColumns$ is missing, see the following algorithm.
+AES, as already stated, consists of $10$ rounds of $4$ operations except for the last one where $\MixColumns$ is missing; see the following algorithm.
 
 \begin{alg}
 \label{alg:aes}

@@ -5,99 +5,100 @@
 \contentsline {subsection}{\numberline {1.1.2}Information-Theoretic Approach}{4}{subsection.1.1.2}
 \contentsline {subsection}{\numberline {1.1.3}Complexity-Theoretic Approach}{5}{subsection.1.1.3}
 \contentsline {subsubsection}{Definition of Semantic Security}{6}{section*.7}
+\contentsline {subsubsection}{Shannon's Principles}{8}{section*.8}
 \contentsline {subsection}{\numberline {1.1.4}Block Cipher}{8}{subsection.1.1.4}
-\contentsline {subsection}{\numberline {1.1.5}Provable Security Proofs}{10}{subsection.1.1.5}
-\contentsline {subsection}{\numberline {1.1.6}Provable vs. Real-World Security}{12}{subsection.1.1.6}
-\contentsline {subsection}{\numberline {1.1.7}From Black-Box to White-Box Attack Context}{12}{subsection.1.1.7}
-\contentsline {subsubsection}{Black-Box}{13}{section*.8}
-\contentsline {subsubsection}{Gray-Box}{13}{section*.9}
-\contentsline {subsubsection}{White-Box}{13}{section*.10}
-\contentsline {section}{\numberline {1.2}White-Box Cryptography}{13}{section.1.2}
+\contentsline {subsection}{\numberline {1.1.5}Provable Security Proofs}{11}{subsection.1.1.5}
+\contentsline {subsection}{\numberline {1.1.6}Provable vs. Real-World Security}{13}{subsection.1.1.6}
+\contentsline {subsection}{\numberline {1.1.7}From Black-Box to White-Box Attack Context}{13}{subsection.1.1.7}
+\contentsline {subsubsection}{Black-Box}{13}{section*.9}
+\contentsline {subsubsection}{Gray-Box}{14}{section*.10}
+\contentsline {subsubsection}{White-Box}{14}{section*.11}
+\contentsline {section}{\numberline {1.2}White-Box Cryptography}{14}{section.1.2}
 \contentsline {subsection}{\numberline {1.2.1}Program Obfuscation}{14}{subsection.1.2.1}
-\contentsline {subsubsection}{Program Obfuscator}{14}{section*.11}
-\contentsline {subsubsection}{Consequences in Cryptography}{14}{section*.12}
-\contentsline {subsubsection}{Main Result of Barak et al.}{14}{section*.13}
-\contentsline {subsubsection}{Going Beyond}{15}{section*.14}
-\contentsline {subsection}{\numberline {1.2.2}Cat and Mouse Game}{15}{subsection.1.2.2}
-\contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{15}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{15}{subsection.1.3.1}
-\contentsline {subsubsection}{SubBytes}{16}{section*.16}
-\contentsline {subsubsection}{ShiftRows}{17}{section*.17}
-\contentsline {subsubsection}{MixColumns}{17}{section*.19}
-\contentsline {subsubsection}{AddRoundKey}{18}{section*.20}
-\contentsline {subsubsection}{KeySchedule}{18}{section*.21}
-\contentsline {subsection}{\numberline {1.3.2}AES Algorithm Description}{18}{subsection.1.3.2}
-\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{19}{subsection.1.3.3}
-\contentsline {section}{\numberline {1.4}White-Box AES}{19}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}Encodings}{20}{subsection.1.4.1}
+\contentsline {subsubsection}{Program Obfuscator}{14}{section*.12}
+\contentsline {subsubsection}{Consequences in Cryptography}{15}{section*.13}
+\contentsline {subsubsection}{Main Result of Barak et al.}{15}{section*.14}
+\contentsline {subsubsection}{Going Beyond}{15}{section*.15}
+\contentsline {subsection}{\numberline {1.2.2}Cat and Mouse Game}{16}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{16}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{16}{subsection.1.3.1}
+\contentsline {subsubsection}{SubBytes}{17}{section*.17}
+\contentsline {subsubsection}{ShiftRows}{18}{section*.18}
+\contentsline {subsubsection}{MixColumns}{18}{section*.20}
+\contentsline {subsubsection}{AddRoundKey}{19}{section*.21}
+\contentsline {subsubsection}{KeySchedule}{19}{section*.22}
+\contentsline {subsection}{\numberline {1.3.2}AES Algorithm Description}{19}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{20}{subsection.1.3.3}
+\contentsline {section}{\numberline {1.4}White-Box AES}{20}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Encodings}{21}{subsection.1.4.1}
 \contentsline {subsection}{\numberline {1.4.2}Reorded AES}{21}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {1.4.3}Fully-Table Representation}{21}{subsection.1.4.3}
-\contentsline {subsubsection}{T-Boxes}{21}{section*.22}
-\contentsline {subsubsection}{MixColumns}{22}{section*.23}
-\contentsline {subsubsection}{ShiftRows}{22}{section*.24}
-\contentsline {subsubsection}{Table Composition}{22}{section*.25}
-\contentsline {subsection}{\numberline {1.4.4}WBAES Construction}{22}{subsection.1.4.4}
-\contentsline {subsubsection}{Inserting Encodings}{23}{section*.26}
-\contentsline {subsubsection}{Mixing Bijection}{23}{section*.27}
-\contentsline {subsubsection}{Input Mixing Bijection}{23}{section*.28}
-\contentsline {subsubsection}{ShiftRows}{24}{section*.29}
-\contentsline {subsubsection}{External Encodings}{24}{section*.30}
-\contentsline {subsection}{\numberline {1.4.5}Known Attacks \& Enhancements}{24}{subsection.1.4.5}
-\contentsline {subsubsection}{BGE Attack}{25}{section*.31}
-\contentsline {subsubsection}{Karroumi's Approach with Dual Ciphers}{25}{section*.32}
-\contentsline {subsubsection}{Klinec's Equivalence Result}{26}{section*.33}
-\contentsline {chapter}{\numberline {2}Using Side-Channel Attack Tools}{27}{chapter.2}
-\contentsline {section}{\numberline {2.1}Side-Channel Attack}{27}{section.2.1}
-\contentsline {subsection}{\numberline {2.1.1}Correlation Power Analysis Attack}{28}{subsection.2.1.1}
-\contentsline {subsubsection}{Vulnerable Intermediate Result}{28}{section*.35}
-\contentsline {subsubsection}{Utilizing Power Traces}{28}{section*.36}
-\contentsline {subsection}{\numberline {2.1.2}Bit-Wise Differential Power Analysis Attack}{30}{subsection.2.1.2}
-\contentsline {subsubsection}{Attack}{30}{section*.37}
-\contentsline {section}{\numberline {2.2}Using SCA Tools in White-Box Cryptography}{31}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{32}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{33}{subsection.2.2.2}
-\contentsline {subsubsection}{Constant Entries Filtering}{33}{section*.38}
-\contentsline {subsubsection}{Address and Temporal Filtering}{34}{section*.40}
-\contentsline {paragraph}{Trace Visualization}{34}{section*.41}
-\contentsline {paragraph}{Trace Filtering}{34}{section*.43}
-\contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{36}{subsection.2.2.3}
-\contentsline {subsubsection}{Processing Results}{36}{section*.44}
-\contentsline {chapter}{\numberline {3}Results \& Improvements}{39}{chapter.3}
-\contentsline {section}{\numberline {3.1}Attack Tools}{39}{section.3.1}
-\contentsline {section}{\numberline {3.2}Results}{40}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}\tt naiveAES}{40}{subsection.3.2.1}
-\contentsline {subsubsection}{CPA Attack against {\tt naiveAES}}{40}{section*.46}
-\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{41}{section*.48}
-\contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{42}{subsection.3.2.2}
-\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt KlinecWBAES}}{42}{section*.50}
-\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{42}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{42}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{44}{subsection.3.3.2}
-\contentsline {subsubsection}{Results Using Rijndael Inverse}{44}{section*.52}
-\contentsline {subsection}{\numberline {3.3.3}Considering Another Targets}{46}{subsection.3.3.3}
-\contentsline {subsubsection}{Results Using All 16 Targets}{47}{section*.55}
-\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{47}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Unifying Approach with $\mathrm {GF}(2)^8$}{50}{subsection.3.3.5}
-\contentsline {subsubsection}{Implementation Note}{51}{section*.59}
-\contentsline {chapter}{\numberline {4}Analysis of the Attack against WBAES}{53}{chapter.4}
-\contentsline {section}{\numberline {4.1}Blind Attack}{53}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Remarks}{54}{subsection.4.1.1}
-\contentsline {subsubsection}{Success Rate of Individual Targets}{54}{section*.60}
-\contentsline {paragraph}{Group by corresponding $p$.}{54}{section*.61}
-\contentsline {paragraph}{Group with fixed $4$ bits of $B$.}{54}{section*.63}
-\contentsline {subsubsection}{Incorrect Candidates}{55}{section*.65}
-\contentsline {paragraph}{Gaps of incorrect candidates.}{55}{section*.66}
-\contentsline {paragraph}{Number of repetitions of false positives.}{56}{section*.67}
-\contentsline {subsubsection}{Using Less Traces}{56}{section*.68}
-\contentsline {subsubsection}{Within-Trace Position of Leaks}{56}{section*.70}
-\contentsline {subsection}{\numberline {4.1.2}Blind Attack Suggestion}{57}{subsection.4.1.2}
-\contentsline {section}{\numberline {4.2}Use in White-Box Cryptography Design}{58}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Leaking Intermediate Product}{58}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Countermeasures against DCA}{59}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Explanation Attempt}{59}{section.4.3}
-\contentsline {chapter}{\numberline {5}Future Work}{63}{chapter.5}
-\contentsline {section}{\numberline {5.1}Another Interesting AES White-Box Implementation}{63}{section.5.1}
-\contentsline {chapter}{Conclusion}{65}{section*.72}
-\contentsline {chapter}{References}{67}{section*.74}
+\contentsline {subsection}{\numberline {1.4.3}Fully-Table Representation}{22}{subsection.1.4.3}
+\contentsline {subsubsection}{T-Boxes}{22}{section*.23}
+\contentsline {subsubsection}{MixColumns}{23}{section*.24}
+\contentsline {subsubsection}{ShiftRows}{23}{section*.25}
+\contentsline {subsubsection}{Table Composition}{23}{section*.26}
+\contentsline {subsection}{\numberline {1.4.4}WBAES Construction}{23}{subsection.1.4.4}
+\contentsline {subsubsection}{Inserting Encodings}{23}{section*.27}
+\contentsline {subsubsection}{Mixing Bijection}{24}{section*.28}
+\contentsline {subsubsection}{Input Mixing Bijection}{24}{section*.29}
+\contentsline {subsubsection}{ShiftRows}{24}{section*.30}
+\contentsline {subsubsection}{External Encodings}{25}{section*.31}
+\contentsline {subsection}{\numberline {1.4.5}Known Attacks \& Enhancements}{25}{subsection.1.4.5}
+\contentsline {subsubsection}{BGE Attack}{25}{section*.32}
+\contentsline {subsubsection}{Karroumi's Approach with Dual Ciphers}{26}{section*.33}
+\contentsline {subsubsection}{Klinec's Equivalence Result}{27}{section*.34}
+\contentsline {chapter}{\numberline {2}Using Side-Channel Attack Tools}{29}{chapter.2}
+\contentsline {section}{\numberline {2.1}Side-Channel Attack}{29}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Correlation Power Analysis Attack}{30}{subsection.2.1.1}
+\contentsline {subsubsection}{Vulnerable Intermediate Result}{30}{section*.36}
+\contentsline {subsubsection}{Utilizing Power Traces}{30}{section*.37}
+\contentsline {subsection}{\numberline {2.1.2}Bit-Wise Differential Power Analysis Attack}{32}{subsection.2.1.2}
+\contentsline {subsubsection}{Attack}{32}{section*.38}
+\contentsline {section}{\numberline {2.2}Using SCA Tools in White-Box Cryptography}{33}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{34}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{35}{subsection.2.2.2}
+\contentsline {subsubsection}{Constant Entries Filtering}{35}{section*.39}
+\contentsline {subsubsection}{Address and Temporal Filtering}{36}{section*.41}
+\contentsline {paragraph}{Trace Visualization}{36}{section*.42}
+\contentsline {paragraph}{Trace Filtering}{36}{section*.44}
+\contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{38}{subsection.2.2.3}
+\contentsline {subsubsection}{Processing Results}{38}{section*.45}
+\contentsline {chapter}{\numberline {3}Results \& Improvements}{41}{chapter.3}
+\contentsline {section}{\numberline {3.1}Attack Tools}{41}{section.3.1}
+\contentsline {section}{\numberline {3.2}Results}{42}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}\tt naiveAES}{42}{subsection.3.2.1}
+\contentsline {subsubsection}{CPA Attack against {\tt naiveAES}}{42}{section*.47}
+\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{43}{section*.49}
+\contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{44}{subsection.3.2.2}
+\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt KlinecWBAES}}{44}{section*.51}
+\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{44}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{44}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{46}{subsection.3.3.2}
+\contentsline {subsubsection}{Results Using Rijndael Inverse}{46}{section*.53}
+\contentsline {subsection}{\numberline {3.3.3}Considering Another Targets}{48}{subsection.3.3.3}
+\contentsline {subsubsection}{Results Using All 16 Targets}{49}{section*.56}
+\contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{49}{subsection.3.3.4}
+\contentsline {subsection}{\numberline {3.3.5}Unifying Approach with $\mathrm {GF}(2)^8$}{52}{subsection.3.3.5}
+\contentsline {subsubsection}{Implementation Note}{53}{section*.60}
+\contentsline {chapter}{\numberline {4}Analysis of the Attack against WBAES}{55}{chapter.4}
+\contentsline {section}{\numberline {4.1}Blind Attack}{55}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Remarks}{56}{subsection.4.1.1}
+\contentsline {subsubsection}{Success Rate of Individual Targets}{56}{section*.61}
+\contentsline {paragraph}{Group by corresponding $p$.}{56}{section*.62}
+\contentsline {paragraph}{Group with fixed $4$ bits of $B$.}{56}{section*.64}
+\contentsline {subsubsection}{Incorrect Candidates}{57}{section*.66}
+\contentsline {paragraph}{Gaps of incorrect candidates.}{57}{section*.67}
+\contentsline {paragraph}{Number of repetitions of false positives.}{58}{section*.68}
+\contentsline {subsubsection}{Using Less Traces}{58}{section*.69}
+\contentsline {subsubsection}{Within-Trace Position of Leaks}{58}{section*.71}
+\contentsline {subsection}{\numberline {4.1.2}Blind Attack Suggestion}{59}{subsection.4.1.2}
+\contentsline {section}{\numberline {4.2}Use in White-Box Cryptography Design}{60}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Leaking Intermediate Product}{60}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Countermeasures against DCA}{61}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Explanation Attempt}{61}{section.4.3}
+\contentsline {chapter}{\numberline {5}Future Work}{65}{chapter.5}
+\contentsline {section}{\numberline {5.1}Another Interesting AES White-Box Implementation}{65}{section.5.1}
+\contentsline {chapter}{Conclusion}{67}{section*.73}
+\contentsline {chapter}{References}{69}{section*.75}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}
 \contentsline {chapter}{Appendix \numberline {B}User Guide}{III}{Appendix.a.B}
