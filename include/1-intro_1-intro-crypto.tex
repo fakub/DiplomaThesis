@@ -143,6 +143,24 @@ With this assumption, we can weaken our requirement on ciphertext from ``carries
 \end{center}
 \end{figure}
 
+\begin{note}   %!% NEW
+\label{note:ambigencr}
+	The adversary is intentially allowed to provide the same plaintext over and over again. However, it follows that the challenger has to encrypt the same plaintext differently each time, otherwise there would exist a trivially winning adversary.
+	
+	Indeed, such an adversary would pick three distinct plaintexts $m_0$, $m_1$, $m_2$ and send $(m_0,m_1)$ to the challenger, while she would get back some ciphertext $c_a$. In her second query, the adversary would send $(m_0,m_2)$ to the challenger and receive another ciphertext, say $c_b$. If encryptions of $m_0$ were equal, she could decide with certainty:
+	\begin{itemize}
+		\item $b' = 0$ if $c_a = c_b$, or
+		\item $b' = 1$ otherwise,
+	\end{itemize}
+	and win the game.
+\end{note}
+
+\begin{note}   %!% NEW
+\label{note:randomize}
+	In order to achieve semantic security of a cipher, the cipher {\em must} encrypt the same plaintext differently each time. This can be achieved using randomization or counters, both approaches are practically used.
+\end{note}
+
+
 \subsubsection{Definition of Semantic Security}
 
 Let us introduce some notion first.
@@ -169,10 +187,10 @@ Let us introduce some notion first.
 	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time; denoted by ${\cal O}_F$.
 \end{defn}
 
-%~ \begin{defn}[Single-Access Oracle]
-%~ \label{def:oracle}
-	%~ Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time; denoted by ${\cal O}_F$.
-%~ \end{defn}
+\begin{defn}[Single-Access Oracle]   %!% NEW
+\label{def:saoracle}
+	Let $F:X\rarr Y$. {\em Single-access oracle evaluating $F$} is an oracle evaluating $F$, where the number of queries is limited to one; denoted by ${\cal O}^{(1)}_F$.
+\end{defn}
 
 \begin{defn}[Statistical Test]
 \label{def:stattest}
@@ -191,11 +209,16 @@ Let us introduce some notion first.
 	\]
 \end{defn}
 
+\begin{defn}[Single-Access Advantage]   %!% NEW
+\label{def:saadvant}
+	{\em Single-access advantage} is defined as advantage, where single-access oracles are used instead; denoted by $\Adv^{(1)}$.
+\end{defn}
+
 In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set, based on its input/output behavior only. According to these sets, advantage can be ``customized'' for a specific purpose. Let us define such advantage for an adversary tempting to distinguish which of her plaintexts has been encrypted, i.e.\ tells us how likely she is to win the Game \ref{game:semsec}.
 
 \begin{defn}[Semantic Security Advantage]
 \label{def:ssadvant}
-	Let $E: K\times M\rarr C$ be an encryption function of a symmetric cipher, $k\unirand K$, ${\cal E}_b = \{E_b:M^2\rarr C \mid E_b(m_0,m_1) = E(k,m_b), k\in K\}$ for $b=0,1$, and $A$ an adversary. We define {\em semantic security advantage} of adversary $A$ as
+	Let $E: K\times M\rarr C$ be an encryption function of a symmetric cipher, ${\cal E}_b = \{E_b:M^2\rarr C \mid E_b(m_0,m_1) = E(k,m_b), k\in K\}$ for $b=0,1$, and $A$ an adversary. We define {\em semantic security advantage} of adversary $A$ as
 	\[
 		\AdvSS(A,E) = \Adv(A,{\cal E}_0,{\cal E}_1) .
 	\]
@@ -205,7 +228,7 @@ Semantic security advantage gives us a reasonable meter for formalization of Gam
 
 \begin{defn}[Semantically Secure Cipher]
 \label{def:semsec}
-	Let $(E,D)$ be a symmetric cipher. Then it is called {\em semantically secure} if for {\em any} adversary $A$, the semantic security advantage $\AdvSS(A,E)$ is negligible.
+	Let $(E,D)$ be a symmetric cipher. Then it is called {\em semantically secure} if, for {\em any} adversary $A$, the semantic security advantage $\AdvSS(A,E)$ is negligible.
 \end{defn}
 
 Semantically secure cipher therefore cannot be broken by any probabilistic-polynomial attack with overwhelming probability. On the other hand, it might be broken by an attacker with unlimited computing power -- unlike perfectly secure cipher which cannot be broken by any means; see Note \ref{note:indist}.
@@ -310,11 +333,11 @@ An example covering most introduced concepts follows.
 	It follows that such PRP is totally insecure, since there exists an attacker with overwhelming advantage, but only a negligible advantage is allowed.
 \end{example}
 
-\begin{note}
+\begin{note}   %!% NEW
 \label{note:secbyobsc}
-	In the previous example, the adversary exploits the knowledge of the cipher's internal structure -- she knows everything but the key. One could have an idea to hide the structure from the attacker, but this is actually a {\em very} bad idea. Once our construction leaks, we need to deploy a new ciphering algorithm confidentially, but we have no way to do so.
+	In the previous example, the adversary exploits the knowledge of the block cipher's internal structure -- she knows everything but the key. One could have an idea to hide the structure from the attacker, but this is actually a {\em very} bad idea. Once our construction leaks, we need to deploy a new ciphering algorithm confidentially, but we have no way to do so. Moreover, note that required a secure PRP to be resistant to {\em all} adversaries, hence hiding your design does not help at all.
 	
-	We shall rather use a secure publicly known cipher and only rely on the key. Once our key is compromised, we simply establish a new key. Also note that our key is only to be protected within our device, but the ciphering algorithm would have to be protected globally.
+	We shall rather use a secure publicly known block cipher and only rely on the key. Once our key is compromised, we simply establish a new key. Also note that our key is only to be protected within our device, but the ciphering algorithm would have to be protected globally.
 	
 	Such approach -- hiding the design of a cipher -- is referred to as {\em security by obscurity} and shall be strictly avoided.
 \end{note}
@@ -344,21 +367,9 @@ Now we know what a secure PRP is (or a secure block cipher) -- it is based on Ga
 
 Note that PRP {\em is} a cipher (cf. Definition \ref{def:symcipher} and \ref{def:prp}), so it makes sense. Indeed, given a PRP, there exists an effective algorithm evaluating it and its inverse, and also Equation \ref{eq:correct} holds.
 
-\begin{note}
+\begin{note}   %!% NEW
 \label{note:singleaccess}
-	PRP has no ambiguity, hence we will need to either limit the amount of adversary-challenger queries to one, or, equivalently, change the key after each query. If we did not do so, then there would obviously exist a trivially winning adversary as outlined in Note .   %!%
-	
-	Indeed, such an adversary would pick three distinct plaintexts $m_0$, $m_1$, $m_2$ (well, let us suppose that there are at least three plaintexts in $M$) and sends $(m_0,m_1)$ to the challenger, while she gets back some ciphertext $c_a$. In her second query, the adversary sends $(m_0,m_2)$ to the challenger and receives another ciphertext, say $c_b$. Since PRP is a deterministic bijection, she can decide with certainty:
-	\begin{itemize}
-		\item $b=0$ if $c_a = c_b$, or
-		\item $b=1$ if $c_a \neq c_b$,
-	\end{itemize}
-	and win the game with $\AdvSS(A,E) = 1$ where $E$ stands for the PRP.
-\end{note}
-
-\begin{note}
-\label{note:randomize}
-	The previous note also implies that in order to achieve semantic security of a cipher, the cipher {\em must} encrypt the same plaintext differently each time. This can be achieved using randomization or counters, both approaches are practically used.
+	PRP has no ambiguity, hence we will need to either limit the amount of adversary-challenger queries to one, or, equivalently, change the key after each query. If we did not do so, then there would obviously exist a trivially winning adversary as outlined in Note \ref{note:ambigencr}.
 \end{note}
 
 Let us modify Game \ref{game:semsec} in a manner described in Note \ref{note:singleaccess} for the purpose of testing PRPs.
@@ -370,11 +381,24 @@ Let us modify Game \ref{game:semsec} in a manner described in Note \ref{note:sin
 	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
 
-%!% nahradit opravdickejma definicema
-%~ \begin{note}
-%~ \label{note:semsecprp}
-	%~ Based on the previous game, we could define {\em PRP semantic security advantage} ($\AdvPRPSS$) and {\em semantically secure PRP} (cf. Game \ref{game:semsec}, Definition \ref{def:ssadvant} and \ref{def:semsec}). The difference would be that the oracle access should be redefined -- it would either need to be limited to one, or the oracle would need to change the function it evaluates. Due to these technical obstacles we do not provide exact definitions.
-%~ \end{note}
+Based on the previous game, let us define {\em PRP semantic security advantage} and {\em semantically secure PRP} (cf. Game \ref{game:semsec}, Definition \ref{def:ssadvant} and \ref{def:semsec}). % The difference is basically in the oracle access.
+
+%!% nahradit opravdickejma definicema BEGIN
+
+\begin{defn}[PRP Semantic Security Advantage]
+\label{def:prpssadvant}
+	Let $E: K\times X\rarr Y$ be a PRP, ${\cal E}_b = \{E_b:X^2\rarr Y \mid E_b(x_0,x_1) = E(k,x_b), k\in K\}$ for $b=0,1$, and $A$ an adversary. We define {\em PRP semantic security advantage} of adversary $A$ as
+	\[
+		\AdvPRPSS(A,E) = \Adv^{(1)}(A,{\cal E}_0,{\cal E}_1) .
+	\]
+\end{defn}
+
+\begin{defn}[Semantically Secure PRP]
+\label{def:semsecprp}
+	Let $E: K\times X\rarr Y$ be a PRP. Then it is called {\em semantically secure PRP} if, for {\em any} adversary $A$, the PRP semantic security advantage $\AdvPRPSS(A,E)$ is negligible.
+\end{defn}
+
+%!% END
 
 The following theorem gives a connection between Game \ref{game:prp} and \ref{game:semsecprp}. It claims that, given a PRP $E$ winning Game \ref{game:prp} (i.e.\ $E$ is indistinguishable from a truly random bijection), $E$ wins Game \ref{game:semsecprp} as well, i.e.\ no adversary can distinguish encryption of $m_0$ from encryption of $m_1$.
 
@@ -383,26 +407,26 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 	Let $E: K\times X\rarr Y$ be a secure PRP. Then it is also a semantically secure PRP.
 \end{thm}
 \begin{proof}
-	We show that for every PRP semantic security adversary $A$ there exist PRP security adversaries $B_0$, $B_1$ such that
+	We show that for every PRP semantic security adversary $A$, there exist PRP security adversaries $B_0$, $B_1$ such that
 	\begin{equation}
 	\label{eq:aleqbb}
 		\AdvPRPSS(A,E) \leq \AdvPRP(B_0,E) + \AdvPRP(B_1,E) .
 	\end{equation}
-	The claim then follows -- if $E$ is a secure PRP i.e.\ $\AdvPRP(B_0,E) + \AdvPRP(B_1,E)$ is negligible then also $\AdvPRPSS(A,E)$ is negligible, therefore $E$ is a semantically secure PRP.
+	The claim then easily follows -- if $E$ is a secure PRP, i.e.\ $\AdvPRP(B_0,E) + \AdvPRP(B_1,E)$ is negligible, then also $\AdvPRPSS(A,E)$ is negligible. Hence $E$ is a semantically secure PRP.
 	
-	Let us first denote $W_b$ the event when adversary $A$ answers $1$ while the true value of the PRP semantic security game is $b$ for $b=0,1$. In this notation it holds
+	Let us first denote $W_b$ the event when adversary $A$ answers $1$ while the true value of the PRP semantic security game is $b$, for $b=0,1$. In this notation, it holds
 	\begin{equation}
 	\label{eq:prpssae}
 		\AdvPRPSS(A,E) = \bigl| \Pr(W_1) - \Pr(W_0) \bigr| .
 	\end{equation}
-	Let us further denote $R_b$ the same event with only difference -- the PRP semantic security game uses a random bijection instead. It holds
+	Let us further denote $R_b$ the same event with only difference -- the PRP semantic security game uses a truly random bijection instead. It holds
 	\begin{equation}
 	\label{eq:rr0}
-		\bigl| \Pr(R_1) - \Pr(R_0) \bigr| = 0
+		\bigl| \Pr(R_1) - \Pr(R_0) \bigr| = 0 ,
 	\end{equation}
 	since $b\unirand\{0,1\}$ and both $R_b$ provide a truly random bijection independent from $b$.
 	
-	Now we construct adversaries $B_0$, $B_1$ distinguishing PRPs from truly random ones while we make use of adversary $A$. Let us construct $B_0$ first. We ask $A$ to provide $m_0$ and $m_1$, then we feed the oracle with $m_0$ obtaining $c$ as a result. Note that either $c=E(k,m_0)$ or $c=F(m_0)$ according to $b$ where $F$ is a truly random bijection. We provide this $c$ to adversary $A$ and output what $A$ outputs. The advantage of adversary $B_0$ is
+	Now we construct adversaries $B_0$, $B_1$ distinguishing PRPs from truly random ones while we make use of adversary $A$. Let us construct $B_0$ first. We ask $A$ to provide $m_0$ and $m_1$, then we feed the PRP oracle with $m_0$ obtaining $c$ as a result. Note that either $c=E(k,m_0)$ or $c=F(m_0)$ according to $b$, where $F$ is a truly random bijection. We provide this $c$ to adversary $A$, and output what $A$ outputs. The advantage of adversary $B_0$ is
 	\begin{equation}
 	\label{eq:prpb0}
 		\AdvPRP(B_0,E) = \left| \Pr(W_0) - \Pr(R_0) \right| .
@@ -412,13 +436,13 @@ The following theorem gives a connection between Game \ref{game:prp} and \ref{ga
 	\label{eq:prpb1}
 		\AdvPRP(B_1,E) = \left| \Pr(W_1) - \Pr(R_1) \right| .
 	\end{equation}
-	Combining Equations \ref{eq:prpssae}, \ref{eq:rr0}, \ref{eq:prpb0} and \ref{eq:prpb1} we get
+	Combining Equations \ref{eq:prpssae}, \ref{eq:rr0}, \ref{eq:prpb0} and \ref{eq:prpb1}, we get
 	\begin{align*}
 		\AdvPRPSS(A,E) &= \left| \Pr(W_1) - \Pr(W_0) \right| \leq \\
 		&\leq \left| \Pr(W_1) - \Pr(R_1) \right| + \left| \Pr(W_0) - \Pr(R_0) \right| = \\
-		&= \AdvPRP(B_1,E) + \AdvPRP(B_0,E)
+		&= \AdvPRP(B_1,E) + \AdvPRP(B_0,E) ,
 	\end{align*}
-	which finally proves Equation \ref{eq:aleqbb}.
+	which finally proves Equation \ref{eq:aleqbb}, hence the theorem, too
 \end{proof}
 
 \begin{note}
