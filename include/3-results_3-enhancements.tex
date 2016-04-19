@@ -44,22 +44,20 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 
 \begin{remark}
 \label{rem:spq}
-	Technically we only substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} of Algorithm \ref{alg:bitwisedpa} with their desired variant -- here $S_{1,0}$ --, hence yielding
-	\begin{align}
-	\begin{split}
-	\label{eq:target}   %!% předělat do algpseudocode ? (i další?)
-		S_0 &\gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\} , \\
-		S_1 &\gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\} .
-	\end{split}
-	\end{align}
-	Remind that we always use precomputed SBox tables as already stated in Remark \ref{rem:attacklookup}.
+	Technically we only substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} of Algorithm \ref{alg:bitwisedpa} with their desired variant -- here $S_{1,0}$ --, hence yielding the following.
+	\begin{algorithmic}[1]
+		\setcounter{ALG@line}{5}
+		\State $S_0 \gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\}$
+		\State $S_1 \gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 1 \Bigr\}$
+	\end{algorithmic}
+	Remind that we always use precomputed SBox tables as outlined in Remark \ref{rem:attacklookup}.
 \end{remark}
 
 \begin{note}
 \label{note:target}
 	The term {\em target of the attack} or simply {\em target} will be used heavily in the following text, let us describe it a bit closer.
 	
-	Target is a function $T$ which inputs a key byte $K$ together with respective plaintext byte $P$ and outputs a byte (for now) or a single bit (later), e.g.\ $T(K,P) = S_{1,0}(K\xor P)$ (cf.\ Equations \ref{eq:target}). Target bit is just a specific bit of target's output. According to the value of target bit, traces are split into the sets $S_0$ and $S_1$ in Algorithm \ref{alg:bitwisedpa}, respectively.
+	Target is a function $T$ which inputs a key byte $K$ together with respective plaintext byte $P$ and outputs a byte (for now) or a single bit (later), e.g.\ $T(K,P) = S_{1,0}(K\xor P)$ in Remark \ref{rem:spq}. Target bit is just a specific bit of target's output. According to the value of target bit, traces are split into the sets $S_0$ and $S_1$ in Algorithm \ref{alg:bitwisedpa}, respectively.
 \end{note}
 
 \subsubsection{Results Using Rijndael Inverse}
@@ -71,7 +69,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 		\begin{landscape}
 		\begin{table}[h]
 			\begin{center}
-			\input{./tables/3_3_1-klinec-rijinv.tex}   %!% obrátit pořadí sloupečků !!!
+			\input{./tables/3_3_1-klinec-rijinv.tex}
 			\end{center}
 		\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.}
 		\label{tab:klinecrijinv}
@@ -251,11 +249,6 @@ The output of this kind of target is a scalar product of two vectors, hence not 
 \end{equation}
 %!% sesynchronizovat závorky, podle mě to je blbost ... co co znamená?
 %!% použití \xor vs. +
-%~ Let us denote this mapping by
-%~ \begin{equation}
-%~ \label{eq:tba}
-	%~ T_B(A) = [B]^T\cdot [A'] ,   %!% změněno
-%~ \end{equation}
 where $B$ stands for any non-zero vector, $(\cdot)'$ for Rijndael inverse, $[\cdot]$ for column vector representation and $[\cdot]^T$ for vector transposition, hence both vectors are scalar-multiplied.
 
 This observation therefore does not bring any new targets, but a unifying and simplifying approach. Hence we do not give any results since these are already given in Table \ref{tab:lintargets} and \ref{tab:noninvtargets} as explained before.

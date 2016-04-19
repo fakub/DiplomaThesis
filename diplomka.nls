@@ -3,21 +3,25 @@
  \nomgroup{A}
 
   \item [{$\GF(p^n)$}]\begingroup Galois Field with $p^n$ elements, $p$ prime\nomeqref {1.6}
-		\nompageref{13}
-  \item [{$\mid S\mid$}]\begingroup Cardinality of the set $S$\nomeqref {1.0}
-		\nompageref{3}
+		\nompageref{17}
+  \item [{$\lvert S \rvert$}]\begingroup Cardinality of the set $S$\nomeqref {1.0}
+		\nompageref{4}
   \item [{$\N$}]\begingroup Positive integers\nomeqref {1.1}
-		\nompageref{5}
-  \item [{$\NPclass$}]\begingroup Non-deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time\nomeqref {1.6}
-		\nompageref{11}
-  \item [{$\Pclass$}]\begingroup Deterministic polynomial complexity class i.e. the set of decision problems which can be solved by a deterministic Turing machine in polynomial time\nomeqref {1.6}
-		\nompageref{11}
-  \item [{$\Pr(\omega)$}]\begingroup Probability of the event $\omega$\nomeqref {1.1}
-		\nompageref{3}
-  \item [{$\R$}]\begingroup Real numbers\nomeqref {1.1}\nompageref{5}
-  \item [{$F[x]$}]\begingroup Ring of polynomials over $F$\nomeqref {1.6}
+		\nompageref{6}
+  \item [{$\NPclass$}]\begingroup Non-deterministic polynomial complexity class i.e.\ the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time\nomeqref {1.6}
 		\nompageref{13}
-  \item [{$k\unirand K$}]\begingroup $k$ is uniformly random in $K$\nomeqref {1.1}
-		\nompageref{3}
+  \item [{$\Pclass$}]\begingroup Deterministic polynomial complexity class i.e.\ the set of decision problems which can be solved by a deterministic Turing machine in polynomial time\nomeqref {1.6}
+		\nompageref{13}
+  \item [{$\Pr(\omega)$}]\begingroup Probability of the event $\omega$\nomeqref {1.1}
+		\nompageref{4}
+  \item [{$\R$}]\begingroup Real numbers\nomeqref {1.1}\nompageref{6}
+  \item [{$a \parallel b$}]\begingroup Concatenation of strings $a$ and $b$\nomeqref {1.6}
+		\nompageref{13}
+  \item [{$a\xor b$}]\begingroup Bitwise XOR of two bitstrings $a$ and $b$\nomeqref {1.1}
+		\nompageref{5}
+  \item [{$F[x]$}]\begingroup Ring of polynomials over $F$\nomeqref {1.6}
+		\nompageref{17}
+  \item [{$k\unirand K$}]\begingroup $k$ is taken uniformly random from $K$\nomeqref {1.1}
+		\nompageref{5}
 
 \end{thenomenclature}

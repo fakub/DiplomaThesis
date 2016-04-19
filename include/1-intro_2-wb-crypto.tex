@@ -1,31 +1,18 @@
-% previously: Finally there is the most extreme case where the attacker has full control over the execution environment -- the white-box attack context. Full control means that the attacker can step the algorithm and directly observe and alter intermediate results in the memory or even skip, alter and insert instructions. Clearly, the key cannot be kept in its original form, it must be somehow hidden, but still usable for encryption.
-
 \section{White-Box Cryptography}
-
-%~ detailně popsat kde se vzala vč. citací, vývoj, smysl
-
-%~ Motivation for white-box crypto, white-box crypto history, milestones   % Bos et al. to hezky shrnul
-	%~ malicious software on your device
-	%~ cryptographic keys of third-parties
-	%~ use cases: DRM
-	%~ modeled as if adversary had full control over execution environment of the device running the implementation
-	%~ everything allowed: perform static analysis, read/alter memory (fault injection)
-	%~ Chow et al.\ \cite{chow2002aes}
-	%~ program obfuscation impossibility results
-	%~ goal of wbc = embed the secret key to the implementation s.t. it is difficult to extract it even when the source code is available
-	%~ note the difference from obfuscation, in practice could be utilized as well
-	%~ conjecture by Chow: wb implementations provide no long-term defense against attacks
-	%~ symmetric crypto only, no published results on pubkey crypto
-	%~ all published approaches have been broken
-	%~ software vendors then disobey Kerckhoff's principle (cite) i.e. use secret design
-	%~ Bos et al. exploit leaked information instead, no need for exact knowledge of design nor reverse engineering
-	%~ The goal of this thesis is to reproduce the attack and make it easy for future researchers and analysis.
+\label{sec:wbc}
 
 As we already mentioned, classical ciphers are designed with respect to black-box attack context, and even under this assumption, it has not been theoretically shown that there exists a secure one; see Section \ref{sec:provable}. We also presented gray-box and white-box attack contexts in Section \ref{sec:bbtowb} with a short reasoning of the gray-box model.
 
-Let us now justify why we are introducing so extreme case as white-box attack context (WBAC). \ldots
-%!% až jednou pochopim k čemu že to je dobrý ..?
-%~ There were several attempts to introduce a ``secure'' white-box variant of a known cipher. Note that there is no known white-box variant of a public key cipher.
+Now let us have a look at WBAC. As we outlined previously, the attacker is very powerful. And even though she is so powerful, she shall not be able to, besides recovering the key, turn an encryption procedure into decryption one and vice versa.
+
+Let us now justify why we are introducing so extreme case as WBAC. Probably the most intiutive motivation stems from the situation where a malicious software ``lives'' in a device together with some software which is intended to use confidential cryptographic material. For instance, we could use third-party keys (especially in DRM\footnote{Digital Rights Management.}). Note that another motivation will be given after we introduce required concepts.
+
+In many use cases, public key cryptography appears to work as well. However, public key (asymmetric) ciphers are far slower than symmetric ones, hence useless in many scenarios. Note that there is no known white-box variant of a public key cipher.
+
+There were several attempts to introduce a ``secure'' white-box variant of a known cipher. However, most of today's commercial WBAC resistant solutions rather disobey Kerckhoffs' principle, and rely on security by obscurity and tons of software obfuscation and anti-reverse engineering tools.
+
+%!% detailně popsat kde se vzala vč. citací, vývoj, smysl
+%~ Motivation for white-box crypto, white-box crypto history, milestones   % Bos et al. to hezky shrnul
 
 
 % ==============================================================================
@@ -79,4 +66,8 @@ The field of white-box cryptography is related to program obfuscation which was 
 \subsection{Cat and Mouse Game}
 \label{sec:catmouse}
 
-%!% odkazuju se sem na: ... soon after introduction of a new white-box implementation of a cipher somebody usually comes up with an effective attack
+It has been conjectured that each white-box resistant implementations gets -- sooner or later -- broken.
+\begin{conj}[Chow et al.\ \cite{chow2002aes}]
+	No perfect long-term defense against white-box attacks exists.
+\end{conj}
+Therefore it reminds a cat and mouse game. In this thesis, we present both -- a white-box resistant implementation and actually two attacks against it. Note that there are a couple of other examples from the past (e.g.\ \cite{chow2002des} broken by \cite{jacob2002attacking}).

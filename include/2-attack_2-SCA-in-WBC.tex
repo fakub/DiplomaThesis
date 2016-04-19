@@ -1,9 +1,14 @@
 \section{Using SCA Tools in White-Box Cryptography}
 \label{sec:scawbc}
 
+%!% Bos et al. exploit leaked information instead, no need for exact knowledge of design nor reverse engineering
 In the previous section we presented some algorithms seemingly unrelated to what we have done so far. Indeed, our aim is to attack white-box implementations where we can fully control the execution environment thus there is no need for physical measurements. The actual reason emerges from a novel approach introduced recently by Bos et al.\ \cite{bos2015differential} -- the use of SCA tools in white-box cryptography context.
 
 The idea was inspired by Delerabl{\'e}e et al.\ \cite{delerablee2013white}. As it is usually required, a ``perfect'' white-box implementation should not provide effectively any other information about the secret key, but only as much as an access to a black-box. In \cite{delerablee2013white} they observed that such implementation must be resistant to all existing and future side-channel attacks which led Bos et al.\ to the idea of exploring this consequence by attacking white-box implementations with SCA tools. And the attack very surprisingly succeeded!
+
+\begin{note}
+	The previous observation also implies another motivation for white-box cryptography -- a white-box attack resistant implementation could be used as a SCA-secure hardware implementation.
+\end{note}
 
 The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution or their contents, sometimes also referred to as {\em memory trace}. Hence in this context differential power analysis might sound wierd since there is no {\em power}, it is rather referred to as {\em Differential Computation Analysis} (DCA).
 
@@ -96,8 +101,8 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		Filtering of constant entries typically decreases the size of the traces by tens of percent. If we do not observe any or extremely small decrease, it might have happened that the traces are not properly aligned. In such case it might be very difficult to align them. Luckily we did not experience this problem and give some advices how to avoid it in Note \ref{note:aslr}.
 	\end{note}
 
-\newcommand{\AddrTempFilter}{Address and Temporal Filtering}
-\subsubsection{\AddrTempFilter}
+\subsubsection{Address and Temporal Filtering}
+\label{subsec:atf}
 	
 	In the second stage we will filter the traces based on visual observation. Note that for this purpose we will need to acquire another trace with full read/write addresses for all memory trace types, unlike Note \ref{note:lsb}. We will refer to such trace as {\em full trace}.
 	
@@ -112,7 +117,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		
 		We developed own tool displaying a full memory trace for this purpose. Given $n$ and a trace, this tool splits the trace by addresses into $n$ ``compact'' segments and displays these parts separately. See Figure \ref{fig:memtrace} for an illustrative memory trace of a run of a simple AES implementation. Horizontal axis represents address range, vertical axis represents the order of addresses from the top (temporal range).
 		
-		\begin{figure}[h!] %!% opravit nakonec umístění
+		\begin{figure}[h!]
 		\begin{center}
 			\includegraphics[width=0.9\textwidth]{./figures/memtrace/memtrace_emph.png}
 			\caption{Illustrative memory trace of a run of an AES implementation with the first round emphasized by a red rectangle. Addresses of memory writes were acquired.}
@@ -196,7 +201,6 @@ As outlined in the previous remark, we will consider Algorithm \ref{alg:bitwised
 	\begin{example}
 	\label{ex:gap}
 	See the following table for partial results of a real experiment, further comments below.
-	%!% spíš to pak vzít odněkud odspod ty data, třeba z 256 trací
 		\begin{table}[H]
 			\begin{center}
 			\begin{tabular}{| c | c | c | c | c | c | c | c | c |}
@@ -205,7 +209,6 @@ As outlined in the previous remark, we will consider Algorithm \ref{alg:bitwised
 				\cline{2-9}
 					~ & Value & Cand.   & Value & Cand.   & Value & Cand.   & Value & Cand.  \\
 				\hline
-				%!% změnil jsem rank od nuly !!! vočekovat všude ... a někam to okomentovat
 					0      & 0.3477 & {\tt >15<} & 0.3970 & {\tt 09}   & 0.3374 & {\tt 9d}   & 0.3730 & {\tt 6f}   \\
 					1      & 0.3147 & {\tt b5}   & 0.3884 & {\tt d1}   & 0.3196 & {\tt f5}   & 0.3521 & {\tt 8b}   \\
 					2      & 0.3110 & {\tt e7}   & 0.3699 & {\tt 65}   & 0.3183 & {\tt 37}   & 0.3451 & {\tt 7b}   \\

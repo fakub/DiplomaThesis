@@ -8,7 +8,7 @@ Bos et al.\ \cite{bos2015differential} mention another interesting AES white-box
 
 Soon after the conference, the author released source codes\footnote{\link{http://pastebin.com/MvXpGZts}}, which allows one to avoid reverse engineering of the binary. Moreover, it allows one to modify the code to run natively on Linux. Philippe Teuwen, a co-author of Bos et al.\ \cite{bos2015differential}, studied this implementation deeper and finally was able to recover the key \cite{teuwen2015nscwriteups}.
 
-In his write-up, Teuwen also describes the structure, which appears to avoid usage of $4$-bit random bijections (in WBAES by Chow et al.\ \cite{chow2002aes}) and uses $8$-bit ones instead. Note that even without any non-linearity check, it is far less likely that any bit of output of a random $8$-bit bijection would provide a reasonable level of linearity compared to a random $4$-bit bijection, as outlined in Section \ref{sec:attempt}.
+In his write-up, Teuwen also describes the structure, which appears to avoid usage of $4$-bit random bijections (in WBAES by Chow et al.\ \cite{chow2002aes}) and uses $8$-bit ones instead. Note that even without any nonlinearity check, it is far less likely that any bit of output of a random $8$-bit bijection would provide a reasonable level of linearity compared to a random $4$-bit bijection, as outlined in Section \ref{sec:attempt}.
 
 However, we did not either modify the source code to make it AES-compliant, nor did run the attack, hence it remains as a possible topic for further research.
 

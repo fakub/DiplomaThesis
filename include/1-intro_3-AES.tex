@@ -63,7 +63,7 @@ Now let us move on to definitions of the $4$ operations.
 	
 	\begin{note}
 	\label{note:rijinv}
-		Even though $A'$ is not a proper field inverse, it is often referred to as inverse in Rijndael field or Rijndael inverse of $A$. Note that it is invertible.
+		Even though $A'$ is not a proper field inverse, it is often referred to as {Rijndael inverse} of $A$. Note that it is invertible.
 	\end{note}
 	
 	Before we define $\SubBytes$, we have to emphasize that the following multiplication is {\em not} performed in $F$, but in the ring of binary polynomials $\GF(2)[x]$ instead. $\SubBytes$ is defined as follows:
@@ -78,14 +78,19 @@ Now let us move on to definitions of the $4$ operations.
 		Although $x^8+1$ is not irreducible (it holds $x^8+1 = (x+1)^8$), $x^4 + x^3 + x^2 + x + 1$ is coprime with $x^8+1$, therefore it has an inverse modulo $x^8+1$. It follows that $\SubBytes$ is an invertible bijection.
 	\end{note}
 	
-	$\SubBytes$ is the only confusion element in AES, indeed, all the other operations are linear (i.e.\ from a limited subset of mappings, see Principle \ref{pri:shannon}). Since $\SubBytes$ is the only source of nonlinearity in AES, it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui in 1993 \cite{matsui1993linear} and analyzed in detail and successfuly performed by Junod in 2001 \cite{junod2001complexity}.
+	$\SubBytes$ is the only confusion element in AES, indeed, all the other operations are linear (i.e.\ from a limited subset of mappings; see Principle \ref{pri:shannon}). Since $\SubBytes$ is the only source of nonlinearity in AES, it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui in 1993 \cite{matsui1993linear} and analyzed in detail and successfuly performed by Junod in 2001 \cite{junod2001complexity}.
 	
 	\begin{note}
 	\label{note:sboxtable}
 		Since $\SubBytes$ only has $256$ possible inputs, it is usually precomputed and implemented as a lookup table, obviously for performance reasons.
 	\end{note}
 	
-	The reason why $\SubBytes$ was not introduced the other way around (i.e.\ as a lookup table with good non-linearity properties) is the simple algebraic form of $S$ which enables mathematical analysis as well as statistical.
+	The reason why $\SubBytes$ was not introduced the other way around (i.e.\ as a lookup table with good nonlinearity properties) is the simple algebraic form of $S$ which enables mathematical analysis as well as statistical.
+	
+	\begin{note}
+	\label{note:sboxaff}
+		$\SubBytes$ is actually an affine mapping (in the vector space $F$ over $\GF(2)$) of Rijndael inverse of its input.
+	\end{note}
 
 \subsubsection{ShiftRows}
 	

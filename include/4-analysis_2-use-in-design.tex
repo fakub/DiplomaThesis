@@ -14,7 +14,7 @@ Note that the attack allows us to reveal concrete addresses which contributed to
 
 \begin{description}
 	\item[Watchpoint in GDB.]
-		We acquired one full trace (as described in Section \ref{sec:filter} under the caption ``\AddrTempFilter'') for some plaintext used during the acquisition phase. We checked that this trace perfectly matches the corresponding trace from the acquisition phase.
+		We acquired one full trace (as described in Section \ref{sec:filter} under the caption ``\nameref{subsec:atf}'') for some plaintext used during the acquisition phase. We checked that this trace perfectly matches the corresponding trace from the acquisition phase.
 		
 		We identified the leaking address and set up a watchpoint in GDB running in the same terminal session. However, GDB did not catch the address, probably because PIN uses different virtual environment.
 	\item[GDB connected to PIN's debugging interface.]
@@ -25,8 +25,8 @@ Note that the attack allows us to reveal concrete addresses which contributed to
 
 Each of the debugging approaches seemed promising to bring valuable information about where the key leaks. The leakage position could be later used to identify a specific table access which causes the leakage, hence it could possibly help us to clarify what is the actual intermediate product which enables the attack. However, we succeeded even without this information.
 
-%!% překopat
-Even though it is not fully understood, the benefit of this attack is obvious -- it introduces a principially different approach to break white-box cryptography implementations. This attack may help to address weaknesses of a future white-box cryptography implementation and possibly increase its resistancy to this kind of attack.
+%!% přesunout
+The benefit of this attack is obvious -- it introduces a principially different approach to break white-box cryptography implementations. This attack may help to address weaknesses of any future white-box cryptography implementation and possibly increase its resistancy to this kind of attack.
 
 
 % ==============================================================================

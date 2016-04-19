@@ -19,7 +19,9 @@ Note that the last plain AES state (denoted with ``plain'' in the previous equat
 		&= [\bar R]^T \cdot \bigl([K]+[P]\bigr)' + \bar r ,
 	\end{align*}
 	where $\bar R$ is just a different random-like vector, which plays the role of $B$ in Equation \ref{eq:tba}, and $\bar r$ is a constant bit. Remind that additive constant does not need to be considered inside target (see Remark \ref{rem:pqeffect}). It follows that each of these $32$ bits perfectly matches some of our $255$ targets introduced in Section \ref{sec:unify}.
-	%!% no diffusion at the moment! depends on single byte
+	
+	%!% nebylo tu, zakamuflovat
+	Note that, even though $\MB\circ\MC$ introduces diffusion, there is no diffusion so far, because those $32$-bit intermediate results are not combined together so far. Therefore these intermediate results only depend on single input byte!
 	
 	If we could observe these intermediate results, we would get the difference of means equal to $1.0$ (cf.\ attack against unprotected implementation in Section \ref{sec:naiveaes}).
 \end{description}
@@ -28,7 +30,7 @@ Note that the last plain AES state (denoted with ``plain'' in the previous equat
 	It follows that the protection against our $255$ targets is fully and solely accomplished by $\Enc$.
 \end{remark}
 \begin{description}
-	\item[$\Enc$.] Remind that $\Enc$ is a (only) $4$-bit random bijection. Note that, unlike confusion elements in regular ciphers (e.g.\ SBox in AES), there is no non-linearity check\footnote{Linearity in ciphers is studied by {\em linear cryptanalysis}, see e.g.\ \cite{matsui1993linear} for detail.} in WBAES by Chow et al.\ \cite{chow2002aes}.
+	\item[$\Enc$.] Remind that $\Enc$ is a (only) $4$-bit random bijection. Note that, unlike confusion elements in regular ciphers (e.g.\ SBox in AES), there is no nonlinearity check\footnote{Linearity in ciphers is studied by {\em linear cryptanalysis}, see e.g.\ \cite{matsui1993linear} for detail.} in WBAES by Chow et al.\ \cite{chow2002aes}.
 	
 	The choice of $\Enc$ actually only relies on the fact that the ratio of affine mappings among all random bijections is extremely low (less than $0.000\,002\%$ for $4$-bit bijections). This justification is very poor since it does not even address the case where only one output bit of $\Enc$ is an affine mapping of the input!
 	
@@ -39,6 +41,6 @@ Note that the last plain AES state (denoted with ``plain'' in the previous equat
 
 To support our hypothesis, we modified the source code of {\tt KlinecWBAES} to output these intermediate products (i.e.\ outputs of the first Type II tables, see Equation \ref{eq:wbaesflow}) and ran the attack with these values instead of memory traces. The attack indeed succeeded, which fully supports our explanation.
 
-%!% v čistých mezivýsledcích se nevyskytuje neuniformní rozložení leak bitů
+However, we noticed an interesting thing: leaking bits, as introduced in Note \ref{note:leakbit}, appear to be uniform in this case!
 
 % perla (jakože fakt nebrat vážně): Note that a random bijection is extremely unlikely to provide any correlation between any input and output bit.
