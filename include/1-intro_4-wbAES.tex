@@ -221,7 +221,7 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 
 \subsubsection{Karroumi's Approach with Dual Ciphers}
 	
-	Karroumi noticed that BGE attack exploits the knowledge of specific AES constants, for instance coefficients inside $\MixColumns$ (see Equation \ref{eq:mixcolmatr}) or, more importantly, coefficients of affine transformation inside $\SubBytes$ (see Equation \ref{eq:sbox} and Note \ref{note:sboxaff}). In 2002, Barkan et al.\ \cite{barkan2002many} came up with the idea of changing these coefficients in an appropriate way and Karroumi suggested to use such modified AES as a basis for an upgraded WBAES. In general, such modified cipher is referred to as {\em dual cipher}.
+	Karroumi noticed that BGE attack exploits the knowledge of specific AES constants, for instance coefficients inside $\MixColumns$ (see Equation \ref{eq:mixcolmatr}) or, more importantly, coefficients of affine transformation inside $\SubBytes$ (see Equation \ref{eq:sbox} and Remark \ref{rem:sboxaff}). In 2002, Barkan et al.\ \cite{barkan2002many} came up with the idea of changing these coefficients in an appropriate way and Karroumi suggested to use such modified AES as a basis for an upgraded WBAES. In general, such modified cipher is referred to as {\em dual cipher}.
 	
 	Originally there were $240$ dual AES ciphers by Barkan et al., the list has been later extended by Raddum \cite{raddum2004more} to $9\,360$ and further by Biryukov et al.\ \cite{biryukov2003toolbox} to $61\,200$ dual AES ciphers.
 	%?% Among other constants, one may change the Rijndael field irreducible polynomial, too, which obviously leads to different field operations.

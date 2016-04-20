@@ -1,34 +1,29 @@
 \section{Advanced Encryption Standard}
 \label{sec:aes}
 
-In 1997, Curtin and Dolske were the first to publicly announce \cite{curtin1998brute} that they have cracked Data Encryption Standard (DES, \cite{fips1977des}) -- a symmetric block cipher which had been in use for $20$ years. In the same year, the National Institute of Standards and Technology (NIST) initiated a selection process for a new encryption standard. During the process, DES was partially replaced with Triple-DES described in ANSI draft X9.52 \cite{americantripple}.
+In this section, we present a currently standardized block cipher. Let us begin with how it originated. In 1997, Curtin and Dolske were the first to publicly announce \cite{curtin1998brute} that they have cracked Data Encryption Standard (DES, \cite{fips1977des}) -- a symmetric block cipher which had been in use for $20$ years. In the same year, the National Institute of Standards and Technology (NIST) initiated a selection process for a new encryption standard. During the process, DES was partially replaced with Triple-DES described in ANSI draft X9.52 \cite{americantripple}.
 
-In 1998, NIST chose $15$ candidates and asked cryptology community for help with analyzing the candidates. After a careful analysis, NIST proposed Rijndael\footnote{From authors' names: Vincent Rijmen and Joan Daemen.} \cite{daemen1999aes} as the new standard called {\em Advanced Encryption Standard} (AES) \cite{fips2001aes} on November 26, 2001. The standard specifies the Rijndael algorithm with block-length of $128$ bits and key-lengths of $128$, $192$ and $256$ bits. Note that the original Rijndael algorithm \cite{daemen2013rijndael} describes more block- and key-length variants. On the other hand, we will only consider its $128$-$128$-bit variant in the following text, unless stated otherwise.
+In 1998, NIST chose $15$ candidates and asked cryptology community for help with analyzing the candidates. After a careful analysis, NIST proposed Rijndael\footnote{From authors' names: Vincent Rijmen and Joan Daemen.} \cite{daemen1999aes} as the new standard called {\em Advanced Encryption Standard} (AES) \cite{fips2001aes} on November 26, 2001. The standard specifies the Rijndael algorithm with block-length of $128$ bits and key-lengths of $128$, $192$ and $256$ bits. Note that the original Rijndael algorithm \cite{daemen2013rijndael} describes more block- and key-length variants. On the other hand, we will only consider its $128$-$128$-bit variant in this thesis, unless stated otherwise.
 
-Today, alomst 15 years later, AES is used worldwide and, although extensively analysed, it is still beleived to have considerable security margin.
+Today, alomst 15 years later, AES is used worldwide and, despite extensive analysis, it is still beleived to have considerable security margin.
 
 
 % ==============================================================================
-% ===   A E S   A L G O R I T H M   P R E R E Q U I S I T I E S              ===
+% ===   A E S   B U I L D I N G   B L O C K S                                ===
 % ==============================================================================
 
-\subsection{AES Algorithm Prerequisities}
+\subsection{AES Building Blocks}
 
-AES encryption\footnote{Decryption will be treated separately at the end of this section.} consists of $10$ rounds, each round (except for the last one) consists of $4$ different operations which will be described later. All of these operations work with $128$-bit words, let us call them {\em states}. Before we start, let us consider a few different state representations. 
+AES encryption\footnote{Decryption will be treated separately at the end of this section.} consists of $10$ rounds, each round (except for the last one) consists of $4$ different operations which will be described later. All of these operations work with $128$-bit words, let us call them {\em states}. Before we start, let us present a couple of different state representations. 
 
-First we split its $128$ bits into $16$ bytes denoted by $A_{0,0}$, $A_{1,0}$, $A_{2,0}$, $A_{3,0}$, $A_{0,1}$, $\ldots$, $A_{3,1}$, $\ldots$, $A_{3,3}$, respectively, obtaining a $4\times 4$ array where $A_{i,j}$ stands for an element in $i$-th row and $j$-th column.
+First, we split its $128$ bits into $16$ bytes denoted by $A_{0,0}$, $A_{1,0}$, $A_{2,0}$, $A_{3,0}$, $A_{0,1}$, $\ldots$, $A_{3,1}$, $\ldots$, $A_{3,3}$, respectively, obtaining a $4\times 4$ array, where $A_{i,j}$ stands for an element in $i$-th row and $j$-th column.
 
-\begin{remark}
-\label{rem:aesstate}
-	Note that the order of bytes in the state fills the array in a column-first manner assuming standard row/column order of indexes.
-\end{remark}
-
-Let us further denote $F = \GF(2)[x]/x^8+x^4+x^3+x+1$ which is a field of polynomials with integral coefficients reduced modulo $2$ (i.e.\ $0$, $1$), these polynomials are further reduced modulo $x^8+x^4+x^3+x+1$. This field has $2^8$ elements and is usually referred to as {\em Rijndael's field}. In AES context it might be denoted also by $\GF(2^8)$.
+Let us further denote $F = \GF(2)[x]/x^8+x^4+x^3+x+1$, which is a field of polynomials with integral coefficients reduced modulo $2$ (i.e.\ $0$, $1$), these polynomials are further reduced modulo $x^8+x^4+x^3+x+1$. This field has $2^8$ elements and is usually referred to as {\em Rijndael's field}. In the context of AES, it might be denoted also by $\GF(2^8)$.
 
 \nomenclature{$\GF(p^n)$}{Galois Field with $p^n$ elements, $p$ prime}
 \nomenclature{$F[x]$}{Ring of polynomials over $F$}
 
-Each byte $A_{i,j} = a_7a_6\ldots a_0$, $a_i\in\GF(2)$, is then considered as an element of $F$ simply as $a_7x^7 + a_6x^6 + a_5x^5 + a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0$.  Note that byte may also be written in hexadecimal notation and still considered as an element of $F$. See Figure \ref{fig:aesnot} with a few of possible AES state representations.
+Each byte $A = a_7a_6\ldots a_0$, $a_i\in\GF(2)$, is then considered as an element of $F$ simply as $a_7x^7 + a_6x^6 + a_5x^5 + a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0$.  Note that byte may also be written in hexadecimal notation, and still considered as an element of $F$. See Figure \ref{fig:aesnot} with a few of possible AES state representations.
 
 \begin{figure}[H]
 \[
@@ -55,7 +50,7 @@ Now let us move on to definitions of the $4$ operations.
 
 \subsubsection{SubBytes}
 	
-	$\SubBytes$ operation is often referred to as {\em SBox} and denoted by $S$. It is defined byte-wise, i.e.\ $S: F \rightarrow F$. For $A\in F$, let $A'$ stand for
+	$\SubBytes$ operation, often referred to as {\em SBox}, will be denoted by $S$. It is defined byte-wise, i.e.\ $S: F \rightarrow F$. For $A\in F$, let $A'$ stand for
 	\begin{itemize}
 		\item $A^{-1}$, if $A \neq 0$,
 		\item $0$, if $A = 0$.
@@ -63,7 +58,7 @@ Now let us move on to definitions of the $4$ operations.
 	
 	\begin{note}
 	\label{note:rijinv}
-		Even though $A'$ is not a proper field inverse, it is often referred to as {Rijndael inverse} of $A$. Note that it is invertible.
+		Even though $A'$ is not a proper field inverse, it is often referred to as {Rijndael inverse} of $A$. Note that Rijndael inverse (taken as mapping) is invertible.
 	\end{note}
 	
 	Before we define $\SubBytes$, we have to emphasize that the following multiplication is {\em not} performed in $F$, but in the ring of binary polynomials $\GF(2)[x]$ instead. $\SubBytes$ is defined as follows:
@@ -78,23 +73,23 @@ Now let us move on to definitions of the $4$ operations.
 		Although $x^8+1$ is not irreducible (it holds $x^8+1 = (x+1)^8$), $x^4 + x^3 + x^2 + x + 1$ is coprime with $x^8+1$, therefore it has an inverse modulo $x^8+1$. It follows that $\SubBytes$ is an invertible bijection.
 	\end{note}
 	
-	$\SubBytes$ is the only confusion element in AES, indeed, all the other operations are linear (i.e.\ from a limited subset of mappings; see Principle \ref{pri:shannon}). Since $\SubBytes$ is the only source of nonlinearity in AES, it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui in 1993 \cite{matsui1993linear} and analyzed in detail and successfuly performed by Junod in 2001 \cite{junod2001complexity}.
+	$\SubBytes$ is the only confusion element in AES -- indeed, all the other operations will be linear (i.e.\ from a limited subset of mappings; see Principle \ref{pri:shannon}). Since $\SubBytes$ is the only source of nonlinearity in AES, it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui \cite{matsui1993linear} in 1993 and analyzed in detail and successfuly performed by Junod in 2001 \cite{junod2001complexity}.
 	
-	\begin{note}
-	\label{note:sboxtable}
+	\begin{remark}
+	\label{rem:sboxtable}
 		Since $\SubBytes$ only has $256$ possible inputs, it is usually precomputed and implemented as a lookup table, obviously for performance reasons.
-	\end{note}
+	\end{remark}
 	
-	The reason why $\SubBytes$ was not introduced the other way around (i.e.\ as a lookup table with good nonlinearity properties) is the simple algebraic form of $S$ which enables mathematical analysis as well as statistical.
+	The reason why $\SubBytes$ was not introduced the other way around (i.e.\ as a lookup table with good nonlinearity properties) is the simple algebraic form of $S$, which enables mathematical analysis as well as statistical.
 	
-	\begin{note}
-	\label{note:sboxaff}
+	\begin{remark}
+	\label{rem:sboxaff}
 		$\SubBytes$ is actually an affine mapping (in the vector space $F$ over $\GF(2)$) of Rijndael inverse of its input.
-	\end{note}
+	\end{remark}
 
 \subsubsection{ShiftRows}
 	
-	$\ShiftRows$ operation is very simple -- it only cyclically shifts rows of the state array. It moves $i$-th row by $i$ positions to the left where rows are numbered from $0$; see Figure \ref{fig:shiftrows}. Note that row entries are not next to each other in AES state, see Remark \ref{rem:aesstate}. $\ShiftRows$ is obviously invertible.
+	$\ShiftRows$ operation is very simple -- it only cyclically shifts rows of the state array. It moves $i$-th row by $i$ positions to the left where rows are numbered from $0$; see Figure \ref{fig:shiftrows}. $\ShiftRows$ is obviously invertible.
 	
 	\begin{figure}[H]
 	\[
@@ -127,7 +122,7 @@ Now let us move on to definitions of the $4$ operations.
 	\label{fig:shiftrows}
 	\end{figure}
 	
-	The design motivation for $\ShiftRows$ is to introduce inter-column diffusion. Note that $\ShiftRows$ does not diffuse bytes internally -- the following operation is here for this purpose.
+	The design motivation for $\ShiftRows$ was to introduce inter-column diffusion. Note that $\ShiftRows$ does not diffuse bytes internally -- the following operation is here for this purpose.
 
 \subsubsection{MixColumns}
 	
@@ -136,11 +131,11 @@ Now let us move on to definitions of the $4$ operations.
 	\label{eq:mixcolpoly}
 		b(z) = c(z) \cdot a(z) \pmod{z^4+1}
 	\end{equation}
-	where $c(z) = \texttt{03}\cdot z^3 + \texttt{01}\cdot z^2 + \texttt{01}\cdot z^2 + \texttt{02}$. Note that here we used hexadecimal notation for elements of $F$ which could also be viewed as polynomials. To avoid confusion, we used $z$ instead of $x$.
+	where $c(z) = \texttt{03}\cdot z^3 + \texttt{01}\cdot z^2 + \texttt{01}\cdot z^2 + \texttt{02}$. Note that here we used hexadecimal notation for elements of $F$, which can also be viewed as polynomials. To avoid confusion, we used $z$ instead of $x$.
 	
 	Note that $c(z)$ is coprime with $z^4+1$, therefore invertible modulo $z^4+1$. It follows that $\MixColumns$ is invertible. The goal of $\MixColumns$ is to introduce inter-byte diffusion within a column.
 	
-	Later we will make use of its different, linear algebra representation. Let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly}, which is performed in $F[z]$, can be rewritten into matrix multiplication back in $F$, indeed
+	Later we will make use of its different, linear algebra representation. Let us denote $b(z) = B_0 + B_1 z + B_2 z^2 + B_3 z^3$. Modular multiplication in Equation \ref{eq:mixcolpoly}, which is performed in $F[z]$, can be rewritten into a matrix multiplication back in $F$, indeed
 	\begin{equation}
 	\label{eq:mixcolmatr}
 		\begin{pmatrix}
@@ -166,14 +161,14 @@ Now let us move on to definitions of the $4$ operations.
 
 \subsubsection{KeySchedule}
 	
-	$\KeySchedule$ is a routine which expands $128$-bit encryption key into $11$-times longer $\ExpandedKey$. $128$-bit blocks of $\ExpandedKey$ will serve as round keys. Their position within $\ExpandedKey$ will be indexed from $0$.
+	$\KeySchedule$ is a routine which expands $128$-bit encryption key into $11$-times longer $\ExpandedKey$. $128$-bit blocks of $\ExpandedKey$ serve as round keys. Their position within $\ExpandedKey$ is indexed from $0$.
 	
 	\begin{note}
 	\label{note:expkey}
 		The most important consequence for us is that $\ExpandedKey$ begins with plain encryption key.
 	\end{note}
 	
-	We omit further details here, because $\KeySchedule$ is specified rather in algorithmic than algebraic manner; see \cite[pp.43-45]{daemen2013rijndael} for detail.
+	We omit further details here, because $\KeySchedule$ is specified rather in an algorithmic than algebraic manner; see \cite[pp.43-45]{daemen2013rijndael} for detail.
 
 
 % ==============================================================================
@@ -186,7 +181,7 @@ AES, as already stated, consists of $10$ rounds of $4$ operations except for the
 
 \begin{alg}
 \label{alg:aes}
-	Given a $128$-bit plaintext and a key, return its AES encryption.
+	Given a $128$-bit plaintext and key, return its AES encryption.
 	\begin{algorithmic}[1]
 		\Function{AES\_Encryption}{$Plaintext,Key$}
 			\State $\ExpandedKey \gets \KeySchedule(Key)$
@@ -218,7 +213,7 @@ AES, as already stated, consists of $10$ rounds of $4$ operations except for the
 \subsection{AES Implementation Note}
 \label{sec:aeslookup}
 
-As stated in Note \ref{note:sboxtable}, $\ShiftRows$ can be implemented as a lookup table for performance reasons. Unlike $\SubBytes$, $\MixColumns$ operates on a substantially larger domain, therefore cannot be directly implemented as a lookup table. But we can utilize its matrix representation, see Equation \ref{eq:mixcolmatr}. Let us denote
+As stated in Remark \ref{rem:sboxtable}, $\ShiftRows$ can be implemented as a lookup table for performance reasons. Unlike $\SubBytes$, $\MixColumns$ operates on a substantially larger domain, therefore it cannot be directly implemented as a lookup table. But we can utilize its matrix representation, see Equation \ref{eq:mixcolmatr}. Let us denote
 \[
 	\C =
 	\begin{pmatrix}
@@ -265,6 +260,6 @@ we can rewrite the equation to the form
 \end{align*}
 where $\C_i$ denotes $i$-th column of $\C$.
 
-Note that each addend only depends on a single byte i.e.\ there are just $256$ possible input values for each. Therefore $\MixColumns$ can be implemented as a fourtuple of lookup tables, the result is then simply a bitwise XOR of their $4$-byte output values.
+Note that each addend only depends on single byte, i.e.\ there are just $256$ possible input values for each. Therefore $\MixColumns$ can be implemented as a fourtuple of lookup tables, the result is then simply a bitwise XOR of their $4$-byte output values.
 
 This was just to give an idea about how AES operations can be turned into lookup tables. These can be further improved, see \cite[Chapter~4]{daemen2013rijndael} for detail.

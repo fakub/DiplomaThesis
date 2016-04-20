@@ -21,7 +21,7 @@
 \contentsline {subsubsection}{Going Beyond}{16}{section*.15}
 \contentsline {subsection}{\numberline {1.2.2}Cat and Mouse Game}{17}{subsection.1.2.2}
 \contentsline {section}{\numberline {1.3}Advanced Encryption Standard}{17}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}AES Algorithm Prerequisities}{17}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.1}AES Building Blocks}{17}{subsection.1.3.1}
 \contentsline {subsubsection}{SubBytes}{18}{section*.17}
 \contentsline {subsubsection}{ShiftRows}{19}{section*.18}
 \contentsline {subsubsection}{MixColumns}{19}{section*.20}
