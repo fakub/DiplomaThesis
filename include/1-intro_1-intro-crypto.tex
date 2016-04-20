@@ -187,9 +187,9 @@ Let us introduce some notion first.
 	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time; denoted by ${\cal O}_F$.
 \end{defn}
 
-\begin{defn}[Single-Access Oracle]   %!% NEW
+\begin{defn}[Oracle with Limited Access]   %!% NEW
 \label{def:saoracle}
-	Let $F:X\rarr Y$. {\em Single-access oracle evaluating $F$} is an oracle evaluating $F$, where the number of queries is limited to one; denoted by ${\cal O}^{(1)}_F$.
+	Let $F:X\rarr Y$ and $n\in\N$. {\em Oracle with limited access evaluating $F$} is an oracle evaluating $F$, where the number of queries is limited to $n$; denoted by ${\cal O}^{(n)}_F$.
 \end{defn}
 
 \begin{defn}[Statistical Test]
@@ -209,9 +209,9 @@ Let us introduce some notion first.
 	\]
 \end{defn}
 
-\begin{defn}[Single-Access Advantage]   %!% NEW
+\begin{defn}[Advantage with Limited Access]   %!% NEW
 \label{def:saadvant}
-	{\em Single-access advantage} is defined as advantage, where single-access oracles are used instead; denoted by $\Adv^{(1)}$.
+	Let $n\in\N$. {\em Advantage with limited access} is defined as advantage, where oracles with access limited to $n$ are used instead; denoted by ${\Adv}^{(n)}$.
 \end{defn}
 
 In other words, advantage tells us how likely adversary $A$ is able to distinguish a random function from one set of functions from a random function from another set, based on its input/output behavior only. According to these sets, advantage can be ``customized'' for a specific purpose. Let us define such advantage for an adversary tempting to distinguish which of her plaintexts has been encrypted, i.e.\ tells us how likely she is to win the Game \ref{game:semsec}.
@@ -335,7 +335,7 @@ An example covering most introduced concepts follows.
 
 \begin{note}   %!% NEW
 \label{note:secbyobsc}
-	In the previous example, the adversary exploits the knowledge of the block cipher's internal structure -- she knows everything but the key. One could have an idea to hide the structure from the attacker, but this is actually a {\em very} bad idea. Once our construction leaks, we need to deploy a new ciphering algorithm confidentially, but we have no way to do so. Moreover, note that required a secure PRP to be resistant to {\em all} adversaries, hence hiding your design does not help at all.
+	In the previous example, the adversary exploits the knowledge of the block cipher's internal structure -- she knows everything but the key. One could have an idea to hide the structure from the attacker, but this is actually a {\em very} bad idea. Once our construction leaks, we need to deploy a new ciphering algorithm confidentially, but we have no way to do so. Moreover, note that a secure PRP was required to be resistant to {\em all} adversaries, hence hiding your design has absolutely no theoretical support.
 	
 	We shall rather use a secure publicly known block cipher and only rely on the key. Once our key is compromised, we simply establish a new key. Also note that our key is only to be protected within our device, but the ciphering algorithm would have to be protected globally.
 	
@@ -361,7 +361,8 @@ Hence harming rule \ref{item:kerck} from the previous list leads to security by 
 % ===   P R O V A B L E   S E C U R I T Y   P R O O F S                      ===
 % ==============================================================================
 
-\subsection{Provable Security Proofs}
+%~ \subsection{Provable Security Proofs}
+\subsection{Output Indistinguishability of a Secure PRP}
 
 Now we know what a secure PRP is (or a secure block cipher) -- it is based on Game \ref{game:prp}, where the aim of the adversary is to distinguish a PRP from a truly random bijection. The obvious question is, what happens if we put a secure PRP into Game \ref{game:semsec}, where the adversary tempts to distinguish which of his two inputs has been processed.
 
@@ -376,7 +377,7 @@ Let us modify Game \ref{game:semsec} in a manner described in Note \ref{note:sin
 
 \begin{game}
 \label{game:semsecprp}
-	There are two parties -- a {\em challenger} and an {\em adversary}. Let further $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random bit $b\unirand\{0,1\}$ and, before each round, also a random key $k\unirand K$. In each round, the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger computes $c = E(k,m_b)$ and sends it back to the adversary. Note that the adversary is allowed to perform several queries again, but, unlike the previous games, the key changes over and over again.
+	There are two parties -- a {\em challenger} and an {\em adversary}. Let $E:K\times X\rarr Y$ be a PRP. First, the challenger chooses a random key $k\unirand K$ and a random bit $b\unirand\{0,1\}$. Then the adversary sends two equally long plaintexts $m_0$, $m_1$ of her choice to the challenger. The challenger computes $c = E(k,m_b)$ and sends it back to the adversary. The adversary is limited to one query only.
 	
 	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
@@ -389,7 +390,7 @@ Based on the previous game, let us define {\em PRP semantic security advantage} 
 \label{def:prpssadvant}
 	Let $E: K\times X\rarr Y$ be a PRP, ${\cal E}_b = \{E_b:X^2\rarr Y \mid E_b(x_0,x_1) = E(k,x_b), k\in K\}$ for $b=0,1$, and $A$ an adversary. We define {\em PRP semantic security advantage} of adversary $A$ as
 	\[
-		\AdvPRPSS(A,E) = \Adv^{(1)}(A,{\cal E}_0,{\cal E}_1) .
+		\AdvPRPSS(A,E) = {\Adv}^{(1)}(A,{\cal E}_0,{\cal E}_1) .
 	\]
 \end{defn}
 
@@ -400,7 +401,7 @@ Based on the previous game, let us define {\em PRP semantic security advantage} 
 
 %!% END
 
-The following theorem gives a connection between Game \ref{game:prp} and \ref{game:semsecprp}. It claims that, given a PRP $E$ winning Game \ref{game:prp} (i.e.\ $E$ is indistinguishable from a truly random bijection), $E$ wins Game \ref{game:semsecprp} as well, i.e.\ no adversary can distinguish encryption of $m_0$ from encryption of $m_1$.
+The following theorem provides a connection of Game \ref{game:prp} and \ref{game:semsecprp}. It claims that, given a PRP $E$ winning Game \ref{game:prp}, i.e.\ $E$ is indistinguishable from a truly random bijection, $E$ wins Game \ref{game:semsecprp} as well, i.e.\ no adversary can distinguish encryption of $m_0$ from encryption of $m_1$.
 
 \begin{thm}
 \label{thm:semsecprp}
