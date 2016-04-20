@@ -283,6 +283,11 @@ H{\aa}vard Raddum.
 \newblock In {\em {Advanced Encryption Standard--AES}}, pages 142--147.
   Springer, 2004.
 
+\bibitem{rivest1978data}
+Ronald~L Rivest, Len Adleman, and Michael~L Dertouzos.
+\newblock On data banks and privacy homomorphisms.
+\newblock {\em Foundations of secure computation}, 4(11):169--180, 1978.
+
 \bibitem{shannon1949communication}
 Claude~E Shannon.
 \newblock {Communication theory of secrecy systems}.
