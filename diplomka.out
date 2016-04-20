@@ -25,7 +25,7 @@
 \BOOKMARK [1][-]{section.2.1}{Side-Channel Attack}{chapter.2}% 25
 \BOOKMARK [2][-]{subsection.2.1.1}{Correlation Power Analysis Attack}{section.2.1}% 26
 \BOOKMARK [2][-]{subsection.2.1.2}{Bit-Wise Differential Power Analysis Attack}{section.2.1}% 27
-\BOOKMARK [1][-]{section.2.2}{Using SCA Tools in White-Box Cryptography}{chapter.2}% 28
+\BOOKMARK [1][-]{section.2.2}{Using SCA Tools in White-Box Attack Context}{chapter.2}% 28
 \BOOKMARK [2][-]{subsection.2.2.1}{Trace Acquisition}{section.2.2}% 29
 \BOOKMARK [2][-]{subsection.2.2.2}{Trace Filtering}{section.2.2}% 30
 \BOOKMARK [2][-]{subsection.2.2.3}{Attacking Traces}{section.2.2}% 31
@@ -50,7 +50,7 @@
 \BOOKMARK [1][-]{section.4.3}{Explanation Attempt}{chapter.4}% 50
 \BOOKMARK [0][-]{chapter.5}{Future Work}{}% 51
 \BOOKMARK [1][-]{section.5.1}{Another Interesting AES White-Box Implementation}{chapter.5}% 52
-\BOOKMARK [0][-]{section*.73}{Conclusion}{}% 53
-\BOOKMARK [0][-]{section*.75}{References}{}% 54
+\BOOKMARK [0][-]{section*.74}{Conclusion}{}% 53
+\BOOKMARK [0][-]{section*.76}{References}{}% 54
 \BOOKMARK [0][-]{Appendix.a.A}{Appendix Contents of Attached CD}{}% 55
 \BOOKMARK [0][-]{Appendix.a.B}{Appendix User Guide}{}% 56
