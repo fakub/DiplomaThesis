@@ -187,7 +187,7 @@ AES, as already stated, consists of $10$ rounds of $4$ operations except for the
 			\State $\ExpandedKey \gets \KeySchedule(Key)$
 			\State $State \gets Plaintext$ \label{line:stateplain}
 			\State $\AddRoundKey(State, \ExpandedKey[0])$ \label{line:addrk}
-			\For{$Round = 1 \to 9$}
+			\For{$Round = 1 \to 9$} \label{line:aesfor}
 				\State $\SubBytes(State)$
 				\State $\ShiftRows(State)$
 				\State $\MixColumns(State)$

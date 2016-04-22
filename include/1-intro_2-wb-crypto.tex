@@ -22,13 +22,13 @@ There were several attempts to introduce a ``secure'' white-box variant of a kno
 \subsection{Program Obfuscation}
 \label{sec:impos}
 
-The field of white-box cryptography is related to program obfuscation, which was pioneered by Barak et al.\ \cite{barak2001possibility}. Let us first define what a program obfuscator is, then we give some consequences and present a very interesting theoretical result of their paper.
+The field of white-box cryptography is closely related to program obfuscation, which was pioneered by Barak et al.\ \cite{barak2001possibility}. Let us first define what a program obfuscator is, then we give some consequences and present a very interesting theoretical result of their paper.
 
 \subsubsection{Program Obfuscator}
 	
 	Informally, a {\em program obfuscator} inputs a description of an algorithm (e.g.\ an input of universal Turing machine or a C code), and transforms it into a functionally equivalent obfuscated algorithm description. Such obfuscated program should prevent any effective attacker from learning anything she could not learn if she only had an oracle access to the program.
 	
-	\begin{defn}[Program obfuscator, taken from \cite{barak2001possibility}, simplified]
+	\begin{defn}[Program Obfuscator; taken from \cite{barak2001possibility}, simplified]
 	\label{def:obfus}
 		{\em Program obfuscator} is an effective (possibly randomized) algorithm, denoted by $O$, if the following three conditions hold:
 		\begin{enumerate}
@@ -46,11 +46,11 @@ The field of white-box cryptography is related to program obfuscation, which was
 
 \subsubsection{Consequences in Cryptography}
 	
-	Besides several applications in software protection, a program obfuscator would allow several exotic cryptographic constructions as well. As an example, let us mention Fully Homomorphic Encryption (also called {\em the holy grail of cryptography}, introduced in 1978 by Rivest et al.\ \cite{rivest1978data}) or transformation of a private key encryption scheme into a public key one.
+	Besides turning a cipher into a WBAC resistant variant and several applications in software protection, a program obfuscator would allow several other exotic cryptographic constructions as well. As an example, let us mention Fully Homomorphic Encryption (also called {\em the holy grail of cryptography}, introduced in 1978 by Rivest et al.\ \cite{rivest1978data}) or transformation of a private key encryption scheme into a public key one.
 
 \subsubsection{Main Result of Barak et al.}
 	
-	The main result of Barak et al.\ \cite{barak2001possibility} basically claims that there is no algorithm which would meet the criteria from Definition \ref{def:obfus}, i.e.\ {\em no generic program obfuscator exists}. Although this result might sound disappointedly, it originally claims that there exists {\em certain class} of algorithms which are unobfuscable. Hence there is no evidence that {\em any specific} algorithm is unobfuscable. This gives us the hope that there could be some algorithm implementing a block cipher which is not in this class.
+	However, the main result of Barak et al.\ \cite{barak2001possibility} basically claims that there is no algorithm which would meet the criteria from Definition \ref{def:obfus}, i.e.\ {\em no generic program obfuscator exists}. Although this result might sound disappointedly, it originally claims that there exists {\em certain class} of algorithms which are unobfuscable. Hence there is no evidence that {\em any specific} algorithm is unobfuscable. This gives us the hope that there could be some algorithm implementing a block cipher which is not in this class.
 
 \subsubsection{Going Beyond}
 	

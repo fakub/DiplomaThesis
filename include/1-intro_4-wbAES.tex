@@ -1,20 +1,20 @@
 \section{White-Box AES}
 \label{sec:wbaes}
 
-In this section we describe White-Box AES (WBAES) as introduced by Chow et al.\ \cite{chow2002aes} and revisited by Muir \cite{muir2013tutorial} (which we highly recommend). Note that it has already been broken by an interesting algebraic attack by Billet et al.\ \cite{billet2004cryptanalysis} which will be covered further in Section \ref{sec:known}.
+In this section, we describe White-Box AES (WBAES) as introduced by Chow et al.\ \cite{chow2002aes} and revisited by Muir \cite{muir2013tutorial} (which we highly recommend). Note that it has already been broken by an interesting algebraic attack by Billet et al.\ \cite{billet2004cryptanalysis}, which will be mentioned further in Section \ref{sec:known}.
 
-The core idea of WBAES is based on usage of lookup tables as outlined in Section \ref{sec:aeslookup}, these are further improved in three ways:
+The core idea of WBAES is based on lookup table implementation as outlined in Section \ref{sec:aeslookup}, these tables are further improved in three ways:
 \begin{enumerate}
-	\item the implementation is turned into fully table representation i.e.\ the key is incorporated into tables as well,
-	\item tables are wrapped around by appropriately self-vanishing random bijections, \label{item:wrap}
+	\item the implementation is turned into {\em fully} table representation, i.e.\ the key is incorporated into tables as well,
+	\item tables are wrapped around with appropriately self-vanishing random bijections, \label{item:wrap}
 	\item the boundary is extended into the containing application. \label{item:boundary}
 \end{enumerate}
-Note that Chow et al.\ introduced also White-Box DES \cite{chow2002des} but it has been broken by Jacob et al.\ \cite{jacob2002attacking} much earlier than WBAES, because it was lacking feature \ref{item:boundary} from the previous list.
+Note that Chow et al.\ introduced also White-Box DES \cite{chow2002des}, but it has been broken by Jacob et al.\ \cite{jacob2002attacking} much earlier than WBAES, because it was lacking the feature \ref{item:boundary} from the previous list.
 
-\begin{notion}
-\label{notion:table}
-	Since WBAES will heavily use lookup tables, let us introduce a simplifying notion: a table will be told to have dimensions $m\times n$ if it has $m$-bit input values and $n$-bit output values. Note that the real size (i.e.\ memory consumption) of such table is $2^m\cdot n$ bits since we need $2^m$ entries of size $n$ to treat all possible $m$-bit input values.
-\end{notion}
+\begin{notation}
+\label{notation:table}
+	Since WBAES will heavily use lookup tables, let us introduce a simplifying notation: a table will be told to have dimensions $m\times n$ if it has $m$-bit input values and $n$-bit output values. Note that the real size (i.e.\ memory consumption) of such table is $2^m\cdot n$ bits, since we need $2^m$ entries of size $n$ to treat all possible $m$-bit input values.
+\end{notation}
 
 
 % ==============================================================================
@@ -30,11 +30,15 @@ Let us first introduce some notion for the feature \ref{item:wrap} from the prev
 	Let $X$ be a transformation from $m$ bits to $n$ bits. Choose an $m$-bit bijection $F$ and an $n$-bit bijection $G$. Call $X' = G \circ X \circ F^{-1}$ an {\em encoded} version of $X$. $F$ is an {\em input encoding} and $G$ is an {\em output encoding}.
 \end{defn}
 
-Note that, given a fixed key, AES itself is a $128$-bit bijection which can obviously never be implemented as a lookup table, because its size would be $2^{128}\times 128$ bits. (On the other hand, this would be black-box equivalent -- we only know the input/output behavior.) Hence we will rather consider only a special kind of bijections -- we will use a series of smaller bijections and concatenate their outputs, a definition follows.
+\begin{note}
+	Given a fixed key, AES itself is a $128$-bit bijection, which can obviously never be implemented as a lookup table, because its size would be $2^{128}\times 128$ bits. On the other hand, this would be black-box equivalent -- we only know the input/output behavior.
+	
+	Hence we will rather only consider a special kind of bijections -- we will use a series of smaller bijections and concatenate their outputs, a definition follows.
+\end{note}
 
-\begin{defn}[Concatenated encoding]
+\begin{defn}[Concatenated Encoding]
 \label{def:concat}
-	Let $F_i$ be $n_i$-bit bijections for $i=\atob{1}{k}$ and let $n = n_1 + \ldots + n_k$. The {\em function concatenation} $F_1 \| F_2 \| \ldots \| F_k$ is the $n$-bit bijection $F$ such that $F(b) = F_1(\atob{b_1}{b_{n_1}})\| F_2(\atob{b_{n_1+1}}{b_{n_1+n_2}})\|\ldots\| F_k(\atob{b_{n_1+\ldots+n_{k-1}+1}}{b_n})$ for any $n$-bit word $b=b_1b_2\ldots b_n$ where $\|$ denotes word concatenation. Clearly $F^{-1} = F_1^{-1}\| F_2^{-1}\| \ldots \|F_k^{-1}$.
+	Let $F_i$ be $n_i$-bit bijections for $i=\atob{1}{k}$ and let $n = n_1 + \ldots + n_k$. The {\em function concatenation} $F_1 \| F_2 \| \ldots \| F_k$ is the $n$-bit bijection $F$ such that $F(b) = F_1(\atob{b_1}{b_{n_1}})\| F_2(\atob{b_{n_1+1}}{b_{n_1+n_2}})\|\ldots\| F_k(\atob{b_{n_1+\ldots+n_{k-1}+1}}{b_n})$ for any $n$-bit word $b=b_1\|b_2\|\ldots\|b_n$, where $\|$ denotes word concatenation (might be omitted). Clearly $F^{-1} = F_1^{-1}\| F_2^{-1}\| \ldots \|F_k^{-1}$.
 \end{defn}
 
 The following definition introduces the self-vanishing property of the bijections.
@@ -48,7 +52,7 @@ The following definition introduces the self-vanishing property of the bijection
 	where $F$, $G$, $H$ are bijections of appropriate size, $F$ and $H$ are {\em external encodings} (input and output encoding, respectively) and $G$ is an {\em internal encoding}.
 \end{defn}
 
-Note that, given only tables for $Y'$ and $X'$, $G$ can be totally forgotten and we are still able to compute $Y\circ X$ provided that we know the input and output encoding. Such networked encoding can be obviously applied to much longer composition of transformations and we still only need to know the input and output encoding.
+Note that, given only tables for $Y'$ and $X'$, $G$ can be totally forgotten and we are still able to compute $Y\circ X$, provided that we know the input and output encoding. Such networked encoding can be obviously applied to much longer composition of transformations and we still only need to know the input and output encoding.
 
 
 % ==============================================================================
@@ -57,7 +61,9 @@ Note that, given only tables for $Y'$ and $X'$, $G$ can be totally forgotten and
 
 \subsection{Reorded AES}
 
-In order to begin with fully-table representation, we need to reorder AES operations, so that the resulting tables can be easily composed. Let us first have a brief look at AES, see Algorithm \ref{alg:aes}. Note that we can ``move'' the forcycle one row upwards with appropriate shift of indexes in $\ExpandedKey$. Then we switch $\ShiftRows$ and $\SubBytes$ without any side-effect since $\SubBytes$ operates byte-wise. Finally we switch $\ShiftRows$ and $\AddRoundKey$ while we moreover have to apply $\ShiftRows$ on $\ExpandedKey$ so that we get equivalent algorithm. The modified version looks as follows:
+In order to begin with fully table representation, we need to reorder AES operations, so that the resulting tables can be easily composed. Let us first have a brief look at AES, see Algorithm \ref{alg:aes}.
+
+We ``move'' the forcycle on Line \ref{line:aesfor} one row upwards with appropriate shift of indexes in $\ExpandedKey$. Then we switch $\ShiftRows$ and $\SubBytes$ without any side-effect since $\SubBytes$ operates byte-wise. Finally, we switch $\ShiftRows$ and $\AddRoundKey$, while we moreover have to apply $\ShiftRows$ on $\ExpandedKey$ in order to get an equivalent algorithm. The modified version looks as follows:
 \begin{alg}
 \label{alg:reordaes}
 	~
@@ -85,45 +91,46 @@ In order to begin with fully-table representation, we need to reorder AES operat
 % ===   F U L L Y - T A B L E   R E P R E S E N T A T I O N                  ===
 % ==============================================================================
 
-\subsection{Fully-Table Representation}
+\subsection{Fully Table Representation}
 
-As outlined earlier, WBAES construction turns AES operations into table lookups only. Moreover we compose certain tables and wrap them all by internal encodings in the fashion of Definition \ref{def:netw}. WBAES generator thus inputs an AES key and a random seed and outputs key-dependent tables which serve as a WBAES instance.
+As outlined earlier, WBAES construction turns all AES operations into table lookups only. Moreover, we compose certain tables and wrap them all around with internal encodings in the fashion of Definition \ref{def:netw}. WBAES generator thus inputs an AES key and a random seed, and outputs key-dependent tables which serve as a WBAES instance.
 
 \begin{note}
 \label{note:tableinst}
-	Some tables of given type might be equal across or within rounds, but we will consider every possible instance of each table since we will give them later distinct encodings.
+	Some tables of given type (e.g.\ $\SubBytes$ table) might be equal across or within rounds, but we will consider every possible instance of each table, since we will give them later distinct encodings.
 \end{note}
 
 \subsubsection{T-Boxes}
 	
 	First we compose $\AddRoundKey$ with the subsequent $\SubBytes$ step yielding an operation referred to as $\TBox$, also denoted by $T_{i,j}^r$ for $r$-th round and $(i,j)$-th position in the state array. We get
 	\begin{equation}
-		T_{i,j}^r(x) = S(x\xor k_{sr(i,j)}^r) , \qquad i,j=\atob{0}{3},\;r=\atob{0}{8}
+		T_{i,j}^r(x) = S(x\xor k_{sr(i,j)}^r) , \qquad i,j=\atob{0}{3},\;r=\atob{0}{8} ,
 	\end{equation}
-	where $k_{sr(i,j)}^r$ stands for $\ExpandedKey$'s byte in $r$-th round at position $(i,j)$ shifted by $\ShiftRows$ (here denoted by $sr(i,j)$). The last round is treated separately as
+	where $k_{sr(i,j)}^r$ stands for $\ExpandedKey$'s byte in $r$-th round at position $(i,j)$ shifted by $\ShiftRows$ (here denoted by $sr(i,j)$). The last round is treated individually as
 	\begin{equation}
 	\label{eq:lasttbox}
 		T_{i,j}^{9}(x) = S(x\xor k_{sr(i,j)}^9) \xor k_{i,j}^{10} , \qquad i,j=\atob{0}{3} .
 	\end{equation}
 	
-	Single $\TBox$ can be implemented as an $8\times 8$ lookup table\footnote{According to Notion \ref{notion:table}.} and there are $16\cdot 10 = 160$ of them.
+	Single $\TBox$ can be implemented as an $8\times 8$ lookup table\footnote{Remind Notation \ref{notation:table}.}, and there are $16\cdot 10 = 160$ of them.
 
 \subsubsection{MixColumns}
 	
-	$\MixColumns$ (here also denoted by $\MC$) acting on a single column can be turned into four $8\times 32$ lookup tables followed by three XOR operations as outlined in Section \ref{sec:aeslookup}. Since there are $9$ uses of $\MixColumns$, each acts on $4$ columns and each such requires $4$ tables, $\MixColumns$ requires altogether $144$ tables.
+	$\MixColumns$ (here also denoted by $\MC$), acting on a single column, can be turned into four $8\times 32$ lookup tables followed by three XOR operations as outlined in Section \ref{sec:aeslookup}. Since there are $9$ uses of $\MixColumns$, each acts on $4$ columns, and each such requires $4$ tables, $\MixColumns$ requires $144$ tables altogether.
 	
-	The difference from the classical implementation is that the following XOR operations must be turned into lookup tables as well. Since the input size of such XOR operation would be $2\cdot 32$ bits, we first need to split inputs into smaller $4$-bit segments which can be treated separately. In the end we simply concatenate them obtaining the final result in the sense of Definition \ref{def:concat}. Such single XOR table is then $2\cdot 4\times 4$ and we need to perform $32/4\cdot 3=24$ such lookups per one column and per one $\MixColumns$. It follows that we need altogether $24\cdot 4\cdot 9 = 864$ tables (according to Note \ref{note:tableinst}).
+	The difference from the classical implementation is that the subsequent XOR operations must be turned into lookup tables as well. Since the input size of such XOR operation would be $2\cdot 32$ bits, we need to split inputs into smaller $4$-bit segments and treat them separately in the fashion of concatenated encoding (Definition \ref{def:concat}).
+	
+	The size of such single XOR table is then $2\cdot 4\times 4$, and we need to perform $32/4\cdot 3=24$ such lookups per one column and per one $\MixColumns$. It follows that we need altogether $24\cdot 4\cdot 9 = 864$ of such XOR tables (according to Note \ref{note:tableinst}).
 
 \subsubsection{ShiftRows}
 	
-	$\ShiftRows$ does not need table representation since it only moves bytes within the state.
-	%?% We will see later how it can be implemented.
+	$\ShiftRows$ does not need table representation, since it only moves bytes within the state.
 
 \subsubsection{Table Composition}
 	
-	Note that $\TBox$ is implemented as an $8\times 8$ table which is followed by an $8\times 32$ table of $\MixColumns$ in rounds $\atob{0}{8}$. Therefore it is reasonable to compose those appropriately subsequent tables together -- we save both space and time.
+	Note that $\TBox$ is implemented as an $8\times 8$ table, which is followed by an $8\times 32$ table of $\MixColumns$ in rounds $\atob{0}{8}$. Therefore it is reasonable to compose those appropriately subsequent tables together -- we save both space and time.
 	
-	It follows that altogether we have $144$ composed $\TBox\circ\MixColumns$ tables, $864$ XOR tables and $16$ $\TBox$ tables.
+	It follows that altogether we have $144$ composed $\TBox\circ\MixColumns$ tables, $864$ XOR tables and $16$ final round $\TBox$ tables.
 
 
 % ==============================================================================
@@ -133,22 +140,13 @@ As outlined earlier, WBAES construction turns AES operations into table lookups 
 \subsection{WBAES Construction}
 \label{sec:constrwbaes}
 
-So far we have trated all AES operations by lookup tables only. Now we will incorporate encodings as described in Section \ref{sec:encod}, which will play the role of a confusion feature, introduce a diffusion feature called {\em Mixing Bijection} and finally compose certain tables together.
+So far we have turned all AES operations into lookup tables only. Next we will incorporate encodings as described in Section \ref{sec:encod}, which will play the role of a confusion feature, introduce a diffusion feature called {\em Mixing Bijection}, and finally compose certain tables together.
 
 \subsubsection{Inserting Encodings}
 	
-	Note that the (partial) $32$-bit outputs of linear operations are first split into $4$-bit words and then two independent $4$-bit words are XORed together yielding a new $4$-bit word. Thus we can only use $4$-bit internal encodings, here denoted by $\Enc$, on both sides of each XOR. %?% in a manner of concatenated encoding, see Definition \ref{def:concat}
-	This is also the reason why input mixing bijection has been introduced -- it diffuses two $4$-bit blocks together.
+	Remind that the $32$-bit outputs of $\MixColumns$ are first split into $4$-bit words, and then two independent $4$-bit words are XORed together yielding a new $4$-bit word. Hence we are limited to use (only) $4$-bit internal encodings, here denoted by $\Enc$, on both sides of each XOR. This is the reason why {\em input mixing bijections} will be introduced -- they will diffuse two neighboring $4$-bit blocks together.
 	
-	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e.\ not the first round nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al.\ \cite{chow2002aes}, and ``plain'' stands for any intermediate result of AES (i.e.\ without being hidden by another mapping).
-	\begin{align}
-	\label{eq:wbaesflow}
-		\ldots&\rarr\underbracket{\Enc\rarr\IMB^{-1}\xrightarrow{\textnormal{plain}}\TBox\xrightarrow{\textnormal{plain}}\MB\circ\MC\rarr\Enc^{-1}}_{\textnormal{Type II}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\nonumber\\[.5em]
-		&\rarr\underbracket{\Enc\rarr\IMB\circ\MB^{-1}\rarr\Enc^{-1}}_{\textnormal{Type III}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\ldots
-	\end{align}
-	Interested reader is referred to Miur's tutorial \cite{muir2013tutorial} where they give large well-arranged figures depicting the flow in detail, including I/O bitsizes or depicting incorporation of $\ShiftRows$ operation. Note that I/O bitsizes differ across WBAES mappings, and Equation \ref{eq:wbaesflow} does not provide that information.
-	
-	%?% nechápu to moc ... a v Chow et al. to stejnak vůbec neni tak nechápu kde to Muir cucal z prstu
+	%?%
 	%~ \begin{remark}
 	%~ \label{rem:localsec}
 		%~ There is an interesting property which Chow et al.\ refer to as {\em local security}. It addresses a theoretical approach where the attacker creates a list of all possible tables for given key byte. However, it can be shown that such lists of tables are the same for all $256$ key bytes. It follows that these tables are information-theoretically secure.
@@ -156,40 +154,53 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 		%~ However, this requires manipulation of input external encoding, hence results in an AES incompatible cipher.
 	%~ \end{remark}
 
-\subsubsection{Mixing Bijection}
+\subsubsection{Mixing Bijections}
 	
-	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e.\ $32$-bit) linear bijection which is to be inserted after $\MC$ and inverted in a separate step (this is to be done before applying encodings). Since it inputs the output of $\MC$, it can be composed together yielding $\MB\circ\MC$. Note that the table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as for $\MC$ itself.
+	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e.\ $32$-bit) linear bijection, which is to be inserted after $\MC$ and inverted in a separate step (this needs to be done before applying encodings). Since it inputs the output of $\MC$, they can be composed together yielding $\MB\circ\MC$. Note that table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as previously for $\MC$.
 	
 	\begin{note}
 	\label{note:fullrank}
+		%!% potvrdit !!!
 		Chow et al.\ claim that all $4\times4$ submatrices of $\MB$ must have full rank. This requirement is related to $4$-bit encodings introduced previously.
 	\end{note}
 
-\subsubsection{Input Mixing Bijection}
+\subsubsection{Input Mixing Bijections}
 	
-	Input mixing bijection ($\IMB$) is a byte-wise variant of mixing bijection. It provides diffusion after inverting mixing bijection and before entering next $\TBox$. Since it is a linear mapping, it can be composed with inverted mixing bijection and since it is a byte-wise mapping it can be composed with $\TBox$ as well. The reason for this smaller diffusion element will be given later.
+	Input mixing bijection ($\IMB$) is a byte-wise variant of mixing bijection. It provides diffusion after inverting mixing bijection and before entering next $\TBox$. Since it is a linear mapping, it can be composed with inverted mixing bijection, and since it is a byte-wise mapping, it can be composed with $\TBox$ as well.
+	
+	The only remaining operation -- $\ShiftRows$ -- will be trated separately later.
 
+\subsubsection{Sketch of Single Round}
+	
+	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e.\ not the first round nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al.\ \cite{chow2002aes}, and ``plain'' stands for any intermediate result of the original AES (i.e.\ without being hidden by another mapping).
+	\begin{align}
+	\label{eq:wbaesflow}
+		\ldots&\rarr\underbracket{\Enc\rarr\IMB^{-1}\xrightarrow{\textnormal{plain}}\TBox\xrightarrow{\textnormal{plain}}\MB\circ\MC\rarr\Enc^{-1}}_{\textnormal{Type II}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\nonumber\\[.5em]
+		&\rarr\underbracket{\Enc\rarr\IMB\circ\MB^{-1}\rarr\Enc^{-1}}_{\textnormal{Type III}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\ldots
+	\end{align}
+	Interested reader is referred to Miur's tutorial \cite{muir2013tutorial}, where they give large and well-arranged figures depicting the flow in detail, including I/O bitsizes or depicting incorporation of $\ShiftRows$ operation. Note that I/O bitsizes differ across WBAES mappings, and Equation \ref{eq:wbaesflow} does not provide that information.
+	
 \subsubsection{ShiftRows}
 	
-	$\ShiftRows$ still only moves bytes within the state. Indeed, at the time of applying $\ShiftRows$ (i.e.\ before entering Type II table), only encoding and input mixing bijection are applied, both operate byte-wise.
+	$\ShiftRows$ only moves bytes within the state. Indeed, at the time of applying $\ShiftRows$ (i.e.\ before entering Type II table), only encoding and input mixing bijection are applied, both operate byte-wise.
 
 \subsubsection{External Encodings}
 	
-	So far we have only treated internal rounds i.e.\ rounds $\atob{1}{8}$ in reordered AES (see Algorithm \ref{alg:reordaes}). There is one more issue with tables on the very input and on the very output, these can handle either non-encoded, or appropriately encoded data. Chow et al.\ introduced {\em external encodings} for the latter and gave it a reasoning: as another level of obfuscation, encoded plaintexts and ciphertexts are used instead of raw ones; encoding can then be hidden within a larger containing application. %!% to nejde číst, srovnat s tim co psal Chow
+	So far we have only treated internal rounds, i.e.\ rounds $\atob{1}{8}$ in reordered AES (see Algorithm \ref{alg:reordaes}). There is one more issue with tables on the very input and on the very output -- these can handle either non-encoded, or appropriately encoded data. Chow et al.\ introduced {\em external encodings} for the latter and gave it a reasoning: as another level of obfuscation, encoded plaintexts and ciphertexts are used instead of raw ones; encoding can then be hidden within a larger containing application. %!% to nejde číst, srovnat s tim co psal Chow
 	
-	Let $E_k$ stand for AES encryption using key $k$, then encryption using external encodings can be seen as
+	Let $E_k$ stand for AES encryption using key $k$, then encryption using external encodings can be written as
 	\begin{equation}
 	\label{eq:extenc}
 		E_k' = G \circ E_k \circ F^{-1} ,
 	\end{equation}
-	where $G$, $F$ stand for input or output external encoding, respectively. These are basically $128$-bit bijections. Clearly, the input plaintext must first be encoded with $F$, then encrypted with $E_k'$ and finally decoded with $G^{-1}$ in order to get an equivalent of AES encryption.
+	where $G$, $F$ stand for input or output external encoding, respectively. These are basically $128$-bit bijections. Clearly, the input plaintext must first be encoded with $F$, then encrypted with $E_k'$, and finally decoded with $G^{-1}$, in order to get an equivalent of AES encryption.
 	
-	Chow et al.\ suggest to use $128$-bit linear mappings (i.e.\ analogous to mixing bijections) as external encodings. These can be obviously implemented as lookup tables in a manner similar to previously used with linear mappings i.e.\ using $16$ tables of size $8\times 128$ followed by appropriate XOR tables. Note that new, larger type of tables is required.
+	Chow et al.\ suggest to use $128$-bit linear mappings (i.e.\ analogous to mixing bijections) as external encodings. These can be obviously implemented as lookup tables in a manner similar to $\MixColumns$, i.e.\ using $16$ tables of size $8\times 128$ followed by appropriate XOR tables. Note that a new, larger type of tables is needed.
 	
 	%!% cucal jsem si to z prstu, tak schvalně kde najdu kontrabeispiel ...
 	\begin{description}
-		\item[Input encoding.] The very first round would normally begin with a table Type II which applies internal encoding and removes input mixing bijection. Here we can keep both: the tables implementing $128$-bit linear mapping will be all wrapped around with internal encodings except for the very input, and the $128$-bit linear mapping can be composed with a series of input mixing bijections.
-		\item[Output encoding.] The very last table operation before the final output is the special last-round $\TBox$, see Equation \ref{eq:lasttbox}. It would be normally further composed with $\MB\circ\MC$ and an internal encoding, but there is no $\MixColumns$ anymore, therefore we only apply $\MB$ and an internal encoding. As before, $\MB$ will be removed by composing a series of its inverses with output external encoding which replaces the following table Type III. Tables Type IV follow while the last table omits internal encoding.
+		\item[Input encoding.] The very first round would normally begin with a table Type II, which applies internal encoding and removes input mixing bijection. Here we will keep both: the tables implementing $128$-bit linear mapping will be all wrapped around with corresponding internal encodings except for the very input, and the $128$-bit linear mapping will be composed with a series of corresponding input mixing bijections.
+		\item[Output encoding.] The very last table operation before the final output is the special last-round $\TBox$, see Equation \ref{eq:lasttbox}. It would be normally further composed with $\MB\circ\MC$ and an internal encoding, but there is no $\MixColumns$ anymore, therefore we only apply $\MB$ and an internal encoding. As before, $\MB$ will be removed by composing a series of its inverses with output external encoding, which replaces the following table Type III. Tables Type IV follow, while the last table omits internal encoding.
 	\end{description}
 	
 	% něco o tom že external encodings jsou důležitý, bez nich by to bylo nebezpečný
@@ -203,7 +214,7 @@ So far we have trated all AES operations by lookup tables only. Now we will inco
 \subsection{Known Attacks \& Enhancements}
 \label{sec:known}
 
-As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-box implementation of a cipher somebody usually comes up with an effective attack. This is the case of WBAES introduced by Chow et al.\ \cite{chow2002aes} in 2002 as well, it was broken by Billet et al.\ \cite{billet2004cryptanalysis} two years later. The attack is called {\em BGE attack} -- it is an abbreviation of authors' names.
+As outlined in Section \ref{sec:catmouse}, sooner or later after introduction of a new white-box implementation of a cipher somebody usually comes up with an effective attack. This is the case of WBAES introduced by Chow et al.\ \cite{chow2002aes} in 2002 as well, it was broken by Billet et al.\ \cite{billet2004cryptanalysis} two years later. The attack is called {\em BGE attack} -- it is an abbreviation of authors' names.
 
 %~ Note that white-box version of DES by Chow et al.\ \cite{chow2002des} 
 %~ DES že Boneh et al. zlomil kvůli slabším okrajům, it did not take long time and wb-aes was broken as well. ... je v tomhle odolnej, ale existuje na něj BGE útok, Karroumi "vylepšil" nevylepšil
@@ -217,7 +228,7 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 		In a real-world scenario, we first need to reverse-engineer provided binary code in order to access the tables. This can make any analysis really painful -- such white-box cryptography programs are often further protected against reverse engineering effort with various techniques.
 	\end{note}
 	
-	We will not cover BGE attack in detail here, it is out of the scope of this thesis, but it motivated further research. On the one hand, BGE attack has been adapted for a broader class of ciphers by Michiels et al.\ \cite{michiels2008cryptanalysis}, on the other hand, novel white-box approaches have been introduced. Among others (e.g.\ \cite{michiels2007cryptographic, xiao2009secure}), we focus on Karroumi's contribution \cite{karroumi2010protecting}. Even though it has been shown by Klinec \cite{klinec2013white} to be equivalent to the original WBAES by Chow et al.\ \cite{chow2002aes}, it will later serve as a theoretical fundament of our contribution.
+	We will not cover BGE attack in detail here, it is out of the scope of this thesis, but it motivated further research. On the one hand, BGE attack has been adapted for a broader class of ciphers by Michiels et al.\ \cite{michiels2008cryptanalysis}, on the other hand, novel white-box approaches have been introduced. Among others (e.g.\ \cite{michiels2007cryptographic, xiao2009secure}), we focus on Karroumi's contribution \cite{karroumi2010protecting}. Even though it has been shown by Klinec \cite{klinec2013white} to be equivalent to the original WBAES by Chow et al.\ \cite{chow2002aes}, it will later support the origin of our contribution.   %?% justify
 
 \subsubsection{Karroumi's Approach with Dual Ciphers}
 	
@@ -226,9 +237,9 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 	Originally there were $240$ dual AES ciphers by Barkan et al., the list has been later extended by Raddum \cite{raddum2004more} to $9\,360$ and further by Biryukov et al.\ \cite{biryukov2003toolbox} to $61\,200$ dual AES ciphers.
 	%?% Among other constants, one may change the Rijndael field irreducible polynomial, too, which obviously leads to different field operations.
 	
-	Note that there is a simple relation between AES and dual AES: for each dual cipher, there exists a linear mapping $\Delta$ which maps a state of AES on a state of dual AES and vice versa. Since both plaintext and ciphertext are an AES state at some point, it follows that $P_{dual} = \Delta P$ and $C_{dual} = \Delta C$, moreover the same holds nontrivially for the key, i.e.\ $K_{dual} = \Delta K$.
+	Note that there is a simple relation between AES and dual AES: for each dual cipher, there exists a linear mapping $\Delta$, which maps a state of AES on a state of dual AES and vice versa. Since both plaintext and ciphertext are an AES state at some point, it follows that $P_{dual} = \Delta P$ and $C_{dual} = \Delta C$, moreover the same holds nontrivially for the key, i.e.\ $K_{dual} = \Delta K$.
 	
-	Karroumi incorporates $4\cdot 10$ distinct dual AES'es into WBAES (for each column of each round) while appropriate linear mappings $\Delta$, transforming the state of one dual AES to another, are simply composed with mixing bijections in each round. Hence the overal structure of WBAES remains unchanged. Karroumi presumes that this modification raises the complexity of BGE attack from originally $2^{30}$ to $2^{91}$ since the attacker seems to need to loop through all fourtuples of dual AES'es and run standard BGE with constants of those dual AES'es.
+	Karroumi incorporates $4\cdot 10$ distinct dual AES'es into WBAES (for each column of each round), while appropriate linear mappings $\Delta$, are simply composed with mixing bijections in each round. Hence the overal structure of WBAES remains unchanged. Karroumi presumes that this modification raises the complexity of BGE attack from originally $2^{30}$ to $2^{91}$, since the attacker seems to need to loop through all fourtuples of dual AES'es and run standard BGE with constants of those dual AES'es.
 	
 	Intuitively, since the transfer to dual cipher is only done by a linear transformation, and since each original WBAES round is wrapped around with a random linear transformation (mixing bijection), it seems that we can consider each original WBAES round as internally using a dual AES and vice versa. Klinec has shown in \cite[Proposition~2]{klinec2013white} that this is indeed true.
 
@@ -247,16 +258,16 @@ As stated in Section \ref{sec:catmouse}, soon after introduction of a new white-
 	
 	\begin{remark}
 	\label{rem:dualequiv}
-		The core observation of Klinec's proof is that equations of Karroumi's WBAES can be rewritten to the form of the original Chow's WBAES i.e.\ without using dual ciphers at all. Concretely the transformations to dual cipher and operations in dual cipher are shown to be absorbed by surrounding random bijections (namely $\IMB^{-1}\circ\Enc$ and its inverse, in addition also by $\MB$ and its inverse), yielding the original Chow's WBAES.
+		The core observation of Klinec's proof is that equations of Karroumi's WBAES can be rewritten to the form of the original Chow's WBAES, i.e.\ without using dual ciphers at all. Concretely the transformations to dual cipher and operations in dual cipher are shown to be absorbed by surrounding random bijections (namely $\IMB^{-1}\circ\Enc$ and its inverse, in addition also by $\MB$ and its inverse), yielding the original Chow's WBAES.
 	\end{remark}
 	
-	As a consequence of the previous remark, it follows that BGE attack breaks Karroumi's WBAES with the same time complexity as the original WBAES scheme -- simply because both is the same from the attack's perspective.
+	As a consequence of the previous remark, it follows that BGE attack breaks Karroumi's WBAES with the same time complexity as the original WBAES scheme -- simply because both is the same from the attacker's perspective.
 	
 	\begin{note}
 	\label{note:dualsbox}
 		Later in this thesis, we will attack Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}. We will utilize Remark \ref{rem:dualequiv} in a slightly different way.
 		
-		Remind that, among others, dual AES allows us to alter coefficients of the affine transformation inside $\SubBytes$ step. Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one i.e.\ we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
+		Remind that, among others, dual AES allows us to alter coefficients of the affine transformation inside $\SubBytes$ step. Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one, i.e.\ we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
 		%!% kurva to ale nedává vůbec smysl, dyť stejnak následuje MC a random MB, oboje lineární zobrazení (MC je ještě docela restricted, je totiž v GF(2^8), ale MB už je v GF(2) tže totál unrestricted)
 	\end{note}
 	

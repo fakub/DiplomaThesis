@@ -1,7 +1,7 @@
 \section{Enhancements of the Attack}   %?% to/of ?
 \label{sec:enhancements}
 
-In this section we present an improvement by Bos et al.\ and reproduce their results in order to have a comparison for further results. Then we generalize the improvement and finally propose our novel framework which covers all of the previous enhancements of the attack.
+In this section, we present an improvement by Bos et al.\ and reproduce their results in order to have a comparison for further results. Then we generalize the improvement and finally propose our novel framework, which covers all of the previous enhancements of the attack.
 
 
 % ==============================================================================
@@ -12,18 +12,18 @@ In this section we present an improvement by Bos et al.\ and reproduce their res
 
 WBAES by Chow et al.\ \cite{chow2002aes} has been shown by Klinec \cite{klinec2013white} to be eqivalent to Karroumi's improved version \cite{karroumi2010protecting}. Remind that Karroumi's WBAES internally uses dual AES'es, and therefore we cannot recognize which affine mapping has been used inside SBoxes; see Note \ref{note:dualsbox}.
 
-Let us first remind definition of the original SBox (Equation \ref{eq:sbox}) and also remind that the multiplication is not performed in $F$, but in the ring of binary polynomials instead:
+Let us first remind definition of the original SBox (Equation \ref{eq:sbox}), and also remind that the multiplication is not performed in $F$, but in the ring of binary polynomials instead:
 \[
 	\defsbox ,
 \]
 where $A'$ stands for Rijndael inverse of $A$.
 
-The original SBox is a specific affine mapping of Rijndael inverse of its input while in Karroumi's approach, this affine mapping is not fixed. Such a new SBox could be written as   %?% neni už to dopsaný tam dřív?
+The original SBox is a specific affine mapping of Rijndael inverse of its input, while in Karroumi's approach, this affine mapping is not fixed. Such a new SBox could be written as   %?% neni už to dopsaný tam dřív?
 \begin{equation}
 \label{eq:spq}
 	S_{p,q}(A) = p\cdot A' + q \pmod{x^8+1}
 \end{equation}
-for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously achieved for $p=1$ and $q=0$ which yields $S_{1,0}(A) = A'$ i.e.\ only a Rijndael inverse.
+for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously achieved for $p=1$ and $q=0$, which yields $S_{1,0}(A) = A'$, i.e.\ only a Rijndael inverse.
 
 \begin{remark}
 \label{rem:coprime}
@@ -44,7 +44,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 
 \begin{remark}
 \label{rem:spq}
-	Technically we only substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} of Algorithm \ref{alg:bitwisedpa} with their desired variant -- here $S_{1,0}$ --, hence yielding the following.
+	Technically we only substitute SBoxes on Line \ref{line:s0} and \ref{line:s1} of Algorithm \ref{alg:bitwisedpa} with their desired variant -- here $S_{1,0}$ --, hence yielding the following:
 	\begin{algorithmic}[1]
 		\setcounter{ALG@line}{5}
 		\State $S_0 \gets \Bigl\{ Traces[n] \Bigm| S_{1,0}\bigl(KGuess\xor PTs[n][i]\bigr)[j] = 0 \Bigr\}$
@@ -52,13 +52,6 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 	\end{algorithmic}
 	Remind that we always use precomputed SBox tables as outlined in Remark \ref{rem:attacklookup}.
 \end{remark}
-
-\begin{note}
-\label{note:target}
-	The term {\em target of the attack} or simply {\em target} will be used heavily in the following text, let us describe it a bit closer.
-	
-	Target is a function $T$ which inputs a key byte $K$ together with respective plaintext byte $P$ and outputs a byte (for now) or a single bit (later), e.g.\ $T(K,P) = S_{1,0}(K\xor P)$ in Remark \ref{rem:spq}. Target bit is just a specific bit of target's output. According to the value of target bit, traces are split into the sets $S_0$ and $S_1$ in Algorithm \ref{alg:bitwisedpa}, respectively.
-\end{note}
 
 \subsubsection{Results Using Rijndael Inverse}
 	
@@ -71,7 +64,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 			\begin{center}
 			\input{./tables/3_3_1-klinec-rijinv.tex}
 			\end{center}
-		\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target.}
+		\caption{Bit-Wise DPA attack against {\tt KlinecWBAES} using $1024$ traces, Rijndael inverse taken as the target. Percentual gap of the best candidate and rank of the correct candidate is given, for each key byte and each number of traces; see Note \ref{note:tabvals} for a full description.}
 		\label{tab:klinecrijinv}
 		\end{table}
 		\end{landscape}
@@ -79,7 +72,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 	
 	On average, there are about $27\%$ of successful strong candidates and about $30\%$ of both weak and strong ones.
 	
-	In both cases (i.e.\ Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking since the gap is very small at \nth{7} bit, and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
+	In both cases (i.e.\ Table \ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table \ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit, and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
 	
 	The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another, cf.\ \nth{9} byte in both tables.
 

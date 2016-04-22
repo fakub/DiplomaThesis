@@ -18,7 +18,7 @@
 \BOOKMARK [1][-]{section.1.4}{White-Box AES}{chapter.1}% 18
 \BOOKMARK [2][-]{subsection.1.4.1}{Encodings}{section.1.4}% 19
 \BOOKMARK [2][-]{subsection.1.4.2}{Reorded AES}{section.1.4}% 20
-\BOOKMARK [2][-]{subsection.1.4.3}{Fully-Table Representation}{section.1.4}% 21
+\BOOKMARK [2][-]{subsection.1.4.3}{Fully Table Representation}{section.1.4}% 21
 \BOOKMARK [2][-]{subsection.1.4.4}{WBAES Construction}{section.1.4}% 22
 \BOOKMARK [2][-]{subsection.1.4.5}{Known Attacks \046 Enhancements}{section.1.4}% 23
 \BOOKMARK [0][-]{chapter.2}{Using Side-Channel Attack Tools}{}% 24
@@ -50,7 +50,7 @@
 \BOOKMARK [1][-]{section.4.3}{Explanation Attempt}{chapter.4}% 50
 \BOOKMARK [0][-]{chapter.5}{Future Work}{}% 51
 \BOOKMARK [1][-]{section.5.1}{Another Interesting AES White-Box Implementation}{chapter.5}% 52
-\BOOKMARK [0][-]{section*.74}{Conclusion}{}% 53
-\BOOKMARK [0][-]{section*.76}{References}{}% 54
+\BOOKMARK [0][-]{section*.75}{Conclusion}{}% 53
+\BOOKMARK [0][-]{section*.77}{References}{}% 54
 \BOOKMARK [0][-]{Appendix.a.A}{Appendix Contents of Attached CD}{}% 55
 \BOOKMARK [0][-]{Appendix.a.B}{Appendix User Guide}{}% 56
