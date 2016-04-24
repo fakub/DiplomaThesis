@@ -1,46 +1,52 @@
 \section{Explanation Attempt}
 \label{sec:attempt}
 
-First of all, let us remind the information flow through WBAES tables (originally in Equation \ref{eq:wbaesflow}), especially its first table.
+In this section, we identify the leaking intermediate product -- we present both reasoning and experimental confirmation.
+
+First of all, let us remind the information flow through WBAES tables (originally in Equation \ref{eq:wbaesflow}), especially its first table,
 \begin{equation}
 \label{eq:wbaesfirst}
-	\ldots \rarr \underbracket{\Enc \rarr \IMB^{-1} \xrightarrow{\textnormal{plain}} \TBox \xrightarrow{\textnormal{plain}} \MB \circ \MC \rarr \Enc^{-1}}_{\textnormal{in table}} \rarr \ldots
+	\ldots \rarr \underbracket{\Enc \rarr \IMB^{-1} \xrightarrow{\textnormal{plain}} \TBox \xrightarrow{\textnormal{plain}} \MB \circ \MC \rarr \Enc^{-1}}_{\textnormal{in table}} \rarr \ldots .
 \end{equation}
-Note that the last plain AES state (denoted with ``plain'' in the previous equation) is actually an $8$-bit output of the first SBox i.e.\ the very original target. Let us see what happens next: a composed linear mapping $\MB\circ\MC$ is applied resulting in a $32$-bit output (using an idea outlined in Section \ref{sec:aeslookup}), then each $4$-bit nibble is passed through a $4$-bit random bijection $\Enc^{-1}$ (further simply $\Enc$).
+Note that the last plain AES intermediate product is actually the $8$-bit output of the first SBox, i.e.\ the very original target. Let us see what happens next: a composed linear mapping $\MB\circ\MC$ is applied resulting in a $32$-bit output (using an idea outlined in Section \ref{sec:aeslookup}), then each $4$-bit nibble is passed through a $4$-bit random bijection $\Enc^{-1}$ (further simply $\Enc$).
 
 \begin{description}
-	\item[$\MB\circ\MC$.] We can view each bit $t$ of the $32$-bit output of $\MB\circ\MC$ as a scalar product of a row $[R]^T$ of matrix representing $\MB\circ\MC$ (i.e.\ a random-like\footnote{Cannot be zero (follows from Note \ref{note:fullrank}).} $8$-bit vector) with its $8$-bit input $[S]$ which is actually an output of the first SBox. We get
+	\item[$\MB\circ\MC$.] We can view each bit $t$ of the $32$-bit output of $\MB\circ\MC$ as a binary scalar product of a row $[R]^T$ of matrix representing $\MB\circ\MC$ with its $8$-bit input $[S]$, which is actually the output of the first SBox (remind that $\MB$ is a random linear mapping with certain restrictions, i.e.\ $[R]^T$ is a non-zero random-like $8$-bit vector). We get
 	\begin{equation}
-		t = [R]^T\cdot [S] = [R]^T\cdot\Bigl( \{\texttt{1f}\}\cdot\bigl([K]+[P]\bigr)' + [\texttt{63}] \Bigr) ,
+		t = [R]^T\cdot [S] = [R]^T\cdot\Bigl( \{\texttt{1f}\}\cdot\bigl[(K+P)'\bigr] + [\texttt{63}] \Bigr) ,
 	\end{equation}
-	where $\{\cdot\}$ stands for respective binary matrix of multiplication modulo $x^8+1$ and $(\cdot)'$ for Rijndael inverse (i.e.\ there is the output of the first SBox in the big parantheses, cf.\ Equation \ref{eq:sbox}). This equation can be easily turned into the form of previously used target (Equation \ref{eq:tba}), indeed
-	\begin{align*}
-		[R]^T\cdot\Bigl( \{\texttt{1f}\}\cdot\bigl([K]+[P]\bigr)' + [\texttt{63}] \Bigr) &= \bigl([R]^T\cdot \{\texttt{1f}\}\bigr)\cdot\bigl([K]+[P]\bigr)' + \bigl([R]^T\cdot [\texttt{63}]\bigr) = \\
-		&= [\bar R]^T \cdot \bigl([K]+[P]\bigr)' + \bar r ,
-	\end{align*}
+	where $\{\cdot\}$ stands for binary matrix corresponding to multiplication modulo $x^8+1$, $(\cdot)'$ stands for Rijndael inverse, and $K$ and $P$ stand for a key byte and corresponding plaintext byte, respectively, i.e.\ there is the output of the first SBox in the big parantheses; cf.\ Equation \ref{eq:sbox}. This equation can be easily turned into the form of previously used target (Equation \ref{eq:tba}), indeed
+	\begin{align}
+	\label{eq:mbmctarget}
+		[R]^T\cdot\Bigl( \{\texttt{1f}\}\cdot\bigl[(K+P)'\bigr] + [\texttt{63}] \Bigr) &= \bigl([R]^T\cdot \{\texttt{1f}\}\bigr)\cdot\bigl[(K+P)'\bigr] + \bigl([R]^T\cdot [\texttt{63}]\bigr) = \\
+		&= [\bar R]^T \cdot \bigl[(K+P)'\bigr] + \bar r ,
+	\end{align}
 	where $\bar R$ is just a different random-like vector, which plays the role of $B$ in Equation \ref{eq:tba}, and $\bar r$ is a constant bit. Remind that additive constant does not need to be considered inside target (see Remark \ref{rem:pqeffect}). It follows that each of these $32$ bits perfectly matches some of our $255$ targets introduced in Section \ref{sec:unify}.
 	
-	%!% nebylo tu, zakamuflovat
-	Note that, even though $\MB\circ\MC$ introduces diffusion, there is no diffusion so far, because those $32$-bit intermediate results are not combined together so far. Therefore these intermediate results only depend on single input byte!
+	Note that, even though $\MB\circ\MC$ introduces diffusion, there is no diffusion so far, because those $32$-bit intermediate results have not been combined together yet. Therefore these intermediate results only depend on single byte of both key and plaintext!
 	
-	If we could observe these intermediate results, we would get the difference of means equal to $1.0$ (cf.\ attack against unprotected implementation in Section \ref{sec:naiveaes}).
+	If we could directly observe these intermediate results, we would get the difference of means equal to $1.0$ (cf.\ attack against unprotected implementation in Section \ref{sec:naiveaes}, see Note \ref{note:unprotect}).
 \end{description}
 \begin{remark}
 \label{rem:enc}
 	It follows that the protection against our $255$ targets is fully and solely accomplished by $\Enc$.
 \end{remark}
 \begin{description}
-	\item[$\Enc$.] Remind that $\Enc$ is a (only) $4$-bit random bijection. Note that, unlike confusion elements in regular ciphers (e.g.\ SBox in AES), there is no nonlinearity check\footnote{Linearity in ciphers is studied by {\em linear cryptanalysis}, see e.g.\ \cite{matsui1993linear} for detail.} in WBAES by Chow et al.\ \cite{chow2002aes}.
+	\item[$\Enc$.] Remind that $\Enc$ is a (only) $4$-bit random bijection. Note that, unlike confusion elements in regular ciphers (e.g.\ SBox in AES), there is no nonlinearity check\footnote{Linearity in ciphers is studied by {\em linear cryptanalysis}, see e.g.\ \cite{matsui1993linear}.} in WBAES by Chow et al.\ \cite{chow2002aes}.
 	
-	The choice of $\Enc$ actually only relies on the fact that the ratio of affine mappings among all random bijections is extremely low (less than $0.000\,002\%$ for $4$-bit bijections). This justification is very poor since it does not even address the case where only one output bit of $\Enc$ is an affine mapping of the input!
+	The choice of $\Enc$ actually only relies on the fact that the ratio of affine mappings among all random bijections is extremely low (less than $0.000\,002\%$ for $4$-bit bijections). This justification is very poor, since it does not even address the case where one output bit of $\Enc$ is an affine mapping of the input!
 	
-	There are actually quite many bijections which are affine in single output bit. Indeed, there are $2\cdot4\cdot(2^4-1)\cdot8!\cdot8! \approx 2\cdot10^{11}$ of them among $16! \approx 2\cdot10^{13}$ bijections on $4$-bits altogether which already makes some $1\%$ ratio! Also note that in such case, the maximum difference of means would be still $1.0$ since this affine mapping could be composed with the previous affine mappings yielding an affine mapping again.
+	There are actually quite many bijections which are affine in single output bit. Indeed, there are $2\cdot4\cdot(2^4-1)\cdot8!\cdot8! \approx 2\cdot10^{11}$ of them among $16! \approx 2\cdot10^{13}$ bijections on $4$-bits altogether, which already makes some $1\%$ ratio! Also note that in such case, the maximum difference of means would be still $1.0$, since this affine mapping could be composed with the previous affine mappings yielding an affine mapping again.
 	
-	But we do not necessarily need a fully affine mapping at some bit, it would be sufficient if the mapping were affine for most inputs. Clearly, there are much more such mappings. For this reason, this intermediate result of WBAES seems to be most likely that which causes the leakage.
+	But we do not necessarily even need a fully affine mapping at some bit -- it would be sufficient if the mapping were affine for most inputs. Clearly, there are much more such mappings. For this reason, this intermediate result of WBAES seems to be most likely that which causes the leakage.
 \end{description}
 
-To support our hypothesis, we modified the source code of {\tt KlinecWBAES} to output these intermediate products (i.e.\ outputs of the first Type II tables, see Equation \ref{eq:wbaesflow}) and ran the attack with these values instead of memory traces. The attack indeed succeeded, which fully supports our explanation.
+In order to support our hypothesis, we modified the source code of {\tt KlinecWBAES} to output these intermediate products (i.e.\ outputs of the first Type II tables, see Equation \ref{eq:wbaesflow}) and ran the attack using these values instead of memory traces. The attack indeed succeeded, which fully supports our explanation.
 
-However, we noticed an interesting thing: leaking bits, as introduced in Note \ref{note:leakbit}, appear to be uniform in this case!
+\begin{note}
+	Our explanation further appears to support our conjecture on uniform distribution of success rates across targets as introduced in Remark \ref{rem:uniform}. Indeed, there is no evidence of preference of any target, which is the role of $R$ in Equation \ref{eq:mbmctarget}, further possibly composed with partially linear $\Enc$. However, we do not prove it rigorously.
+	
+	On the other hand, we noticed an interesting difference from our previous results: leaking bits, as introduced in Note \ref{note:leakbit} and unlike previous observations (see Figure \ref{fig:leakbitall}), appear to be uniform in this case! We still do not have any explanation for this behavior.
+\end{note}
 
-% perla (jakože fakt nebrat vážně): Note that a random bijection is extremely unlikely to provide any correlation between any input and output bit.
+% legacy perla (jakože fakt nebrat vážně): Note that a random bijection is extremely unlikely to provide any correlation between any input and output bit.

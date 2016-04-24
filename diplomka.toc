@@ -73,21 +73,21 @@
 \contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{45}{section*.51}
 \contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{46}{subsection.3.2.2}
 \contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt KlinecWBAES}}{46}{section*.53}
-\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{46}{section.3.3}
+\contentsline {section}{\numberline {3.3}Enhancements of the Attack}{48}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{48}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{48}{subsection.3.3.2}
 \contentsline {subsubsection}{Results Using Rijndael Inverse}{49}{section*.55}
 \contentsline {subsection}{\numberline {3.3.3}Considering Another Targets}{49}{subsection.3.3.3}
 \contentsline {subsubsection}{Results Using the 16 Targets}{51}{section*.58}
 \contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{51}{subsection.3.3.4}
-\contentsline {subsection}{\numberline {3.3.5}Unifying Approach in $\mathrm {GF}(2)^8$}{55}{subsection.3.3.5}
-\contentsline {subsubsection}{Implementation Note}{56}{section*.62}
+\contentsline {subsection}{\numberline {3.3.5}Unifying Approach in $\mathrm {GF}(2)^8$}{53}{subsection.3.3.5}
+\contentsline {subsubsection}{Implementation Note}{55}{section*.62}
 \contentsline {chapter}{\numberline {4}Analysis of the Attack against WBAES}{57}{chapter.4}
 \contentsline {section}{\numberline {4.1}Blind Attack}{57}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Remarks}{58}{subsection.4.1.1}
 \contentsline {subsubsection}{Success Rate of Individual Targets}{58}{section*.63}
 \contentsline {paragraph}{Group by corresponding $p$.}{58}{section*.64}
-\contentsline {paragraph}{Group with fixed $4$ bits of $B$.}{58}{section*.66}
+\contentsline {paragraph}{Group by fixed $4$ bits of $B$.}{58}{section*.66}
 \contentsline {subsubsection}{Incorrect Candidates}{59}{section*.68}
 \contentsline {paragraph}{Gaps of incorrect candidates.}{59}{section*.69}
 \contentsline {paragraph}{Number of repetitions of false positives.}{60}{section*.70}
@@ -95,8 +95,8 @@
 \contentsline {subsubsection}{Within-Trace Position of Leaks}{60}{section*.73}
 \contentsline {subsection}{\numberline {4.1.2}Blind Attack Suggestion}{61}{subsection.4.1.2}
 \contentsline {section}{\numberline {4.2}Use in White-Box Cryptography Design}{62}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Leaking Intermediate Product}{62}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Countermeasures against DCA}{63}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.1}Point of Leakage}{62}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Countermeasures against DCA}{62}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Explanation Attempt}{63}{section.4.3}
 \contentsline {chapter}{\numberline {5}Future Work}{67}{chapter.5}
 \contentsline {section}{\numberline {5.1}Another Interesting AES White-Box Implementation}{67}{section.5.1}
