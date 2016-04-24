@@ -100,6 +100,7 @@
 \contentsline {section}{\numberline {4.3}Explanation Attempt}{63}{section.4.3}
 \contentsline {chapter}{\numberline {5}Future Work}{67}{chapter.5}
 \contentsline {section}{\numberline {5.1}Another Interesting AES White-Box Implementation}{67}{section.5.1}
+\contentsline {section}{\numberline {5.2}Miscellaneous Remarks}{67}{section.5.2}
 \contentsline {chapter}{Conclusion}{69}{section*.75}
 \contentsline {chapter}{References}{71}{section*.77}
 \contentsline {chapter}{Appendix \numberline {A}Contents of Attached CD}{I}{Appendix.a.A}

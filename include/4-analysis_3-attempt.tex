@@ -44,6 +44,7 @@ Note that the last plain AES intermediate product is actually the $8$-bit output
 In order to support our hypothesis, we modified the source code of {\tt KlinecWBAES} to output these intermediate products (i.e.\ outputs of the first Type II tables, see Equation \ref{eq:wbaesflow}) and ran the attack using these values instead of memory traces. The attack indeed succeeded, which fully supports our explanation.
 
 \begin{note}
+\label{note:leakbituniform}
 	Our explanation further appears to support our conjecture on uniform distribution of success rates across targets as introduced in Remark \ref{rem:uniform}. Indeed, there is no evidence of preference of any target, which is the role of $R$ in Equation \ref{eq:mbmctarget}, further possibly composed with partially linear $\Enc$. However, we do not prove it rigorously.
 	
 	On the other hand, we noticed an interesting difference from our previous results: leaking bits, as introduced in Note \ref{note:leakbit} and unlike previous observations (see Figure \ref{fig:leakbitall}), appear to be uniform in this case! We still do not have any explanation for this behavior.
