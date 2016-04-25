@@ -145,14 +145,6 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 \subsubsection{Inserting Encodings}
 	
 	Remind that the $32$-bit outputs of $\MixColumns$ are first split into $4$-bit words, and then two independent $4$-bit words are XORed together yielding a new $4$-bit word. Hence we are limited to use (only) $4$-bit internal encodings, here denoted by $\Enc$, on both sides of each XOR. This is the reason why {\em input mixing bijections} will be introduced -- they will diffuse two neighboring $4$-bit blocks together.
-	
-	%?%
-	%~ \begin{remark}
-	%~ \label{rem:localsec}
-		%~ There is an interesting property which Chow et al.\ refer to as {\em local security}. It addresses a theoretical approach where the attacker creates a list of all possible tables for given key byte. However, it can be shown that such lists of tables are the same for all $256$ key bytes. It follows that these tables are information-theoretically secure.
-		%~ 
-		%~ However, this requires manipulation of input external encoding, hence results in an AES incompatible cipher.
-	%~ \end{remark}
 
 \subsubsection{Mixing Bijections}
 	
@@ -160,8 +152,7 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 	
 	\begin{note}
 	\label{note:fullrank}
-		%!% potvrdit !!!
-		Chow et al.\ claim that all $4\times4$ submatrices of $\MB$ must have full rank. This requirement is related to $4$-bit encodings introduced previously.
+		Chow et al.\ claim that all aligned $4\times4$ submatrices of $\MB$ must have full rank. This requirement is related to using $4$-bit encodings introduced previously.
 	\end{note}
 
 \subsubsection{Input Mixing Bijections}
@@ -172,7 +163,7 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 
 \subsubsection{Sketch of Single Round}
 	
-	Let us demonstrate previous ideas in a single sketch of the flow during one inner round (i.e.\ not the first round nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al., and ``plain'' stands for any intermediate result of the original AES (i.e.\ without being hidden by another mapping).
+	Let us demonstrate previous ideas in a single sketch of the flow through one inner round (i.e.\ not the first round nor the last) showing all operations, table compositions, mixing bijections and encodings. Tables are given their names (e.g.\ Type II) as introduced by Chow et al., and ``plain'' stands for any intermediate result of the original AES (i.e.\ without being hidden by another mapping).
 	\begin{align}
 	\label{eq:wbaesflow}
 		\ldots&\rarr\underbracket{\Enc\rarr\IMB^{-1}\xrightarrow{\textnormal{plain}}\TBox\xrightarrow{\textnormal{plain}}\MB\circ\MC\rarr\Enc^{-1}}_{\textnormal{Type II}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^2\rarr\nonumber\\[.5em]
@@ -186,25 +177,28 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 
 \subsubsection{External Encodings}
 	
-	So far, we have only treated internal rounds, i.e.\ rounds $\atob{1}{8}$ in reordered AES (see Algorithm~\ref{alg:reordaes}). There is one more issue with tables on the very input and on the very output -- these can handle either non-encoded, or appropriately encoded data. Chow et al.\ introduced {\em external encodings} for the latter and gave it a reasoning: as another level of obfuscation, encoded plaintexts and ciphertexts are used instead of raw ones; encoding can then be hidden within a larger containing application. %!% to nejde číst, srovnat s tim co psal Chow
+	So far, we have only treated internal rounds, i.e.\ rounds $\atob{1}{8}$ in reordered AES (see Algorithm~\ref{alg:reordaes}). There is one more issue with tables on the very input and on the very output -- these can handle either non-encoded, or appropriately encoded data. Chow et al.\ introduced {\em external encodings} for the latter and gave it a reasoning: as another level of obfuscation, encoded plaintexts and ciphertexts are used instead of raw ones; encoding can then be hidden within a larger containing application or implemented separately.
 	
 	Let $E_k$ stand for AES encryption using key $k$, then encryption using external encodings can be written as
 	\begin{equation}
 	\label{eq:extenc}
 		E_k' = G \circ E_k \circ F^{-1} ,
 	\end{equation}
-	where $G$, $F$ stand for input or output external encoding, respectively. These are basically $128$-bit bijections. Clearly, the input plaintext must first be encoded with $F$, then encrypted with $E_k'$, and finally decoded with $G^{-1}$, in order to get an equivalent of AES encryption.
+	where $G$, $F$ stands for input and output external encoding, respectively. These are basically $128$-bit bijections. Clearly, the input plaintext must first be encoded with $F$, then encrypted with encoded variant $E_k'$, and finally decoded with $G^{-1}$, in order to get an equivalent of AES encryption.
 	
-	Chow et al.\ suggest to use $128$-bit linear mappings (i.e.\ analogous to mixing bijections) as external encodings. These can be obviously implemented as lookup tables in a manner similar to $\MixColumns$, i.e.\ using $16$ tables of size $8\times 128$ followed by appropriate XOR tables. Note that a new, larger type of tables is needed.
+	%_% NEW
+	Chow et al.\ suggest to use $128$-bit linear mappings as external encodings. These can be further composed with corresponding input mixing bijections of the first and the last round, respectively, preserving linearity.
 	
-	%!% cucal jsem si to z prstu, tak schvalně kde najdu kontrabeispiel ...
-	\begin{description}
-		\item[Input encoding.] The very first round would normally begin with a table Type II, which applies internal encoding and removes input mixing bijection. Here we will keep both: the tables implementing $128$-bit linear mapping will be all wrapped around with corresponding internal encodings except for the very input, and the $128$-bit linear mapping will be composed with a series of corresponding input mixing bijections.
-		\item[Output encoding.] The very last table operation before the final output is the special last-round $\TBox$, see Equation~\ref{eq:lasttbox}. It would be normally further composed with $\MB\circ\MC$ and an internal encoding, but there is no $\MixColumns$ anymore, therefore we only apply $\MB$ and an internal encoding. As before, $\MB$ will be removed by composing a series of its inverses with output external encoding, which replaces the following table Type III. Tables Type IV follow, while the last table omits internal encoding.
-	\end{description}
+	Such external encodings can be obviously implemented as lookup tables in a manner similar to $\MixColumns$, here using $16$ tables\footnote{A new, larger type of tables is needed.} of size $8\times 128$ followed by appropriately encoded XOR tables. Note that there are $4$ levels of XOR tables now, since we have $16$ vectors to be XORed together. Also note that the very input and output are {\em not} encoded with $\Enc$.
 	
-	% něco o tom že external encodings jsou důležitý, bez nich by to bylo nebezpečný
-	% tou muchou trpěl předchozí WBDES, taky že byl zlomenej dřív
+	See Equation~\ref{eq:extencin} and \ref{eq:extencout} for a sketch of the flow through input and output external encoding, respectively. Note that external encoding can be trivially turned off by setting $E$ and $F$ equal to identity.
+	
+	\begin{align}
+	\label{eq:extencin}
+		&\xrightarrow{\textnormal{input}}\underbracket{\IMB\circ G\rarr\Enc^{-1}}_{\textnormal{Type I}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^4\rarr\ldots\\[.5em]
+	\label{eq:extencout}
+		\ldots&\rarr\underbracket{\Enc\rarr F^{-1}\circ\IMB^{-1}\rarr\Enc^{-1}}_{\textnormal{Type I}}\rarr\Bigl(\underbracket{\Enc\rarr\xor\rarr\Enc^{-1}}_{\textnormal{Type IV}}\Bigr)^3\rarr\underbracket{\Enc\rarr\xor}_{\textnormal{Type IV}}\xrightarrow{\textnormal{output}}
+	\end{align}
 
 
 % ==============================================================================
@@ -228,14 +222,13 @@ As outlined in Section~\ref{sec:catmouse}, sooner or later after introduction of
 		In a real-world scenario, we first need to reverse-engineer provided binary code in order to access the tables. This can make any analysis really painful -- such white-box cryptography programs are often further protected against reverse engineering effort with various techniques.
 	\end{note}
 	
-	We will not cover BGE attack in detail here, it is out of the scope of this thesis, but it motivated further research. On the one hand, BGE attack has been adapted for a broader class of ciphers by Michiels et al.\ \cite{michiels2008cryptanalysis}, on the other hand, novel white-box approaches have been introduced. Among others (e.g.\ \cite{michiels2007cryptographic, xiao2009secure}), we focus on Karroumi's contribution \cite{karroumi2010protecting}. Even though it has been shown by Klinec \cite{klinec2013white} to be equivalent to the original WBAES by Chow et al., it will later support the origin of our contribution.   %?% justify
+	We will not cover BGE attack in detail here, it is out of the scope of this thesis, but it motivated further research. On the one hand, BGE attack has been adapted for a broader class of ciphers by Michiels et al.\ \cite{michiels2008cryptanalysis}, on the other hand, novel white-box approaches have been introduced. Among others (e.g.\ \cite{michiels2007cryptographic, xiao2009secure}), we focus on Karroumi's contribution \cite{karroumi2010protecting}. Even though it has been shown by Klinec \cite{klinec2013white} to be equivalent to the original WBAES by Chow et al., it will later support the origin of our contribution.
 
 \subsubsection{Karroumi's Approach with Dual Ciphers}
 	
 	Karroumi noticed that BGE attack exploits the knowledge of specific AES constants, for instance coefficients inside $\MixColumns$ (see Equation~\ref{eq:mixcolmatr}) or, more importantly, coefficients of affine transformation inside $\SubBytes$ (see Equation~\ref{eq:sbox} and Remark~\ref{rem:sboxaff}). In 2002, Barkan et al.\ \cite{barkan2002many} came up with the idea of changing these coefficients in an appropriate way and Karroumi suggested to use such modified AES as a basis for an upgraded WBAES. In general, such modified cipher is referred to as {\em dual cipher}.
 	
 	Originally there were $240$ dual AES ciphers by Barkan et al., the list has been later extended by Raddum \cite{raddum2004more} to $9\,360$ and further by Biryukov et al.\ \cite{biryukov2003toolbox} to $61\,200$ dual AES ciphers.
-	%?% Among other constants, one may change the Rijndael field irreducible polynomial, too, which obviously leads to different field operations.
 	
 	Note that there is a simple relation between AES and dual AES: for each dual cipher, there exists a linear mapping $\Delta$, which maps a state of AES on a state of dual AES and vice versa. Since both plaintext and ciphertext are an AES state at some point, it follows that $P_{dual} = \Delta P$ and $C_{dual} = \Delta C$, moreover the same holds nontrivially for the key, i.e.\ $K_{dual} = \Delta K$.
 	
@@ -268,6 +261,5 @@ As outlined in Section~\ref{sec:catmouse}, sooner or later after introduction of
 		Later in this thesis, we will attack Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al. We will utilize Remark~\ref{rem:dualequiv} in a slightly different way.
 		
 		Remind that, among others, dual AES allows us to alter coefficients of the affine transformation inside $\SubBytes$ step. Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one, i.e.\ we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
-		%!% kurva to ale nedává vůbec smysl, dyť stejnak následuje MC a random MB, oboje lineární zobrazení (MC je ještě docela restricted, je totiž v GF(2^8), ale MB už je v GF(2) tže totál unrestricted)
 	\end{note}
 	

@@ -22,7 +22,6 @@ In order to perform a blind attack, we studied our results deeper -- we were par
 \subsection{Remarks}
 \label{sec:remarks}
 
-%~ We decided to create another {\tt KlinecWBAES} table instantiations in order to have larger data set. Note that for each instance we have $16$ independent tables -- one for each byte since %?% neni to podle mě uplně nezávislý ptž MC je před MB tže dycky aspon 4 byty jsou provázaný
 We obviously cannot make conclusions based on a single {\tt KlinecWBAES} table instantiation only. In order to avoid specific behavior of a single instance, we created another $7$ instances. Then we acquired $1024$ traces and ran the attack against each of $16$ key bytes using all $255$ targets, for each instance. Altogether we ran $16\cdot255\cdot8=32\,640$ attacks, which, together with trace acquisition and filtering, took us several hours on a regular hardware.
 
 We processed the results and displayed several statistics, here we present some of them. Note that we only considered strong candidates as introduced in Note~\ref{note:strong} (candidates with a gap greater than $10\%$).
@@ -33,7 +32,7 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 
 \subsubsection{Success Rate of Individual Targets}
 	
-	%!% přidat footnote, že ještě nevíme jak jsou nezávislý
+	%!% přidat footnote, že ještě nevíme jak jsou nezávislý (sloupečky zívislý už jsou, ale ne tolik, ale jsou ... tzn. 32 by šlo tvrdit, ale radši ne)
 	Remind that we have $255$ targets and only $8$ independent instances of tables which is quite a small data set for statistical purposes. For this reason, we rather group targets by different criteria and observe if they appear to be uniformly distributed. Note that we could possibly only refute uniformity this way, but it can still serve as reasonable justification.
 	
 	\paragraph{Group by corresponding $p$.}
@@ -213,14 +212,4 @@ In general, we suggest to use rather less traces, and repeat the attack with sev
 \begin{remark}
 \label{rem:attimpr}
 	The attack can be further improved -- we can make the bound adaptive: we begin with a lower bound, obtain some (full) key candidate and verify it. Until the candidate is correct, we keep increasing the bound and merge our previous and new results. However, we did not implement this enhanced variant.
-	%?% vyzkoušet jestli tak zlomim všechny instance
 \end{remark}
-
-% psal já / Teuwen:
-%~ > I only wonder about the reasoning why Karroumi is more than Chow since
-%~ > it seems to have been shown to be equal (based on what I wrote in my
-%~ > previous email).
-%~ 
-%~ Well I've no problem to break completely Chow with standard DCA so there
-%~ is something a bit more in Karroumi. Obviously not enough to make it
-%~ robust enough...

@@ -1,17 +1,6 @@
 \section{Introduction to Cryptography}
 \label{sec:introcrypto}
 
-%?% přesun mimo section přímo pod chapter?
-% goal: introduce crypto in a broader context, yet not too much in detail
-% starý jako lidstvo samo, bla bla, trochu ukázky z historie a jak to bylo špatný a jak se to umí lámat, security by obscurity, využívá cool matiku
-% co po crypto vlastně chci
-%~ crypto = basis for security mechanisms
-%~ CONFIDENTIALITY and much more (e.g. integrity, digital signature, anonymity) or magic: zero knowledge proof of knowledge, FHE
-%~  or a complicated construction of crypto primitives (e.g. digital currency, electronic election, electronic auction)
-%~ 1. threat model (WB vs. BB later)
-%~ 2. propose sth
-%~ 3. prove that breaking it would break an underlying hard problem
-
 In cryptography, the most typical situation is where Alice wants to communicate with Bob confidentially over an insecure channel, while Eve may eavesdrop on the channel. In the beginning, let us suppose that Alice and Bob share certain portion of secret information referred to as {\em secret key}, and both control a secure execution environment, where they intend to run their ciphering algorithm, so that Eve can only observe what they send over the channel.
 
 \begin{note}
@@ -54,7 +43,6 @@ There are two large families of ciphers -- symmetric and asymmetric ones. Shift 
 	\label{eq:correct}
 		\Pr\Bigl(D\bigl(k,E(k,m)\bigr)=m\Bigr) = 1 .
 	\end{equation}
-	%?% \footnote{In some use cases it might be useful to require only so-called {\em overwhelming} probability; not needed in this thesis.}
 \end{defn}
 \nomenclature{$\Pr(\omega)$}{Probability of the event $\omega$}
 
@@ -143,7 +131,7 @@ With this assumption, we can weaken our requirement on ciphertext from ``carries
 \end{center}
 \end{figure}
 
-\begin{note}   %!% NEW
+\begin{note}   %_% NEW
 \label{note:ambigencr}
 	The adversary is intentially allowed to provide the same plaintext over and over again. However, it follows that the challenger has to encrypt the same plaintext differently each time, otherwise there would exist a trivially winning adversary.
 	
@@ -155,7 +143,7 @@ With this assumption, we can weaken our requirement on ciphertext from ``carries
 	and win the game.
 \end{note}
 
-\begin{note}   %!% NEW
+\begin{note}   %_% NEW
 \label{note:randomize}
 	In order to achieve semantic security of a cipher, the cipher {\em must} encrypt the same plaintext differently each time. This can be achieved using randomization or counters, both approaches are practically used.
 \end{note}
@@ -187,7 +175,7 @@ Let us introduce some notion first.
 	Let $F:X\rarr Y$. {\em Oracle evaluating $F$} is a device which, given $x\in X$, evaluates and returns $F(x)$ in unit time; denoted by ${\cal O}_F$.
 \end{defn}
 
-\begin{defn}[Oracle with Limited Access]   %!% NEW
+\begin{defn}[Oracle with Limited Access]   %_% NEW
 \label{def:saoracle}
 	Let $F:X\rarr Y$ and $n\in\N$. {\em Oracle with limited access evaluating $F$} is an oracle evaluating $F$, where the number of queries is limited to $n$; denoted by ${\cal O}^{(n)}_F$.
 \end{defn}
@@ -209,7 +197,7 @@ Let us introduce some notion first.
 	\]
 \end{defn}
 
-\begin{defn}[Advantage with Limited Access]   %!% NEW
+\begin{defn}[Advantage with Limited Access]   %_% NEW
 \label{def:saadvant}
 	Let $n\in\N$. {\em Advantage with limited access} is defined as advantage, where oracles with access limited to $n$ are used instead; denoted by ${\Adv}^{(n)}$.
 \end{defn}
@@ -281,7 +269,6 @@ respectively. Stream ciphers achieve semantic security by proper initialization,
 \end{defn}
 
 \begin{note}
-	%~ For $X$ and $Y$ being a set of fixed-length strings, e.g.\ $X = Y = \{0,1\}^n$   %?%
 	Pseudorandom permutation is usually referred to as {\em block cipher}. Note that the previous definition is in some sense very similar to Definition~\ref{def:symcipher} -- it does not introduce any security requirements either.
 \end{note}
 
@@ -333,7 +320,7 @@ An example covering most introduced concepts follows.
 	It follows that such PRP is totally insecure, since there exists an adversary with overwhelming advantage, but only a negligible advantage is allowed.
 \end{example}
 
-\begin{note}   %!% NEW
+\begin{note}   %_% NEW
 \label{note:secbyobsc}
 	In the previous example, the adversary exploits the knowledge of the block cipher's internal structure -- she knows everything but the key. One could have an idea to hide the structure from the adversary, but this is actually a {\em very} bad idea. Once our construction leaks, we need to deploy a new ciphering algorithm confidentially, but we have no way to do so. Moreover, note that a secure PRP was required to be resistant to {\em all} adversaries, hence hiding your design has absolutely no theoretical support.
 	
@@ -368,7 +355,7 @@ Now we know what a secure PRP is (or a secure block cipher) -- it is based on Ga
 
 Note that PRP {\em is} a cipher (cf.\ Definition~\ref{def:symcipher} and \ref{def:prp}), so it makes sense. Indeed, given a PRP, there exists an effective algorithm evaluating it and its inverse, and also Equation~\ref{eq:correct} holds.
 
-\begin{note}   %!% NEW
+\begin{note}   %_% NEW
 \label{note:singleaccess}
 	PRP has no ambiguity, hence we will need to either limit the amount of adversary-challenger queries to one, or, equivalently, change the key after each query. If we did not do so, then there would obviously exist a trivially winning adversary as outlined in Note~\ref{note:ambigencr}.
 \end{note}
@@ -384,8 +371,8 @@ Let us modify Game~\ref{game:semsec} in a manner described in Note~\ref{note:sin
 
 Based on the previous game, let us define {\em PRP semantic security advantage} and {\em semantically secure PRP} (cf.\ Game~\ref{game:semsec}, Definition~\ref{def:ssadvant} and \ref{def:semsec}). % The difference is basically in the oracle access.
 
-%!% NEW BEGIN
-
+%_% NEW
+% BEGIN
 \begin{defn}[PRP Semantic Security Advantage]
 \label{def:prpssadvant}
 	Let $E: K\times X\rarr Y$ be a PRP, ${\cal E}_b = \{E_b:X^2\rarr Y \mid E_b(x_0,x_1) = E(k,x_b), k\in K\}$ for $b=0,1$, and $A$ an adversary. We define {\em PRP semantic security advantage} of adversary $A$ as
@@ -398,8 +385,7 @@ Based on the previous game, let us define {\em PRP semantic security advantage} 
 \label{def:semsecprp}
 	Let $E: K\times X\rarr Y$ be a PRP. Then it is called {\em semantically secure PRP} if, for {\em any} adversary $A$, the PRP semantic security advantage $\AdvPRPSS(A,E)$ is negligible.
 \end{defn}
-
-%!% END
+% END
 
 The following theorem provides a connection of Game~\ref{game:prp} and \ref{game:semsecprp}. It claims that, given a PRP $E$ winning Game~\ref{game:prp}, i.e.\ $E$ is indistinguishable from a truly random bijection, $E$ wins Game~\ref{game:semsecprp} as well, i.e.\ no adversary can distinguish encryption of $m_0$ from encryption of $m_1$.
 
@@ -493,7 +479,7 @@ Classical ciphers are designed under the assumption of black-box attack context,
 
 Gray-box attack context is closer to reality, since we do not encrypt using oracles, but rather using some physical device, which runs a specific implementation of given cipher. In the gray-box model, cipher is thus supposed to be implemented and run, while the attacker can observe some information related to cipher's intermediate results as well.
 
-Such information leaks can be modelled as a set of distributions conditioned by intermediate results and are referred to as {\em leakage model}. There is an area of theoretical cryptography studying leakages -- {\em Leakage Resilient Cryptography}. A practical attack exploiting such leaks will be described in Chapter~\ref{chap:attack} in Section~\ref{sec:side}.   %?% LRC introduced by?
+Such information leaks can be modelled as a set of distributions conditioned by intermediate results and are referred to as {\em leakage model}. There is an area of theoretical cryptography studying leakages -- {\em Leakage Resilient Cryptography}. A practical attack exploiting such leaks will be described in Chapter~\ref{chap:attack} in Section~\ref{sec:side}.
 
 \subsubsection{White-Box}
 

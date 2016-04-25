@@ -44,7 +44,7 @@
 \contentsline {subsubsection}{Sketch of Single Round}{25}{section*.30}
 \contentsline {subsubsection}{ShiftRows}{26}{section*.31}
 \contentsline {subsubsection}{External Encodings}{26}{section*.32}
-\contentsline {subsection}{\numberline {1.4.5}Known Attacks \& Enhancements}{26}{subsection.1.4.5}
+\contentsline {subsection}{\numberline {1.4.5}Known Attacks \& Enhancements}{27}{subsection.1.4.5}
 \contentsline {subsubsection}{BGE Attack}{27}{section*.33}
 \contentsline {subsubsection}{Karroumi's Approach with Dual Ciphers}{27}{section*.34}
 \contentsline {subsubsection}{Klinec's Equivalence Result}{28}{section*.35}
