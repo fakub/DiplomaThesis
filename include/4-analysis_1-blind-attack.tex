@@ -7,12 +7,12 @@ The most straightforward rule seems to be thresholding the gap of the best candi
 
 \begin{remark}
 \label{rem:false}
-	Especially note the attack against the \nth{1} byte using {\tt 3d} as a target and its last but one entry in Table \ref{tab:lintargets} -- here an incorrect candidate has a gap of almost $26\%$. It is actually the largest gap of an incorrect candidate among all targets and all bytes using this particular instance of WBAES tables. (The largest gap of an incorrect candidate ever seen was almost $35\%$!)
+	Especially note the attack against the \nth{1} byte using {\tt 3d} as a target and its last but one entry in Table~\ref{tab:lintargets} -- here an incorrect candidate has a gap of almost $26\%$. It is actually the largest gap of an incorrect candidate among all targets and all bytes using this particular instance of WBAES tables. (The largest gap of an incorrect candidate ever seen was almost $35\%$!)
 	
-	In our results, the target bits keep their original order (but reverse), therefore we can deduce the vector $B$ generating this particular target in terms of $T_B$ as introduced in Equation \ref{eq:tba}. Here it is the second row of matrix of multiplication by $\texttt{3d}\pmod{x^8+1}$, see Example \ref{ex:shiftmatrix}. Hence the vector is $B = 01011110$.
+	In our results, the target bits keep their original order (but reverse), therefore we can deduce the vector $B$ generating this particular target in terms of $T_B$ as introduced in Equation~\ref{eq:tba}. Here it is the second row of matrix of multiplication by $\texttt{3d}\pmod{x^8+1}$, see Example~\ref{ex:shiftmatrix}. Hence the vector is $B = 01011110$.
 \end{remark}
 
-In order to perform a blind attack, we studied our results deeper -- we were particularly interested in success rates of individual targets. The following section gives some of our remarks, next we suggest the blind attack itself in Section \ref{sec:subblindattack}
+In order to perform a blind attack, we studied our results deeper -- we were particularly interested in success rates of individual targets. The following section gives some of our remarks, next we suggest the blind attack itself in Section~\ref{sec:subblindattack}
 
 
 % ==============================================================================
@@ -25,7 +25,7 @@ In order to perform a blind attack, we studied our results deeper -- we were par
 %~ We decided to create another {\tt KlinecWBAES} table instantiations in order to have larger data set. Note that for each instance we have $16$ independent tables -- one for each byte since %?% neni to podle mě uplně nezávislý ptž MC je před MB tže dycky aspon 4 byty jsou provázaný
 We obviously cannot make conclusions based on a single {\tt KlinecWBAES} table instantiation only. In order to avoid specific behavior of a single instance, we created another $7$ instances. Then we acquired $1024$ traces and ran the attack against each of $16$ key bytes using all $255$ targets, for each instance. Altogether we ran $16\cdot255\cdot8=32\,640$ attacks, which, together with trace acquisition and filtering, took us several hours on a regular hardware.
 
-We processed the results and displayed several statistics, here we present some of them. Note that we only considered strong candidates as introduced in Note \ref{note:strong} (candidates with a gap greater than $10\%$).
+We processed the results and displayed several statistics, here we present some of them. Note that we only considered strong candidates as introduced in Note~\ref{note:strong} (candidates with a gap greater than $10\%$).
 
 The good news is that the overal success rate was $25\%$ (cf.\ $27\%$ and $31\%$ for our previous single-instance attack using the original SBox and Rijndael inverse, respectively), which gives us a hope that the new targets are successful, too. But our goal is to estimate rather individual success rate of each of our $255$ targets -- here the good news is that each target was successful at least once out of $16\cdot8=128$ chances.
 
@@ -38,9 +38,9 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 	
 	\paragraph{Group by corresponding $p$.}
 	
-	%~ We studied whether there is some influence of target invertibility (non-invertible targets were introduced in Section \ref{sec:noninv}).
+	%~ We studied whether there is some influence of target invertibility (non-invertible targets were introduced in Section~\ref{sec:noninv}).
 	
-	Here we make use of our former approach, and group the targets by corresponding $p$; see the transfer in Section \ref{sec:unify}. We put the results in a histogram, see Figure \ref{fig:leaktargethist}. Here we give average percentual success rate together with its standard deviation (among $8$ measurements), for each group of targets. Invertible $p$'s are shown in green, non-invertible ones are orange.
+	Here we make use of our former approach, and group the targets by corresponding $p$; see the transfer in Section~\ref{sec:unify}. We put the results in a histogram, see Figure~\ref{fig:leaktargethist}. Here we give average percentual success rate together with its standard deviation (among $8$ measurements), for each group of targets. Invertible $p$'s are shown in green, non-invertible ones are orange.
 	
 	\begin{figure}[h]
 	\begin{center}
@@ -54,7 +54,7 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 	
 	\paragraph{Group by fixed $4$ bits of $B$.}
 	
-	Another way of grouping we performed was grouping targets by fixing $4$ out of $8$ bits of their corresponding vector $B$. We fixed the first and the last $4$ bits and grouped them; see results in Figure \ref{fig:leaktargetotherhist}, where these ways of grouping are given in green and orange, respectively. Note that group index can be computed as binary AND of mask {\tt 0xf0} and {\tt 0x0f} with vector $B$, respectively.
+	Another way of grouping we performed was grouping targets by fixing $4$ out of $8$ bits of their corresponding vector $B$. We fixed the first and the last $4$ bits and grouped them; see results in Figure~\ref{fig:leaktargetotherhist}, where these ways of grouping are given in green and orange, respectively. Note that group index can be computed as binary AND of mask {\tt 0xf0} and {\tt 0x0f} with vector $B$, respectively.
 	
 	\begin{figure}[h]
 	\begin{center}
@@ -71,7 +71,7 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 
 \subsubsection{Incorrect Candidates}
 	
-	There is an inconvenience, which emerges once we do not know the key -- we do not recognize the correct candidate anymore, see Remark \ref{rem:false}. Therefore we will first observe behavior of incorrect ones in our self-controlled experiment where we know the key.
+	There is an inconvenience, which emerges once we do not know the key -- we do not recognize the correct candidate anymore, see Remark~\ref{rem:false}. Therefore we will first observe behavior of incorrect ones in our self-controlled experiment where we know the key.
 	
 	\paragraph{Gaps of incorrect candidates.}
 		
@@ -95,9 +95,9 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 
 \subsubsection{Using Less Traces}
 	
-	So far we always used $1024$ traces in our attacks, let us have a look at results of the attack with much less traces. Note that Bos et al.\ \cite{bos2015differential} used $2000$ and $500$ traces for the attack targetting the original SBox and Rijndael inverse, respectively.
+	So far, we always used $1024$ traces in our attacks, let us have a look at results of the attack with much less traces. Note that Bos et al.\ \cite{bos2015differential} used $2000$ and $500$ traces for the attack targetting the original SBox and Rijndael inverse, respectively.
 	
-	Namely, we used $128$, $256$, $384$ and $512$ traces. For each number of traces, we attacked all of our $8$ instances of {\tt KlinecWBAES}, and observed ratios of strong candidates (both correct and incorrect) and their average gap; see results in Table \ref{tab:ntraces}. Note that number of repeating false positives remains very low -- up to three.
+	Namely, we used $128$, $256$, $384$ and $512$ traces. For each number of traces, we attacked all of our $8$ instances of {\tt KlinecWBAES}, and observed ratios of strong candidates (both correct and incorrect) and their average gap; see results in Table~\ref{tab:ntraces}. Note that number of repeating false positives remains very low -- up to three.
 	
 	\begin{table}[H]
 		\begin{center}
@@ -170,7 +170,7 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 		This moduled position will be referred to as {\em leaking bit} (note the difference from target bit).
 	\end{note}
 	
-	We noticed soon that leaking bits are not very well balanced as one would expect to, therefore we put this data into a histogram; see Figure \ref{fig:leakbitall}. The histogram shows, for each leaking bit, the average number of strong correct candidates together with its standard deviation, which is surprisingly very low. Note that the histogram does not provide $y$-axis scale for similar reasons as for previous histograms.
+	We noticed soon that leaking bits are not very well balanced as one would expect to, therefore we put this data into a histogram; see Figure~\ref{fig:leakbitall}. The histogram shows, for each leaking bit, the average number of strong correct candidates together with its standard deviation, which is surprisingly very low. Note that the histogram does not provide $y$-axis scale for similar reasons as for previous histograms.
 	
 	\begin{figure}[h]
 	\begin{center}
@@ -197,16 +197,15 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 In general, we suggest to use rather less traces, and repeat the attack with several targets until the sum of strong gaps of any candidate exceeds given bound. Let us choose reasonable values for both the number of traces and the bound.
 \begin{description}
 	\item[Number of traces.]
-		In order to deduce a reasonable number of traces from results in Table \ref{tab:ntraces}, let us introduce {\em reduced cost of gap}, defined as
-		\begin{equation}
-		\label{eq:redcost}
+		In order to deduce a reasonable number of traces from results in Table~\ref{tab:ntraces}, let us introduce {\em reduced cost of gap}, defined as
+		\begin{equation*}
 			C(n, s, g) = \frac{n}{s\cdot g} ,
-		\end{equation}
+		\end{equation*}
 		where $n$ stands for the number of traces, $s$ for average success rate and $g$ for average gap of a strong candidate.
 		
 		Note that this quantity corresponds with average time of the attack. Indeed, the more traces, the longer time; the better success rate or the bigger gap, the shorter time. Hence we can use this quantity to compare expected time of the attack using different number of traces.
 		
-		According to results in Table \ref{tab:ntraces}, the best value of the reduced cost of gap was achieved for $256$ traces, therefore we suggest to use $256$ traces.
+		According to results in Table~\ref{tab:ntraces}, the best value of the reduced cost of gap was achieved for $256$ traces, therefore we suggest to use $256$ traces.
 	\item[Bound.]
 		According to our previous observation, false positives do not appear to repeat very much -- there were only a couple of repetitions for the most successful ones --, for less traces neither. Therefore we suggest to use $75\%$ as a cummulative bound, since it requires some $6$ hits for a fairly successful false positive, which appears to be hardly achievable.
 \end{description}

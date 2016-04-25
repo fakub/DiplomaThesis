@@ -22,7 +22,7 @@ Let us present this idea on a concrete attack.
 
 \subsection{Correlation Power Analysis Attack}
 
-In this section, we describe CPA attack (an advanced form of DPA attack) mounted on an unprotected AES implementation, where the attacker can measure power consumption, referred to as {\em power trace}; see Figure \ref{fig:powertrace} for an example power trace. First we show which AES intermediate result leads to immediate key recovery, then we describe how the attacker can utilize information related to this intermediate result hidden in power traces to recover the key. Remind Algorithm \ref{alg:aes} in Section \ref{sec:aes} for AES construction.
+In this section, we describe CPA attack (an advanced form of DPA attack) mounted on an unprotected AES implementation, where the attacker can measure power consumption, referred to as {\em power trace}; see Figure~\ref{fig:powertrace} for an example power trace. First we show which AES intermediate result leads to immediate key recovery, then we describe how the attacker can utilize information related to this intermediate result hidden in power traces to recover the key. Remind Algorithm~\ref{alg:aes} in Section~\ref{sec:aes} for AES construction.
 
 \begin{figure}[h]
 \begin{center}
@@ -34,7 +34,7 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 
 \subsubsection{Vulnerable Intermediate Result}
 	
-	In AES, the very first plaintext-dependent operation is $\AddRoundKey$ on Line \ref{line:addrk} of Algorithm \ref{alg:aes}, which XORs current state with the first block of expanded key. Here the state is equal to input plaintext, see Line \ref{line:stateplain}, and the first block of expanded key is equal to the original AES key, see Note \ref{note:expkey}. $\AddRoundKey$ is then usually composed with $\SubBytes$ (the following step), hence yielding
+	In AES, the very first plaintext-dependent operation is $\AddRoundKey$ on Line~\ref{line:addrk} of Algorithm~\ref{alg:aes}, which XORs current state with the first block of expanded key. Here the state is equal to input plaintext, see Line~\ref{line:stateplain}, and the first block of expanded key is equal to the original AES key, see Note~\ref{note:expkey}. $\AddRoundKey$ is then usually composed with $\SubBytes$ (the following step), hence yielding
 	\begin{equation}
 	\label{eq:byprod}
 		b = \SubBytes(k\xor m)
@@ -51,7 +51,7 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 	
 	Let us suppose that we have a plenty of such traces which are properly aligned, i.e.\ a position in the traces corresponds with a fixed position in the AES implementation. Therefore, for each byte of $b$'s, there is a position in the traces, where the power values are correlated with Hamming weights of respective bytes of respective $b$'s.
 	
-	Since we do not know actual $b$'s, we will assume that the correlation of true values of $b$'s is the highest among others, and among all positions in the traces. Note that $b_i = S(k_i\xor m_i)$, i.e.\ $b$'s only depend on respective known plaintexts $m$ and the key $k$ which is constant, therefore we will loop through key guesses and search for globally maximal correlation. And more importantly, note that we can guess the key byte-wise!
+	Since we do not know actual $b$'s, we will assume that the correlation of true values of $b$'s is the highest among others, and among all positions in the traces. Note that $b_i = S(k_i+m_i)$, i.e.\ $b$'s only depend on respective known plaintexts $m$ and the key $k$ which is constant, therefore we will loop through key guesses and search for globally maximal correlation. And more importantly, note that we can guess the key byte-wise!
 	
 	\begin{note}
 	\label{note:brutevssca}
@@ -60,7 +60,7 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 
 \subsubsection{Attack}
 	
-	The attack performs as follows: given a byte index $i=\atob{0}{15}$, we find the maximal correlation\footnote{We can rather use some other empirical meter, since correlation is quite expensive and we only need to find the key, no matter how.} (among all keyguesses $k_i$ of $i$-th byte of the key and all positions in the traces) of $HW\bigl(S(k_i\xor m_i)\bigr)$ with respective power values. $k_i$ reaching the maximum is then our top candidate. This idea is summarized in the following algorithm.
+	The attack performs as follows: given a byte index $i=\atob{0}{15}$, we find the maximal correlation\footnote{We can rather use some other empirical meter, since correlation is quite expensive and we only need to find the key, no matter how.} (among all keyguesses $k_i$ of $i$-th byte of the key and all positions in the traces) of $HW\bigl(S(k_i+m_i)\bigr)$ with respective power values. $k_i$ reaching the maximum is then our top candidate. This idea is summarized in the following algorithm.
 	
 	\begin{alg}
 	\label{alg:cpa}
@@ -90,7 +90,7 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 	
 	\begin{note}
 	\label{note:fulllist}
-		It is useful to modify the previous algorithm to output the whole list of key candidates together with their maximal correlation values for each key byte, i.e.\ the result of Line \ref{line:corr}, not only $BestKey$.
+		It is useful to modify the previous algorithm to output the whole list of key candidates together with their maximal correlation values for each key byte, i.e.\ the result of Line~\ref{line:corr}, not only $BestKey$.
 		
 		This is because if $BestKey$ is not equal to the true key, we still have a good chance to recover the key: since the true key is likely to have rather high correlation, we loop through key candidates according to their correlation values, higher first.
 		
@@ -117,9 +117,9 @@ Therefore such attacker is not limited to observing values related to Hamming we
 
 \subsubsection{Attack}
 	
-	In this attack, we proceed similarly as in the previous one, i.e.\ we loop through key guesses for each key byte and compute the respective intermediate results $b_i$; see Algirothm \ref{alg:cpa}. But instead of applying Hamming weight and computing correlation, we proceed each bit individually.
+	In this attack, we proceed similarly as in the previous one, i.e.\ we loop through key guesses for each key byte and compute the respective intermediate results $b_i$; see Algorithm~\ref{alg:cpa}. But instead of applying Hamming weight and computing correlation, we proceed each bit individually.
 	
-	Let say we are targetting the $j$-th bit of the $i$-th byte of $b$. Based on actual key guess $k_i$, we compute $j$-th bit of $b_i = S(k_i\xor m_i)$ for each trace/plaintext pair, and partition the traces based on this bit into two sets, let us denote them $S_0$ and $S_1$, respectively.
+	Let say we are targetting the $j$-th bit of the $i$-th byte of $b$. Based on actual key guess $k_i$, we compute $j$-th bit of $b_i = S(k_i+m_i)$ for each trace/plaintext pair, and partition the traces based on this bit into two sets, let us denote them $S_0$ and $S_1$, respectively.
 	
 	\begin{note}
 	\label{note:concattraces}
@@ -155,7 +155,7 @@ Therefore such attacker is not limited to observing values related to Hamming we
 	
 	\begin{note}
 	\label{note:eightlists}
-		We can modify this algorithm in a manner similar to Note \ref{note:fulllist} and \ref{note:leakpos}, and output the full record of maximal differences of means (instead of correlations previously, here it is the result of Line \ref{line:diffmean}) and their positions in traces. Note that in this case we get $8$ separate lists for each $j$, see Line \ref{line:tbcycle} in the previous algorithm. Here $j$ is referred to as {\em target bit}. We can also unravel which target bit leaks most substantially, which might be useful for further analysis purposes.
+		We can modify this algorithm in a manner similar to Note~\ref{note:fulllist} and \ref{note:leakpos}, and output the full record of maximal differences of means (instead of correlations previously, here it is the result of Line~\ref{line:diffmean}) and their positions in traces. Note that in this case we get $8$ separate lists for each $j$, see Line~\ref{line:tbcycle} in the previous algorithm. Here $j$ is referred to as {\em target bit}. We can also unravel which target bit leaks most substantially, which might be useful for further analysis purposes.
 	\end{note}
 	
 	%!% prověřit

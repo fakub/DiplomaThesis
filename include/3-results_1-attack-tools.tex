@@ -1,10 +1,10 @@
 \section{Attack Tools}
 \label{sec:tools}
 
-Since there was no open-source toolkit for the purpose of DCA described in Section \ref{sec:scawbc} at the time of writing\footnote{It was released in March 2016, see \cite{bos2016tools}. Bos et al.\ \cite{bos2015differential} published a link to this toolkit in their March 2016 revision.}, we implemented it ourselves. Our toolkit consists of several tools and subtools, see the following list.
+Since there was no open-source toolkit for the purpose of DCA described in Section~\ref{sec:scawbc} at the time of writing\footnote{It was released in March 2016, see \cite{bos2016tools}. Bos et al.\ \cite{bos2015differential} published a link to this toolkit in their March 2016 revision.}, we implemented it ourselves. Our toolkit consists of several tools and subtools, see the following list.
 
 \begin{enumerate}
-	\item Acquire traces (see Section \ref{sec:tracq}):
+	\item Acquire traces (see Section~\ref{sec:tracq}):
 	\begin{enumerate}
 		\item acquire single trace (PIN tools, modified versions of Teuwen's one \cite{teuwen2015movfuscator}),
 		\begin{enumerate}
@@ -12,9 +12,9 @@ Since there was no open-source toolkit for the purpose of DCA described in Secti
 		\end{enumerate}
 		\item manage trace acquisition (generate \& save respective plaintexts along).
 	\end{enumerate}
-	\item Filter traces (see Section \ref{sec:filter}):
+	\item Filter traces (see Section~\ref{sec:filter}):
 	\begin{enumerate}
-		\item filter constant entries \& save its mask $M_C$ (see Figure \ref{fig:constmask}),
+		\item filter constant entries \& save its mask $M_C$ (see Figure~\ref{fig:constmask}),
 		\item filter by address and temporal range,
 		\begin{enumerate}
 			\item acquire another {\em full} trace $T$ (preferably in the same terminal session),
@@ -22,15 +22,15 @@ Since there was no open-source toolkit for the purpose of DCA described in Secti
 			\item visualize $T_C$,
 			\item estimate address \& temporal range,
 			\item create another mask $M_R$ based on the range using $T_C$,
-			\item filter all traces with $M_R$ (see Remark \ref{rem:rangemask}).
+			\item filter all traces with $M_R$ (see Remark~\ref{rem:rangemask}).
 		\end{enumerate}
 	\end{enumerate}
-	\item Attack traces (see Section \ref{sec:attack}):
+	\item Attack traces (see Section~\ref{sec:attack}):
 	\begin{enumerate}
 		\item run attack,
 		\begin{enumerate}
-			\item CPA attack (Algorithm \ref{alg:cpa}), or
-			\item bit-wise DPA attack (Algorithm \ref{alg:bitwisedpa}),
+			\item CPA attack (Algorithm~\ref{alg:cpa}), or
+			\item bit-wise DPA attack (Algorithm~\ref{alg:bitwisedpa}),
 		\end{enumerate}
 		\item process results,
 		\item display results \& statistics.

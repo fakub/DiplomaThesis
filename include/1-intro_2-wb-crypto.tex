@@ -1,11 +1,11 @@
 \section{White-Box Cryptography}
 \label{sec:wbc}
 
-As we already mentioned, classical ciphers are designed with respect to black-box attack context, and even under this assumption, it has not been theoretically shown that there exists a secure one; see Section \ref{sec:provable}. We also presented gray-box and white-box attack contexts in Section \ref{sec:bbtowb} with a short reasoning of the gray-box model.
+As we already mentioned, classical ciphers are designed with respect to black-box attack context, and even under this assumption, it has not been theoretically shown that there exists a secure one; see Section~\ref{sec:provable}. We also presented gray-box and white-box attack contexts in Section~\ref{sec:bbtowb} with a short reasoning of the gray-box model.
 
 Now let us have a closer look at WBAC. As we outlined previously, the attacker is very powerful. And even though she is so powerful, she shall not be able to, besides recovering the key, turn an encryption procedure into decryption one and vice versa.
 
-Let us now justify why we are introducing so extreme case as WBAC. Probably the most intiutive motivation stems from the situation, where a malicious software ``lives'' in a device together with some software, which is intended to use confidential cryptographic material. For instance, we could use third-party keys (especially in DRM\footnote{Digital Rights Management.}). Note that another motivation will be given after we introduce required concepts (in Note \ref{note:motiv}).
+Let us now justify why we are introducing so extreme case as WBAC. Probably the most intiutive motivation stems from the situation, where a malicious software ``lives'' in a device together with some software, which is intended to use confidential cryptographic material. For instance, we could use third-party keys (especially in DRM\footnote{Digital Rights Management.}). Note that another motivation will be given after we introduce required concepts (in Note~\ref{note:motiv}).
 
 In many use cases, public key cryptography appears to work as well. However, public key (asymmetric) ciphers are far slower than symmetric ones, hence useless in many scenarios. Note that there is no known white-box variant of a public key cipher.
 
@@ -26,7 +26,7 @@ The field of white-box cryptography is closely related to program obfuscation, w
 
 \subsubsection{Program Obfuscator}
 	
-	Informally, a {\em program obfuscator} inputs a description of an algorithm (e.g.\ an input of universal Turing machine or a C code), and transforms it into a functionally equivalent obfuscated algorithm description. Such obfuscated program should prevent any effective attacker from learning anything she could not learn if she only had an oracle access to the program.
+	Informally, a {\em program obfuscator} inputs a description of an algorithm (e.g.\ an input of universal Turing machine or a C code), and transforms it into a functionally equivalent obfuscated algorithm description. Such obfuscated program should prevent any effective adversary from learning anything she could not learn if she only had an oracle access to the program.
 	
 	\begin{defn}[Program Obfuscator; taken from \cite{barak2001possibility}, simplified]
 	\label{def:obfus}
@@ -50,7 +50,7 @@ The field of white-box cryptography is closely related to program obfuscation, w
 
 \subsubsection{Main Result of Barak et al.}
 	
-	However, the main result of Barak et al.\ \cite{barak2001possibility} basically claims that there is no algorithm which would meet the criteria from Definition \ref{def:obfus}, i.e.\ {\em no generic program obfuscator exists}. Although this result might sound disappointedly, it originally claims that there exists {\em certain class} of algorithms which are unobfuscable. Hence there is no evidence that {\em any specific} algorithm is unobfuscable. This gives us the hope that there could be some algorithm implementing a block cipher which is not in this class.
+	However, the main result of Barak et al.\ basically claims that there is no algorithm which would meet the criteria from Definition~\ref{def:obfus}, i.e.\ {\em no generic program obfuscator exists}. Although this result might sound disappointedly, it originally claims that there exists {\em certain class} of algorithms which are unobfuscable. Hence there is no evidence that {\em any specific} algorithm is unobfuscable. This gives us the hope that there could be some algorithm implementing a block cipher which is not in this class.
 
 \subsubsection{Going Beyond}
 	
