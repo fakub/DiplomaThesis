@@ -32,14 +32,11 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 
 \subsubsection{Success Rate of Individual Targets}
 	
-	%!% přidat footnote, že ještě nevíme jak jsou nezávislý (sloupečky zívislý už jsou, ale ne tolik, ale jsou ... tzn. 32 by šlo tvrdit, ale radši ne)
-	Remind that we have $255$ targets and only $8$ independent instances of tables which is quite a small data set for statistical purposes. For this reason, we rather group targets by different criteria and observe if they appear to be uniformly distributed. Note that we could possibly only refute uniformity this way, but it can still serve as reasonable justification.
+	Remind that we have $255$ targets and only $8$ independent\footnote{At the moment, we do not know which intermediate product leaks, hence cannot claim which values within single instance are independent. Clearly, more of them could be possibly independent.} instances of tables, which is quite a small data set for statistical purposes. For this reason, we rather group targets by different criteria and observe if they appear to be uniformly distributed. Note that we could possibly only refute uniformity this way, but it can still serve as reasonable justification.
 	
 	\paragraph{Group by corresponding $p$.}
 	
-	%~ We studied whether there is some influence of target invertibility (non-invertible targets were introduced in Section~\ref{sec:noninv}).
-	
-	Here we make use of our former approach, and group the targets by corresponding $p$; see the transfer in Section~\ref{sec:unify}. We put the results in a histogram, see Figure~\ref{fig:leaktargethist}. Here we give average percentual success rate together with its standard deviation (among $8$ measurements), for each group of targets. Invertible $p$'s are shown in green, non-invertible ones are orange.
+	Here we make use of our former approach -- group the targets by corresponding $p$, and also study whether there is some influence of target invertibility; see the transfer in Section~\ref{sec:unify}. We put the results in a histogram, see Figure~\ref{fig:leaktargethist}. Here we give average percentual success rate together with its standard deviation (among $8$ measurements), for each group of targets. Invertible $p$'s are shown in green, non-invertible ones are orange.
 	
 	\begin{figure}[h]
 	\begin{center}

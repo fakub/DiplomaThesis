@@ -5,6 +5,11 @@ First of all, we used our toolkit to attack our straightforward C++ implementati
 
 Then we performed the most interesting attack which Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here referred to as {\tt KlinecWBAES}; see results and comments in Section~\ref{sec:klinecwbaes}.
 
+\begin{note}
+\label{note:expdes}
+	In our results, we only attacked implementations with known source codes and known key. The case of unknown key will be discussed further in Section~\ref{sec:blindattack}.
+\end{note}
+
 
 % ==============================================================================
 % ===   n a i v e A E S                                                      ===
@@ -85,7 +90,7 @@ First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not 
 	We used $1024$ traces for the attack; see results in Table~\ref{tab:klinecsbox}. In this table, we give the same values as previously in Table~\ref{tab:naiveaescpa}, see Note~\ref{note:tabvals}.
 	
 	\afterpage{
-		\clearpage   % To flush out all floats, might not be what you want
+		%~ \clearpage   % To flush out all floats, might not be what you want
 		\begin{landscape}
 		\begin{table}[h]
 			\begin{center}
@@ -106,13 +111,10 @@ First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not 
 		As already noted by Bos et al., we can see remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table~\ref{tab:klinecsbox}.
 	\end{note}
 
-% jak dlouho to běželo, že jsem zjistil adresu kde to leakuje
-
 
 % ==============================================================================
 % ===   B a c i n s k a   W B A E S +                                        ===
 % ==============================================================================
 
-% proč to s tou javou nešlo:
-% neimplementuje AES ale "zlepšenou" verzi
+%?% neimplementuje AES ale "zlepšenou" verzi
 % key-dependent SBoxy => útok tak jak je ani fungovat nemůže

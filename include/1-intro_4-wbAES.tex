@@ -210,9 +210,6 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 
 As outlined in Section~\ref{sec:catmouse}, sooner or later after introduction of a new white-box implementation of a cipher somebody usually comes up with an effective attack. This is the case of WBAES introduced by Chow et al.\ in 2002 as well, it was broken by Billet et al.\ \cite{billet2004cryptanalysis} two years later. The attack is called {\em BGE attack} -- it is an abbreviation of authors' names.
 
-%~ Note that white-box version of DES by Chow et al.\ \cite{chow2002des} 
-%~ DES že Boneh et al. zlomil kvůli slabším okrajům, it did not take long time and wb-aes was broken as well. ... je v tomhle odolnej, ale existuje na něj BGE útok, Karroumi "vylepšil" nevylepšil
-
 \subsubsection{BGE Attack}
 	
 	BGE attack is a pure algebraic attack, therefore it requires access to all tables implementing WBAES.

@@ -345,10 +345,9 @@ Hence harming rule~\ref{item:kerck} from the previous list leads to security by 
 
 
 % ==============================================================================
-% ===   P R O V A B L E   S E C U R I T Y   P R O O F S                      ===
+% ===   O U T P U T   I N D I S T .   O F   A   S E C U R E   P R P          ===
 % ==============================================================================
 
-%~ \subsection{Provable Security Proofs}
 \subsection{Output Indistinguishability of a Secure PRP}
 
 Now we know what a secure PRP is (or a secure block cipher) -- it is based on Game~\ref{game:prp}, where the aim of the adversary is to distinguish a PRP from a truly random bijection. The obvious question is, what happens if we put a secure PRP into Game~\ref{game:semsec}, where the adversary tempts to distinguish which of her two inputs has been processed.
@@ -369,7 +368,7 @@ Let us modify Game~\ref{game:semsec} in a manner described in Note~\ref{note:sin
 	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
 
-Based on the previous game, let us define {\em PRP semantic security advantage} and {\em semantically secure PRP} (cf.\ Game~\ref{game:semsec}, Definition~\ref{def:ssadvant} and \ref{def:semsec}). % The difference is basically in the oracle access.
+Based on the previous game, let us define {\em PRP semantic security advantage} and {\em semantically secure PRP} (cf.\ Game~\ref{game:semsec}, Definition~\ref{def:ssadvant} and \ref{def:semsec}). Note that the difference is basically limited oracle access.
 
 %_% NEW
 % BEGIN
@@ -441,7 +440,7 @@ The previous theorem is especially important for the idea behind its proof which
 
 
 % ==============================================================================
-% ===   P R O V A B L E   V S   R E A L - W O R L D                          ===
+% ===   P R O V A B L E   V S .   R E A L - W O R L D   S E C U R I T Y      ===
 % ==============================================================================
 
 \subsection{Provable vs. Real-World Security}
