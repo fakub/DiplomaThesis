@@ -23,7 +23,7 @@ The original SBox is a specific affine mapping of Rijndael inverse of its input,
 \label{eq:spq}
 	S_{p,q}(A) = p\cdot A' + q \pmod{x^8+1}
 \end{equation}
-for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously achieved for $p=1$ and $q=0$, which yields $S_{1,0}(A) = A'$, i.e.\ only a Rijndael inverse.
+for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously achieved for $p=1$ and $q=0$, which yields $S_{1,0}(A) = A'$, i.e., only a Rijndael inverse.
 
 \begin{remark}
 \label{rem:coprime}
@@ -55,7 +55,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 
 \subsubsection{Results Using Rijndael Inverse}
 	
-	We conducted the same attack as in Section~\ref{sec:klinecwbaes}, now with Rijndael inverse as the target (i.e.\ the simplest SBox variant); see results in Table~\ref{tab:klinecrijinv}. Note that this is the second part of successfuly reproduced results of Bos et al.
+	We conducted the same attack as in Section~\ref{sec:klinecwbaes}, now with Rijndael inverse as the target (i.e., the simplest SBox variant); see results in Table~\ref{tab:klinecrijinv}. Note that this is the second part of successfuly reproduced results of Bos et al.
 	
 	\afterpage{
 		%~ \clearpage   % To flush out all floats, might not be what you want
@@ -72,7 +72,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 	
 	On average, there are about $27\%$ of successful strong candidates and about $30\%$ of both weak and strong ones.
 	
-	In both cases (i.e.\ Table~\ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g.\ \nth{9} byte in Table~\ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit, and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
+	In both cases (i.e., Table~\ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g., \nth{9} byte in Table~\ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit, and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
 	
 	The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another; cf.\ \nth{9} byte in both tables.
 
@@ -84,7 +84,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 \subsection{Considering Another Targets}
 \label{sec:16targets}
 
-The benefit of having higher chance of breaking the key led us to the idea of using yet another invertible affine mappings inside SBoxes (see Equation~\ref{eq:spq}) besides the one of the original SBox and identity (i.e.\ those used by Bos et al.).
+The benefit of having higher chance of breaking the key led us to the idea of using yet another invertible affine mappings inside SBoxes (see Equation~\ref{eq:spq}) besides the one of the original SBox and identity (i.e., those used by Bos et al.).
 
 There seems to be plenty of them: number of $p$'s is equal to the number of binary polynomials with degree smaller than $8$ and coprime with $x^8+1$; there are $128$ of them (follows from Remark~\ref{rem:coprime}). Number of $q$'s is simply $256$, hence altogether there are $128\cdot 256 = 32\,768$ invertible affine mappings, which could be used inside SBoxes to create another targets.
 
@@ -100,7 +100,7 @@ There seems to be plenty of them: number of $p$'s is equal to the number of bina
 		\item[Effect of $p$'s.]
 			Second let us study the effect of different $p$'s. Note that $x$ is coprime with $x^8+1$ and $p$ is supposed to be coprime, too, therefore if we multiply $p$ by $x\pmod{x^8+1}$, the result is still coprime with $x^8+1$.
 			
-			Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g.\ $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g.\ $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end, so the shift is actually a cyclical shift by one.
+			Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g., $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g., $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end, so the shift is actually a cyclical shift by one.
 			
 			Remind that polynomials, which are coprime with $x^8+1$, have odd number of terms (see Remark~\ref{rem:coprime}), hence repeating multiplication by $x$ yields $8$ distinct polynomials, which we put into single equivalence class. Since there are $128$ of such coprime polynomials, we get $128/8=16$ of such classes; see Table~\ref{tab:classrepre} for representants of each class. Note that the effect is the same on bytes representing polynomials.
 			
@@ -122,7 +122,7 @@ There seems to be plenty of them: number of $p$'s is equal to the number of bina
 \label{tab:classrepre}
 \end{table}
 
-It follows that we can narrow down our attention to $16$ targets only. Indeed, our targets will be of the form $T(K,P) = S_{p,0}(K+P)$ for all representants $p$ from Table~\ref{tab:classrepre}. Remind that Bos et al.\ only used the original SBox (i.e.\ $p = \texttt{1f}$) and Rijndael inverse (i.e.\ $p = \texttt{01}$).
+It follows that we can narrow down our attention to $16$ targets only. Indeed, our targets will be of the form $T(K,P) = S_{p,0}(K+P)$ for all representants $p$ from Table~\ref{tab:classrepre}. Remind that Bos et al.\ only used the original SBox (i.e., $p = \texttt{1f}$) and Rijndael inverse (i.e., $p = \texttt{01}$).
 
 \subsubsection{Results Using the 16 Targets}
 	
@@ -167,7 +167,7 @@ As before, we only kept one representant of each class, where elements of such c
 \label{tab:classreprenoninv}
 \end{table}
 
-We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Also note that some classes include less than $8$ polynomials, e.g.\ $\texttt{11} = x^4+1$. This is because $(x^4+1)\cdot x^4 \pmod{x^8+1} = x^4+1$. For this reason, some target bits are not shown in results since their values would repeat.
+We can immediately discard {\tt 00}, because it only gives $0$ (everything would fall into $S_0$ in the attack algorithm). Also note that some classes include less than $8$ polynomials, e.g., $\texttt{11} = x^4+1$. This is because $(x^4+1)\cdot x^4 \pmod{x^8+1} = x^4+1$. For this reason, some target bits are not shown in results since their values would repeat.
 
 We attacked {\tt KlinecWBAES} using the new non-invertible targets and $1024$ traces; see results of the \nth{1} byte in Table~\ref{tab:noninvtargets}.
 
@@ -240,11 +240,11 @@ where $B\in\cal B$ stands for any non-zero vector, $(\cdot)'$ for Rijndael inver
 
 Even though this observation does not bring any new targets, its benefit is a unifying and simplifying approach. Hence we do not give any results, since these are already given in Table~\ref{tab:lintargets} and \ref{tab:noninvtargets} as explained before.
 
-We only wondered whether we should split our remarks in the following Section~\ref{sec:remarks} by the origin of the corresponding linear mapping (i.e.\ either invertible, or non-invertible) and finally decided to do so, because there could possibly emerge some surprising results.
+We only wondered whether we should split our remarks in the following Section~\ref{sec:remarks} by the origin of the corresponding linear mapping (i.e., either invertible, or non-invertible) and finally decided to do so, because there could possibly emerge some surprising results.
 
 \subsubsection{Implementation Note}
 	
-	Now, as we have $255$ targets outputting only a single bit, we have to modify our attack, i.e.\ Algorithm~\ref{alg:bitwisedpa}. We skip the forcycle on Line~\ref{line:tbcycle} and also modify the following Line~\ref{line:s0} and \ref{line:s1} into the following form:
+	Now, as we have $255$ targets outputting only a single bit, we have to modify our attack, i.e., Algorithm~\ref{alg:bitwisedpa}. We skip the forcycle on Line~\ref{line:tbcycle} and also modify the following Line~\ref{line:s0} and \ref{line:s1} into the following form:
 	\begin{algorithmic}[1]
 		\setcounter{ALG@line}{5}
 		\State $S_0 \gets \Bigl\{ Traces[n] \Bigm| T_B\bigl(KGuess, PTs[n][i]\bigr) = 0 \Bigr\}$

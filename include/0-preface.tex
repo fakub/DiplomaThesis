@@ -8,13 +8,13 @@
 % česky Předmluva ...
 % should be arresting
 
-Cryptography emerged long long time ago with the need for confidential communication in the presence of enemies -- Caesar cipher can serve as a well-known example of an ancient cipher. Cryptography also had considerable consequences in the past -- for instance, Mary, Queen of Scots, was executed back in \nth{16} century, because she was planning to assasinate Queen Elizabeth I of England and her cipher got broken. However, the most appreciable success of cryptography was definitely the breach of Nazi Germany's Enigma code, which Nazi's fortunately beleived to be unbreakable.
+Cryptography emerged long long time ago with the need for confidential communication in the presence of enemies -- Caesar cipher can serve as a well-known example of an ancient cipher. Cryptography also had considerable consequences in the past -- for instance, Mary, Queen of Scots, was executed back in \nth{16} century, because she was planning to assasinate Queen Elizabeth I of England and her cipher got broken. However, the most appreciable success of cryptography was definitely the breach of Nazi Germany's Enigma code, which they fortunately beleived to be unbreakable.
 
-Since its revival few decades ago, cryptography became a proper discipline of modern mathematics and now it covers much more than ``hiding secrets''. Indeed, there are cryptographic primitives which allow us to construct digital signatures, message authentication codes or even more complicated structures like digital currencies.
+Since its revival few decades ago, cryptography became a proper discipline of modern mathematics and now it covers much more than ``hiding secrets''. Indeed, there are cryptographic primitives that allow us to construct digital signatures, message authentication codes or even more complicated structures like digital currencies.
 
-In this thesis, we will focus on another interesting problem: let us imagine that we would like to work with confidential data in an untrusted environment. For example, we would like to let an untrusted party process our confidential data without learning anything about it, or -- which we will study in this thesis -- we would like to let anybody use our cryptographic key without being able to recover it. Such a property of an implementation of a cipher will be referred to as {\em white-box attack resistancy}. However, white-box attack resistancy appears to be quite hard to achieve.
+In this thesis, we will focus on another interesting problem: let us imagine that we would like to work with confidential data in an untrusted environment. For example, we would like to let an untrusted party process our confidential data without learning anything about it, or -- which we will study in this thesis -- we would like to let anybody use our cryptographic key without being able to recover it. Such a property of a cipher implementation will be referred to as {\em white-box attack resistance}. However, white-box attack resistance appears to be quite hard to achieve.
 
-The primary goal of this thesis is to reproduce, improve and analyze a recently introduced attack technique against white-box attack protected implementations.
+The primary goal of this thesis is to reproduce, improve and analyze a recently introduced attack technique \cite{bos2015differential} against white-box attack protected implementations.
 
 
 % ==============================================================================
@@ -25,13 +25,13 @@ The primary goal of this thesis is to reproduce, improve and analyze a recently 
 \markright{\MakeUppercase{Work Overview}}
 	\begin{description}
 		\item[Chapter~\ref{chap:intro}: \nameref{chap:intro}.] ~ \\
-			First of all, we give an introduction to cryptography and white-box cryptography. Then we present the structure of Advanced Encryption Standard (AES) -- a cipher which we will be particularly interested in during the whole thesis. Finally, we conclude this chapter with a description of an attempt for a white-box variant of AES.
+			First of all, we give an introduction to cryptography and white-box cryptography. Then we present the structure of Advanced Encryption Standard (AES) -- a cipher which we will be particularly interested in during the whole thesis. Finally, we conclude this chapter with a description of a particular design of a white-box variant of AES.
 		\item[Chapter~\ref{chap:attack}: \nameref{chap:attack}.] ~ \\
 			Next we present an attack technique which originally targets hardware leakage. However, it can be advantageously used in software scenario as well -- we describe a recent attack based on this idea.
 		\item[Chapter~\ref{chap:results}: \nameref{chap:results}.] ~ \\
-			In the third chapter, we first reproduce previous results of the attack, then we suggest our improvements and run the attack again. Finally we introduce an approach which unifies our contributions.
+			In the third chapter, we first reproduce previous results of the attack, then we suggest our improvements and run the attack again. Finally we introduce an approach that unifies our contributions.
 		\item[Chapter~\ref{chap:analysis}: \nameref{chap:analysis}.] ~ \\
-			In the fourth chapter, we present some remarks regarding the attack, then we exploit them to suggest a blind attack (i.e.\ an attack without knowing the actual key). We also mention some consequences in white-box implementation design. To conclude this chapter, we outline, justify and confirm our explanation of the attack.
+			In the fourth chapter, we present some remarks regarding the attack, then we exploit them to suggest a blind attack (i.e., an attack without knowing the actual key). We also mention some consequences in white-box implementation design. To conclude this chapter, we outline, justify and confirm our explanation of the attack.
 		\item[Chapter~\ref{chap:future}: \nameref{chap:future}.] ~ \\
 			Finally, we summarize possible topics of further research.
 	\end{description}

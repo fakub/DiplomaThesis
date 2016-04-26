@@ -1,7 +1,7 @@
 \section{Use in White-Box Cryptography Design}
 \label{sec:useindesign}
 
-The benefit of this attack is obvious -- it introduces a principially different approach to break white-box cryptography implementations. This attack may help to address weaknesses of any future white-box cryptography implementation and possibly increase its resistancy to this kind of attack.
+The benefit of this attack is obvious -- it introduces a principially different approach to break white-box cryptography implementations. This attack may help to address weaknesses of any future white-box cryptography implementation and possibly increase its resistance to this kind of attack.
 
 So far, we were only interested in results of the attack. In this section, we will study practical consequences of the attack itself. First we describe our initial effort trying to identify which intermediate product causes the leakage, then we outline some countermeasures against this attack. Both might be useful in white-box cryptography design.
 
@@ -19,7 +19,7 @@ We tried two ways of using a debugger how to find that position in source code, 
 
 One could possibly try yet another approach -- modify the source code to output directly all relevant array indexes. Note that it might be challenging to address them really all.
 
-However, we did not finally make use of this information (i.e.\ the point of leakage in source code) -- we identified the leaking intermediate product rather by a mathematical reasoning. This will be given in Section~\ref{sec:attempt}.
+However, we did not finally make use of this information (i.e., the point of leakage in source code) -- we identified the leaking intermediate product rather by a mathematical reasoning. This will be given in Section~\ref{sec:attempt}.
 
 % LEGACY !!!
 % BEGIN
@@ -44,7 +44,7 @@ However, we did not finally make use of this information (i.e.\ the point of lea
 
 Since DCA is based on an algorithm, which was originally developed for physical measurements of certain hardware emissions, we can look for some inspiration back in hardware model. There are several countermeasures, see the following list for some of them (basic ones are introduced in \cite{chari1999towards,goubin1999des}).
 \begin{description}
-	\item[Masking with random values.] Cryptographic hardware can run some unpretendable source of random data and thus mess up values in traces (i.e.\ adding a strong noise). However, there is no equivalent of noise in white-box context, since everything is is fully controlled by the attacker.
+	\item[Masking with random values.] Cryptographic hardware can run some unpretendable source of random data and thus mess up values in traces (i.e., adding a strong noise). However, there is no equivalent of noise in white-box context, since everything is is fully controlled by the attacker.
 	\item[Reordering instructions.] Remind that our algorithms required aligned traces, therefore it would be fatal if the leaking position were at several different places. However, this could be possibly overcome in white-box context -- we could achieve this by reverse engineering or, much easier, by aligning the traces with respect to instruction address trace (as outlined by Bos et al.).
 	\item[Adding random delays.] Note that random delays have very similar properties as the previous countermeasures -- it can be controlled by the attacker and it only causes a trace misalignment.
 \end{description}

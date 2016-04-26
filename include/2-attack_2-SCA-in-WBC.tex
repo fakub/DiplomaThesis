@@ -164,11 +164,11 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 			\]
 		\end{example}
 		
-		Note that address and temporal filtering brings the most substantial speedup of the whole attack, since its speed depends heavily on the size of the traces. On the other hand, it may happen that we filter our traces too much and loose valuable information, i.e.\ the attack does not succeed. In such case, we broaden the address and/or temporal range and rerun again.
+		Note that address and temporal filtering brings the most substantial speedup of the whole attack, since its speed depends heavily on the size of the traces. On the other hand, it may happen that we filter our traces too much and loose valuable information, i.e., the attack does not succeed. In such case, we broaden the address and/or temporal range and rerun again.
 		
 		Also note that there may occur several $10$-part patterns resembling $10$ AES rounds. Then we need to keep trying them all until we succeed with our attack.
 		
-		In the worst case, all our filtering attempts fail or we just cannot see any relevant pattern in the memory trace visualization. Then we omit address and temporal filtering at all and attack for instance only the first byte while, hopefuly, obtaining the position where the key leaks, i.e.\ where encryption takes place; here we employ the improved output of our SCA algorithm introduced in Note~\ref{note:leakpos}. We can look at this position in the visualization and guess some reasonable address and temporal range, use it for filtering and finally attack all $16$ bytes with much smaller traces.
+		In the worst case, all our filtering attempts fail or we just cannot see any relevant pattern in the memory trace visualization. Then we omit address and temporal filtering at all and attack for instance only the first byte while, hopefuly, obtaining the position where the key leaks, i.e., where encryption takes place; here we employ the improved output of our SCA algorithm introduced in Note~\ref{note:leakpos}. We can look at this position in the visualization and guess some reasonable address and temporal range, use it for filtering and finally attack all $16$ bytes with much smaller traces.
 
 
 % ==============================================================================
@@ -178,7 +178,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 \subsection{Attacking Traces}
 \label{sec:attack}
 
-Once the traces are acquired, possibly filtered and, most importantly, properly aligned -- it can be deduced from Note~\ref{note:filter} and achieved with ideas from Note~\ref{note:aslr} --, we can perform the attack. We can use both SCA algorithms presented in this thesis, i.e.\ Algorithm~\ref{alg:cpa} or \ref{alg:bitwisedpa}, or any other SCA algorithm of our choice.
+Once the traces are acquired, possibly filtered and, most importantly, properly aligned -- it can be deduced from Note~\ref{note:filter} and achieved with ideas from Note~\ref{note:aslr} --, we can perform the attack. We can use both SCA algorithms presented in this thesis, i.e., Algorithm~\ref{alg:cpa} or \ref{alg:bitwisedpa}, or any other SCA algorithm of our choice.
 
 \begin{remark}
 \label{rem:traceformat}
@@ -186,7 +186,7 @@ Once the traces are acquired, possibly filtered and, most importantly, properly 
 	
 	In Algorithm~\ref{alg:cpa}, the traces were supposed to carry information about Hamming weight of intermediate results, therefore the original attack must be modified to compute Hamming weights of entries of traces. It might not make much sense to compute Hamming weight of both intermediate result and trace entries and then their correlation, but this algorithm serves rather as a proof-of-concept. On the other hand, it could possibly bring some surprising results, so we employed it as well.
 	
-	In Algorithm~\ref{alg:bitwisedpa}, the traces were supposed to be a serialization of eight separate traces, which should carry only bits of information; see Note~\ref{note:concattraces}. Therefore it is crucial in this attack to consider entries of traces as separate bits, not bytes, i.e.\ {\tt [1,0,0,0,0,1,0,0, 0,1,1,0,1,1,0,0]} rather than {\tt [84, 6c]}.
+	In Algorithm~\ref{alg:bitwisedpa}, the traces were supposed to be a serialization of eight separate traces, which should carry only bits of information; see Note~\ref{note:concattraces}. Therefore it is crucial in this attack to consider entries of traces as separate bits, not bytes, i.e., {\tt [1,0,0,0,0,1,0,0, 0,1,1,0,1,1,0,0]} rather than {\tt [84, 6c]}.
 \end{remark}
 
 As outlined in the previous remark, we will consider Algorithm~\ref{alg:bitwisedpa} by default since now, unless stated otherwise.
@@ -237,16 +237,16 @@ As outlined in the previous remark, we will consider Algorithm~\ref{alg:bitwised
 		\caption{Partial results of a real experiment. The true key byte is {\tt 15} and is emphasized with angle brackets.}
 		\label{tab:gap}
 		\end{table}
-		According to the original criterion, i.e.\ picking the candidate with the highest value, we would get {\tt 09} in the \nth{5} bit column, but it is not the correct one -- in this experiment, the correct candidate does not have the highest value.
+		According to the original criterion, i.e., picking the candidate with the highest value, we would get {\tt 09} in the \nth{5} bit column, but it is not the correct one -- in this experiment, the correct candidate does not have the highest value.
 		
 		On the other hand, if we consider the gap to the second candidate and modify our criterion to take it into account, we can get the correct candidate.
 	\end{example}
 	
 	\begin{remark}
 	\label{rem:gap}
-		According to the observation in the previous example, we can modify our criterion as follows: we choose the candidate which is on the top of any list and has the biggest gap to the second candidate. Note that we can use various methods how to evaluate this gap, e.g.\ absolute or relative differences of values, and we may obtain different results.
+		According to the observation in the previous example, we can modify our criterion as follows: we choose the candidate which is on the top of any list and has the biggest gap to the second candidate. Note that we can use various methods how to evaluate this gap, e.g., absolute or relative differences of values, and we may obtain different results.
 		
-		We can further improve this rule by combining (e.g.\ summing) gaps of the same candidate when it is on the top. On the other hand, note that if the correct candidate is not on the top of any list, improving this rule does not help either.
+		We can further improve this rule by combining (e.g., summing) gaps of the same candidate when it is on the top. On the other hand, note that if the correct candidate is not on the top of any list, improving this rule does not help either.
 		
 		Similarly to the idea of Note~\ref{note:fulllist}, we can create a list of maximum $8$ candidates (one candidate from each of $8$ lists) and loop through them to find out whether the key was revealed or not.
 	\end{remark}

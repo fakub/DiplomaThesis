@@ -1,7 +1,7 @@
 \section{White-Box Cryptography}
 \label{sec:wbc}
 
-As we already mentioned, classical ciphers are designed with respect to black-box attack context, and even under this assumption, it has not been theoretically shown that there exists a secure one; see Section~\ref{sec:provable}. We also presented gray-box and white-box attack contexts in Section~\ref{sec:bbtowb} with a short reasoning of the gray-box model.
+As we already mentioned, classical ciphers are designed with respect to the black-box attack context, and even under this assumption, it has not been theoretically shown that there exists a secure one; see Section~\ref{sec:provable}. We also presented gray-box and white-box attack contexts in Section~\ref{sec:bbtowb} with a short reasoning of the gray-box model.
 
 Now let us have a closer look at WBAC. As we outlined previously, the attacker is very powerful. And even though she is so powerful, she shall not be able to, besides recovering the key, turn an encryption procedure into decryption one and vice versa.
 
@@ -9,7 +9,7 @@ Let us now justify why we are introducing so extreme case as WBAC. Probably the 
 
 In many use cases, public key cryptography appears to work as well. However, public key (asymmetric) ciphers are far slower than symmetric ones, hence useless in many scenarios. Note that there is no known white-box variant of a public key cipher.
 
-There were several attempts to introduce a ``secure'' white-box variant of a known cipher. However, most of today's commercial WBAC resistant solutions rather disobey Kerckhoffs' principle, and rely on security by obscurity and tons of software obfuscation and anti-reverse engineering techniques.
+There were several attempts to introduce a ``secure'' white-box variant of a known cipher. However, most of today's commercial WBAC resistant solutions rather disobey the Kerckhoffs' principle, and rely on security by obscurity and tons of software obfuscation and anti-reverse engineering techniques.
 
 %?% Motivation for white-box crypto, white-box crypto history, milestones   % Bos et al. to hezky shrnul
 
@@ -25,7 +25,7 @@ The field of white-box cryptography is closely related to program obfuscation, w
 
 \subsubsection{Program Obfuscator}
 	
-	Informally, a {\em program obfuscator} inputs a description of an algorithm (e.g.\ an input of universal Turing machine or a C code), and transforms it into a functionally equivalent obfuscated algorithm description. Such obfuscated program should prevent any effective adversary from learning anything she could not learn if she only had an oracle access to the program.
+	Informally, a {\em program obfuscator} inputs a description of an algorithm (e.g., an input of universal Turing machine or a C code), and transforms it into a functionally equivalent obfuscated algorithm description. Such an obfuscated program should prevent any effective adversary from learning anything she could not learn if she only had an oracle access to the program.
 	
 	\begin{defn}[Program Obfuscator; taken from \cite{barak2001possibility}, simplified]
 	\label{def:obfus}
@@ -49,7 +49,7 @@ The field of white-box cryptography is closely related to program obfuscation, w
 
 \subsubsection{Main Result of Barak et al.}
 	
-	However, the main result of Barak et al.\ basically claims that there is no algorithm which would meet the criteria from Definition~\ref{def:obfus}, i.e.\ {\em no generic program obfuscator exists}. Although this result might sound disappointedly, it originally claims that there exists {\em certain class} of algorithms which are unobfuscable. Hence there is no evidence that {\em any specific} algorithm is unobfuscable. This gives us the hope that there could be some algorithm implementing a block cipher which is not in this class.
+	However, the main result of Barak et al.\ basically claims that there is no algorithm that would meet the criteria from Definition~\ref{def:obfus}, i.e., {\em no generic program obfuscator exists}. Although this result might sound disappointedly, it originally claims that there exists {\em certain class} of algorithms which are unobfuscable. Hence there is no evidence that {\em any specific} algorithm is unobfuscable. This gives us the hope that there could be some algorithm implementing a block cipher which is not in this class.
 
 \subsubsection{Going Beyond}
 	
@@ -62,11 +62,11 @@ The field of white-box cryptography is closely related to program obfuscation, w
 % ===   C A T   A N D   M O U S E   G A M E                                  ===
 % ==============================================================================
 
-\subsection{Cat and Mouse Game}
+\subsection{Cat and Mouse Game}   %!% And
 \label{sec:catmouse}
 
 It has been conjectured that each white-box resistant implementations gets -- sooner or later -- broken.
 \begin{conj}[Chow et al.\ \cite{chow2002aes}]
 	No perfect long-term defense against white-box attacks exists.
 \end{conj}
-Therefore it reminds a cat and mouse game. In this thesis, we present both -- a white-box resistant implementation and actually two attacks against it. Note that there are another examples from the past, e.g.\ \cite{chow2002des} broken by \cite{jacob2002attacking}.
+Therefore it reminds a cat and mouse game. In this thesis, we present both -- a white-box resistant implementation and actually two attacks against it. Note that there are another examples from the past, e.g., \cite{chow2002des} broken by \cite{jacob2002attacking}.

@@ -22,7 +22,7 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 
 \subsubsection{CPA Attack against {\tt naiveAES}}
 	
-	First we attacked {\tt naiveAES} with CPA attack (i.e.\ Algorithm~\ref{alg:cpa}) using $64$, $96$ and $128$ traces, respectively; see results in Table~\ref{tab:naiveaescpa} and the following note for its description.
+	First we attacked {\tt naiveAES} with CPA attack (i.e., Algorithm~\ref{alg:cpa}) using $64$, $96$ and $128$ traces, respectively; see results in Table~\ref{tab:naiveaescpa} and the following note for its description.
 	
 	\begin{note}
 	\label{note:tabvals}
@@ -38,7 +38,7 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 		\begin{center}
 		\input{./tables/3_2_1-naiveAES-CPA.tex}
 		\end{center}
-	\caption{CPA attack against {\tt naiveAES} using different number of traces. Percentual gap of the best candidate and rank of the correct candidate is given, for each key byte and each number of traces. The rank ranges from $0$, while $0$ (i.e.\ the top position) is replaced with $\blacksquare$ or {\weak$\blacksquare$} for strong or weak candidate, respectively, in order to emphasize successful attack.}
+	\caption{CPA attack against {\tt naiveAES} using different number of traces. Percentual gap of the best candidate and rank of the correct candidate is given, for each key byte and each number of traces. The rank ranges from $0$, while $0$ (i.e., the top position) is replaced with $\blacksquare$ or {\weak$\blacksquare$} for strong or weak candidate, respectively, in order to emphasize successful attack.}
 	\label{tab:naiveaescpa}
 	\end{table}
 	
@@ -48,12 +48,12 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	\label{note:target}
 		The term {\em target of the attack} or simply {\em target} will be used heavily in the following text, let us describe it a bit closer.
 		
-		Target is a function $T$, which inputs a key byte $K$ together with respective plaintext byte $P$, and outputs a byte (for now), or a single bit (later), e.g.\ $T(K,P) = S(K+P)$ on Line~\ref{line:s0} and \ref{line:s1} of Algorithm~\ref{alg:bitwisedpa}. Target bit is just a specific bit of target's output. According to the value of target bit, traces are split into the sets $S_0$ and $S_1$, respectively.
+		Target is a function $T$, which inputs a key byte $K$ together with respective plaintext byte $P$, and outputs a byte (for now), or a single bit (later), e.g., $T(K,P) = S(K+P)$ on Line~\ref{line:s0} and \ref{line:s1} of Algorithm~\ref{alg:bitwisedpa}. Target bit is just a specific bit of target's output. According to the value of target bit, traces are split into the sets $S_0$ and $S_1$, respectively.
 	\end{note}
 
 \subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}}
 	
-	Second we performed bit-wise DPA attack (i.e.\ Algorithm~\ref{alg:bitwisedpa}) against {\tt naiveAES} using $24$ and $32$ memory traces, respectively; see results in Table~\ref{tab:naiveaesdca}. The table shows amount of leaking target bits out of $8$ of them.
+	Second we performed bit-wise DPA attack (i.e., Algorithm~\ref{alg:bitwisedpa}) against {\tt naiveAES} using $24$ and $32$ memory traces, respectively; see results in Table~\ref{tab:naiveaesdca}. The table shows amount of leaking target bits out of $8$ of them.
 	
 	\begin{note}
 	\label{note:unprotect}
@@ -108,7 +108,7 @@ First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not 
 	
 	\begin{note}
 	\label{note:tailrank}
-		As already noted by Bos et al., we can see remarkably many tail ranks (e.g.\ between $250$ and $255$) in results in Table~\ref{tab:klinecsbox}.
+		As already noted by Bos et al., we can see remarkably many tail ranks (e.g., between $250$ and $255$) in results in Table~\ref{tab:klinecsbox}.
 	\end{note}
 
 
