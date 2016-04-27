@@ -15,7 +15,7 @@ So far, we were only interested in results of the attack. In this section, we wi
 
 Note that the attack allows us to reveal concrete addresses which contributed to the key recovery. Our original intention was to find the corresponding piece of source code, and possibly deduce the intermediate product, which is later transformed into leaking memory address, -- it would most likely be used as an array index.
 
-We tried two ways of using a debugger how to find that position in source code, but neither of them gave any results. Authors of the DCA toolkit \cite{bos2016tools} were successful at this point, see their comprehensive and very technical report on a wiki page of their Deadpool repository\footnote{Direct link:\\\link{github.com/SideChannelMarvels/Deadpool/wiki/Tutorial-\%234\%3A-DCA-against-Karroumi-2010-challenge}.\\Accessed 2016-04-24.}.
+We tried two ways of using a debugger how to find that position in source code, but neither of them gave any results. Authors of the DCA toolkit \cite{bos2016tools} were successful at this point, see their comprehensive and very technical report on a wiki page of their Deadpool repository\footnote{Direct link:\\\link{github.com/SideChannelMarvels/Deadpool/wiki/Tutorial-\%234\%3A-DCA-against-Karroumi-2010-challenge}.\\Accessed: 2016-04-24.}.
 
 One could possibly try yet another approach -- modify the source code to output directly all relevant array indexes. Note that it might be challenging to address them really all.
 

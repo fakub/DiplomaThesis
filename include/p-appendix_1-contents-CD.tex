@@ -2,16 +2,19 @@
 \pagenumbering{Roman}
 \label{app:cd}
 	
-	%!% finish it!
 	\begin{description}
-		\item[\tt README] ~ \\ README file,
 		\item[\tt diploma-thesis.pdf] ~ \\ diploma thesis in Portable Document Format,
-		\item[\tt implementations/] ~ \\ folder with (white-box) AES implementations,
-		\item[\tt implementations/naiveAES/] ~ \\ Git repository -- sources of our naive AES implementation,
-		\item[\tt implementations/klinecWBAES/] ~ \\ Git repository -- sources of Klinec's WBAES implementation \cite{klinec2013implementation},
-		\item[\tt implementations/???/] ~ \\ source of magic AES white-box implementation introduced in Section~\ref{sec:magicimpl},
-		\item[\tt attack/] ~ \\ Git repository -- our attack scripts written in Ruby,
-		\item[\tt cpp\_attack/] ~ \\ Git repository -- sources of our side-channel attack tool implementing a primitive of Algorithm~\ref{alg:bitwisedpa} and its further modifications,
-		\item[\tt data/] ~ \\ folder with comprimed traces and respective results of our $8$ instantiations,
-		\item[\tt .] ~ \\ \ldots
+		\item[\tt attackTools/] ~ \\ folder with our attack tools,
+		\begin{description}
+			\item[\tt attack/] ~ \\ our attack toolkit written in Ruby, see Section~\ref{sec:tools},
+			\item[\tt BitwiseDPA/] ~ \\ C++ sources of customized bitwise DPA attack, see Algorithm~\ref{alg:bitwisedpa},
+			\item[\tt MemoryTracingTools/] ~ \\ C++ sources of memory tracing tools, see Section~\ref{sec:tracq},
+		\end{description}
+		\item[\tt implementations/] ~ \\ folder with (white-box) AES implementations and tables,
+		\begin{description}
+			\item[\tt klinecWBAES/] ~ \\ C++ sources of customized {\tt KlinecWBAES}, see Section~\ref{sec:results},
+			\item[\tt naiveAES/] ~ \\ C++ sources of {\tt naiveAES}, see Section~\ref{sec:results},
+			\item[\tt NoSuchCon2013Challenge/] ~ \\ C source of an interesting AES white-box implementation, see Section~\ref{sec:magicimpl},
+			\item[\tt WBAESTables/] ~ \\ our particular $8$ instances of {\tt KlinecWBAES} tables, see Section~\ref{sec:remarks}.
+		\end{description}
 	\end{description}

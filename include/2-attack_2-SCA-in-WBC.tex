@@ -108,7 +108,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		Filtering of constant entries typically decreases the size of the traces by tens of percent. If we did not observe any or extremely small decrease, it might have happened that the traces were not properly aligned. In such case, it might be difficult to align them. Fortunately, we did not experience this problem (we gave some advices how to avoid it in Note~\ref{note:aslr}).
 	\end{note}
 
-\subsubsection{Address and Temporal Filtering}
+\subsubsection{Address And Temporal Filtering}
 \label{subsec:atf}
 	
 	In the second stage, we will filter the traces based on visual observation. Note that for this purpose, we will need to acquire another trace with full read/write addresses for all types of memory traces, unlike Note~\ref{note:lsb}. We will refer to such trace as {\em full trace}.

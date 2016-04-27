@@ -1,11 +1,5 @@
 \begin{thebibliography}{10}
 
-\bibitem{pin214manual}
-{Pin 2.14 User Guide}.
-\newblock
-  \url{https://software.intel.com/sites/landingpage/pintool/docs/71313/Pin/html/index.html#APPDEBUG_LINUX}.
-\newblock Accessed: 2016-01-22.
-
 \bibitem{bos2016tools}
 {Side-Channel Marvels}.
 \newblock Git repositories. \url{https://github.com/SideChannelMarvels}.
@@ -117,6 +111,12 @@ C{\'e}cile Delerabl{\'e}e, Tancr{\`e}de Lepoint, Pascal Paillier, and Matthieu
 \newblock In {\em {Selected Areas in Cryptography--SAC 2013}}, pages 247--264.
   Springer, 2013.
 
+\bibitem{dierks2008transport}
+Tim Dierks.
+\newblock {The transport layer security (TLS) protocol version 1.2}.
+\newblock Online: \url{https://tools.ietf.org/html/rfc5246}, 2008.
+\newblock Accessed: 2015-03-06.
+
 \bibitem{gandolfi2001electromagnetic}
 Karine Gandolfi, Christophe Mourtel, and Francis Olivier.
 \newblock {Electromagnetic analysis: Concrete results}.
@@ -129,7 +129,7 @@ Dan Goodin.
   hijacking}.
 \newblock
   \url{http://arstechnica.com/security/2012/09/crime-hijacks-https-sessions/}.
-\newblock Accessed: 06-03-2015.
+\newblock Accessed: 2015-03-06.
 
 \bibitem{goubin1999des}
 Louis Goubin and Jacques Patarin.
@@ -212,6 +212,11 @@ Mitsuru Matsui.
 \newblock {Linear cryptanalysis method for DES cipher}.
 \newblock In {\em {Advances in Cryptology—EUROCRYPT’93}}, pages 386--397.
   Springer, 1993.
+
+\bibitem{menezes1996handbook}
+Alfred~J Menezes, Paul~C Van~Oorschot, and Scott~A Vanstone.
+\newblock {\em {Handbook of applied cryptography}}.
+\newblock CRC press, 1996.
 
 \bibitem{michiels2008cryptanalysis}
 Wil Michiels, Paul Gorissen, and Henk~DL Hollmann.

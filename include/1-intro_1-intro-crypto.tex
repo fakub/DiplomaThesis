@@ -18,8 +18,8 @@ Our first intuitive requirements on Alice's and Bob's encryption algorithm could
 The item~\ref{item:plainrecov} requirement is also referred to as {\em confidentiality}. Note that the item~\ref{item:keyrecov} requirement -- key recovery -- would lead to plaintext recovery as well, on the other hand, not necessarily the other way around. Let us give an example of a primitive cipher.
 
 \begin{example}
-\label{ex:shift}   %!% citovat ??
-	{\em Shift cipher} is an ancient cipher already used by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|{\cal A}|-1$ and adds a constant $c\in\{\atob{0}{|{\cal A}|-1}\}$ modulo $|\cal A|$ to each number. Finally, it maps the numbers back to letters yielding a string ``shifted'' by $c$, where $c$ can be interpreted as an element of $\cal A$ as well. Decryption can be achieved simply by substracting $c$ from the ciphertext in a similar way.
+\label{ex:shift}
+	{\em Shift cipher} \cite{menezes1996handbook} is an ancient cipher already used by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|{\cal A}|-1$ and adds a constant $c\in\{\atob{0}{|{\cal A}|-1}\}$ modulo $|\cal A|$ to each number. Finally, it maps the numbers back to letters yielding a string ``shifted'' by $c$, where $c$ can be interpreted as an element of $\cal A$ as well. Decryption can be achieved simply by substracting $c$ from the ciphertext in a similar way.
 	
 	Shift cipher can be easily broken by pen and paper only, since there are as many keys as letters in the alphabet, typically $26$ English letters. We simply try them all until the plaintext makes sense. Such approach is referred to as {\em brute force attack} or {\em exhaustive search}.
 \end{example}
@@ -32,7 +32,7 @@ As we could have seen in the previous example, shift cipher is not very secure c
 % ===   S Y M M E T R I C   A N D   A S Y M M E T R I C   C I P H E R        ===
 % ==============================================================================
 
-\subsection{Symmetric and Asymmetric Cipher}   %!% And
+\subsection{Symmetric And Asymmetric Cipher}
 
 There are two large families of ciphers -- symmetric and asymmetric ones. Shift cipher, introduced in Example~\ref{ex:shift}, belongs to the symmetric family, which follows from the fact that it uses the same key for both encryption and decryption, while asymmetric ciphers use distinct keys for encryption and decryption. Asymmetric ciphers are also referred to as public key ciphers, but we will only consider symmetric ciphers in this thesis; a definition follows.
 
@@ -226,12 +226,12 @@ The benefit of semantic security over perfect security is that semantic security
 Let us now give a nice real-world example, how things can go wrong if semantic security is not complied, even though the design follows common sense.
 
 \begin{example}
-\label{ex:crime}   %!% citovat TLS
-	In 2012, a combination of settings in TLS\footnote{Transport Layer Security, a cryptographic protocol.} allowed researchers to hijack a web session by cracking encrypted cookies \cite{goodin2012crime}. The problem arised when compression was followed by encryption, which actually makes sense. Let us have a look from theoretical point of view.
+\label{ex:crime}
+	In 2012, a combination of settings in TLS\footnote{Transport Layer Security, a cryptographic protocol \cite{dierks2008transport}.} allowed researchers to hijack a web session by cracking encrypted cookies \cite{goodin2012crime}. The problem arised when compression was followed by encryption, which actually makes sense. Let us have a look from theoretical point of view.
 	
 	Remind the condition of Game~\ref{game:semsec} -- it requires two plaintexts of equal length. With this assumption, the respective ciphertexts were indistinguishable. However, if the plaintext is compressed first, it can result in differently-sized inputs to the subsequent (semantically secure) cipher! This obviously harms the assumption of inputs of equal length, and may allow the adversary to distinguish the ciphertexts. Note that only very little queries (around six) were needed to attack one byte of an encrypted cookie in the practical attack!
 	
-	This vulnerability was given a CVE\footnote{Common Vulnerabilities and Exposures, a standard for information security vulnerability names, see \link{http://cve.mitre.org/}.} code CVE-2012-4929 and a human-readable name ``CRIME'' (Compression Ratio Info-leak Made Easy).
+	This vulnerability was given a CVE\footnote{Common Vulnerabilities and Exposures, a standard for information security vulnerability names, see \link{cve.mitre.org}.} code CVE-2012-4929 and a human-readable name ``CRIME'' (Compression Ratio Info-leak Made Easy).
 \end{example}
 
 \subsubsection{Shannon's Principles}
@@ -452,8 +452,7 @@ If there were, it would actually imply that $\Pclass \subsetneq \NPclass$ which 
 \nomenclature{$\Pclass$}{Deterministic polynomial complexity class i.e., the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
 \nomenclature{$\NPclass$}{Non-deterministic polynomial complexity class i.e., the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
 
-%!% citovat něco
-Instead, real-world block ciphers are {\em believed} to be secure based on a simple fact: no known attack is far better than exhaustive search. One such block cipher is called {\em Advanced Encryption Standard} (AES) and will be of top interest in this thesis. AES will be described in detail in Section~\ref{sec:aes}.
+Instead, real-world block ciphers are {\em believed} to be secure \cite{menezes1996handbook} based on a simple fact: no known attack is far better than exhaustive search. One such block cipher is called {\em Advanced Encryption Standard} (AES) and will be of top interest in this thesis. AES will be described in detail in Section~\ref{sec:aes}.
 
 
 % ==============================================================================
