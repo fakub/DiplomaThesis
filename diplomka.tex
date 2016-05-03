@@ -146,12 +146,12 @@
 %!% vyplnit
 \newcommand{\klicova}{White-box AES, útok postranním kanálem, paměťová stopa.}
 \newcommand{\keyword}{White-box AES, side-channel attack, memory trace.}
-\newcommand{\abstrCZ}{Samotný koncept white-box kryptografie je relativně nový, přesto už známe některé silné teoretické výsledky. Z praktického pohledu se ale jednalo a jedná spíše o hru kočky s myší -- návrhy se neopírají o žádný známý těžký problém a tak bývá spíše otázkou času, jak dlouho vydrží vzdorovat snaze kryptanalytiků.
+\newcommand{\abstrCZ}{Nejen že jsou všechna současná vědecká white-box schémata stan\-dar\-di\-zo\-va\-ných šifer matematicky zlomená, další ránu pro ně představuje nový útok od autorů Bos a kol.\ \cite{bos2015differential} z července 2015. Tento útok je velmi univerzální a účinný -- nepotřebuje ani znalost implementace, ani použití reverzního inženýrství.
 
-Velmi zajímavý a univerzální přístup \cite{bos2015differential} byl představen v preprintu na \link{iacr.org}. Cílem této práce je naprogramovat potřebné nástroje a útok reprodukovat, předně na implementaci z diplomové práce Dušana Klince \cite{klinec2013white}. Dále se budeme zabývat tím, kudy informace uniká, a jak tomu zabránit.}
-\newcommand{\abstrEN}{Although the concept of White-Box Cryptography is quite recent, we already know some strong theoretical results. But from the practical point of view it rather reminds a cat-and-mouse game -- proposed schemes are not supported by any known computationally hard problem so it is usually a matter of time until it gets broken by cryptanalytic effort.
+Ve svojí práci se mi podařilo reprodukovat útok na implementaci \cite{klinec2013implementation} konkrétní chráněné šifry \cite{chow2002aes}, vylepšit ho a nakonec i vysvětlit jeho podstatu, což původní autoři nezmiňují.}
+\newcommand{\abstrEN}{Not only have all current scientific white-box schemes of standardized ciphers been mathematically broken, they further need to face a novel attack by Bos et al.\ \cite{bos2015differential} published in July, 2015. This attack is very universal and powerful -- it requires neither knowledge of the implementation, nor use of reverse engineering techniques.
 
-A very interesting and universal approach has been recently introduced in a paper \cite{bos2015differential} at \link{iacr.org}'s preprint. The goal of this thesis is to write required tools and reproduce the attack, especially on an implementation from Dušan Klinec's diploma thesis. Then we will identify where the point of leakage is and how to prevent from leaking the key.}
+In this thesis, we successfuly reproduced the attack against an implementation \cite{klinec2013implementation} of a specific protected cipher \cite{chow2002aes}. We further improved the original attack, and finally provided an explanation of its principle, which the original authors omitted.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   k vyplnění KONEC
