@@ -1,7 +1,7 @@
 \section{Advanced Encryption Standard}
 \label{sec:aes}
 
-In this section, we present a currently standardized block cipher. Let us begin with how it originated. In 1997, Curtin and Dolske were the first to publicly announce \cite{curtin1998brute} that they have cracked Data Encryption Standard (DES, \cite{fips1977des}) -- a symmetric block cipher which had been in use for $20$ years. In the same year, the National Institute of Standards and Technology (NIST) initiated a selection process for a new encryption standard. During the process, DES was partially replaced with Triple-DES described in the ANSI draft X9.52 \cite{americantripple}.
+In this section, we present a currently standardized block cipher. Let us begin with how it originated. In 1997, Curtin and Dolske were the first to publicly announce \cite{curtin1998brute} that they have cracked Data Encryption Standard (DES, \cite{fips1977des}) -- a symmetric block cipher that had been in use for $20$ years. In the same year, the National Institute of Standards and Technology (NIST) initiated a selection process for a new encryption standard. During the process, DES was partially replaced with Triple-DES described in the ANSI draft X9.52 \cite{americantripple}.
 
 In 1998, NIST chose $15$ candidates and asked cryptology community for help with analyzing the candidates. After a careful analysis, NIST proposed Rijndael\footnote{From authors' names: Vincent Rijmen and Joan Daemen.} \cite{daemen1999aes} as the new standard called {\em Advanced Encryption Standard} (AES) \cite{fips2001aes} on November 26, 2001. The standard specifies the Rijndael algorithm with block-length of $128$ bits and key-lengths of $128$, $192$ and $256$ bits. Note that the original Rijndael algorithm \cite{daemen2013rijndael} describes more block- and key-length variants. On the other hand, we will only consider its $128$-$128$-bit variant in this thesis, unless stated otherwise.
 
@@ -14,14 +14,14 @@ Today, almost 15 years later, AES is used worldwide and, despite extensive analy
 
 \subsection{AES Building Blocks}
 
-AES encryption\footnote{Decryption will be treated separately at the end of this section.} consists of $10$ rounds, each round (except for the last one) consists of $4$ different operations which will be described later. All of these operations work with $128$-bit words, let us call them {\em states}. Before we start, let us present a couple of different state representations. 
+AES encryption\footnote{Decryption will be treated separately at the end of this section.} consists of $10$ rounds, each round (except for the last one) consists of $4$ different operations, which will be described later. All of these operations work with $128$-bit words, let us call them {\em states}. Before we start, let us present a couple of different state representations. 
 
 First, we split its $128$ bits into $16$ bytes denoted by $A_{0,0}$, $A_{1,0}$, $A_{2,0}$, $A_{3,0}$, $A_{0,1}$, $\ldots$, $A_{3,1}$, $\ldots$, $A_{3,3}$, respectively, obtaining a $4\times 4$ array, where $A_{i,j}$ stands for an element in $i$-th row and $j$-th column.
 
 Let us further denote $F = \GF(2)[x]/x^8+x^4+x^3+x+1$, which is a field of polynomials with integral coefficients reduced modulo $2$ (i.e., $0$, $1$), these polynomials are further reduced modulo $x^8+x^4+x^3+x+1$. This field has $2^8$ elements and is usually referred to as {\em Rijndael's field}. In the context of AES, it might be denoted also by $\GF(2^8)$.
 
-\nomenclature{$\GF(p^n)$}{Galois Field with $p^n$ elements, $p$ prime}
-\nomenclature{$F[x]$}{Ring of polynomials over $F$}
+\nomenclature[10]{$\GF(p^n)$}{Galois Field with $p^n$ elements, $p$ prime}
+\nomenclature[11]{$F[x]$}{Ring of polynomials over the ring $F$}
 
 Each byte $A = a_7a_6\ldots a_0$, $a_i\in\GF(2)$, is then considered as an element of $F$ simply as $a_7x^7 + a_6x^6 + a_5x^5 + a_4x^4 + a_3x^3 + a_2x^2 + a_1x + a_0$.  Note that byte may also be written in hexadecimal notation, and still considered as an element of $F$. See Figure~\ref{fig:aesnot} with a few of possible AES state representations.
 
@@ -157,7 +157,7 @@ Now let us move on to definitions of the $4$ operations.
 	
 	Given a $128$-bit round key, $\AddRoundKey$ operation simply bitwise XORs it on the state. The round key is derived from the encryption key using $\KeySchedule$ routine which follows.
 	
-	$\AddRoundKey$ is the only step which employs keying material. Note that it is its own inverse.
+	$\AddRoundKey$ is the only step that employs keying material. Note that it is its own inverse.
 
 \subsubsection{KeySchedule}
 	

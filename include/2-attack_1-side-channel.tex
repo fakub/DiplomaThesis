@@ -47,7 +47,7 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 	
 	But in this attack scenario, we do not observe intermediate results $b$ directly, we only have power traces. Now let us describe a reasonable model how certain portion of information about $b$'s leaks into the power trace, and how we can exploit it.
 	
-	Before entering next stages, the intermediate result $b$ is temporarily stored. It is handled byte-wise, hence its byte-wise Hamming weights (i.e., numbers of ones in binary representation, further denoted by $HW$) are reflected into the power trace\footnote{Here we assume so-called {\em Hamming Weight Leakage Model}.}. It means that for each byte of $b$ denoted by $b_i$, there is a position in the power trace which reflects $HW(b_i)$.
+	Before entering next stages, the intermediate result $b$ is temporarily stored. It is handled byte-wise, hence its byte-wise Hamming weights (i.e., numbers of ones in binary representation, further denoted by $HW$) are reflected into the power trace\footnote{Here we assume so-called {\em Hamming Weight Leakage Model}.}. It means that for each byte of $b$ denoted by $b_i$, there is a position in the power trace that reflects $HW(b_i)$.
 	
 	Let us suppose that we have a plenty of such traces which are properly aligned, i.e., a position in the traces corresponds with a fixed position in the AES implementation. Therefore, for each byte of $b$'s, there is a position in the traces, where the power values are correlated with Hamming weights of respective bytes of respective $b$'s.
 	

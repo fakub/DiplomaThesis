@@ -3,7 +3,7 @@
 
 First of all, we used our toolkit to attack our straightforward C++ implementation of AES, here referred to as {\tt naiveAES}, which was supposed to serve just as a proof-of-concept; see results in Section~\ref{sec:naiveaes}. Note that Section~\ref{sec:naiveaes} does not fully cover many details, these are given later in subsequent sections.
 
-Then we performed the most interesting attack which Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here referred to as {\tt KlinecWBAES}; see results and comments in Section~\ref{sec:klinecwbaes}.
+Then we performed the most interesting attack that Bos et al.\ \cite{bos2015differential} did -- we successfuly attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here referred to as {\tt KlinecWBAES}; see results and comments in Section~\ref{sec:klinecwbaes}.
 
 \begin{note}
 \label{note:expdes}
@@ -18,7 +18,7 @@ Then we performed the most interesting attack which Bos et al.\ \cite{bos2015dif
 \subsection{\tt naiveAES}
 \label{sec:naiveaes}
 
-In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them. Both attacks are expected to work, since {\tt naiveAES} stores all intermediate results which are required for each attack. For this reason, we captured contents of all $1$-byte memory writes into our memory traces, and used output of the first SBox as our target. In both cases, we treated strong candidates differently (see Note~\ref{note:strong} for what a strong candidate is).
+In order to prove the concept of both SCA algorithms presented in this thesis, we first attacked our straightforward AES implementation {\tt naiveAES} with both of them. Both attacks are expected to work, since {\tt naiveAES} stores all intermediate results that are required for each attack. For this reason, we captured contents of all $1$-byte memory writes into our memory traces, and used output of the first SBox as our target. In both cases, we treated strong candidates differently (see Note~\ref{note:strong} for what a strong candidate is).
 
 \subsubsection{CPA Attack against {\tt naiveAES}}
 	
@@ -48,7 +48,7 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	\label{note:target}
 		The term {\em target of the attack} or simply {\em target} will be used heavily in the following text, let us describe it a bit closer.
 		
-		Target is a function $T$, which inputs a key byte $K$ together with respective plaintext byte $P$, and outputs a byte (for now), or a single bit (later), e.g., $T(K,P) = S(K+P)$ on Line~\ref{line:s0} and \ref{line:s1} of Algorithm~\ref{alg:bitwisedpa}. Target bit is just a specific bit of target's output. According to the value of target bit, traces are split into the sets $S_0$ and $S_1$, respectively.
+		Target is a function $T$ that inputs a key byte $K$ together with respective plaintext byte $P$, and outputs a byte (for now), or a single bit (later), e.g., $T(K,P) = S(K+P)$ on Line~\ref{line:s0} and \ref{line:s1} of Algorithm~\ref{alg:bitwisedpa}. Target bit is just a specific bit of target's output. According to the value of target bit, traces are split into the sets $S_0$ and $S_1$, respectively.
 	\end{note}
 
 \subsubsection{Bit-Wise DPA Attack against {\tt naiveAES}}
@@ -60,12 +60,11 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 		In case of the correct candidate, the maximum value of difference of means (which is what bit-wise DPA looks for) is {\em always} equal to $1.0$, since there is always a position in the traces where given intermediate product -- here a bit of output of the first SBox -- appears. Therefore once there appears a non-zero gap for the first time, we certainly get the correct candidate and do not need to care about its strength. Obviously, the attack can be aborted at such moment.
 	\end{note}
 	
-	%?% asi uplně zahodit tabulku a jenom říct, že to poznam hned ptž správnej má dycky 1.0 a jde jenom o to kdy se odlepí poslední špatnej ... zbude jedinej
 	\begin{table}[h]
 		\begin{center}
 		\input{./tables/3_2_2-naiveAES-DCA.tex}
 		\end{center}
-	\caption{Number of target bits which gave single candidate with difference of means equal to $1.0$ using bit-wise DPA attack against {\tt naiveAES}.}
+	\caption{Number of target bits that gave single candidate with difference of means equal to $1.0$ using bit-wise DPA attack against {\tt naiveAES}.}
 	\label{tab:naiveaesdca}
 	\end{table}
 	
@@ -116,5 +115,5 @@ First we tried to attack {\tt KlinecWBAES} with CPA attack, too, but it did not 
 % ===   B a c i n s k a   W B A E S +                                        ===
 % ==============================================================================
 
-%?% neimplementuje AES ale "zlepšenou" verzi
+%?% neimplementuje AES ale "zlepšenou" verzi, uvidíme co na to školitel
 % key-dependent SBoxy => útok tak jak je ani fungovat nemůže

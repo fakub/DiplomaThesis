@@ -148,7 +148,7 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 
 \subsubsection{Mixing Bijections}
 	
-	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e., $32$-bit) linear bijection, which is to be inserted after $\MC$ and inverted in a separate step (this needs to be done before applying encodings). Since it inputs the output of $\MC$, they can be composed together yielding $\MB\circ\MC$. Note that table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as previously for $\MC$.
+	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e., $32$-bit) linear bijection that is to be inserted after $\MC$ and inverted in a separate step (this needs to be done before applying encodings). Since it inputs the output of $\MC$, they can be composed together yielding $\MB\circ\MC$. Note that table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as previously for $\MC$.
 	
 	\begin{note}
 	\label{note:fullrank}
@@ -227,7 +227,7 @@ As outlined in Section~\ref{sec:catmouse}, sooner or later after introduction of
 	
 	Originally there were $240$ dual AES ciphers by Barkan et al., the list has been later extended by Raddum \cite{raddum2004more} to $9\,360$ and further by Biryukov et al.\ \cite{biryukov2003toolbox} to $61\,200$ dual AES ciphers.
 	
-	Note that there is a simple relation between AES and dual AES: for each dual cipher, there exists a linear mapping $\Delta$, which maps a state of AES on a state of dual AES and vice versa. Since both plaintext and ciphertext are an AES state at some point, it follows that $P_{dual} = \Delta P$ and $C_{dual} = \Delta C$, moreover the same holds nontrivially for the key, i.e., $K_{dual} = \Delta K$.
+	Note that there is a simple relation between AES and dual AES: for each dual cipher, there exists a linear mapping $\Delta$ that maps a state of AES on a state of dual AES and vice versa. Since both plaintext and ciphertext are an AES state at some point, it follows that $P_{dual} = \Delta P$ and $C_{dual} = \Delta C$, moreover the same holds nontrivially for the key, i.e., $K_{dual} = \Delta K$.
 	
 	Karroumi incorporates $4\cdot 10$ distinct dual AES'es into WBAES (for each column of each round), while appropriate linear mappings $\Delta$, are simply composed with mixing bijections in each round. Hence the overal structure of WBAES remains unchanged. Karroumi presumes that this modification raises the complexity of BGE attack from originally $2^{30}$ to $2^{91}$, since the attacker seems to need to loop through all fourtuples of dual AES'es and run standard BGE with constants of those dual AES'es.
 	

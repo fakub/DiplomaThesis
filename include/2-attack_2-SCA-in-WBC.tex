@@ -13,7 +13,7 @@ The idea was inspired by Delerabl{\'e}e et al.\ \cite{delerablee2013white}: as i
 The obvious question is what kind of traces we should use instead of power traces -- we use {\em software traces}. In this context, software trace reffers to a record of memory addresses being accessed during program execution, or their contents; sometimes also referred to as {\em memory trace}. Hence in this context, differential power analysis might sound wierd, since there is no {\em power}, it will be rather referred to as {\em Differential Computation Analysis} (DCA).
 
 \begin{remark}
-\label{rem:benefit}   %?% odkaz
+\label{rem:benefit}
 	We would like to especially highlight that this approach avoids reverse engineering -- it only exploits leaked runtime information --, which is probably the best practical benefit. There is further no need for knowledge of the design, obviously.
 \end{remark}
 
@@ -58,7 +58,7 @@ One may wonder whether traces can ever be properly aligned, because then it woul
 
 \begin{note}
 \label{note:aslr}
-	There is another issue with trace acquisition, now it is related to the next step which is trace filtering. It will be highly appreciated that the program uses very the same addresses for instructions, which are not related to plaintext . Later we will try to filter them out, since they do not carry any useful information.
+	There is another issue with trace acquisition, now it is related to the next step which is trace filtering. It will be highly appreciated that the program uses very the same addresses for instructions that are not related to plaintext. Later we will try to filter them out, since they do not carry any useful information.
 	
 	For this reason, it might be helpful to switch off Address Space Layout Randomization (ASLR) and acquire all traces in a single terminal session.
 \end{note}
@@ -81,7 +81,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 
 \subsubsection{Filtering of Constant Entries}
 	
-	In the first stage, we filter out such entries which are constant across all acquired traces, because they do not carry any information. Indeed, both presented SCA algorithms exploit changes across traces.
+	In the first stage, we filter out such entries that are constant across all acquired traces, because they do not carry any information. Indeed, both presented SCA algorithms exploit changes across traces.
 	
 	Practically, we first create a filter mask based on a small subset of traces, $10$ appears to be sufficient. Such mask carries $0$ if all corresponding addresses in the small set of traces are equal, $1$ otherwise; see an example in Figure~\ref{fig:constmask}. This mask is then simply applied to filter all the remaining traces, possibly hundreds or thousands of them. Note that we keep the mask, we will use it for the following filtering method as well.
 	
@@ -136,9 +136,9 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 
 	\paragraph{Trace Filtering}
 		
-		Given an address and temporal range, we filter our traces so that we only keep their entries which fall into this range. But our traces do not contain full address information, see Note~\ref{note:lsb}. The idea could be to use full traces instead.
+		Given an address and temporal range, we filter our traces so that we only keep their entries that fall into this range. But our traces do not contain full address information, see Note~\ref{note:lsb}. The idea could be to use full traces instead.
 		
-		If we had all full traces, we could filter them easily based on both ranges. But in this case there may occur a position, for which some traces contain an address falling inside or outside the address range, respectively. Note that this would immediately violate the alignment!
+		If we had all full traces, we could filter them easily based on both ranges. But in this case, there may occur a position, for which some traces contain an address falling inside or outside the address range, respectively. Note that this would immediately violate the alignment!
 		
 		\begin{remark}
 		\label{rem:rangemask}
@@ -196,7 +196,7 @@ As outlined in the previous remark, we will consider Algorithm~\ref{alg:bitwised
 	As already stated in Note~\ref{note:fulllist}, the best key candidate we obtain from a SCA algorithm does not need to be necessarily the correct one, especially when we use it for attacking white-box implementations, where there is no interpretation of what we ``measure''.
 	
 	In that note, we suggested to output the full list of key candidates together with their ``value'' for each key byte. The original purpose of this was to have some rating of key candidates, and then loop through them according to their order and value. In physical world scenario, this would be likely to recover the key in a relatively short time, since we assume certain bias in our measurements caused by execution of the cipher.
-	%?% \footnote{Each SCA algorithm may use different meter to compare key candidates, in Algorithm~\ref{alg:cpa} it was correlation, in Algorithm~\ref{alg:bitwisedpa} it was difference of means.}
+	% \footnote{Each SCA algorithm may use different meter to compare key candidates, in Algorithm~\ref{alg:cpa} it was correlation, in Algorithm~\ref{alg:bitwisedpa} it was difference of means.}
 	
 	But it turns out that looping would be useless in the white-box scenario. Indeed, by empirical observation, the true key byte is typically
 	\begin{itemize}
@@ -244,14 +244,14 @@ As outlined in the previous remark, we will consider Algorithm~\ref{alg:bitwised
 	
 	\begin{remark}
 	\label{rem:gap}
-		According to the observation in the previous example, we can modify our criterion as follows: we choose the candidate which is on the top of any list and has the biggest gap to the second candidate. Note that we can use various methods how to evaluate this gap, e.g., absolute or relative differences of values, and we may obtain different results.
+		According to the observation in the previous example, we can modify our criterion as follows: we choose the candidate that is on the top of any list and has the biggest gap to the second candidate. Note that we can use various methods how to evaluate this gap, e.g., absolute or relative differences of values, and we may obtain different results.
 		
 		We can further improve this rule by combining (e.g., summing) gaps of the same candidate when it is on the top. On the other hand, note that if the correct candidate is not on the top of any list, improving this rule does not help either.
 		
 		Similarly to the idea of Note~\ref{note:fulllist}, we can create a list of maximum $8$ candidates (one candidate from each of $8$ lists) and loop through them to find out whether the key was revealed or not.
 	\end{remark}
 	
-	Applying the rule from the previous remark to the previous example, we find the maximal gap for the \nth{4} target bit, its absolute value is $0.0330$ compared to $0.0086$, $0.0178$ and $0.0209$, its relative value is $9.5\%$ compared to $2.2\%$, $5.3\%$ and $5.6\%$, respectively. Hence the best candidate with this rule is {\tt 15} which is the correct one.
+	Applying the rule from the previous remark to the previous example, we find the maximal gap for the \nth{4} target bit, its absolute value is $0.0330$ compared to $0.0086$, $0.0178$ and $0.0209$, its relative value is $9.5\%$ compared to $2.2\%$, $5.3\%$ and $5.6\%$, respectively. Hence the best candidate with this rule is {\tt 15}, which is the correct one.
 	
 	\begin{note}
 	\label{note:strong}

@@ -72,7 +72,7 @@ Since all of these SBoxes are equivalent inside WBAES, Bos et al.\ came up with 
 	
 	On average, there are about $27\%$ of successful strong candidates and about $30\%$ of both weak and strong ones.
 	
-	In both cases (i.e., Table~\ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits which actually leak, or nothing leaks at all (e.g., \nth{9} byte in Table~\ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit, and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
+	In both cases (i.e., Table~\ref{tab:klinecsbox} and \ref{tab:klinecrijinv}), there are, for each key byte, usually either only few target bits that actually leak, or nothing leaks at all (e.g., \nth{9} byte in Table~\ref{tab:klinecsbox} cannot be considered as leaking, since the gap is very small at \nth{7} bit, and at \nth{8} bit, the gap is much larger for an incorrect candidate; this happens much more often if less traces are used).
 	
 	The most substantial practical benefit of attacking different targets is that those key bytes, which did not leak with one target, may possibly leak with another; cf.\ \nth{9} byte in both tables.
 
@@ -102,9 +102,9 @@ There seems to be plenty of them: number of $p$'s is equal to the number of bina
 			
 			Now let us see what multiplying by $x\pmod{x^8+1}$ actually does. If the result does not need to be reduced, it simply shifts coefficients of $p$ by one, e.g., $(x^4 + x + 1) \cdot x = x^5 + x^2 + x$. If it reaches $x^8$, e.g., $(x^7 + x^4 + x^3) \cdot x \pmod{x^8+1} = x^5 + x^4 + 1$, we get $1$ at the end, so the shift is actually a cyclical shift by one.
 			
-			Remind that polynomials, which are coprime with $x^8+1$, have odd number of terms (see Remark~\ref{rem:coprime}), hence repeating multiplication by $x$ yields $8$ distinct polynomials, which we put into single equivalence class. Since there are $128$ of such coprime polynomials, we get $128/8=16$ of such classes; see Table~\ref{tab:classrepre} for representants of each class. Note that the effect is the same on bytes representing polynomials.
+			Remind that polynomials coprime with $x^8+1$ have odd number of terms (see Remark~\ref{rem:coprime}), hence repeating multiplication by $x$ yields $8$ distinct polynomials, which we put into single equivalence class. Since there are $128$ of such coprime polynomials, we get $128/8=16$ of such classes; see Table~\ref{tab:classrepre} for representants of each class. Note that the effect is the same on bytes representing polynomials.
 			
-			Since we assumed $q = 0$, the actual output of two SBoxes using $p$'s from single class is thus also only a cyclical shift of each other. It follows that the results are also only cyclically shifted across target bits. Hence the information which target bit leaks is totally irrelevant, too.
+			Since we assumed $q = 0$, the actual output of two SBoxes using $p$'s from single class is thus also only a cyclical shift of each other. It follows that the results are also only cyclically shifted across target bits. Hence the information, which target bit leaks, is totally irrelevant, too.
 	\end{description}
 \end{remark}
 

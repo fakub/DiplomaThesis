@@ -11,7 +11,7 @@ In many use cases, public key cryptography appears to work as well. However, pub
 
 There were several attempts to introduce a ``secure'' white-box variant of a known cipher. However, most of today's commercial WBAC resistant solutions rather disobey the Kerckhoffs' principle, and rely on security by obscurity and tons of software obfuscation and anti-reverse engineering techniques.
 
-%?% Motivation for white-box crypto, white-box crypto history, milestones   % Bos et al. to hezky shrnul
+%?% Motivation for white-box crypto, white-box crypto history, milestones   % Bos et al. to hezky shrnul, uvidíme po korekturach
 
 
 % ==============================================================================
@@ -31,7 +31,7 @@ The field of white-box cryptography is closely related to program obfuscation, w
 	\label{def:obfus}
 		{\em Program obfuscator} is an effective (possibly randomized) algorithm, denoted by $O$, if the following three conditions hold:
 		\begin{enumerate}
-			\item {\em functionality:} for every encoding $C$ of an algorithm $A_C$, $O(C)$ encodes an algorithm which outputs the same as $A_C$ on each input,
+			\item {\em functionality:} for every encoding $C$ of an algorithm $A_C$, $O(C)$ encodes an algorithm that outputs the same as $A_C$ on each input,
 			\item {\em polynomial slowdown:} for every encoding $C$ of an algorithm $A_C$, the length and the running time of $O(C)$ is at most polynomially larger than that of $C$,
 			\item {\em virtual black-box property:} for every effective algorithm $B$, there exists an effective adversary $A$ such that for every encoding $C$ of an algorithm $A_C$ it holds that
 			\[
@@ -41,7 +41,7 @@ The field of white-box cryptography is closely related to program obfuscation, w
 		\end{enumerate}
 	\end{defn}
 	
-	In other words, the virtual black-box property states that there is no effective algorithm, which would be able to gain more information from an obfuscated code than any adversary with an oracle access only, hence black-box property.
+	In other words, the virtual black-box property states that there is no effective algorithm that would be able to gain more information from an obfuscated code than any adversary with an oracle access only, hence black-box property.
 
 \subsubsection{Consequences in Cryptography}
 	
@@ -53,7 +53,7 @@ The field of white-box cryptography is closely related to program obfuscation, w
 
 \subsubsection{Going Beyond}
 	
-	However, the requirements on program obfuscator might be too strong (already suggested by Barak et al.). Indeed, especially in white-box cryptography context, we can weaken the virtual black-box property, since we probably do not care about any information, which does not effectively lead to key recovery, even though we would not learn this information having an oracle access only.
+	However, the requirements on program obfuscator might be too strong (already suggested by Barak et al.). Indeed, especially in the white-box cryptography context, we can weaken the virtual black-box property, since we probably do not care about any information that does not effectively lead to key recovery, even though we would not learn this information having an oracle access only.
 	
 	Note that since then, there has been a lot of research using various assumptions, sometimes surprisingly with positive results, too. Most interesting results can be found in \cite{barak2014protecting, brakerski2014virtual}.
 
