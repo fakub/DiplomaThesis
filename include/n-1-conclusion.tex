@@ -8,19 +8,19 @@
 
 %~ \item[Chapter~\ref{chap:intro}: \nameref{chap:intro}.] ~ \\
 	%~ First of all, we give an introduction to cryptography and white-box cryptography. Then we present the structure of Advanced Encryption Standard (AES) -- a cipher that we will be particularly interested in during the whole thesis. Finally, we conclude this chapter with a description of a particular design of a white-box variant of AES.
-After a general introduction to cryptography, we presented three attack contexts: black-box, gray-box and white-box, with emphasis on the last-named. Then we described another pillar of this thesis -- the Advanced Encryption Standard (AES, \cite{fips2001aes}) and its white-box variant by Chow et al.\ (WBAES, \cite{chow2002aes}).
+After a general introduction to cryptography, we presented three attack contexts: black-box, gray-box and white-box, with an emphasis on the last-named. Then we described another pillar of this thesis -- the Advanced Encryption Standard (AES, \cite{fips2001aes}) and its white-box variant by Chow et al.\ (WBAES, \cite{chow2002aes}).
 
 %~ \item[Chapter~\ref{chap:attack}: \nameref{chap:attack}.] ~ \\
 	%~ Next we present an attack technique that originally targets hardware leakage. However, it can be advantageously used in software scenario as well -- we describe a recent attack based on this idea.
-Next we presented side-channel attack, which seems to be unrelated to white-box attack context. However, we also described their relationship as originally outlined by Bos et al.\ \cite{bos2015differential}, and provided a detailed description of this novel attack. Here we especially ephasized one practical consequence -- no reverse engineering effort is needed for this attack.
+Next we presented a side-channel attack that seems to be unrelated to the white-box attack context. However, we also described their relationship as originally outlined by Bos et al.\ \cite{bos2015differential}, and provided a detailed description of this novel attack. Here we particularly emphasized one practical consequence -- no reverse engineering effort is needed for this attack.
 
 %~ \item[Chapter~\ref{chap:results}: \nameref{chap:results}.] ~ \\
 	%~ In the third chapter, we first reproduce previous results of the attack, then we suggest our improvements and run the attack again. Finally we introduce an approach that unifies our contributions.
-In Chapter~\ref{chap:results}, we first reproduced results of the attack by Bos et al.\ against Klinec's implementation \cite{klinec2013implementation} of WBAES. Then we extended their attack from $16$ to $255$ targets, and finally we introduced a simple unifying approach for our contributions.
+In Chapter~\ref{chap:results}, we first reproduced results of the attack by Bos et al.\ against Klinec's implementation \cite{klinec2013implementation} of WBAES. Then we extended this attack from $16$ to $255$ targets, and finally we introduced a simple unifying approach for our contributions.
 
 %~ \item[Chapter~\ref{chap:analysis}: \nameref{chap:analysis}.] ~ \\
 	%~ In the fourth chapter, we present some remarks regarding the attack, then we exploit them to suggest a blind attack (i.e., an attack without knowing the actual key). We also mention some consequences in white-box implementation design. To conclude this chapter, we outline, justify and confirm our explanation of the attack.
-In the fourth chapter, we analyzed the attack from three perspectives. First, we suggested a blind attack (i.e., an attack without knowing the actual key) based on our observations. Second, we commented on usage of the attack in white-box cryptography design and presented possible practical countermeasures which, however, did not seem to avoid this attack. Third, we analytically identified and experimentally confirmed which intermediate result leaks information. We also outlined which is the only building block of WBAES that attempts to protect it from our enhanced attack, and why its choice is inappropriate.
+In the fourth chapter, we analyzed the attack from three perspectives. Firstly, we suggested a blind attack (i.e., an attack without knowing the actual key) based on our observations. Secondly, we commented on the usage of the attack in a white-box cryptography design and presented possible practical countermeasures that, however, did not seem to avoid this attack. Thirdly, we analytically identified and experimentally confirmed which intermediate result leaks information. We also outlined which is the only building block of WBAES that attempts to protect it from our enhanced attack, and why its choice is inappropriate.
 
 %~ \item[Chapter~\ref{chap:future}: \nameref{chap:future}.] ~ \\
 	%~ Finally, we summarize possible topics of further research.
