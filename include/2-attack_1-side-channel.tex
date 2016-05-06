@@ -5,7 +5,7 @@ Let us assume gray-box attack context. In practice, there are several means of i
 
 SCA was pioneered by Kocher \cite{kocher1996timing} in 1996. His paper was originally concentrating on public key cryptography, but the general idea can be ported to symmetric cryptography as well.
 
-Since then, several techniques have been developed, including Simple Power/EM Analysis (SPA/SEMA), Differential Power/EM Analysis (DPA/DEMA), High-Order DPA/DEMA, Correlation Power Analysis (CPA), Inferential Power Analysis (IPA), partitioning attacks, collision attacks, hidden Markov model etc.; see \cite[Chapters~13-14]{koc2008cryptographic} for reference.
+Since then, several techniques have been developed, including Simple Power/EM Analysis (SPA/SEMA), Differential Power/EM Analysis (DPA/DEMA), High-Order DPA/DEMA, Correlation Power Analysis (CPA), Inferential Power Analysis (IPA), partitioning attacks, collision attacks, hidden Markov model, etc.; see \cite[Chapters~13-14]{koc2008cryptographic} for reference.
 
 The success of SCA is based on the following assumptions:
 \begin{enumerate}
@@ -22,7 +22,7 @@ Let us present this idea on a concrete attack.
 
 \subsection{Correlation Power Analysis Attack}
 
-In this section, we describe CPA attack (an advanced form of DPA attack) mounted on an unprotected AES implementation, where the attacker can measure power consumption, referred to as {\em power trace}; see Figure~\ref{fig:powertrace} for an example power trace. First we show which AES intermediate result leads to immediate key recovery, then we describe how the attacker can utilize information related to this intermediate result hidden in power traces to recover the key. Remind Algorithm~\ref{alg:aes} in Section~\ref{sec:aes} for AES construction.
+In this section, we describe the CPA attack (an advanced form of the DPA attack) mounted on an unprotected AES implementation, where the attacker can measure power consumption, referred to as {\em power trace}; see Figure~\ref{fig:powertrace} for an example power trace. First we show which AES intermediate result leads to immediate key recovery, then we describe how the attacker can utilize information related to this intermediate result hidden in power traces to recover the key. Remind Algorithm~\ref{alg:aes} in Section~\ref{sec:aes} for AES construction.
 
 \begin{figure}[h]
 \begin{center}
@@ -41,13 +41,13 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 	\end{equation}
 	as the first ($128$-bit wide) intermediate result, where $k$ stands for the AES key and $m$ for the plaintext. $b$ is then used in the following AES step which is $\ShiftRows$, usually composed with $\MixColumns$.
 		
-	Once we knew $b$ and respective $m$ from single AES encryption, it would be easy to directly compute the key as $k = {\SubBytes}^{-1}(b)\xor m$.
+	Once we would learn $b$ and respective $m$ from a single AES encryption, it would be easy to directly compute the key as $k = {\SubBytes}^{-1}(b)\xor m$.
 
 \subsubsection{Utilizing Power Traces}
 	
-	But in this attack scenario, we do not observe intermediate results $b$ directly, we only have power traces. Now let us describe a reasonable model how certain portion of information about $b$'s leaks into the power trace, and how we can exploit it.
+	Yet in this attack scenario, we do not observe intermediate results $b$ directly, we only have power traces. Now let us describe a reasonable model how a certain portion of information about $b$'s leaks into the power trace, and how we can exploit it.
 	
-	Before entering next stages, the intermediate result $b$ is temporarily stored. It is handled byte-wise, hence its byte-wise Hamming weights (i.e., numbers of ones in binary representation, further denoted by $HW$) are reflected into the power trace\footnote{Here we assume so-called {\em Hamming Weight Leakage Model}.}. It means that for each byte of $b$ denoted by $b_i$, there is a position in the power trace that reflects $HW(b_i)$.
+	Before entering next stages, the intermediate result $b$ is temporarily stored. It is handled byte-wise, hence its byte-wise Hamming weights (i.e., numbers of ones in binary representation, further denoted by $HW$) are reflected into the power trace\footnote{Here we assume the so-called {\em Hamming Weight Leakage Model}.}. It means that for each byte of $b$ denoted by $b_i$, there is a position in the power trace that reflects $HW(b_i)$.
 	
 	Let us suppose that we have a plenty of such traces which are properly aligned, i.e., a position in the traces corresponds with a fixed position in the AES implementation. Therefore, for each byte of $b$'s, there is a position in the traces, where the power values are correlated with Hamming weights of respective bytes of respective $b$'s.
 	
@@ -92,9 +92,9 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 	\label{note:fulllist}
 		It is useful to modify the previous algorithm to output the whole list of key candidates together with their maximal correlation values for each key byte, i.e., the result of Line~\ref{line:corr}, not only $BestKey$.
 		
-		This is because if $BestKey$ is not equal to the true key, we still have a good chance to recover the key: since the true key is likely to have rather high correlation, we loop through key candidates according to their correlation values, higher first.
+		This is because if $BestKey$ is not equal to the true key, we still have a good chance to recover the key: since the true key is likely to have a rather high correlation, we loop through key candidates according to their correlation values -- in the descending order.
 		
-		Note that we can verify correctness of our key guess simply by checking whether the resulting ciphertext equals to the ciphertext we expect.
+		Note that we can verify the correctness of our key guess simply by checking whether the resulting ciphertext equals to the ciphertext we expect.
 	\end{note}
 	
 	\begin{note}
@@ -102,7 +102,7 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 		It might be also helpful to output positions of maximal correlation for each candidate. This information might be valuable for any further analysis purposes.
 	\end{note}
 	
-	There are several solutions implementing CPA including an open-source ChipWhisperer\texttrademark\ Project \cite{chipwhisperer}, which is a toolkit providing a complete toolchain from trace acquisition to key extraction. We derived this algorithm from the documentation of ChipWhisperer\texttrademark.
+	There are several solutions implementing the CPA including the open-source ChipWhisperer\texttrademark\ Project \cite{chipwhisperer}, which is a toolkit providing a complete toolchain from trace acquisition to key extraction. We derived this algorithm from the ChipWhisperer\texttrademark documentation.
 
 
 % ==============================================================================
@@ -113,17 +113,17 @@ In this section, we describe CPA attack (an advanced form of DPA attack) mounted
 
 Let us continue with another attack on an unprotected AES implementation. For now, let us suppose a more powerful attacker, who can probe individual wires of a vulnerable bus and measure its voltage. Let us further suppose that the intermediate results $b = \SubBytes(k\xor m)$ are transferred over this bus.
 
-Therefore such attacker is not limited to observing values related to Hamming weight of $b$, but she can rather measure values related to individual bits of $b$! The advantage of such attacker is that there suffice much less measurements to successfuly recover the key.
+Therefore such attacker is not limited to observing values related to the Hamming weight of $b$, but she can rather measure values related to individual bits of $b$! The advantage of such attacker is that there suffice much less measurements to successfuly recover the key.
 
 \subsubsection{Attack}
 	
-	In this attack, we proceed similarly as in the previous one, i.e., we loop through key guesses for each key byte and compute the respective intermediate results $b_i$; see Algorithm~\ref{alg:cpa}. But instead of applying Hamming weight and computing correlation, we proceed each bit individually.
+	In this attack, we proceed similarly as in the previous one, i.e., we loop through key guesses for each key byte and compute the respective intermediate results $b_i$; see Algorithm~\ref{alg:cpa}. But instead of applying Hamming weight and computing correlation, we proceed with each bit individually.
 	
-	Let say we are targetting the $j$-th bit of the $i$-th byte of $b$. Based on actual key guess $k_i$, we compute $j$-th bit of $b_i = S(k_i+m_i)$ for each trace/plaintext pair, and partition the traces based on this bit into two sets, let us denote them $S_0$ and $S_1$, respectively.
+	Let us say we are targetting the $j$-th bit of the $i$-th byte of $b$. Based on the actual key guess $k_i$, we compute the $j$-th bit of $b_i = S(k_i+m_i)$ for each trace/plaintext pair, and partition the traces based on this bit into two sets, let us denote them $S_0$ and $S_1$, respectively.
 	
 	\begin{note}
 	\label{note:concattraces}
-		Typically, we have several traces (from several probes) for a single plaintext and we do not know which of them contains which bit. Actually this does not play much of a role -- we can serialize them into a single trace and do not care anymore.
+		Typically, we have several traces (from several probes) for a single plaintext and we do not know which of them contains which bit. Actually, this does not play much of a role -- we can serialize them into a single trace and do not care anymore.
 	\end{note}
 	
 	If the key guess is correct, then there is a position in the traces, where the values are low in traces in $S_0$ and high in traces in $S_1$. We can find this position as the spot of the highest difference of mean values within $S_0$ and $S_1$. If the key guess is not correct, there should be no substantial peak in this difference of means. Hence the true key should maximize the trace-maximal difference of means among other key guesses. An algorithm implementing this attack follows.
@@ -155,7 +155,7 @@ Therefore such attacker is not limited to observing values related to Hamming we
 	
 	\begin{note}
 	\label{note:eightlists}
-		We can modify this algorithm in a manner similar to Note~\ref{note:fulllist} and \ref{note:leakpos}, and output the full record of maximal differences of means (instead of correlations previously, here it is the result of Line~\ref{line:diffmean}) and their positions in traces. Note that in this case we get $8$ separate lists for each $j$, see Line~\ref{line:tbcycle} in the previous algorithm. Here $j$ is referred to as {\em target bit}. We can also unravel which target bit leaks most substantially, which might be useful for further analysis purposes.
+		We can modify this algorithm in a manner similar to Notes~\ref{note:fulllist} and \ref{note:leakpos}, and output the full record of maximal differences of means (instead of correlations previously, here it is the result of Line~\ref{line:diffmean}) and their positions in traces. Note that in this case we get $8$ separate lists for each $j$, see Line~\ref{line:tbcycle} in the previous algorithm. Here $j$ is referred to as the {\em target bit}. We can also unravel which target bit leaks most substantially, which might be useful for further analysis purposes.
 	\end{note}
 	
 	To the best of our knowledge, there is no open-source project implementing this attack. This method has been taken from \cite{teuwen2015movfuscator}.

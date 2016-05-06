@@ -31,7 +31,7 @@
 \contentsline {subsection}{\numberline {1.3.3}AES Implementation Note}{21}{subsection.1.3.3}
 \contentsline {section}{\numberline {1.4}White-Box AES}{22}{section.1.4}
 \contentsline {subsection}{\numberline {1.4.1}Encodings}{22}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {1.4.2}Reorded AES}{23}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.2}Reordered AES}{23}{subsection.1.4.2}
 \contentsline {subsection}{\numberline {1.4.3}Fully Table Representation}{23}{subsection.1.4.3}
 \contentsline {subsubsection}{T-Boxes}{24}{section*.23}
 \contentsline {subsubsection}{MixColumns}{24}{section*.24}
@@ -61,8 +61,8 @@
 \contentsline {subsection}{\numberline {2.2.2}Trace Filtering}{37}{subsection.2.2.2}
 \contentsline {subsubsection}{Filtering of Constant Entries}{37}{section*.41}
 \contentsline {subsubsection}{Address And Temporal Filtering}{38}{section*.43}
-\contentsline {paragraph}{Trace Visualization}{38}{section*.44}
-\contentsline {paragraph}{Trace Filtering}{38}{section*.46}
+\contentsline {paragraph}{Trace Visualization.}{38}{section*.44}
+\contentsline {paragraph}{Trace Filtering.}{38}{section*.46}
 \contentsline {subsection}{\numberline {2.2.3}Attacking Traces}{40}{subsection.2.2.3}
 \contentsline {subsubsection}{Processing Results}{41}{section*.47}
 \contentsline {chapter}{\numberline {3}Results \& Improvements}{45}{chapter.3}
