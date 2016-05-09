@@ -19,9 +19,9 @@ The item~\ref{item:plainrecov} requirement is also referred to as {\em confident
 
 \begin{example}
 \label{ex:shift}
-	{\em Shift cipher} \cite{menezes1996handbook} is an ancient cipher already used by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|{\cal A}|-1$ and adds a constant $c\in\{\atob{0}{|{\cal A}|-1}\}$ modulo $|\cal A|$ to each number. Finally, it maps the numbers back to letters yielding a string ``shifted'' by $c$, where $c$ can be interpreted as an element of $\cal A$ as well. Decryption can be achieved simply by substracting $c$ from the ciphertext in a similar way.
+	{\em Shift cipher} \cite{menezes1996handbook} is an ancient cipher already used by Julius Caesar and it works as follows: it inputs a string of letters from a finite alphabet $\cal A$, maps its letters bijectively to the numbers from $0$ to $|{\cal A}|-1$ and adds a constant $c\in\{\atob{0}{|{\cal A}|-1}\}$ modulo $|\cal A|$ to each number. Finally, it maps the numbers back to letters, yielding a string ``shifted'' by $c$, where $c$ can be interpreted as an element of $\cal A$ as well. Decryption can be achieved simply by subtracting $c$ from the ciphertext in a similar way.
 	
-	Shift cipher can be easily broken by pen and paper only, since there are as many keys as letters in the alphabet, typically $26$ English letters. We simply try them all until the plaintext makes sense. Such approach is referred to as {\em brute force attack} or {\em exhaustive search}.
+	Shift cipher can be easily broken by pen and paper only, since there are as many keys as letters in the alphabet, typically $26$ English letters. We simply try them all until the plaintext makes sense. Such an approach is referred to as {\em brute force attack} or {\em exhaustive search}.
 \end{example}
 \nomenclature[01]{$\lvert S \rvert$}{Cardinality of the set $S$}
 
@@ -50,7 +50,7 @@ There are two large families of ciphers -- symmetric and asymmetric ones. Shift 
 	Going back to Example~\ref{ex:shift}, the key space is $\{\atob{0}{|{\cal A}|-1}\}\sim\cal A$, the message and ciphertext spaces are ${\cal A}^*$ which stands for the set of all strings over the alphabet $\cal A$.
 \end{note}
 
-According to the previous definition, we do not seem to have a definition of a proper cipher at all -- the only requirement is corectness (cf.\ Equation~\ref{eq:correct}), but it totally lacks any security requirement. As we will see later, it is actually quite complicated to define ``security'' properly.
+According to the previous definition, we do not seem to have a definition of a proper cipher at all -- the only requirement is correctness (cf.\ Equation~\ref{eq:correct}), but it totally lacks any security requirement. As we will see later, it is actually quite complicated to define ``security'' properly.
 
 
 % ==============================================================================
@@ -75,12 +75,12 @@ Shannon's groundbreaking work \cite{shannon1949mathematical} on the mathematics 
 There is a cipher that is perfectly secure, see the following example.
 
 \begin{example}[Vernam Cipher]
-	Let $K = M = C = \{0,1\}^n$ and $k\unirand K$. Given a plaintext $m$, {\em Vernam cipher} applies bitwise XOR of the key $k$ and the plaintext $m$ yielding a ciphertext $c$, i.e., $c = m\xor k$.
+	Let $K = M = C = \{0,1\}^n$ and $k\unirand K$. Given a plaintext $m$, {\em Vernam cipher} applies bitwise XOR of the key $k$ and the plaintext $m$, yielding a ciphertext $c$, i.e., $c = m\xor k$.
 \end{example}
 \nomenclature[04]{$a\xor b$}{Bitwise XOR of two bitstrings $a$ and $b$}
 
 \begin{note}
-	Vernam cipher is also referred to as {\em One Time Pad} (OTP). Note that it is crucial that each key is only used once, otherwise we could attack the cipher easily. Indeed, given two ciphertexts using the same key, i.e., $c_0=m_0\xor k$ and $c_1=m_1\xor k$, one can compute $c_0\xor c_1 = m_0\xor m_1$. This can be practically attacked using some apriori knowledge about the plaintexts (e.g., encoding -- ASCII, format and language of the plaintext -- XML and English, and so on), which reduces the amount of possibilities and typically leads to a complete plaintext recovery.
+	Vernam cipher is also referred to as {\em One Time Pad} (OTP). Note that it is crucial that each key is only used once, otherwise we could attack the cipher easily. Indeed, given two ciphertexts using the same key, i.e., $c_0=m_0\xor k$ and $c_1=m_1\xor k$, one can compute $c_0\xor c_1 = m_0\xor m_1$. This can be practically attacked using some a priori knowledge about the plaintexts (e.g., encoding -- ASCII, format and language of the plaintext -- XML and English, and so on), which reduces the amount of possibilities and typically leads to a complete plaintext recovery.
 \end{note}
 
 Perfect security seems to be exactly what we want from a secure cipher, but the following theorem shows that it implies certain inconveniences.
@@ -133,7 +133,7 @@ With this assumption, we can weaken our requirement on ciphertext from ``carries
 
 \begin{note}   %_% NEW
 \label{note:ambigencr}
-	The adversary is intentially allowed to provide the same plaintext over and over again. However, it follows that the challenger has to encrypt the same plaintext differently each time, otherwise there would exist a trivially winning adversary.
+	The adversary is intentionally allowed to provide the same plaintext over and over again. However, it follows that the challenger has to encrypt the same plaintext differently each time, otherwise there would exist a trivially winning adversary.
 	
 	Indeed, such an adversary would pick three distinct plaintexts $m_0$, $m_1$, $m_2$ and send $(m_0,m_1)$ to the challenger, while she would get back some ciphertext $c_a$. In her second query, the adversary would send $(m_0,m_2)$ to the challenger and receive another ciphertext, say $c_b$. If encryptions of $m_0$ were equal, she could decide with certainty:
 	\begin{itemize}
@@ -227,7 +227,7 @@ Let us now give a nice real-world example, how things can go wrong if semantic s
 
 \begin{example}
 \label{ex:crime}
-	In 2012, a combination of settings in TLS\footnote{Transport Layer Security, a cryptographic protocol \cite{dierks2008transport}.} allowed researchers to hijack a web session by cracking encrypted cookies \cite{goodin2012crime}. The problem arised when compression was followed by encryption, which actually makes sense. Let us have a look from theoretical point of view.
+	In 2012, a combination of settings in TLS\footnote{Transport Layer Security, a cryptographic protocol \cite{dierks2008transport}.} allowed researchers to hijack a web session by cracking encrypted cookies \cite{goodin2012crime}. The problem arose when compression was followed by encryption, which actually makes sense. Let us have a look from theoretical point of view.
 	
 	Remind the condition of Game~\ref{game:semsec} -- it requires two plaintexts of equal length. With this assumption, the respective ciphertexts were indistinguishable. However, if the plaintext is compressed first, it can result in differently-sized inputs to the subsequent (semantically secure) cipher! This obviously harms the assumption of inputs of equal length, and may allow the adversary to distinguish the ciphertexts. Note that only very little queries (around six) were needed to attack one byte of an encrypted cookie in the practical attack!
 	
@@ -298,7 +298,7 @@ PRP advantage tells us how likely adversary $A$ is able to distinguish a PRP wit
 	Let $E: K\times X\rarr Y$ be a PRP. Then it is called {\em secure PRP} if, for {\em any} adversary $A$, the PRP advantage $\AdvPRP(A,E)$ is negligible.
 \end{defn}
 
-In other words, given a random key, PRP is secure if it is computationaly indistinguishable from a truly random bijection. 
+In other words, given a random key, PRP is secure if it is computationally indistinguishable from a truly random bijection. 
 
 An example covering most introduced concepts follows.
 
@@ -326,7 +326,7 @@ An example covering most introduced concepts follows.
 	
 	We shall rather use a secure publicly known block cipher and only rely on the key. Once our key is compromised, we simply establish a new key. Also note that our key is only to be protected within our device, but the cryptographic algorithm would have to be protected globally.
 	
-	Such approach -- hiding the design of a cipher -- is referred to as {\em security by obscurity} and shall be strictly avoided.
+	Such an approach -- hiding the design of a cipher -- is referred to as {\em security by obscurity} and shall be strictly avoided.
 \end{note}
 
 This idea has already been addressed in 1883 by Kerckhoffs \cite{auguste1883cryptographie}. It is usually referred to as {\em Kerckhoffs' Principle} and its six rules follow (originally French, English translation taken from \cite{petitcolas2016kerckhoffs}):
@@ -352,7 +352,7 @@ Hence harming rule~\ref{item:kerck} from the previous list leads to security by 
 
 Now we know what a secure PRP is (or a secure block cipher) -- it is based on Game~\ref{game:prp}, where the aim of the adversary is to distinguish a PRP from a truly random bijection. The obvious question is, what happens if we put a secure PRP into Game~\ref{game:semsec}, where the adversary tempts to distinguish which of her two inputs has been processed.
 
-Note that PRP {\em is} a cipher (cf.\ Definition~\ref{def:symcipher} and \ref{def:prp}), so it makes sense. Indeed, given a PRP, there exists an effective algorithm evaluating it and its inverse, and also Equation~\ref{eq:correct} holds.
+Note that PRP {\em is} a cipher (cf.\ Definitions~\ref{def:symcipher} and \ref{def:prp}), so it makes sense. Indeed, given a PRP, there exists an effective algorithm evaluating it and its inverse, and also Equation~\ref{eq:correct} holds.
 
 \begin{note}   %_% NEW
 \label{note:singleaccess}
@@ -368,7 +368,7 @@ Let us modify Game~\ref{game:semsec} in a manner described in Note~\ref{note:sin
 	The aim of the adversary is to distinguish effectively which $b$ has been chosen by the challenger.
 \end{game}
 
-Based on the previous game, let us define {\em PRP semantic security advantage} and {\em semantically secure PRP} (cf.\ Game~\ref{game:semsec}, Definition~\ref{def:ssadvant} and \ref{def:semsec}). Note that the difference is basically limited oracle access.
+Based on the previous game, let us define {\em PRP semantic security advantage} and {\em semantically secure PRP} (cf.\ Game~\ref{game:semsec}, Definitions~\ref{def:ssadvant} and \ref{def:semsec}). Note that the difference is basically limited oracle access.
 
 %_% NEW
 % BEGIN
@@ -386,7 +386,7 @@ Based on the previous game, let us define {\em PRP semantic security advantage} 
 \end{defn}
 % END
 
-The following theorem provides a connection of Game~\ref{game:prp} and \ref{game:semsecprp}. It claims that, given a PRP $E$ winning Game~\ref{game:prp}, i.e., $E$ is indistinguishable from a truly random bijection, $E$ wins Game~\ref{game:semsecprp} as well, i.e., no adversary can distinguish encryption of $m_0$ from encryption of $m_1$.
+The following theorem provides a connection of Games~\ref{game:prp} and \ref{game:semsecprp}. It claims that, given a PRP $E$ winning Game~\ref{game:prp}, i.e., $E$ is indistinguishable from a truly random bijection, $E$ wins Game~\ref{game:semsecprp} as well, i.e., no adversary can distinguish encryption of $m_0$ from encryption of $m_1$.
 
 \begin{thm}
 \label{thm:semsecprp}
@@ -422,7 +422,7 @@ The following theorem provides a connection of Game~\ref{game:prp} and \ref{game
 	\label{eq:prpb1}
 		\AdvPRP(B_1,E) = \left| \Pr(W_1) - \Pr(R_1) \right| .
 	\end{equation}
-	Combining Equation~\ref{eq:prpssae}, \ref{eq:rr0}, \ref{eq:prpb0} and \ref{eq:prpb1}, we get
+	Combining Equations~\ref{eq:prpssae}, \ref{eq:rr0}, \ref{eq:prpb0} and \ref{eq:prpb1}, we get
 	\begin{align*}
 		\AdvPRPSS(A,E) &= \left| \Pr(W_1) - \Pr(W_0) \right| \leq \\
 		&\leq \left| \Pr(W_1) - \Pr(R_1) \right| + \left| \Pr(W_0) - \Pr(R_0) \right| = \\
@@ -432,7 +432,7 @@ The following theorem provides a connection of Game~\ref{game:prp} and \ref{game
 \end{proof}
 
 \begin{note}
-	The previous theorem does not work the other way around, i.e., a semantically secure PRP does not need to be a secure PRP. Indeed, let $E: K\times X\rarr Y$ be a secure PRP, and let us define $E'(k,x) = E(k,x)\|1$, where $\|$ stands for string concatenation. $E'$ is obviously semantically secure (it remains hard to distinguish encryptions of dinstinct plaintexts), but it can be easily distinguished from a truly random bijection, since it always ends with $1$. The advantage of such adversary would be $\AdvPRP(A,E') = \nicefrac{1}{2}$ which is clearly non-negligible.
+	The previous theorem does not work the other way around, i.e., a semantically secure PRP does not need to be a secure PRP. Indeed, let $E: K\times X\rarr Y$ be a secure PRP, and let us define $E'(k,x) = E(k,x)\|1$, where $\|$ stands for string concatenation. $E'$ is obviously semantically secure (it remains hard to distinguish encryptions of distinct plaintexts), but it can be easily distinguished from a truly random bijection, since it always ends with $1$. The advantage of such adversary would be $\AdvPRP(A,E') = \nicefrac{1}{2}$ which is clearly non-negligible.
 \end{note}
 \nomenclature[05]{$a \parallel b$}{Concatenation of two strings $a$ and $b$}
 
@@ -448,7 +448,7 @@ The previous theorem is especially important for the idea behind its proof, whic
 
 Provable security is one aspect, the other is practical construction of a cipher. Note that there is no provably secure block cipher known.
 
-If there were, it would actually imply that $\Pclass \subsetneq \NPclass$, which is an open millenium problem. Indeed, if $\Pclass = \NPclass$ and $E$ were a PRP, then the adversary could, given certain (polynomial) amount of plaintext-ciphertext pairs $(m_i,c_i)$, non-deterministically find a key $k$, such that $c_i = E(k,m_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ were found, otherwise she says ``pseudorandom''. Here, the ``truly random'' answer is answered with certainty, while the ``pseudorandom'' answer is just a conjecture, but it has sufficiently large probability.
+If there were, it would actually imply that $\Pclass \subsetneq \NPclass$, which is an open millennium problem. Indeed, if $\Pclass = \NPclass$ and $E$ were a PRP, then the adversary could, given certain (polynomial) amount of plaintext-ciphertext pairs $(m_i,c_i)$, non-deterministically find a key $k$, such that $c_i = E(k,m_i)$ for all $i$. Then she would simply answer ``truly random'' if no such $k$ were found, otherwise she says ``pseudorandom''. Here, the ``truly random'' answer is answered with certainty, while the ``pseudorandom'' answer is just a conjecture, but it has sufficiently large probability.
 \nomenclature[08]{$\Pclass$}{Deterministic polynomial complexity class, i.e., the set of decision problems which can be solved by a deterministic Turing machine in polynomial time}
 \nomenclature[09]{$\NPclass$}{Non-deterministic polynomial complexity class, i.e., the set of decision problems which can be solved by a non-deterministic Turing machine in polynomial time}
 

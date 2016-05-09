@@ -102,7 +102,7 @@ As outlined earlier, WBAES construction turns all AES operations into table look
 
 \subsubsection{T-Boxes}
 	
-	First, we compose $\AddRoundKey$ with the subsequent $\SubBytes$ step yielding an operation referred to as $\TBox$, also denoted by $T_{i,j}^r$ for $r$-th round and $(i,j)$-th position in the state array. We get
+	First, we compose $\AddRoundKey$ with the subsequent $\SubBytes$ step, yielding an operation referred to as $\TBox$, also denoted by $T_{i,j}^r$ for $r$-th round and $(i,j)$-th position in the state array. We get
 	\begin{equation*}
 		T_{i,j}^r(x) = S(x+k_{sr(i,j)}^r) , \qquad i,j=\atob{0}{3},\;r=\atob{0}{8} ,
 	\end{equation*}
@@ -120,7 +120,7 @@ As outlined earlier, WBAES construction turns all AES operations into table look
 	
 	The difference from the classical implementation is that the subsequent XOR operations must be turned into lookup tables as well. Since the input size of such XOR operation would be $2\cdot 32$ bits, we need to split inputs into smaller $4$-bit segments and treat them separately in the fashion of concatenated encoding (Definition~\ref{def:concat}).
 	
-	The size of such single XOR table is then $2\cdot 4\times 4$, and we need to perform $32/4\cdot 3=24$ such lookups per one column and per one $\MixColumns$. It follows that we need altogether $24\cdot 4\cdot 9 = 864$ of such XOR tables (according to Note~\ref{note:tableinst}).
+	The size of such a single XOR table is then $2\cdot 4\times 4$, and we need to perform $32/4\cdot 3=24$ such lookups per one column and per one $\MixColumns$. It follows that we need altogether $24\cdot 4\cdot 9 = 864$ of such XOR tables (according to Note~\ref{note:tableinst}).
 
 \subsubsection{ShiftRows}
 	
@@ -148,7 +148,7 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 
 \subsubsection{Mixing Bijections}
 	
-	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e., $32$-bit) linear bijection that is to be inserted after $\MC$ and inverted in a separate step (this needs to be done before applying encodings). Since it inputs the output of $\MC$, they can be composed together yielding $\MB\circ\MC$. Note that table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as previously for $\MC$.
+	Mixing bijection (denoted by $\MB$) is a random column-wise (i.e., $32$-bit) linear bijection that is to be inserted after $\MC$ and inverted in a separate step (this needs to be done before applying encodings). Since it inputs the output of $\MC$, they can be composed together, yielding $\MB\circ\MC$. Note that table representation of both $\MB\circ\MC$ and $\MB^{-1}$ can be created in very the same manner as previously for $\MC$.
 	
 	\begin{note}
 	\label{note:fullrank}
@@ -159,7 +159,7 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 	
 	Input mixing bijection ($\IMB$) is a byte-wise variant of mixing bijection. It provides diffusion after inverting mixing bijection and before entering next $\TBox$. Since it is a linear mapping, it can be composed with the inverted mixing bijection, and since it is a byte-wise mapping, it can be composed with $\TBox$ as well.
 	
-	The only remaining operation -- $\ShiftRows$ -- will be trated separately later.
+	The only remaining operation -- $\ShiftRows$ -- will be treated separately later.
 
 \subsubsection{Sketch of Single Round}
 	
@@ -191,7 +191,7 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 	
 	Such external encodings can be obviously implemented as lookup tables in a manner similar to $\MixColumns$, here using $16$ tables\footnote{A new, larger type of tables is needed.} of size $8\times 128$ followed by appropriately encoded XOR tables. Note that there are $4$ levels of XOR tables now, since we have $16$ vectors to be XORed together. Also note that the very input and output are {\em not} encoded with $\Enc$.
 	
-	See Equation~\ref{eq:extencin} and \ref{eq:extencout} for a sketch of the flow through input and output external encoding, respectively. Note that external encoding can be trivially turned off by setting $E$ and $F$ equal to identity.
+	See Equations~\ref{eq:extencin} and \ref{eq:extencout} for a sketch of the flow through input and output external encoding, respectively. Note that external encoding can be trivially turned off by setting $E$ and $F$ equal to identity.
 	
 	\begin{align}
 	\label{eq:extencin}
@@ -229,7 +229,7 @@ As outlined in Section~\ref{sec:catmouse}, sooner or later after introduction of
 	
 	Note that there is a simple relation between the AES and a dual AES: for each dual cipher, there exists a linear mapping $\Delta$ that maps a state of the AES on a state of the dual AES and vice versa. Since both plaintext and ciphertext are an AES state at some point, it follows that $P_{dual} = \Delta P$ and $C_{dual} = \Delta C$, moreover the same holds nontrivially for the key, i.e., $K_{dual} = \Delta K$.
 	
-	Karroumi incorporates $4\cdot 10$ distinct dual AES'es into WBAES (for each column of each round), while appropriate linear mappings $\Delta$, are simply composed with mixing bijections in each round. Hence the overal structure of WBAES remains unchanged. Karroumi presumes that this modification raises the complexity of BGE attack from originally $2^{30}$ to $2^{91}$, since the attacker seems to need to loop through all fourtuples of dual AES'es and to run the standard BGE with constants of those dual AES'es.
+	Karroumi incorporates $4\cdot 10$ distinct dual AES'es into WBAES (for each column of each round), while appropriate linear mappings $\Delta$, are simply composed with mixing bijections in each round. Hence the overall structure of WBAES remains unchanged. Karroumi presumes that this modification raises the complexity of the BGE attack from originally $2^{30}$ to $2^{91}$, since the attacker seems to need to loop through all four-tuples of dual AES'es and to run the standard BGE with constants of those dual AES'es.
 	
 	Intuitively, since the transfer to dual cipher is only done by a linear transformation, and since each original WBAES round is wrapped around with a random linear transformation (mixing bijection), it seems that we can consider each original WBAES round as internally using a dual AES and vice versa. Klinec has shown in \cite[Proposition~2]{klinec2013white} that this is indeed true.
 
@@ -239,7 +239,7 @@ As outlined in Section~\ref{sec:catmouse}, sooner or later after introduction of
 	
 	\begin{prop}[Klinec]
 	\label{thm:dualequiv}
-		Karroumi's WBAES scheme can be broken with BGE attack with the same time complexity as the original WBAES scheme.
+		Karroumi's WBAES scheme can be broken with the BGE attack with the same time complexity as the original WBAES scheme.
 	\end{prop}
 	
 	\begin{proof}
@@ -251,12 +251,12 @@ As outlined in Section~\ref{sec:catmouse}, sooner or later after introduction of
 		The core observation of Klinec's proof is that equations of Karroumi's WBAES can be rewritten to the form of the original Chow's WBAES, i.e., without using dual ciphers at all. Concretely the transformations to dual cipher and operations in dual cipher are shown to be absorbed by surrounding random bijections (namely $\IMB^{-1}\circ\Enc$ and its inverse, in addition also by $\MB$ and its inverse), yielding the original Chow's WBAES.
 	\end{remark}
 	
-	As a consequence of the previous remark, it follows that BGE attack breaks Karroumi's WBAES with the same time complexity as the original WBAES scheme -- simply because both is the same from the attacker's perspective.
+	As a consequence of the previous remark, it follows that the BGE attack breaks Karroumi's WBAES with the same time complexity as the original WBAES scheme -- simply because both is the same from the attacker's perspective.
 	
 	\begin{note}
 	\label{note:dualsbox}
 		Later in this thesis, we will attack Klinec's implementation \cite{klinec2013implementation} of WBAES by Chow et al. We will utilize Remark~\ref{rem:dualequiv} in a slightly different way.
 		
-		Remind that, among others, dual AES allows us to alter coefficients of the affine transformation inside $\SubBytes$ step. Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one, i.e., we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
+		Note that, among others, dual AES allows us to alter coefficients of the affine transformation inside $\SubBytes$ step. Since we do not recognize which instance of dual AES has been used in WBAES, we can expect every single one, i.e., we can suppose that those SBoxes use {\em arbitrary invertible affine mapping}.
 	\end{note}
 	

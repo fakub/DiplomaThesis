@@ -10,7 +10,7 @@ Warning--can't use both volume and number fields in luk2005pin
 Warning--can't use both volume and number fields in nethercote2007valgrind
 You've used 54 entries,
             2118 wiz_defined-function locations,
-            781 strings with 12419 characters,
+            781 strings with 12418 characters,
 and the built_in function-call counts, 19754 in all, are:
 = -- 2063
 > -- 749

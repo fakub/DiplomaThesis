@@ -5,7 +5,7 @@ In this section, we present a currently standardized block cipher. Let us begin 
 
 In 1998, NIST chose $15$ candidates and asked cryptology community for help with analyzing the candidates. After a careful analysis, NIST proposed Rijndael\footnote{From authors' names: Vincent Rijmen and Joan Daemen.} \cite{daemen1999aes} as the new standard called {\em Advanced Encryption Standard} (AES) \cite{fips2001aes} on November 26, 2001. The standard specifies the Rijndael algorithm with block-length of $128$ bits and key-lengths of $128$, $192$ and $256$ bits. Note that the original Rijndael algorithm \cite{daemen2013rijndael} describes more block- and key-length variants. On the other hand, we will only consider its $128$-$128$-bit variant in this thesis, unless stated otherwise.
 
-Today, almost 15 years later, AES is used worldwide and, despite extensive analysis, it is still beleived to have considerable security margin.
+Today, almost 15 years later, AES is used worldwide and, despite extensive analysis, it is still believed to have considerable security margin.
 
 
 % ==============================================================================
@@ -73,7 +73,7 @@ Now let us move on to definitions of the $4$ operations.
 		Although $x^8+1$ is not irreducible (it holds $x^8+1 = (x+1)^8$), $x^4 + x^3 + x^2 + x + 1$ is coprime with $x^8+1$, therefore it has an inverse modulo $x^8+1$. It follows that $\SubBytes$ is an invertible bijection.
 	\end{note}
 	
-	$\SubBytes$ is the only confusion element in AES -- indeed, all the other operations will be linear (i.e., from a limited subset of mappings; see Principle~\ref{pri:shannon}). Since $\SubBytes$ is the only source of nonlinearity in AES, it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui \cite{matsui1993linear} in 1993 and analyzed in detail and successfuly performed by Junod in 2001 \cite{junod2001complexity}.
+	$\SubBytes$ is the only confusion element in AES -- indeed, all the other operations will be linear (i.e., from a limited subset of mappings; see Principle~\ref{pri:shannon}). Since $\SubBytes$ is the only source of nonlinearity in AES, it shall have excellent nonlinearity properties. This was the major weakness of DES, its predecessor. A practical linear attack against DES was introduced by Matsui \cite{matsui1993linear} in 1993 and analyzed in detail and successfully performed by Junod in 2001 \cite{junod2001complexity}.
 	
 	\begin{remark}
 	\label{rem:sboxtable}
@@ -260,6 +260,6 @@ we can rewrite the equation to the form
 \end{align*}
 where $\C_i$ denotes $i$-th column of $\C$.
 
-Note that each addend only depends on single byte, i.e., there are just $256$ possible input values for each. Therefore $\MixColumns$ can be implemented as a fourtuple of lookup tables, the result is then simply a bitwise XOR of their $4$-byte output values.
+Note that each addend only depends on a single byte, i.e., there are just $256$ possible input values for each. Therefore $\MixColumns$ can be implemented as a four-tuple of lookup tables, the result is then simply a bitwise XOR of their $4$-byte output values.
 
 This was just to give an idea about how AES operations can be turned into lookup tables. These can be further improved, see \cite[Chapter~4]{daemen2013rijndael} for detail.

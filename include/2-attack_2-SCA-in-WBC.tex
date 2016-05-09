@@ -17,7 +17,7 @@ The obvious question is what kind of traces we should use instead of power trace
 	We would like to especially highlight that this approach avoids reverse engineering -- it only exploits leaked runtime information -- which is probably the best practical benefit. There is further no need for knowledge of the design, obviously.
 \end{remark}
 
-In the following sections, we describe the full process of DCA attack -- from trace acquisition, over trace filtering, concluding with the attack itself.
+In the following sections, we describe the full process of the DCA attack -- from trace acquisition, over trace filtering, concluding with the attack itself.
 
 
 % ==============================================================================
@@ -117,7 +117,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 	
 	\begin{note}
 	\label{note:fullfilter}
-		Once we filter the full trace, we get rid of tons of ballast yielding a trace which is much smaller and easier to understand. Note that the filtered full trace remains correctly aligned to the rest of our traces after filtering.
+		Once we filter the full trace, we get rid of tons of ballast, yielding a trace which is much smaller and easier to understand. Note that the filtered full trace remains correctly aligned to the rest of our traces after filtering.
 	\end{note}
 	
 	\paragraph{Trace Visualization.}
@@ -127,7 +127,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		\begin{figure}[h!]
 		\begin{center}
 			\includegraphics[width=0.9\textwidth]{./figures/memtrace/memtrace_emph.png}
-			\caption{Illustrative memory trace of a run of a simple AES implementation with the first round emphasized by a red rectangle. Contents of memory writes were acquired.}
+			\caption{Illustrative memory trace of a run of a simple AES implementation with the first round emphasized by a red rectangle. Contents of memory writes were acquired.}   %?% poslední věta
 			\label{fig:memtrace}
 		\end{center}
 		\end{figure}
@@ -147,7 +147,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		
 		\begin{example}
 		\label{ex:rangemask}
-			Let us say we have deduced from trace visualization that the first round of AES encryption takes place between rows $0$ and $2$, and in the address range from {\tt 0x7fffe3150000} to {\tt 0x7fffe3158000}. Then we get the mask as follows.
+			Let us say we have deduced from trace visualization that the first round of the AES encryption takes place between rows $0$ and $2$, and in the address range from {\tt 0x7fffe3150000} to {\tt 0x7fffe3158000}. Then we get the mask as follows.
 			\[
 			\arraycolsep=.5em\def\arraystretch{1.5}
 				\begin{array}{|c|c|c|}
@@ -178,7 +178,7 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 \subsection{Attacking Traces}
 \label{sec:attack}
 
-Once the traces are acquired, possibly filtered and, most importantly, properly aligned -- it can be deduced from Note~\ref{note:filter} and achieved with ideas from Note~\ref{note:aslr} --, we can perform the attack. We can use both SCA algorithms presented in this thesis, i.e., Algorithm~\ref{alg:cpa} or \ref{alg:bitwisedpa}, or any other SCA algorithm of our choice.
+Once the traces are acquired, possibly filtered and, most importantly, properly aligned -- it can be deduced from Note~\ref{note:filter} and achieved with ideas from Note~\ref{note:aslr} -- we can perform the attack. We can use both SCA algorithms presented in this thesis, i.e., Algorithm~\ref{alg:cpa} or \ref{alg:bitwisedpa}, or any other SCA algorithm of our choice.
 
 \begin{remark}
 \label{rem:traceformat}

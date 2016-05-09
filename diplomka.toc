@@ -54,7 +54,7 @@
 \contentsline {subsubsection}{Vulnerable Intermediate Result}{32}{section*.37}
 \contentsline {subsubsection}{Utilizing Power Traces}{32}{section*.38}
 \contentsline {subsubsection}{Attack}{33}{section*.39}
-\contentsline {subsection}{\numberline {2.1.2}Bit-Wise Differential Power Analysis Attack}{34}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.2}Bitwise Differential Power Analysis Attack}{34}{subsection.2.1.2}
 \contentsline {subsubsection}{Attack}{34}{section*.40}
 \contentsline {section}{\numberline {2.2}Using SCA Tools in White-Box Attack Context}{35}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Trace Acquisition}{36}{subsection.2.2.1}
@@ -70,9 +70,9 @@
 \contentsline {section}{\numberline {3.2}Results}{46}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}\tt naiveAES}{46}{subsection.3.2.1}
 \contentsline {subsubsection}{CPA Attack against {\tt naiveAES}}{46}{section*.49}
-\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt naiveAES}}{47}{section*.51}
+\contentsline {subsubsection}{Bitwise DPA Attack against {\tt naiveAES}}{47}{section*.51}
 \contentsline {subsection}{\numberline {3.2.2}\tt KlinecWBAES}{48}{subsection.3.2.2}
-\contentsline {subsubsection}{Bit-Wise DPA Attack against {\tt KlinecWBAES}}{48}{section*.53}
+\contentsline {subsubsection}{Bitwise DPA Attack against {\tt KlinecWBAES}}{48}{section*.53}
 \contentsline {section}{\numberline {3.3}Enhancements of the Attack}{50}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Exploiting WBAES Structure}{50}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Changing Attack Target}{50}{subsection.3.3.2}
@@ -81,7 +81,7 @@
 \contentsline {subsubsection}{Results Using the 16 Targets}{53}{section*.58}
 \contentsline {subsection}{\numberline {3.3.4}Non-Invertible Linear Mappings}{53}{subsection.3.3.4}
 \contentsline {subsection}{\numberline {3.3.5}Unifying Approach in $\mathrm {GF}(2)^8$}{55}{subsection.3.3.5}
-\contentsline {subsubsection}{Implementation Note}{57}{section*.62}
+\contentsline {subsubsection}{Implementation Note}{58}{section*.62}
 \contentsline {chapter}{\numberline {4}Analysis of the Attack against WBAES}{59}{chapter.4}
 \contentsline {section}{\numberline {4.1}Blind Attack}{59}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Remarks}{60}{subsection.4.1.1}

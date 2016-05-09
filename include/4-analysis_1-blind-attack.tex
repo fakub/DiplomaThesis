@@ -22,17 +22,17 @@ In order to perform a blind attack, we studied our results deeper -- we were par
 \subsection{Remarks}
 \label{sec:remarks}
 
-We obviously cannot make conclusions based on a single {\tt KlinecWBAES} table instantiation only. In order to avoid specific behavior of a single instance, we created another $7$ instances. Then we acquired $1024$ traces and ran the attack against each of $16$ key bytes using all $255$ targets, for each instance. Altogether we ran $16\cdot255\cdot8=32\,640$ attacks, which, together with trace acquisition and filtering, took us several hours on a regular hardware.
+We obviously cannot make conclusions based on a single {\tt KlinecWBAES} table instantiation only. In order to avoid specific behavior of a single instance, we created other $7$ instances. Then we acquired $1024$ traces and ran the attack against each of $16$ key bytes using all $255$ targets, for each instance. Altogether we ran $16\cdot255\cdot8=32\,640$ attacks, which, together with trace acquisition and filtering, took us several hours on a regular hardware.
 
 We processed the results and displayed several statistics, here we present some of them. Note that we only considered strong candidates as introduced in Note~\ref{note:strong} (candidates with a gap greater than $10\%$).
 
-The good news is that the overal success rate was $25\%$ (cf.\ $27\%$ and $31\%$ for our previous single-instance attack using the original SBox and Rijndael inverse, respectively), which gives us a hope that the new targets are successful, too. But our goal is to estimate rather individual success rate of each of our $255$ targets -- here the good news is that each target was successful at least once out of $16\cdot8=128$ chances.
+The good news is that the overall success rate was $25\%$ (cf.\ $27\%$ and $31\%$ for our previous single-instance attack using the original SBox and Rijndael inverse, respectively), which gives us a hope that the new targets are successful, too. But our goal is to estimate rather individual success rate of each of our $255$ targets -- here the good news is that each target was successful at least once out of $16\cdot8=128$ chances.
 
 Let us give the remarks now -- namely we present success rates of our targets, behavior of incorrect candidates, what happens if we use less than $1024$ traces, and finally we show a very peculiar result regarding leaking position within our traces.
 
 \subsubsection{Success Rate of Individual Targets}
 	
-	Remind that we have $255$ targets and only $8$ independent\footnote{At the moment, we do not know which intermediate product leaks, hence cannot claim which values within single instance are independent. Clearly, more of them could be possibly independent.} instances of tables, which is quite a small data set for statistical purposes. For this reason, we rather group targets by different criteria and observe if they appear to be uniformly distributed. Note that we could possibly only refute uniformity this way, but it can still serve as reasonable justification.
+	Note that we have $255$ targets and only $8$ independent\footnote{At the moment, we do not know which intermediate product leaks, hence cannot claim which values within a single instance are independent. Clearly, more of them could be possibly independent.} instances of tables, which is quite a small data set for statistical purposes. For this reason, we rather group targets by different criteria and observe if they appear to be uniformly distributed. Note that we could possibly only refute uniformity this way, but it can still serve as a reasonable justification.
 	
 	\paragraph{Group by corresponding $p$.}
 	
@@ -41,7 +41,7 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 	\begin{figure}[h]
 	\begin{center}
 		\includegraphics{figures/leak_target/leak_target.pdf}
-		\caption{Average success rate and its standard deviation for targets grouped by corresponding $p$. Green represents invertible $p$'s, orange noninvertible ones.}
+		\caption{Average success rate and its standard deviation for targets grouped by corresponding $p$. Green represents invertible $p$'s, orange non-invertible ones.}
 		\label{fig:leaktargethist}
 	\end{center}
 	\end{figure}
@@ -62,12 +62,12 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 	
 	\begin{remark}
 	\label{rem:uniform}
-		According to our previous observations, there does not seem to be a preferred target or a group of targets, therefore we will assume that success rate is uniform across all targets.
+		According to our previous observations, there does not seem to be a preferred target or a group of targets, therefore we will assume that the success rate is uniform across all targets.
 	\end{remark}
 
 \subsubsection{Incorrect Candidates}
 	
-	There is an inconvenience, which emerges once we do not know the key -- we do not recognize the correct candidate anymore, see Remark~\ref{rem:false}. Therefore we will first observe behavior of incorrect ones in our self-controlled experiment where we know the key.
+	There is an inconvenience, which emerges once we do not know the key -- we do not recognize the correct candidate anymore, see Remark~\ref{rem:false}. Therefore we will first observe the behavior of the incorrect ones in our self-controlled experiment where we know the key.
 	
 	\paragraph{Gaps of incorrect candidates.}
 		
@@ -91,7 +91,7 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 
 \subsubsection{Using Less Traces}
 	
-	So far, we always used $1024$ traces in our attacks, let us have a look at results of the attack with much less traces. Note that Bos et al.\ \cite{bos2015differential} used $2000$ and $500$ traces for the attack targetting the original SBox and Rijndael inverse, respectively.
+	So far, we always used $1024$ traces in our attacks, let us have a look at results of the attack with much less traces. Note that Bos et al.\ \cite{bos2015differential} used $2000$ and $500$ traces for the attack targeting the original SBox and Rijndael inverse, respectively.
 	
 	Namely, we used $128$, $256$, $384$ and $512$ traces. For each number of traces, we attacked all of our $8$ instances of {\tt KlinecWBAES}, and observed ratios of strong candidates (both correct and incorrect) and their average gap; see results in Table~\ref{tab:ntraces}. Note that number of repeating false positives remains very low -- up to three.
 	
@@ -159,7 +159,7 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 
 \subsubsection{Within-Trace Position of Leaks}
 	
-	Remind that our trace is a bit-wise serialization of least significant bytes of memory addresses, hence we can identify which bit within that byte was leaking -- simply by taking the leaking position within trace modulo $8$.
+	Note that our trace is a bitwise serialization of least significant bytes of memory addresses, hence we can identify which bit within that byte was leaking -- simply by taking the leaking position within trace modulo $8$.
 	
 	\begin{note}
 	\label{note:leakbit}
@@ -176,7 +176,7 @@ Let us give the remarks now -- namely we present success rates of our targets, b
 	\end{center}
 	\end{figure}
 	
-	The \nth{0} and \nth{1} bits leaked slightly more, the \nth{2} bit slightly less than average, and the \nth{3} bit actually leaked only twice, while the overal average of the remaining bits was almost $160$! On the other hand, all of the remaining bits leaked fairly similarly. We do not have any explanation for this behavior, we only present it as our observation.
+	The \nth{0} and \nth{1} bits leaked slightly more, the \nth{2} bit slightly less than average, and the \nth{3} bit actually leaked only twice, while the overall average of the remaining bits was almost $160$! On the other hand, all of the remaining bits leaked fairly similarly. We do not have any explanation for this behavior, we only present it as our observation.
 
 
 % ==============================================================================
@@ -199,11 +199,12 @@ In general, we suggest to use rather less traces, and repeat the attack with sev
 		\end{equation*}
 		where $n$ stands for the number of traces, $s$ for average success rate and $g$ for average gap of a strong candidate.
 		
-		Note that this quantity corresponds with average time of the attack. Indeed, the more traces, the longer time; the better success rate or the bigger gap, the shorter time. Hence we can use this quantity to compare expected time of the attack using different number of traces.
+		Note that this quantity corresponds with average time of the attack. Indeed, the more traces, the longer time; the better success rate or the bigger gap, the shorter time. Hence we can use this quantity to estimate the expected time of the attack using different number of traces.
 		
 		According to results in Table~\ref{tab:ntraces}, the best value of the reduced cost of gap was achieved for $256$ traces, therefore we suggest to use $256$ traces.
 	\item[Bound.]
-		According to our previous observation, false positives do not appear to repeat very much -- there were only a couple of repetitions for the most successful ones --, for less traces neither. Therefore we suggest to use $75\%$ as a cummulative bound, since it requires some $6$ hits for a fairly successful false positive, which appears to be hardly achievable.
+		According to our previous observation, false positives do not appear to repeat very much -- there were only a couple of repetitions for the most successful ones -- for less traces neither. %?% was? poslední kus..
+		Therefore we suggest to use $75\%$ as a cumulative bound, since it requires some $6$ hits for a fairly successful false positive, which appears to be hardly achievable.
 \end{description}
 
 \begin{remark}
