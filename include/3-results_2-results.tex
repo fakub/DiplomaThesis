@@ -29,11 +29,6 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 		In our tables, two values will be given: percentual gap of the best candidate to the second best one together with rank of the correct candidate, for each key byte and each number of traces. Note that the rank ranges from $0$ to $255$, while $0$ is replaced with $\blacksquare$ or {\weak$\blacksquare$} for strong or weak candidate, respectively, in order to emphasize successful attack. See the following example for a hint.
 	\end{note}
 	
-	\begin{example}
-	\label{ex:gaprank}
-		If we looked at the \nth{5} bit back in Table~\ref{tab:gap} in Example~\ref{ex:gap}, these two values would be $\frac{0.3970-0.3884}{0.3970}\cdot100\%\approx2.2\%$ and $45$, respectively.
-	\end{example}
-	
 	\begin{table}[h]
 		\begin{center}
 		\input{./tables/3_2_1-naiveAES-CPA.tex}
@@ -41,6 +36,11 @@ In order to prove the concept of both SCA algorithms presented in this thesis, w
 	\caption{CPA attack against {\tt naiveAES} using different number of traces. Percentual gap of the best candidate and rank of the correct candidate is given, for each key byte and each number of traces. The rank ranges from $0$, while $0$ (i.e., the top position) is replaced with $\blacksquare$ or {\weak$\blacksquare$} for strong or weak candidate, respectively, in order to emphasize successful attack.}
 	\label{tab:naiveaescpa}
 	\end{table}
+	
+	\begin{example}
+	\label{ex:gaprank}
+		If we looked at the \nth{5} bit back in Table~\ref{tab:gap} in Example~\ref{ex:gap}, these two values would be $\frac{0.3970-0.3884}{0.3970}\cdot100\%\approx2.2\%$ and $45$, respectively.
+	\end{example}
 	
 	It appears that we need hundreds of traces in order to attack even an unprotected implementation successfully. Note that in the CPA attack, we only have a single attack target (for each key byte), which is the Hamming weight of the first SBox output (cf.\ $8$ target bits in the bitwise DPA). However, this attack served just as a proof of the concept.
 	

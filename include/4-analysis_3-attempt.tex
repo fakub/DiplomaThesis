@@ -9,6 +9,8 @@ First of all, let us refresh the information flow through WBAES tables (original
 \end{equation*}
 Note that the last plain AES intermediate product is actually the $8$-bit output of the first SBox, i.e., the very original target. Let us see what happens next: a composed linear mapping $\MB\circ\MC$ is applied resulting in a $32$-bit output (using an idea outlined in Section~\ref{sec:aeslookup}), then each $4$-bit nibble is passed through a $4$-bit random bijection $\Enc^{-1}$ (further simply $\Enc$).
 
+\newpage   %_%
+
 \begin{description}
 	\item[$\MB\circ\MC$.] We can view each bit $t$ of the $32$-bit output of $\MB\circ\MC$ as a binary scalar product of a row $[R]^T$ of matrix representing $\MB\circ\MC$ with its $8$-bit input $[S]$, which is actually the output of the first SBox (note that $\MB$ is a random linear mapping with certain restrictions, i.e., $[R]^T$ is a non-zero random-like $8$-bit vector). We get
 	\begin{equation*}

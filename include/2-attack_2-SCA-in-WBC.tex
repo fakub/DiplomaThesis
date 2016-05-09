@@ -133,12 +133,16 @@ Once we have acquired memory traces, we perform two kinds of filtering. We filte
 		\end{figure}
 		
 		In this example trace, we can clearly recognize $10$ distinct AES rounds even with its $4$ subroutines. In general, if possible, we try to estimate the address and temporal range of the first round\footnote{Note that we are only interested in the first round, see Equation~\ref{eq:byprod} and its context.} based on visual observation. In the example, the first round is emphasized by a red rectangle.
-
+	
+	\newpage   %_%
+	
 	\paragraph{Trace Filtering.}
 		
 		Given an address and temporal range, we filter our traces so that we only keep their entries that fall into this range. But our traces do not contain full address information, see Note~\ref{note:lsb}. The idea could be to use full traces instead.
 		
 		If we had all full traces, we could filter them easily based on both ranges. But in this case, there may occur a position, for which some traces contain an address falling inside or outside the address range, respectively. Note that this would immediately violate the alignment!
+		
+		\newpage   %_%
 		
 		\begin{remark}
 		\label{rem:rangemask}
@@ -207,8 +211,8 @@ As outlined in the previous remark, we will consider Algorithm~\ref{alg:bitwised
 	
 	\begin{example}
 	\label{ex:gap}
-	See the following table for partial results of a real experiment, find further comments below.
-		\begin{table}[H]
+	See Table \ref{tab:gap} for partial results of a real experiment.
+		\begin{table}[h]
 			\begin{center}
 			\begin{tabular}{| c | c | c | c | c | c | c | c | c |}
 				\hline
