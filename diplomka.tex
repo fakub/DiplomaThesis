@@ -3,7 +3,7 @@
 %  use packages
 % --------------
 \usepackage[utf8]{inputenc}
-%~ \usepackage[T1]{fontenc}   %!% the font looks strange, but has ť ...
+%~ \usepackage[T1]{fontenc}   % the font looks strange, but has ť ...
 \usepackage{geometry,amsmath, amsthm, amssymb}   % , units, dsfont, caption
 % enumerate: \begin{enumerate}[{Example} I)] ... Roman numbering
 \usepackage{graphicx,color,tabularx,float,subcaption,algorithmicx,algpseudocode,mathtools,textcomp}
@@ -143,16 +143,16 @@
 \newcommand{\misto}{Praha}
 \newcommand{\VMiste}{V Praze}
 
-%!% ABC pořadí??
-\newcommand{\klicova}{White-box AES, útok postranním kanálem, paměťová stopa.}
-\newcommand{\keyword}{White-box AES, side-channel attack, memory trace.}
-%!% odebrat citace až se dozvim jak
-\newcommand{\abstrCZ}{Nejenže jsou všechna současná vědecká white-box schémata stan\-dar\-di\-zo\-va\-ných šifer matematicky zlomená, další ránu pro ně představuje nový útok od autorů Bos a kol.\ \cite{bos2015differential} z července 2015. Tento útok je velmi univerzální a účinný -- nepotřebuje ani znalost implementace, ani použití reverzního inženýrství.
+\newcommand{\klicova}{Stopa v paměti, útok postranním kanálem, white-box AES.}
+\newcommand{\keyword}{Memory trace, side-channel attack, white-box AES.}
 
-V této práci se mi podařilo reprodukovat útok na implementaci \cite{klinec2013implementation} konkrétní chráněné šifry \cite{chow2002aes}, vylepšit ho a nakonec i vysvětlit jeho podstatu, což původní autoři nezmiňují.}
-\newcommand{\abstrEN}{Not only have all current scientific white-box schemes of standardized ciphers been mathematically broken, they further face a novel attack by Bos et al.\ \cite{bos2015differential} published in July, 2015. This attack is very universal and powerful -- it requires neither knowledge of the implementation, nor use of reverse engineering techniques.
+\newcommand{\abstrCZ}{Nejenže jsou všechna současná vědecká white-box schémata stan\-dar\-di\-zo\-va\-ných šifer matematicky zlomená, další ránu pro ně představuje nový útok od autorů Bos a kol.\ představený v~červenci 2015 ve článku {\em Differential Computation Analysis: Hiding your White-Box Designs is Not Enough}. Tento útok je velmi univerzální a účinný -- nepotřebuje ani znalost implementace, ani použití reverzního inženýrství.
 
-In this thesis, we successfuly reproduced this attack against an implementation \cite{klinec2013implementation} of a specific protected cipher \cite{chow2002aes}. We further improved the original attack, and finally provided an explanation of its principle, which the original authors omitted.}
+V této práci se mi podařilo reprodukovat útok na implementaci konkrétní chráněné šifry, vylepšit ho a nakonec i vysvětlit jeho podstatu, což původní autoři nezmiňují.}
+
+\newcommand{\abstrEN}{Not only have all current scientific white-box schemes of standardized ciphers been mathematically broken, they further face a novel attack introduced by Bos et al.\ in July, 2015, in {\em Differential Computation Analysis: Hiding your White-Box Designs is Not Enough}. This attack is very universal and powerful -- it requires neither knowledge of the implementation, nor use of reverse engineering techniques.
+
+In this thesis, we successfuly reproduced this attack against an implementation of a specific protected cipher. We further improved the original attack, and finally provided an explanation of its principle, which the original authors omitted.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%   k vyplnění KONEC
@@ -296,9 +296,6 @@ In this thesis, we successfuly reproduced this attack against an implementation 
 		% 	%?% ... co s tim?
 		
 		% FINAL CHECK:
-		% 	note vs. remark
-		% 	polynomials in this thesis are with GF(2) coefficients, unless stated otherwise
-		% 	umístění floatů a nadpisů (něco hodit na novou)
 		% 	vhodně vyignorovat bačinskou
 		
 		% DONE:

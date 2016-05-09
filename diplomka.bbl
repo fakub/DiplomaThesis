@@ -45,6 +45,11 @@ Elad Barkan and Eli Biham.
 \newblock In {\em {Advances in Cryptology--ASIACRYPT 2002}}, pages 160--175.
   Springer, 2002.
 
+\bibitem{bacinska2015white}
+Lenka Bačinská.
+\newblock {White-box attack resistant cipher based on WBAES}.
+\newblock 2015.
+
 \bibitem{billet2004cryptanalysis}
 Olivier Billet, Henri Gilbert, and Charaf Ech-Chatbi.
 \newblock {Cryptanalysis of a white box AES implementation}.

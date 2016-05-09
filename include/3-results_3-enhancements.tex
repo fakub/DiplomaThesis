@@ -1,7 +1,7 @@
 \section{Enhancements of the Attack}
 \label{sec:enhancements}
 
-In this section, we present an improvement by Bos et al.\ and reproduce their results in order to have a comparison base for further results. Then we generalize the improvement and finally propose our novel framework, which covers all of the previous enhancements of the attack.
+In this section, we present an improvement by Bos et al.\ against {\tt KlinecWBAES}, and reproduce their results in order to have a comparison base for further results. Then we generalize the improvement and finally propose our novel framework, which covers all of the previous enhancements of the attack.
 
 
 % ==============================================================================
@@ -24,6 +24,8 @@ The original SBox is a specific affine mapping of Rijndael inverse of its input,
 	S_{p,q}(A) = p\cdot A' + q \pmod{x^8+1}
 \end{equation}
 for $p,q\in F$ and $p$ coprime with $x^8+1$. The simplest affine mapping is obviously achieved for $p=1$ and $q=0$, which yields $S_{1,0}(A) = A'$, i.e., only a Rijndael inverse.
+
+\newpage   %_%
 
 \begin{remark}
 \label{rem:coprime}
@@ -196,7 +198,7 @@ Let us have a closer look at our previously considered targets, in particular at
 
 Note that equivalents of multiplication by $p\pmod{x^8+1}$ form a specific subset of all linear mappings on $\cal B$ -- simply since there are only $256$ of $p$'s, but there are obviously many more linear mappings on $\cal B$. Let us see how multiplication by $p\pmod{x^8+1}$ can be expressed in $\cal B$ -- its matrix has cyclically shifted rows as outlined in the following example\footnote{Note the analogy of $\MixColumns$ -- it was originally defined as modular polynomial multiplication in Equation~\ref{eq:mixcolpoly} and further represented by matrix multiplication in Equation~\ref{eq:mixcolmatr}, where the matrix had cyclically shifted rows.}.
 
-\newpage   %_%
+%~ \newpage   %_%
 
 \begin{example}[Multiplication by $\texttt{3d}\pmod{x^8+1}$]
 \label{ex:shiftmatrix}

@@ -188,7 +188,6 @@ So far, we have turned all AES operations into lookup tables only. Next we will 
 	\end{equation}
 	where $G$, $F$ stands for input and output external encoding, respectively. These are basically $128$-bit bijections. Clearly, the input plaintext must first be encoded with $F$, then encrypted with encoded variant $E_k'$, and finally decoded with $G^{-1}$, in order to get an equivalent of AES encryption.
 	
-	%_% NEW
 	Chow et al.\ suggest to use $128$-bit linear mappings as external encodings. These can be further composed with corresponding input mixing bijections of the first and the last round, respectively, preserving linearity.
 	
 	Such external encodings can be obviously implemented as lookup tables in a manner similar to $\MixColumns$, here using $16$ tables\footnote{A new, larger type of tables is needed.} of size $8\times 128$ followed by appropriately encoded XOR tables. Note that there are $4$ levels of XOR tables now, since we have $16$ vectors to be XORed together. Also note that the very input and output are {\em not} encoded with $\Enc$.

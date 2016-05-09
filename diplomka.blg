@@ -4,49 +4,50 @@ The top-level auxiliary file: diplomka.aux
 The style file: plain.bst
 Database file #1: biblio.bib
 Warning--to sort, need author or key in bos2016tools
+Warning--empty journal in bacinska2015white
 Warning--empty journal in daemen1999aes
 Warning--empty journal in klinec2013white
 Warning--can't use both volume and number fields in luk2005pin
 Warning--can't use both volume and number fields in nethercote2007valgrind
-You've used 54 entries,
+You've used 55 entries,
             2118 wiz_defined-function locations,
-            781 strings with 12418 characters,
-and the built_in function-call counts, 19754 in all, are:
-= -- 2063
-> -- 749
+            785 strings with 12516 characters,
+and the built_in function-call counts, 19957 in all, are:
+= -- 2082
+> -- 756
 < -- 31
-+ -- 299
-- -- 244
-* -- 1124
-:= -- 3041
-add.period$ -- 196
-call.type$ -- 54
-change.case$ -- 282
++ -- 302
+- -- 246
+* -- 1132
+:= -- 3079
+add.period$ -- 199
+call.type$ -- 55
+change.case$ -- 286
 chr.to.int$ -- 0
-cite$ -- 59
-duplicate$ -- 868
-empty$ -- 1671
-format.name$ -- 244
-if$ -- 4438
+cite$ -- 61
+duplicate$ -- 878
+empty$ -- 1688
+format.name$ -- 246
+if$ -- 4478
 int.to.chr$ -- 0
-int.to.str$ -- 54
-missing$ -- 45
-newline$ -- 279
-num.names$ -- 106
-pop$ -- 419
+int.to.str$ -- 55
+missing$ -- 46
+newline$ -- 284
+num.names$ -- 108
+pop$ -- 425
 preamble$ -- 1
-purify$ -- 229
+purify$ -- 232
 quote$ -- 0
-skip$ -- 646
+skip$ -- 653
 stack$ -- 0
-substring$ -- 1199
+substring$ -- 1204
 swap$ -- 298
 text.length$ -- 31
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 210
-warning$ -- 5
-while$ -- 202
-width$ -- 56
-write$ -- 611
-(There were 5 warnings)
+type$ -- 214
+warning$ -- 6
+while$ -- 204
+width$ -- 57
+write$ -- 620
+(There were 6 warnings)

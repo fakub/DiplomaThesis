@@ -203,8 +203,7 @@ In general, we suggest to use rather less traces, and repeat the attack with sev
 		
 		According to results in Table~\ref{tab:ntraces}, the best value of the reduced cost of gap was achieved for $256$ traces, therefore we suggest to use $256$ traces.
 	\item[Bound.]
-		According to our previous observation, false positives do not appear to repeat very much -- there were only a couple of repetitions for the most successful ones -- for less traces neither. %?% was? poslední kus..
-		Therefore we suggest to use $75\%$ as a cumulative bound, since it requires some $6$ hits for a fairly successful false positive, which appears to be hardly achievable.
+		According to our previous observation, false positives do not appear to repeat very much -- there were only a couple of repetitions for the most successful ones\footnote{This holds also when using less traces.}. Therefore we suggest to use $75\%$ as a cumulative bound, since it requires some $6$ hits for a fairly successful false positive, which appears to be hardly achievable.
 \end{description}
 
 \begin{remark}
