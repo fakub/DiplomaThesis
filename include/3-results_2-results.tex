@@ -6,7 +6,7 @@ First of all, we used our toolkit to attack our straightforward C++ implementati
 Then we performed the most interesting attack that Bos et al.\ \cite{bos2015differential} did -- we successfully attacked Klinec's C++ implementation \cite{klinec2013implementation} of WBAES by Chow et al.\ \cite{chow2002aes}, here referred to as {\tt KlinecWBAES}; see results and comments in Section~\ref{sec:klinecwbaes}.
 
 %_% bačinská
-Finally in Section~\ref{sec:bacinskawbaes}, we studied possible usage of the attack against a white-box implementation of a cipher derived from WBAES, introduced by Bačinská \cite{bacinska2015white}, here referred to as {\tt BacinskaWBAES+}.
+Finally in Section~\ref{sec:bacinskawbaes}, we comment on usage of the attack against a white-box implementation of a cipher derived from WBAES, introduced by Bačinská \cite{bacinska2015white}, here referred to as {\tt BacinskaWBAES+}.
 
 \begin{note}
 \label{note:expdes}
@@ -124,6 +124,6 @@ First we tried to attack {\tt KlinecWBAES} with the CPA attack, too, but it did 
 \subsection{\tt BacinskaWBAES+}
 \label{sec:bacinskawbaes}
 
-Bačinská introduced a variant of WBAES in \cite{bacinska2015white}, here denoted as {\tt BacinskaWBAES+}. However, her cipher is not compliant with the standard AES anymore -- SBoxes of {\tt BacinskaWBAES+} are key-dependent, i.e., different from those of the standard AES. Note that the output of the first standard SBox is what the attack is targeting, therefore there is nothing to be successfully attacked. Finally, the attack did not work, as expected.
+Bačinská introduced a variant of WBAES in \cite{bacinska2015white}, here denoted as {\tt BacinskaWBAES+}. However, this variant is not compliant with the standard AES anymore -- SBoxes of {\tt BacinskaWBAES+} are key-dependent, i.e., different from those of the standard AES. Note that the output of the first standard SBox is what the attack is targeting, therefore there is nothing to be successfully attacked.
 
 The attack could be most probably ``customized'' for {\tt BacinskaWBAES+}. However, there is no practical interest in non-standard ciphers, hence we omitted it.

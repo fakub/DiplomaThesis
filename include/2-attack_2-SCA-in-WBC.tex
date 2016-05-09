@@ -200,7 +200,6 @@ As outlined in the previous remark, we will consider Algorithm~\ref{alg:bitwised
 	As already stated in Note~\ref{note:fulllist}, the best key candidate we obtain from a SCA algorithm does not need to be necessarily the correct one, especially when we use it for attacking white-box implementations, where there is no interpretation of what we ``measure''.
 	
 	In that note, we suggested to output the full list of key candidates together with their ``value'' for each key byte. The original purpose of this was to have some rating of key candidates, and then loop through them according to their order and value. In the physical world scenario, this would be likely to recover the key in a relatively short time, since we assume a certain bias in our measurements caused by execution of the cipher.
-	% \footnote{Each SCA algorithm may use different meter to compare key candidates, in Algorithm~\ref{alg:cpa} it was correlation, in Algorithm~\ref{alg:bitwisedpa} it was difference of means.}
 	
 	But it turns out that looping would be useless in the white-box scenario. Indeed, by empirical observation, the true key byte is typically
 	\begin{itemize}
